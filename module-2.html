@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 2: The Illusion of No Time | Financial Freedom Masterclass</title>
+  <meta name="description" content="An interactive exploration of why the belief that 'it's too late' is not a fact — it's a bias. Built on neuroscience, psychology, and the data from 2.7 million founders."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --void:#030507; --deep:#070B14; --surface:rgba(255,255,255,.03);
+      --surface2:rgba(255,255,255,.06);
+      --gold:#C9A84C; --gold-l:#E8C97A; --gold-d:rgba(201,168,76,.15);
+      --gold-g:rgba(201,168,76,.06); --gold-b:rgba(201,168,76,.25);
+      --text:#EEF0F4; --muted:#7A8290; --muted2:#4A5260;
+      --danger:#E84855; --success:#2ECC71; --cyan:#4FC3F7;
+      --purple:#9B7FE8; --border:rgba(255,255,255,.07);
+      --r:20px; --rp:100px;
+    }
+    ::-webkit-scrollbar{width:3px}
+    ::-webkit-scrollbar-track{background:var(--void)}
+    ::-webkit-scrollbar-thumb{background:var(--gold-b);border-radius:3px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',serif;overflow-x:hidden;line-height:1.7}
+
+    /* ── NOISE + CANVAS ── */
+    .noise{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;opacity:.08;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+    #ambient-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.2}
+
+    /* ── LAYOUT ── */
+    main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 28px 180px}
+    @media(max-width:640px){main{padding:0 18px 180px}}
+
+    /* ── SCROLL REVEAL ── */
+    .sr{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+    .sr.v{opacity:1;transform:none}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+
+    /* ── KEYFRAMES ── */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes pulse-gold{0%,100%{box-shadow:0 0 20px rgba(201,168,76,.08)}50%{box-shadow:0 0 50px rgba(201,168,76,.22)}}
+    @keyframes drawLine{from{stroke-dashoffset:1000}to{stroke-dashoffset:0}}
+    @keyframes nodeAppear{from{opacity:0;r:0}to{opacity:1;r:6}}
+    @keyframes crack{0%{clip-path:inset(0 100% 0 0)}100%{clip-path:inset(0 0% 0 0)}}
+    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+    @keyframes scaleIn{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+    @keyframes floatUp{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-60px)}}
+
+    /* ── TYPOGRAPHY ── */
+    .tag{font-family:'Inter';font-size:.65rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;opacity:.85;display:inline-block;margin-bottom:14px}
+    .sec-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;color:#fff;letter-spacing:.05em;margin-bottom:1rem;line-height:1.2}
+    .body-text{font-size:1.18rem;font-weight:300;color:var(--text);margin-bottom:1rem;line-height:1.85}
+    .body-text.lg{font-size:1.35rem}
+    .pipe-quote{padding:16px 24px;border-left:2px solid var(--gold);font-style:italic;font-size:1.25rem;margin:28px 0;color:var(--text);background:var(--gold-g);border-radius:0 10px 10px 0}
+    .em{color:var(--gold);font-style:italic}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:44px 48px;backdrop-filter:blur(10px)}
+    @media(max-width:640px){.card{padding:28px 22px}}
+    .card.gold-l{border-left:3px solid var(--gold)}
+
+    /* ── SECTION DIVIDERS ── */
+    .sec-divider{display:flex;align-items:center;gap:16px;margin:80px 0 32px}
+    .sec-divider::before,.sec-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+    .sec-divider span{font-family:'Inter';font-size:.6rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;white-space:nowrap}
+
+    /* ── HERO ── */
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 0 60px;position:relative}
+    .hero-eyebrow{font-family:'Inter';font-size:.68rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fadeUp .8s .3s forwards}
+    .hero-title{font-family:'Cinzel',serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:900;line-height:1.05;color:#fff;margin-bottom:24px;opacity:0;animation:fadeUp .9s .5s forwards}
+    .hero-title .g{color:var(--gold)}
+    .hero-sub{font-size:1.3rem;font-style:italic;color:var(--muted);max-width:620px;margin:0 auto 56px;font-weight:300;opacity:0;animation:fadeUp .9s .7s forwards}
+    .hero-scroll{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 1s 1.5s forwards;margin-top:32px}
+    .hero-scroll span{font-family:'Inter';font-size:.6rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+    .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s infinite}
+    @keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+    /* Key stat strip */
+    .key-stat-strip{display:flex;gap:48px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .9s 1.1s forwards;margin-bottom:20px}
+    .ks{text-align:center}
+    .ks-num{font-family:'Cinzel';font-size:2.4rem;color:var(--gold);font-weight:700;line-height:1}
+    .ks-label{font-family:'Inter';font-size:.62rem;letter-spacing:.15em;color:var(--muted);margin-top:6px;text-transform:uppercase}
+
+    /* ── BELIEF DETECTOR ── */
+    .belief-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    @media(max-width:640px){.belief-grid{grid-template-columns:1fr}}
+    .belief-card{
+      background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+      overflow:hidden;cursor:pointer;transition:all .4s cubic-bezier(.16,1,.3,1);
+      position:relative;
+    }
+    .belief-card:hover:not(.cracked){border-color:rgba(232,72,85,.3);transform:translateY(-3px)}
+    .belief-card.cracked{border-color:var(--gold-b);transform:none;cursor:default}
+    .belief-front{padding:32px 28px;transition:all .4s}
+    .belief-card.cracked .belief-front{background:rgba(0,0,0,.2)}
+    .belief-phrase{font-style:italic;font-size:1.2rem;color:var(--text);margin-bottom:16px;line-height:1.5}
+    .belief-tag{font-family:'Inter';font-size:.62rem;letter-spacing:.15em;color:var(--muted);text-transform:uppercase}
+    .belief-tap{font-family:'Inter';font-size:.65rem;letter-spacing:.12em;color:var(--danger);text-transform:uppercase;display:flex;align-items:center;gap:6px;margin-top:16px;transition:opacity .3s}
+    .belief-card.cracked .belief-tap{display:none}
+    .belief-reveal{
+      padding:24px 28px;border-top:1px solid var(--border);
+      background:rgba(201,168,76,.04);
+      display:none;animation:scaleIn .4s ease forwards;
+    }
+    .belief-card.cracked .belief-reveal{display:block}
+    .belief-reveal h4{font-family:'Cinzel';font-size:.85rem;color:var(--gold);margin-bottom:10px;letter-spacing:.06em}
+    .belief-reveal p{font-size:1rem;color:var(--muted);line-height:1.65}
+    .crack-icon{position:absolute;top:16px;right:16px;font-size:1.2rem;opacity:0;transition:opacity .3s}
+    .belief-card.cracked .crack-icon{opacity:1}
+
+    /* ── NEURAL CANVAS ── */
+    .neural-wrap{position:relative;height:280px;border-radius:var(--r);overflow:hidden;background:rgba(0,0,0,.3);border:1px solid var(--border);margin:32px 0}
+    #neural-canvas{width:100%;height:100%}
+    .neural-label{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-family:'Inter';font-size:.65rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;white-space:nowrap}
+    .neural-status{position:absolute;top:16px;right:20px;font-family:'Inter';font-size:.68rem;letter-spacing:.1em;color:var(--success);text-transform:uppercase}
+
+    /* ── LEVY BELIEF IMPACT ── */
+    .levy-wrap{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+    @media(max-width:720px){.levy-wrap{grid-template-columns:1fr}}
+    .levy-slider-box{padding:36px 32px;background:var(--deep);border:1px solid var(--border);border-radius:var(--r)}
+    .levy-slider-label{display:flex;justify-content:space-between;margin-bottom:8px}
+    .levy-slider-label span{font-family:'Inter';font-size:.68rem;letter-spacing:.1em;text-transform:uppercase}
+    .levy-slider-label .neg{color:var(--danger)}
+    .levy-slider-label .pos{color:var(--success)}
+    input[type=range]{-webkit-appearance:none;width:100%;background:transparent;margin:12px 0}
+    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;height:22px;width:22px;border-radius:50%;background:var(--gold);cursor:pointer;margin-top:-9px;box-shadow:0 0 12px rgba(201,168,76,.4);transition:transform .2s}
+    input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+    input[type=range]::-webkit-slider-runnable-track{width:100%;height:4px;background:var(--border);border-radius:2px}
+    input[type=range]:focus{outline:none}
+    .levy-outcome-box{padding:36px 32px;background:var(--deep);border-radius:var(--r);border:1px solid var(--border);transition:border-color .5s}
+    .levy-outcome-box.positive{border-color:rgba(46,204,113,.3)}
+    .levy-outcome-box.negative{border-color:rgba(232,72,85,.3)}
+    .levy-years{font-family:'Cinzel';font-size:3.5rem;font-weight:900;line-height:1;margin:12px 0;transition:color .5s,all .6s cubic-bezier(.16,1,.3,1)}
+    .levy-years.positive{color:var(--success)}
+    .levy-years.negative{color:var(--danger)}
+    .levy-years.neutral{color:var(--muted)}
+    .levy-verdict{font-size:1rem;color:var(--muted);line-height:1.65;font-style:italic;transition:all .4s}
+    .levy-brain-bar{width:100%;height:8px;border-radius:8px;overflow:hidden;background:rgba(255,255,255,.06);margin:20px 0 8px}
+    .levy-brain-fill{height:100%;border-radius:8px;transition:width 1s cubic-bezier(.16,1,.3,1),background .5s}
+    .levy-bar-label{font-family:'Inter';font-size:.62rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+
+    /* ── FOUNDER AGE CHART ── */
+    .chart-outer{padding:40px 36px;background:var(--deep);border:1px solid var(--border);border-radius:var(--r)}
+    .chart-title{font-family:'Cinzel';font-size:1rem;color:#fff;margin-bottom:28px;letter-spacing:.06em}
+    .chart-bars{display:flex;align-items:flex-end;gap:12px;height:200px;position:relative}
+    .chart-bars::before{content:'';position:absolute;left:0;right:0;bottom:0;top:0;background:repeating-linear-gradient(to top,rgba(255,255,255,.03) 0,rgba(255,255,255,.03) 1px,transparent 1px,transparent 20%);pointer-events:none}
+    .chart-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;height:100%}
+    .chart-bar-inner{width:100%;display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+    .chart-bar{
+      width:100%;border-radius:6px 6px 0 0;
+      background:rgba(255,255,255,.08);
+      transition:height 1.2s cubic-bezier(.16,1,.3,1),background .4s;
+      position:relative;cursor:pointer;
+    }
+    .chart-bar:hover{filter:brightness(1.15)}
+    .chart-bar.highlight{background:linear-gradient(to top,var(--gold),var(--gold-l));box-shadow:0 0 20px rgba(201,168,76,.3)}
+    .chart-bar.peak{background:linear-gradient(to top,var(--success),#68d391)}
+    .chart-bar-label{font-family:'Inter';font-size:.6rem;color:var(--muted);text-align:center;letter-spacing:.05em;text-transform:uppercase}
+    .chart-bar-pct{font-family:'Cinzel';font-size:.75rem;color:var(--gold);text-align:center}
+    .chart-legend{display:flex;gap:20px;margin-top:24px;flex-wrap:wrap}
+    .chart-leg-item{display:flex;align-items:center;gap:8px;font-family:'Inter';font-size:.65rem;color:var(--muted);letter-spacing:.05em}
+    .chart-leg-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+
+    /* ── TEMPORAL DISCOUNTING GAME ── */
+    .td-stage{padding:48px;background:var(--deep);border:1px solid var(--gold-b);border-radius:var(--r);text-align:center;position:relative;overflow:hidden}
+    .td-question{font-size:1.3rem;font-style:italic;line-height:1.65;color:var(--text);margin-bottom:36px;max-width:600px;margin-left:auto;margin-right:auto}
+    .td-choices{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+    .td-btn{
+      padding:20px 32px;border-radius:var(--r);cursor:pointer;transition:all .3s;
+      border:1px solid var(--border);background:var(--surface);
+      font-family:'Cinzel';font-size:.9rem;color:#fff;letter-spacing:.05em;
+      min-width:220px;line-height:1.4;
+    }
+    .td-btn:hover{transform:translateY(-3px)}
+    .td-btn.safe:hover{border-color:var(--danger);box-shadow:0 8px 30px rgba(232,72,85,.15)}
+    .td-btn.bold:hover{border-color:var(--success);box-shadow:0 8px 30px rgba(46,204,113,.15)}
+    .td-btn.chosen-safe{border-color:var(--danger);background:rgba(232,72,85,.08);animation:shake .4s ease}
+    .td-btn.chosen-bold{border-color:var(--success);background:rgba(46,204,113,.08)}
+    .td-result{font-size:1.05rem;color:var(--muted);line-height:1.7;font-style:italic;display:none;animation:scaleIn .4s ease;margin-top:8px}
+    .td-result.show{display:block}
+    .td-reset{font-family:'Inter';font-size:.68rem;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;cursor:pointer;background:none;border:1px solid var(--border);padding:8px 16px;border-radius:var(--rp);margin-top:16px;display:none;transition:.3s}
+    .td-reset.show{display:inline-block}.td-reset:hover{color:var(--gold);border-color:var(--gold-b)}
+
+    /* ── ENLARGE/DIMINISH SCALE ── */
+    .ed-box{padding:44px 48px;background:var(--deep);border:1px solid var(--border);border-radius:var(--r)}
+    @media(max-width:640px){.ed-box{padding:28px 22px}}
+    .ed-input-row{margin-bottom:28px}
+    .ed-label{font-family:'Inter';font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:block}
+    .ed-input{
+      width:100%;padding:16px 20px;background:rgba(255,255,255,.04);
+      border:1px solid var(--border);border-radius:12px;
+      color:var(--text);font-family:'Cormorant Garamond';font-size:1.1rem;
+      outline:none;transition:.3s;
+    }
+    .ed-input:focus{border-color:var(--gold-b);background:rgba(201,168,76,.03)}
+    .ed-scales{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:24px 0}
+    @media(max-width:640px){.ed-scales{grid-template-columns:1fr}}
+    .ed-scale{padding:28px 24px;border-radius:var(--r);border:1px solid var(--border)}
+    .ed-scale.enlarge{border-color:rgba(46,204,113,.2);background:rgba(46,204,113,.03)}
+    .ed-scale.diminish{border-color:rgba(232,72,85,.2);background:rgba(232,72,85,.03)}
+    .ed-scale h4{font-family:'Cinzel';font-size:.85rem;margin-bottom:16px;letter-spacing:.06em}
+    .ed-scale.enlarge h4{color:var(--success)}
+    .ed-scale.diminish h4{color:var(--danger)}
+    .ed-scale-value{font-family:'Cinzel';font-size:2.5rem;font-weight:700;text-align:center;margin:12px 0}
+    .ed-scale.enlarge .ed-scale-value{color:var(--success)}
+    .ed-scale.diminish .ed-scale-value{color:var(--danger)}
+    .ed-verdict{
+      margin-top:20px;padding:20px 24px;border-radius:12px;
+      font-style:italic;font-size:1.05rem;line-height:1.65;color:var(--text);
+      display:none;
+    }
+    .ed-verdict.show{display:block;animation:scaleIn .4s ease}
+    .ed-verdict.go{background:rgba(46,204,113,.05);border:1px solid rgba(46,204,113,.2)}
+    .ed-verdict.wait{background:rgba(201,168,76,.05);border:1px solid var(--gold-b)}
+
+    /* ── STATS STRIP ── */
+    .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+    .stat-card{padding:36px 28px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);text-align:center;transition:transform .3s,border-color .3s}
+    .stat-card:hover{transform:translateY(-4px);border-color:var(--gold-b)}
+    .stat-card .s-num{font-family:'Cinzel';font-size:3rem;font-weight:900;line-height:1;margin-bottom:12px;background:linear-gradient(135deg,var(--gold),var(--gold-l));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .stat-card .s-desc{font-size:1rem;color:var(--muted);line-height:1.6;font-style:italic}
+    .stat-card .s-src{font-family:'Inter';font-size:.58rem;letter-spacing:.1em;color:rgba(255,255,255,.18);margin-top:14px;text-transform:uppercase}
+
+    /* ── JOURNAL ── */
+    .journal-section{display:flex;flex-direction:column;gap:20px}
+    .journal-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .3s}
+    .journal-item:focus-within{border-color:var(--gold-b)}
+    .journal-q{padding:24px 28px 16px;font-size:1.1rem;font-style:italic;color:var(--text);line-height:1.6}
+    .journal-q strong{font-style:normal;font-family:'Inter';font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+    .journal-item textarea{width:100%;padding:16px 28px 24px;background:none;border:none;border-top:1px solid var(--border);color:var(--text);font-family:'Cormorant Garamond';font-size:1.05rem;line-height:1.7;resize:vertical;min-height:100px;outline:none;transition:background .3s}
+    .journal-item textarea:focus{background:rgba(201,168,76,.02)}
+    .journal-item textarea::placeholder{color:var(--muted);font-style:italic}
+    .save-ind{font-family:'Inter';font-size:.6rem;letter-spacing:.1em;color:var(--success);padding:6px 28px;display:none;text-transform:uppercase}
+    .save-ind.show{display:block}
+    .journal-controls{display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:12px}
+    .jc-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--rp);font-family:'Inter';font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s;border:1px solid var(--border);background:none}
+    .jc-export{color:var(--gold);border-color:var(--gold-b)}
+    .jc-export:hover{background:var(--gold);color:var(--void)}
+    .jc-clear{color:var(--muted)}
+    .jc-clear:hover{color:var(--danger);border-color:rgba(232,72,85,.3);background:rgba(232,72,85,.05)}
+
+    /* ── DECLARATION ── */
+    .decl-box{text-align:center;padding:80px 48px;border:1px dashed var(--gold-b);border-radius:var(--r);background:radial-gradient(circle at 50% 0%,rgba(201,168,76,.06) 0%,transparent 65%);position:relative;overflow:hidden}
+    .decl-text{font-size:clamp(1.2rem,2.5vw,1.7rem);font-style:italic;font-weight:300;line-height:1.65;color:var(--text);max-width:680px;margin:0 auto 40px}
+    .decl-input-wrap{display:flex;gap:12px;justify-content:center;max-width:480px;margin:0 auto 16px}
+    .decl-input{flex:1;padding:14px 20px;background:rgba(255,255,255,.04);border:1px solid var(--gold-b);border-radius:var(--rp);color:var(--gold);font-family:'Cinzel';font-size:1rem;letter-spacing:.1em;outline:none;text-transform:uppercase;text-align:center;transition:border-color .4s,box-shadow .4s}
+    .decl-input:focus{background:var(--gold-g)}
+    .decl-input.error{border-color:var(--danger)!important;box-shadow:0 0 0 3px rgba(232,72,85,.15)!important}
+    .decl-input.success{border-color:var(--success)!important;box-shadow:0 0 20px rgba(46,204,113,.3)!important;color:var(--success)!important}
+    .decl-input::placeholder{color:var(--muted);font-family:'Inter';font-size:.75rem;text-transform:none;letter-spacing:.05em}
+    .decl-btn{padding:14px 28px;border-radius:var(--rp);border:1px solid var(--gold-b);background:none;color:var(--gold);font-family:'Inter';font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:.3s;white-space:nowrap}
+    .decl-btn:hover,.decl-btn.sealed{background:var(--gold);color:var(--void)}
+    .decl-hint{font-family:'Inter';font-size:.65rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:8px}
+    .decl-sealed-msg{display:none;margin-top:28px}
+    .decl-sealed-msg.show{display:block;animation:fadeUp .6s ease forwards}
+    .decl-sealed-msg p{font-family:'Cinzel';font-size:.9rem;color:var(--gold);letter-spacing:.1em}
+    .decl-sealed-msg .sd{font-family:'Inter';font-size:.65rem;color:var(--muted);margin-top:8px;letter-spacing:.1em}
+    #p-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+
+    /* ── WHOP BAR ── */
+    .whop-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(5,8,18,.95);border-top:1px solid var(--border);backdrop-filter:blur(14px);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .wb-left{display:flex;align-items:center;gap:16px}
+    .wb-module{display:flex;flex-direction:column}
+    .wb-m-label{font-family:'Inter';font-size:.6rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+    .wb-m-name{font-family:'Cinzel';font-size:.78rem;color:var(--text);letter-spacing:.05em}
+    .wb-progress-wrap{display:flex;align-items:center;gap:10px}
+    .wb-p-label{font-family:'Inter';font-size:.62rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+    .wb-p-track{width:120px;height:3px;background:var(--border);border-radius:3px;overflow:hidden}
+    .wb-p-fill{height:100%;background:var(--gold);width:0%;transition:width .5s;border-radius:3px}
+    .whop-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:var(--rp);background:var(--gold);color:var(--void);font-family:'Inter';font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;border:none;text-decoration:none;transition:.3s;white-space:nowrap}
+    .whop-btn:hover{background:var(--gold-l);transform:translateY(-1px)}
+    @media(max-width:640px){.wb-progress-wrap{display:none}}
+  </style>
+</head>
+<body>
+<div class="noise"></div>
+<canvas id="ambient-canvas"></canvas>
+
+<!-- WHOP RETURN BAR -->
+<div class="whop-bar">
+  <div class="wb-left">
+    <div class="wb-module">
+      <div class="wb-m-label">Currently Viewing</div>
+      <div class="wb-m-name">Module 2 · The Illusion of No Time</div>
+    </div>
+    <div class="wb-progress-wrap">
+      <span class="wb-p-label">Progress</span>
+      <div class="wb-p-track"><div class="wb-p-fill" id="pfill"></div></div>
+    </div>
+  </div>
+  <a href="https://whop.com/silent-strategist/exp_OQfyAgJkYyIvH9/app/courses/cors_fGZBpPUYQtguD/lessons/lesn_vouy0iR2i9vjf/" class="whop-btn">↩ Return to Course</a>
+</div>
+
+<main>
+
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <p class="hero-eyebrow">Financial Freedom Masterclass · Module 2</p>
+    <h1 class="hero-title">The Illusion<br/>of <span class="g">No Time</span></h1>
+    <p class="hero-sub">"I'm too old for this." — Not a fact you're reporting. A belief you're rehearsing. And your brain is listening.</p>
+    <div class="key-stat-strip">
+      <div class="ks"><div class="ks-num" data-count="45" data-suffix="">0</div><div class="ks-label">Avg. founder age of fastest-growing companies</div></div>
+      <div class="ks"><div class="ks-num" data-count="7" data-suffix=".5 yrs">0</div><div class="ks-label">Longer life from positive aging beliefs</div></div>
+      <div class="ks"><div class="ks-num" data-count="2" data-suffix="×">0</div><div class="ks-label">More likely to succeed at 50 than 30</div></div>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll to Begin</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ══ BELIEF DETECTOR ══ -->
+  <div class="sec-divider sr"><span>The Belief Detector</span></div>
+
+  <p class="body-text sr" style="text-align:center;font-style:italic;color:var(--muted);margin-bottom:32px">
+    These four phrases sound like wisdom. They sound like maturity speaking. Click any you've told yourself — and see what's actually happening underneath.
+  </p>
+
+  <div class="belief-grid sr">
+    <div class="belief-card" onclick="crackBelief(this,'temporal')">
+      <div class="crack-icon">⚡</div>
+      <div class="belief-front">
+        <p class="belief-phrase">"I don't have time to start something new."</p>
+        <span class="belief-tag">The Time Belief</span>
+        <div class="belief-tap">↗ Tap to see what's really going on</div>
+      </div>
+      <div class="belief-reveal">
+        <h4>Temporal Discounting in Action</h4>
+        <p>Your brain is wired to weigh a smaller reward available now more heavily than a larger reward available later — even when the math clearly favours waiting. This isn't a time problem. It's a perception problem.</p>
+      </div>
+    </div>
+    <div class="belief-card" onclick="crackBelief(this,'window')">
+      <div class="crack-icon">⚡</div>
+      <div class="belief-front">
+        <p class="belief-phrase">"That window has passed for me."</p>
+        <span class="belief-tag">The Window Belief</span>
+        <div class="belief-tap">↗ Tap to see what's really going on</div>
+      </div>
+      <div class="belief-reveal">
+        <h4>The Window Was Never Closing</h4>
+        <p>2.7 million founders were studied. The average founder of the fastest-growing companies was 45 years old. A 50-year-old was nearly twice as likely to build a success as a 30-year-old. The data doesn't support this belief.</p>
+      </div>
+    </div>
+    <div class="belief-card" onclick="crackBelief(this,'stability')">
+      <div class="crack-icon">⚡</div>
+      <div class="belief-front">
+        <p class="belief-phrase">"I need to focus on what's stable, not what's uncertain."</p>
+        <span class="belief-tag">The Safety Belief</span>
+        <div class="belief-tap">↗ Tap to see what's really going on</div>
+      </div>
+      <div class="belief-reveal">
+        <h4>Kierkegaard's Dizziness of Freedom</h4>
+        <p>The anxiety of standing before a real choice is not a warning sign that the choice is wrong. It is the psychological weight of having options. Many adults misread this anxiety as proof a new direction is unwise — when it may just be proof they're standing at an open door for the first time in years.</p>
+      </div>
+    </div>
+    <div class="belief-card" onclick="crackBelief(this,'ten')">
+      <div class="crack-icon">⚡</div>
+      <div class="belief-front">
+        <p class="belief-phrase">"Maybe ten years ago, but not now."</p>
+        <span class="belief-tag">The Timing Belief</span>
+        <div class="belief-tap">↗ Tap to see what's really going on</div>
+      </div>
+      <div class="belief-reveal">
+        <h4>Your Brain Is Still Being Written</h4>
+        <p>Neuroplasticity does not stop at 45. Your hippocampus still generates new neurons in midlife. The friction you feel learning something new isn't evidence of being too old — it's what active learning feels like, at any age.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ NEUROPLASTICITY ══ -->
+  <div class="sec-divider sr"><span>Your Brain at 50</span></div>
+
+  <div class="card sr" style="margin-bottom:24px">
+    <p class="tag">The Science of Neuroplasticity</p>
+    <h2 class="sec-title">The Brain Doesn't Stop<br/>Rewiring at <span style="color:var(--gold)">Forty-Five</span></h2>
+    <p class="body-text lg">For decades, the assumption was that the adult brain was mostly fixed after childhood. That assumption has been overturned.</p>
+    <p class="body-text">The brain remains capable of forming new neural connections and reorganising itself throughout the entire lifespan. The hippocampus — the region tied closely to memory and learning — continues generating new neurons well into older age. <span class="em">Your brain at 50 is not a closed book. It is still being written.</span></p>
+    <p class="body-text" style="color:var(--muted)">What decides whether that rewiring actually happens is not your age. It's whether you put yourself into situations difficult enough to demand it. The confusion you feel learning something new in midlife is not evidence you're too old. It's what active learning feels like.</p>
+  </div>
+
+  <div class="neural-wrap sr">
+    <canvas id="neural-canvas"></canvas>
+    <div class="neural-label">New neural connections forming — active learning in progress</div>
+    <div class="neural-status">● REWIRING</div>
+  </div>
+
+  <!-- ══ BECCA LEVY BELIEF IMPACT ══ -->
+  <div class="sec-divider sr"><span>Becca Levy Research</span></div>
+
+  <div class="card sr" style="margin-bottom:32px">
+    <p class="tag">Yale Longitudinal Study</p>
+    <h2 class="sec-title">What You <em style="font-style:italic;color:var(--gold)">Believe</em> About Aging<br/>Changes Your Actual Brain</h2>
+    <div class="pipe-quote">"Adults with more positive views of their own aging lived, on average, <strong>seven and a half years longer</strong> than those with negative views."<br/><span style="font-family:'Inter';font-size:.7rem;letter-spacing:.1em;color:var(--muted);font-style:normal">— Becca Levy, Yale University</span></div>
+    <p class="body-text" style="color:var(--muted)">The belief itself was measurably associated with the physical outcome — not just lifestyle differences or genetics. The illusion of no time doesn't just limit your choices. It appears to shape your biology.</p>
+  </div>
+
+  <div class="levy-wrap sr">
+    <div class="levy-slider-box">
+      <p class="tag" style="margin-bottom:8px">Your Belief Spectrum</p>
+      <h3 class="sec-title" style="font-size:1.2rem;margin-bottom:20px">Where do your beliefs sit?</h3>
+      <div class="levy-slider-label">
+        <span class="neg">Negative</span>
+        <span class="pos">Positive</span>
+      </div>
+      <input type="range" id="levy-slider" min="0" max="100" value="50" oninput="updateLevy(this.value)"/>
+      <div style="display:flex;justify-content:space-between;font-family:'Inter';font-size:.6rem;color:var(--muted);margin-top:4px;letter-spacing:.05em">
+        <span>"My best years are behind me"</span>
+        <span>"I'm still building"</span>
+      </div>
+    </div>
+    <div class="levy-outcome-box" id="levy-box">
+      <p class="tag" style="margin-bottom:8px">Projected Impact</p>
+      <div class="levy-years" id="levy-years">—</div>
+      <p style="font-family:'Inter';font-size:.65rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px" id="levy-yr-label">Move the slider</p>
+      <div class="levy-brain-bar"><div class="levy-brain-fill" id="levy-brain-fill" style="width:50%;background:var(--muted)"></div></div>
+      <div class="levy-bar-label" id="levy-bar-label">Hippocampal health indicator</div>
+      <p class="levy-verdict" id="levy-verdict">Adjust the slider to reveal the projected biological impact of your belief system, as measured by Becca Levy's longitudinal research.</p>
+    </div>
+  </div>
+
+  <!-- ══ FOUNDER AGE DATA ══ -->
+  <div class="sec-divider sr"><span>The Data: 2.7 Million Founders</span></div>
+
+  <div class="card sr" style="margin-bottom:32px">
+    <p class="body-text lg">Researchers studying <span class="em">2.7 million business founders</span> in the United States found that among the fastest-growing new companies, the <strong style="color:var(--gold)">average founder's age at founding was 45</strong> — not 25. A 50-year-old was nearly <strong style="color:var(--gold)">twice as likely</strong> to build a runaway success as a 30-year-old.</p>
+  </div>
+
+  <div class="chart-outer sr">
+    <div class="chart-title">New Business Formation Rate by Age Group (US Data)</div>
+    <p style="font-family:'Inter';font-size:.68rem;color:var(--muted);letter-spacing:.05em;margin:-12px 0 24px;line-height:1.6">How to read this chart: The 45–54 group is set as the peak baseline (Index 100). All other groups show their rate <em>relative to that peak</em>. An index of 38 means that age group starts businesses at 38% of the rate of the 45–54 peak — not that 38% of people in that group start businesses.</p>
+    <div class="chart-bars" id="chart-bars">
+      <div class="chart-bar-wrap">
+        <div class="chart-bar-inner"><div class="chart-bar" data-h="38" data-tip="Under 35 start businesses at a rate of 38 on the index — about 62% less frequently than the peak 45–54 group, despite popular mythology that youth drives entrepreneurship."></div></div>
+        <div class="chart-bar-pct" data-count-bar="38" data-suffix="">0</div>
+        <div class="chart-bar-label">Under 35</div>
+      </div>
+      <div class="chart-bar-wrap">
+        <div class="chart-bar-inner"><div class="chart-bar" data-h="62" data-tip="35–44 group scores 62 on the index — experience is starting to compound, but still below the 45–54 peak."></div></div>
+        <div class="chart-bar-pct" data-count-bar="62" data-suffix="">0</div>
+        <div class="chart-bar-label">35–44</div>
+      </div>
+      <div class="chart-bar-wrap">
+        <div class="chart-bar-inner"><div class="chart-bar highlight peak" data-h="100" data-tip="PEAK: 45–54 year olds are the most frequent business starters of any age group. The average founder of the fastest-growing companies is 45 years old. This group = Index 100 (the baseline)."></div></div>
+        <div class="chart-bar-pct" data-count-bar="100" data-suffix=" ★ PEAK" style="color:var(--gold);font-size:.7rem">0</div>
+        <div class="chart-bar-label" style="color:var(--gold)">45–54</div>
+      </div>
+      <div class="chart-bar-wrap">
+        <div class="chart-bar-inner"><div class="chart-bar" data-h="88" data-tip="55–64 score 88 on the index — very close to the peak. Both 45–54 and 55–64 are well ahead of those under 35."></div></div>
+        <div class="chart-bar-pct" data-count-bar="88" data-suffix="">0</div>
+        <div class="chart-bar-label">55–64</div>
+      </div>
+      <div class="chart-bar-wrap">
+        <div class="chart-bar-inner"><div class="chart-bar" data-h="55" data-tip="65+ scores 55 on the index — still comparable to the under-35 group, disproving the idea that business-building belongs only to the young."></div></div>
+        <div class="chart-bar-pct" data-count-bar="55" data-suffix="">0</div>
+        <div class="chart-bar-label">65+</div>
+      </div>
+    </div>
+    <div class="chart-legend">
+      <div class="chart-leg-item"><div class="chart-leg-dot" style="background:linear-gradient(to top,var(--gold),var(--gold-l))"></div><span>Peak group (45–54) = Index 100. All bars show formation rate relative to this group.</span></div>
+      <div class="chart-leg-item"><div class="chart-leg-dot" style="background:rgba(255,255,255,.15)"></div><span>Other age groups (indexed relative to peak)</span></div>
+    </div>
+    <div id="chart-tooltip" style="display:none;position:absolute;background:#0A0E18;border:1px solid var(--gold-b);border-radius:10px;padding:12px 16px;font-size:.9rem;color:var(--text);font-style:italic;line-height:1.5;max-width:260px;pointer-events:none;z-index:10"></div>
+  </div>
+
+  <!-- ══ STATS ══ -->
+  <div class="stats-grid sr" style="margin-top:32px">
+    <div class="stat-card">
+      <div class="s-num" data-count="45" data-suffix="">0</div>
+      <p class="s-desc">Average age of founders at fastest-growing US companies — not 25.</p>
+      <p class="s-src">Azoulay et al., 2.7M Founders Study</p>
+    </div>
+    <div class="stat-card">
+      <div class="s-num" data-count="2" data-suffix="×">0×</div>
+      <p class="s-desc">A 50-year-old is nearly <em>twice as likely</em> to build a runaway success as a 30-year-old.</p>
+      <p class="s-src">Same 2.7M Founders Dataset</p>
+    </div>
+    <div class="stat-card">
+      <div class="s-num" data-count="7" data-suffix=".5">0</div>
+      <p class="s-desc">Extra years of life linked to holding positive rather than negative beliefs about your own aging.</p>
+      <p class="s-src">Becca Levy, Yale University</p>
+    </div>
+  </div>
+
+  <!-- ══ TEMPORAL DISCOUNTING SIMULATOR ══ -->
+  <div class="sec-divider sr"><span>Feel the Bias: Temporal Discounting</span></div>
+
+  <p class="body-text sr" style="text-align:center;font-style:italic;color:var(--muted);margin-bottom:28px">Humans are wired to prefer smaller rewards now over larger rewards later — even when the math clearly favours waiting. Make this choice and feel it happening.</p>
+
+  <div class="td-stage sr">
+    <p class="td-question" id="td-q">You are considering building a second income stream — something that works independently of your main job. It will demand a period of uncomfortable learning and consistent effort, with no financial return during that runway.<br/><br/>At the other end of that discomfort is income that arrives whether you work or not. Your instinct says: stay with what's stable right now.</p>
+    <div class="td-choices">
+      <button class="td-btn safe" onclick="chooseTD('safe')">Stay safe.<br/><span style="font-family:'Inter';font-size:.7rem;color:var(--muted)">Protect what I have now.</span></button>
+      <button class="td-btn bold" onclick="chooseTD('bold')">Accept the discomfort.<br/><span style="font-family:'Inter';font-size:.7rem;color:var(--muted)">Build toward the larger reward.</span></button>
+    </div>
+    <p class="td-result" id="td-result"></p>
+    <button class="td-reset" id="td-reset" onclick="resetTD()">↺ Try again</button>
+  </div>
+
+  <!-- ══ ENLARGE / DIMINISH TOOL ══ -->
+  <div class="sec-divider sr"><span>Burkeman's Test: Enlarge or Diminish?</span></div>
+
+  <p class="body-text sr" style="text-align:center;font-style:italic;color:var(--muted);margin-bottom:28px">Instead of asking "will this make me happy" — ask: will this choice enlarge me or diminish me? Name a real decision you're currently facing and rate both sides.</p>
+
+  <div class="ed-box sr">
+    <div class="ed-input-row">
+      <label class="ed-label" for="ed-decision">Name the decision you're facing</label>
+      <input type="text" class="ed-input" id="ed-decision" placeholder="e.g. Starting a side consulting practice, learning to invest, leaving a stable job..." oninput="updateED()"/>
+    </div>
+    <div class="ed-scales">
+      <div class="ed-scale enlarge">
+        <h4>If I Take This Step</h4>
+        <label class="ed-label">How much will it ENLARGE my life?</label>
+        <input type="range" min="0" max="10" value="5" id="ed-enlarge" oninput="updateED()"/>
+        <div class="ed-scale-value" id="ed-enlarge-val">5</div>
+        <p style="font-size:.95rem;color:var(--muted)">Skills gained, freedom earned, person I become</p>
+      </div>
+      <div class="ed-scale diminish">
+        <h4>If I Avoid This Step</h4>
+        <label class="ed-label">How much will it DIMINISH my life?</label>
+        <input type="range" min="0" max="10" value="5" id="ed-diminish" oninput="updateED()"/>
+        <div class="ed-scale-value" id="ed-diminish-val">5</div>
+        <p style="font-size:.95rem;color:var(--muted)">Stagnation, regret, the smaller life stayed in</p>
+      </div>
+    </div>
+    <div class="ed-verdict" id="ed-verdict"></div>
+  </div>
+
+  <!-- ══ REFLECTION JOURNAL ══ -->
+  <div class="sec-divider sr"><span>Written Reflection — 10 Prompts</span></div>
+
+  <div class="card sr" style="margin-bottom:28px;border-color:var(--gold-b)">
+    <p class="body-text" style="margin:0;font-style:italic;color:var(--muted)">Do not rush these. Write real sentences, not one-word answers. Your answers are saved privately to your browser — no one else can see them. As you move through this course, you will return to these reflections to evaluate how your thinking has shifted and to guide the decisions you take next.</p>
+  </div>
+
+  <div class="journal-section sr">
+    <div class="journal-item">
+      <div class="journal-q"><strong>Reflection 01</strong>Write down the exact words you've used — out loud or in your head — in the last month, about being "too old," "too late," or having "missed the window." What was the situation? What were you considering when that thought showed up?</div>
+      <textarea id="r1" placeholder="Write your honest answer here..." oninput="saveJ('r1')"></textarea>
+      <div class="save-ind" id="sv-r1">✓ Saved</div>
+    </div>
+    <div class="journal-item">
+      <div class="journal-q"><strong>Reflection 02</strong>Think of one opportunity, idea, or invitation you turned down or avoided in the last year. What was the first reason you gave yourself for saying no? Was that reason about the opportunity itself — or about your age, energy, or stage of life?</div>
+      <textarea id="r2" placeholder="Write your honest answer here..." oninput="saveJ('r2')"></textarea>
+      <div class="save-ind" id="sv-r2">✓ Saved</div>
+    </div>
+    <div class="journal-item">
+      <div class="journal-q"><strong>Reflection 03</strong>When you imagine starting something new right now — a second income stream, a skill, a pivot — what physical sensation shows up first? Describe it. Then ask: is this the feeling of danger, or the feeling of difficulty?</div>
+      <textarea id="r3" placeholder="Write your honest answer here..." oninput="saveJ('r3')"></textarea>
+      <div class="save-ind" id="sv-r3">✓ Saved</div>
+    </div>
+    <div class="journal-item">
+      <div class="journal-q"><strong>Reflection 04</strong>List three decisions you've made in the last two years that were about protecting what you already have, rather than building something new. Were these genuinely necessary — or were they the safer, smaller, nearer choice your mind reached for automatically?</div>
+      <textarea id="r4" placeholder="Write your honest answer here..." oninput="saveJ('r4')"></textarea>
+      <div class="save-ind" id="sv-r4">✓ Saved</div>
+    </div>
+    <div class="journal-item">
+      <div class="journal-q"><strong>Reflection 05</strong>Who in your life — older than you — is proof that this stage of life is not the end of building? Name at least one person, real or well known. What did they actually do, and what does it tell you about the ceiling you've assumed for yourself?</div>
+      <textarea id="r5" placeholder="Write your honest answer here..." oninput="saveJ('r5')"></textarea>
+      <div class="save-ind" id="sv-r5">✓ Saved</div>
+    </div>
+    <div class="journal-item">
+      <div class="journal-q"><strong>Reflection 06</strong>Complete this sentence honestly: "If I believed I genuinely still had twenty good years of building ahead of me, I would ______." Don't edit the answer to sound reasonable. Write what actually comes to mind first.</div>
+      <textarea id="r6" placeholder="If I believed I genuinely still had twenty good years of building ahead of me, I would..." oninput="saveJ('r6')"></textarea>
+      <div class="save-ind" id="sv-r6">✓ Saved</div>
+    </div>
+    <div class="journal-item">
+      <div class="journal-q"><strong>Reflection 07</strong>Think back to the last time you learned something genuinely new and difficult, at any age. How did the discomfort during that learning compare to how you're currently interpreting the discomfort of a new income path? Is the current discomfort actually different — or are you reading it differently?</div>
+      <textarea id="r7" placeholder="Write your honest answer here..." oninput="saveJ('r7')"></textarea>
+      <div class="save-ind" id="sv-r7">✓ Saved</div>
+    </div>
+    <div class="journal-item">
+      <div class="journal-q"><strong>Reflection 08</strong>Name one choice in front of you right now — big or small — and answer Burkeman's test honestly: would taking it enlarge you or diminish you? Would avoiding it enlarge you or diminish you? Write both sides out.</div>
+      <textarea id="r8" placeholder="Write your honest answer here..." oninput="saveJ('r8')"></textarea>
+      <div class="save-ind" id="sv-r8">✓ Saved</div>
+    </div>
+    <div class="journal-item">
+      <div class="journal-q"><strong>Reflection 09</strong>What is one skill, relationship, or piece of experience you've built over the last twenty years that you've been quietly assuming has no market value? Why did you assume that? Who told you — or did you decide it on your own?</div>
+      <textarea id="r9" placeholder="Write your honest answer here..." oninput="saveJ('r9')"></textarea>
+      <div class="save-ind" id="sv-r9">✓ Saved</div>
+    </div>
+    <div class="journal-item">
+      <div class="journal-q"><strong>Reflection 10</strong>If a friend came to you with your exact circumstances — your exact age, your exact experience — and asked whether it was "too late" for them to build something new, what would you honestly tell them? Now read your own answer back to yourself.</div>
+      <textarea id="r10" placeholder="Write your honest answer here..." oninput="saveJ('r10')"></textarea>
+      <div class="save-ind" id="sv-r10">✓ Saved</div>
+    </div>
+  </div>
+
+  <div class="journal-controls sr">
+    <button class="jc-btn jc-export" onclick="exportJournal()">📥 Download My Reflections</button>
+    <button class="jc-btn jc-clear" onclick="clearJournal()">🗑 Clear &amp; Reset</button>
+  </div>
+
+  <!-- ══ DECLARATION ══ -->
+  <div class="sec-divider sr"><span>The Declaration</span></div>
+
+  <div class="decl-box sr">
+    <canvas id="p-canvas"></canvas>
+    <p class="tag">Seal Your Commitment</p>
+    <p class="decl-text">"I understand that 'I don't have time' is not a fact I'm reporting — it is a belief I have been rehearsing. The door is open. The data says so. My biology supports it. I choose to stop rehearsing the illusion and to start building — starting now."</p>
+    <div class="decl-input-wrap">
+      <input type="text" class="decl-input" id="decl-in" placeholder='Type "I ACCEPT" to seal this'/>
+      <button class="decl-btn" onclick="sealDecl()">Seal</button>
+    </div>
+    <p class="decl-hint">Type "I ACCEPT" and press Seal</p>
+    <div class="decl-sealed-msg" id="sealed-msg">
+      <p>✦ THE ILLUSION IS BROKEN — YOUR BUILD BEGINS NOW ✦</p>
+      <p class="sd" id="sealed-date"></p>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:48px;flex-wrap:wrap;gap:16px" class="sr">
+    <a href="module-1.html" style="font-family:'Inter';font-size:.7rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;text-decoration:none;border:1px solid var(--border);padding:10px 20px;border-radius:var(--rp);transition:.3s" onmouseover="this.style.borderColor='var(--gold-b)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">← Module 1: The Foundation</a>
+    <a href="https://whop.com/silent-strategist/exp_OQfyAgJkYyIvH9/app/courses/cors_fGZBpPUYQtguD/lessons/lesn_vouy0iR2i9vjf/" class="whop-btn" style="text-decoration:none">↩ Return to Course</a>
+  </div>
+
+</main>
+
+<script>
+/* ─── AMBIENT CANVAS ─── */
+(function(){
+  const c=document.getElementById('ambient-canvas'),ctx=c.getContext('2d');
+  let s=[];
+  const resize=()=>{c.width=innerWidth;c.height=innerHeight};
+  const init=()=>{s=[];for(let i=0;i<130;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.1+.2,speed:Math.random()*.18+.04,op:Math.random()*.55+.1,tw:Math.random()*Math.PI*2})};
+  const draw=()=>{ctx.clearRect(0,0,c.width,c.height);s.forEach(p=>{p.tw+=.007;const o=p.op*(.6+.4*Math.sin(p.tw));ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(201,168,76,${o})`;ctx.fill();p.y-=p.speed;if(p.y<0){p.y=c.height;p.x=Math.random()*c.width}});requestAnimationFrame(draw)};
+  resize();init();draw();window.addEventListener('resize',()=>{resize();init()});
+})();
+
+/* ─── SCROLL REVEAL ─── */
+(()=>{
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target)}}),{threshold:.07});
+  document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
+})();
+
+/* ─── COUNTER ANIMATION ─── */
+function animCount(el){
+  const t=parseFloat(el.dataset.count||el.dataset.countBar||0),suf=el.dataset.suffix||'';
+  let cur=0;const step=t/55;
+  const ti=setInterval(()=>{cur=Math.min(cur+step,t);el.textContent=Number.isInteger(t)?Math.floor(cur)+suf:cur.toFixed(1)+suf;if(cur>=t){clearInterval(ti);el.textContent=t+suf}},20);
+}
+const cObs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){animCount(e.target);cObs.unobserve(e.target)}}),{threshold:.5});
+document.querySelectorAll('[data-count],[data-count-bar]').forEach(el=>cObs.observe(el));
+
+/* ─── PROGRESS BAR ─── */
+window.addEventListener('scroll',()=>{
+  const pct=Math.round((scrollY/(document.body.scrollHeight-innerHeight))*100);
+  document.getElementById('pfill').style.width=pct+'%';
+});
+
+/* ─── BELIEF DETECTOR ─── */
+function crackBelief(card,type){
+  if(card.classList.contains('cracked'))return;
+  card.classList.add('cracked');
+}
+
+/* ─── NEURAL NETWORK CANVAS ─── */
+(function(){
+  const c=document.getElementById('neural-canvas'),ctx=c.getContext('2d');
+  let nodes=[],connections=[],t=0;
+  function resize(){c.width=c.offsetWidth;c.height=c.offsetHeight}
+  function init(){
+    nodes=[];connections=[];
+    const cols=Math.floor(c.width/90),rows=Math.floor(c.height/60);
+    for(let r=0;r<rows;r++)for(let col=0;col<cols;col++){
+      nodes.push({x:col*(c.width/(cols-1||1))+Math.random()*30-15,y:r*(c.height/(rows-1||1))+Math.random()*20-10,r:Math.random()*3+2,active:Math.random()>.3,pulse:Math.random()*Math.PI*2,speed:Math.random()*.04+.02});
+    }
+    nodes.forEach((n,i)=>{
+      nodes.forEach((m,j)=>{
+        if(i>=j)return;
+        const d=Math.hypot(n.x-m.x,n.y-m.y);
+        if(d<130&&Math.random()>.4)connections.push({a:i,b:j,alpha:Math.random()*.4+.1,life:Math.random(),speed:Math.random()*.008+.003});
+      });
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    connections.forEach(cn=>{
+      cn.life+=cn.speed;
+      if(cn.life>1){cn.life=0}
+      const n=nodes[cn.a],m=nodes[cn.b];
+      const grad=ctx.createLinearGradient(n.x,n.y,m.x,m.y);
+      grad.addColorStop(0,'rgba(201,168,76,0)');
+      grad.addColorStop(cn.life,'rgba(201,168,76,.5)');
+      grad.addColorStop(Math.min(1,cn.life+.15),'rgba(79,195,247,.3)');
+      grad.addColorStop(1,'rgba(201,168,76,0)');
+      ctx.beginPath();ctx.moveTo(n.x,n.y);ctx.lineTo(m.x,m.y);
+      ctx.strokeStyle=grad;ctx.lineWidth=.8;ctx.stroke();
+    });
+    nodes.forEach(n=>{
+      n.pulse+=n.speed;
+      const gl=.5+.5*Math.sin(n.pulse);
+      ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
+      ctx.fillStyle=n.active?`rgba(201,168,76,${gl*.8+.2})`:`rgba(255,255,255,${gl*.15})`;
+      ctx.fill();
+      if(n.active&&Math.sin(n.pulse)>.8){
+        ctx.beginPath();ctx.arc(n.x,n.y,n.r+4,0,Math.PI*2);
+        ctx.strokeStyle=`rgba(201,168,76,${gl*.3})`;ctx.lineWidth=1;ctx.stroke();
+      }
+    });
+    requestAnimationFrame(draw);
+  }
+  resize();init();draw();
+  window.addEventListener('resize',()=>{resize();init()});
+})();
+
+/* ─── LEVY SLIDER ─── */
+function updateLevy(val){
+  const v=parseInt(val);
+  const box=document.getElementById('levy-box');
+  const yearsEl=document.getElementById('levy-years');
+  const labelEl=document.getElementById('levy-yr-label');
+  const verdictEl=document.getElementById('levy-verdict');
+  const brainFill=document.getElementById('levy-brain-fill');
+
+  if(v<30){
+    box.className='levy-outcome-box negative';
+    const lost=Math.round(((30-v)/30)*7.5);
+    yearsEl.className='levy-years negative';
+    yearsEl.textContent=`-${lost} yrs`;
+    labelEl.textContent='Projected lifespan reduction';
+    brainFill.style.width=(20+v*.5)+'%';
+    brainFill.style.background='var(--danger)';
+    verdictEl.textContent=`Research associates strongly negative aging beliefs with steeper hippocampal volume loss and elevated Alzheimer's markers over time. These beliefs are not just uncomfortable — they appear to be biologically costly.`;
+  } else if(v>70){
+    box.className='levy-outcome-box positive';
+    const gained=Math.round(((v-50)/50)*7.5);
+    yearsEl.className='levy-years positive';
+    yearsEl.textContent=`+${gained} yrs`;
+    labelEl.textContent='Projected lifespan advantage';
+    brainFill.style.width=Math.min(95,50+v*.45)+'%';
+    brainFill.style.background='var(--success)';
+    verdictEl.textContent=`Positive beliefs about your own aging are associated with greater hippocampal volume retention, lower Alzheimer's markers, and — critically — up to 7.5 extra years of life, independent of lifestyle and genetics alone.`;
+  } else {
+    box.className='levy-outcome-box';
+    yearsEl.className='levy-years neutral';
+    yearsEl.textContent='Neutral';
+    labelEl.textContent='Mixed belief system';
+    brainFill.style.width='50%';
+    brainFill.style.background='var(--muted)';
+    verdictEl.textContent=`Your beliefs are mixed. Becca Levy's research shows that the direction of these beliefs — even subtle, quiet assumptions — measurably correlates with brain health over time. Neutrality trends slightly positive over strong negative beliefs.`;
+  }
+}
+updateLevy(50);
+
+/* ─── CHART BARS ─── */
+(function(){
+  const bars=document.querySelectorAll('.chart-bar');
+  const obs=new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting){
+      bars.forEach(b=>{
+        const h=parseInt(b.dataset.h);
+        setTimeout(()=>{b.style.height=(h/100*160)+'px'},100);
+      });
+      obs.disconnect();
+    }
+  },{threshold:.3});
+  obs.observe(document.getElementById('chart-bars'));
+  bars.forEach(b=>{
+    b.style.height='0px';b.style.transition='height 1.2s cubic-bezier(.16,1,.3,1)';
+    const tt=document.getElementById('chart-tooltip');
+    b.addEventListener('mouseenter',e=>{
+      tt.textContent=b.dataset.tip;tt.style.display='block';
+      tt.style.left=(e.offsetX+b.getBoundingClientRect().left-50)+'px';
+      tt.style.top=(b.getBoundingClientRect().top-100+scrollY)+'px';
+    });
+    b.addEventListener('mouseleave',()=>tt.style.display='none');
+  });
+  document.querySelectorAll('[data-count-bar]').forEach(el=>{
+    const obs2=new IntersectionObserver(entries=>{
+      if(entries[0].isIntersecting){animCount(el);obs2.disconnect()}
+    },{threshold:.3});
+    obs2.observe(el);
+  });
+})();
+
+/* ─── TEMPORAL DISCOUNTING ─── */
+function chooseTD(type){
+  const safeBtn=document.querySelector('.td-btn.safe'),boldBtn=document.querySelector('.td-btn.bold');
+  const result=document.getElementById('td-result'),reset=document.getElementById('td-reset');
+  safeBtn.disabled=true;boldBtn.disabled=true;
+  if(type==='safe'){
+    safeBtn.classList.add('chosen-safe');
+    result.innerHTML=`<span style="color:var(--danger)">That was your temporal discounting bias at work.</span> The discomfort of 8 months felt heavier than $2,000/month forever — even though the math is overwhelmingly clear. This is not a character flaw. It's a biological wiring pattern. Now that you can see it, you can interrupt it.`;
+  } else {
+    boldBtn.classList.add('chosen-bold');
+    result.innerHTML=`<span style="color:var(--success)">You overrode the bias.</span> You chose the larger, later reward over the smaller, immediate comfort. This is the exact mental move that separates people who build financial freedom from those who keep preparing to start.`;
+  }
+  result.classList.add('show');reset.classList.add('show');
+}
+function resetTD(){
+  const safeBtn=document.querySelector('.td-btn.safe'),boldBtn=document.querySelector('.td-btn.bold');
+  const result=document.getElementById('td-result'),reset=document.getElementById('td-reset');
+  safeBtn.disabled=false;boldBtn.disabled=false;
+  safeBtn.className='td-btn safe';boldBtn.className='td-btn bold';
+  result.classList.remove('show');reset.classList.remove('show');
+}
+
+/* ─── ENLARGE/DIMINISH ─── */
+function updateED(){
+  const decision=document.getElementById('ed-decision').value.trim();
+  const enlarge=parseInt(document.getElementById('ed-enlarge').value);
+  const diminish=parseInt(document.getElementById('ed-diminish').value);
+  document.getElementById('ed-enlarge-val').textContent=enlarge;
+  document.getElementById('ed-diminish-val').textContent=diminish;
+  const verdict=document.getElementById('ed-verdict');
+  if(!decision){verdict.className='ed-verdict';return}
+  verdict.className='ed-verdict show '+(enlarge>=diminish?'go':'wait');
+  if(enlarge>diminish)verdict.innerHTML=`<span style="color:var(--success)">✦ The data says: go.</span> Taking this step — "${decision}" — enlarges your life by ${enlarge}/10, while avoiding it diminishes it by ${diminish}/10. The cost of inaction is greater than the cost of discomfort.`;
+  else if(diminish>enlarge)verdict.innerHTML=`<span style="color:var(--gold)">⟳ The data says: reconsider avoidance.</span> Avoiding this decision might feel safe in the short term — but you've rated its diminishing effect (${diminish}/10) higher than its enlarging effect when taken (${enlarge}/10). The question is whether that avoidance cost is acceptable long-term.`;
+  else verdict.innerHTML=`<span style="color:var(--muted)">You've rated both sides equally.</span> Sit with this longer. Burkeman's test usually produces a clear answer when you're fully honest — especially about the cost of staying still.`;
+}
+
+/* ─── JOURNAL ─── */
+['r1','r2','r3','r4','r5','r6','r7','r8','r9','r10'].forEach(id=>{
+  const saved=localStorage.getItem('ffm2_'+id);
+  if(saved){const el=document.getElementById(id);if(el)el.value=saved}
+});
+function saveJ(id){
+  const val=document.getElementById(id)?.value||'';
+  localStorage.setItem('ffm2_'+id,val);
+  const ind=document.getElementById('sv-'+id);
+  if(ind){ind.classList.add('show');setTimeout(()=>ind.classList.remove('show'),2000)}
+}
+
+/* ─── EXPORT JOURNAL ─── */
+function exportJournal(){
+  const questions=[
+    'Reflection 01: Write down the exact words you’ve used — out loud or in your head — in the last month, about being "too old," "too late," or having "missed the window."',
+    'Reflection 02: Think of one opportunity, idea, or invitation you turned down or avoided in the last year. What was the first reason you gave yourself?',
+    'Reflection 03: When you imagine starting something new right now, what physical sensation shows up first? Is it danger or difficulty?',
+    'Reflection 04: List three decisions you’ve made in the last two years that were about protecting what you already have rather than building something new.',
+    'Reflection 05: Who in your life — older than you — is proof that this stage of life is not the end of building?',
+    'Reflection 06: Complete honestly: "If I believed I genuinely still had twenty good years of building ahead of me, I would ______"',
+    'Reflection 07: Think back to the last time you learned something genuinely new and difficult. How does that discomfort compare to now?',
+    'Reflection 08: Name one choice in front of you right now and apply Burkeman’s test: would taking it enlarge you or diminish you?',
+    'Reflection 09: What skill, relationship, or experience have you built over the last twenty years that you’ve assumed has no market value?',
+    'Reflection 10: If a friend came to you with your exact circumstances and asked if it was "too late" — what would you honestly tell them?'
+  ];
+  const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  let content=`FINANCIAL FREEDOM MASTERCLASS\nModule 2: The Illusion of No Time\nJournal Export — ${date}\n${'='.repeat(60)}\n\n`;
+  questions.forEach((q,i)=>{
+    const key='ffm2_r'+(i+1);
+    const answer=localStorage.getItem(key)||'(No answer written yet)';
+    content+=`${q}\n\n${answer}\n\n${'-'.repeat(60)}\n\n`;
+  });
+  const decl=localStorage.getItem('ffm2_declaration');
+  const declDate=localStorage.getItem('ffm2_declaration_date');
+  if(decl) content+=`DECLARATION SEALED on ${declDate}\n`;
+  const blob=new Blob([content],{type:'text/plain;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='Module-2-Journal.txt';a.click();
+  URL.revokeObjectURL(url);
+}
+
+/* ─── CLEAR JOURNAL ─── */
+function clearJournal(){
+  if(!confirm('Are you sure you want to clear all your reflection answers for Module 2? This cannot be undone.'))return;
+  ['r1','r2','r3','r4','r5','r6','r7','r8','r9','r10'].forEach(id=>{
+    localStorage.removeItem('ffm2_'+id);
+    const el=document.getElementById(id);if(el)el.value='';
+  });
+}
+
+/* ─── DECLARATION ─── */
+(function(){
+  if(localStorage.getItem('ffm2_declaration')){
+    const d=localStorage.getItem('ffm2_declaration_date');
+    document.getElementById('decl-in').value='I ACCEPT';
+    document.getElementById('decl-in').disabled=true;
+    document.querySelector('.decl-btn').classList.add('sealed');
+    document.querySelector('.decl-btn').textContent='✦ Sealed';
+    document.getElementById('sealed-msg').classList.add('show');
+    document.getElementById('sealed-date').textContent='Declared on '+d;
+  }
+})();
+function sealDecl(){
+  const inp=document.getElementById('decl-in');
+  if(inp.value.trim().toUpperCase()!=='I ACCEPT'){
+    inp.classList.add('error');
+    inp.style.animation='shake .4s ease';
+    setTimeout(()=>{inp.classList.remove('error');inp.style.animation=''},600);
+    return;
+  }
+  inp.classList.add('success');
+  const now=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  localStorage.setItem('ffm2_declaration','true');
+  localStorage.setItem('ffm2_declaration_date',now);
+  setTimeout(()=>{
+    inp.disabled=true;
+    document.querySelector('.decl-btn').classList.add('sealed');
+    document.querySelector('.decl-btn').textContent='✦ Sealed';
+    document.getElementById('sealed-msg').classList.add('show');
+    document.getElementById('sealed-date').textContent='Declared on '+now;
+    firePart();
+  },500);
+}
+function firePart(){
+  const canvas=document.getElementById('p-canvas'),ctx=canvas.getContext('2d');
+  canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;
+  const cx=canvas.width/2,cy=canvas.height/2,particles=[];
+  for(let i=0;i<90;i++){const a=Math.random()*Math.PI*2,sp=Math.random()*6+2;particles.push({x:cx,y:cy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,alpha:1,size:Math.random()*4+1,color:`hsl(${40+Math.random()*20},90%,${55+Math.random()*20}%)`})}
+  function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);let alive=false;particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.1;p.alpha-=.016;if(p.alpha>0)alive=true;ctx.globalAlpha=Math.max(0,p.alpha);ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=p.color;ctx.fill()});if(alive)requestAnimationFrame(anim);else ctx.clearRect(0,0,canvas.width,canvas.height);}
+  anim();
+}
+const shakeStyle=document.createElement('style');
+shakeStyle.textContent='@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}';
+document.head.appendChild(shakeStyle);
+</script>
+</body>
+</html>

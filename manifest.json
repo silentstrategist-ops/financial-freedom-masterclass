@@ -1,0 +1,90 @@
+{
+  "course": "Financial Freedom Masterclass",
+  "root": "c:\\Users\\KINGSLAY MIRIERI\\OneDrive\\Documents\\SPIRITUAL COURSE\\financial-infographics",
+  "local_server_port": 3100,
+  "last_updated": "2026-08-26",
+  "modules": [
+    {
+      "id": 1,
+      "file": "module-1.html",
+      "title": "The Foundation of Financial Freedom",
+      "whop_url": "YOUR_WHOP_MODULE_1_URL_HERE",
+      "status": "complete",
+      "local_url": "http://localhost:3100/module-1.html",
+      "sections": [
+        "Hero — animated stat counters (65%, 80%, 37%)",
+        "The Cost of Peace — Bronnie Ware deathbed regret",
+        "The Fragility Test — live 4-field calculator (expenses, savings, passive income, active income)",
+        "Definitions — Rich vs Wealth vs Financial Freedom (3 interactive cards)",
+        "The 4 Seasons — clickable animated timeline (Morning, Noon, Afternoon, Evening)",
+        "Real Facts — animated counters section",
+        "Reflection Journal — 3 prompts with localStorage auto-save",
+        "Declaration — sealed commitment with gold particle burst",
+        "Return to Whop — fixed bottom bar"
+      ],
+      "editable_tokens": {
+        "whop_url_placeholder": "YOUR_WHOP_MODULE_1_URL_HERE"
+      }
+    }
+  ],
+  "planned_modules": [
+    {
+      "id": 2,
+      "file": "module-2.html",
+      "title": "The Illusion of No Time",
+      "whop_url": "YOUR_WHOP_MODULE_2_URL_HERE",
+      "status": "complete",
+      "local_url": "http://localhost:3100/module-2.html",
+      "sections": [
+        "Hero — key stats: founder age 45, 7.5 extra years, 2x success rate",
+        "Belief Detector — 4 clickable belief cards that crack open to reveal the hidden bias",
+        "Neuroplasticity — animated live neural network canvas",
+        "Becca Levy Research — belief impact slider (negative → positive aging beliefs → lifespan projection)",
+        "2.7M Founders Chart — animated bar chart by age group, 45–54 highlighted as peak",
+        "Stat cards — 45 avg age, 2x success rate, 7.5 years",
+        "Temporal Discounting Simulator — interactive safe vs bold choice game",
+        "Enlarge/Diminish Tool — Burkeman's test with live sliders",
+        "Reflection Journal — 10 prompts with localStorage auto-save",
+        "Declaration — sealed commitment with gold particle burst",
+        "Return to Whop — fixed bottom bar + module nav"
+      ]
+    },
+    { "id": 3, "file": "module-3.html", "status": "awaiting_content" },
+    { "id": 4, "file": "module-4.html", "status": "awaiting_content" },
+    { "id": 5, "file": "module-5.html", "status": "awaiting_content" },
+    { "id": 6, "file": "module-6.html", "status": "awaiting_content" },
+    { "id": 7, "file": "module-7.html", "status": "awaiting_content" },
+    { "id": 8, "file": "module-8.html", "status": "awaiting_content" },
+    { "id": 9, "file": "module-9.html", "status": "awaiting_content" },
+    { "id": 10, "file": "module-10.html", "status": "awaiting_content" }
+  ],
+  "design_system": {
+    "palette": {
+      "background": "#030507",
+      "gold": "#C9A84C",
+      "gold_light": "#E8C97A",
+      "text": "#EEF0F4",
+      "muted": "#7A8290",
+      "danger": "#E84855",
+      "success": "#2ECC71",
+      "cyan": "#4FC3F7"
+    },
+    "fonts": {
+      "display": "Cinzel (headings, titles)",
+      "body": "Cormorant Garamond (body text, quotes)",
+      "ui": "Inter (labels, badges, buttons)"
+    },
+    "standard_components": [
+      "Noise overlay (film grain)",
+      "Ambient starfield canvas",
+      "Scroll reveal (.sr + IntersectionObserver)",
+      "Animated stat counters (data-count attribute)",
+      "Interactive card grids",
+      "Reflection journal with localStorage",
+      "Sealed declaration with particle burst",
+      "Fixed Whop return bar (bottom)",
+      "Section dividers with gold label"
+    ]
+  },
+  "notes": "To start a local server: open terminal in the financial-infographics folder and run: cmd.exe /c npx -y serve . --listen 3100"
+}

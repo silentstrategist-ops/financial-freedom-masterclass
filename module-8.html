@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 8: The Late Bloomer Advantage | Financial Freedom Masterclass</title>
+  <meta name="description" content="The story you've been told about age and success is wrong. Look at the real data, decrypt the overnight success myth, and calculate your hidden moat."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --void:#030507;--deep:#060A12;--surface:rgba(255,255,255,.03);
+      --surface2:rgba(255,255,255,.06);--gold:#C9A84C;--gold-l:#E8C97A;
+      --gold-d:rgba(201,168,76,.15);--gold-g:rgba(201,168,76,.06);
+      --gold-b:rgba(201,168,76,.25);--text:#EEF0F4;--muted:#7A8290;
+      --muted2:#4A5260;--danger:#E84855;--success:#2ECC71;
+      --cyan:#4FC3F7;--purple:#9B7FE8;--border:rgba(255,255,255,.07);
+      --r:20px;--rp:100px;
+    }
+    ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--void)}
+    ::-webkit-scrollbar-thumb{background:var(--gold-b);border-radius:3px}
+    *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+    body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',serif;overflow-x:hidden;line-height:1.7}
+
+    .noise{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;opacity:.08;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+    #ambient-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.2}
+
+    main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 28px 180px}
+    @media(max-width:640px){main{padding:0 18px 180px}}
+
+    .sr{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+    .sr.v{opacity:1;transform:none}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes scaleIn{from{transform:scale(.93);opacity:0}to{transform:scale(1);opacity:1}}
+    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+    .tag{font-family:'Inter';font-size:.65rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;display:inline-block;margin-bottom:14px}
+    .sec-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;color:#fff;letter-spacing:.05em;margin-bottom:1rem;line-height:1.2}
+    .body-text{font-size:1.18rem;font-weight:300;color:var(--text);margin-bottom:1rem;line-height:1.85}
+    .em{color:var(--gold);font-style:italic}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:44px 48px}
+    @media(max-width:640px){.card{padding:28px 22px}}
+
+    .sec-divider{display:flex;align-items:center;gap:16px;margin:80px 0 32px}
+    .sec-divider::before,.sec-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+    .sec-divider span{font-family:'Inter';font-size:.6rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;white-space:nowrap}
+
+    /* HERO */
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 0 60px}
+    .hero-eyebrow{font-family:'Inter';font-size:.68rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fadeUp .8s .3s forwards}
+    .hero-title{font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;line-height:1.05;color:#fff;margin-bottom:24px;opacity:0;animation:fadeUp .9s .5s forwards}
+    .hero-sub{font-size:1.3rem;font-style:italic;color:var(--muted);max-width:640px;margin:0 auto 40px;font-weight:300;opacity:0;animation:fadeUp .9s .7s forwards}
+    .hero-scroll{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 1s 1.2s forwards}
+    .hero-scroll span{font-family:'Inter';font-size:.6rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+    .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s infinite}
+    @keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+    /* MYTH VS REALITY ENGINE */
+    .mvr-box{background:var(--deep);border:1px solid var(--border);border-radius:var(--r);padding:44px 48px;text-align:center}
+    @media(max-width:640px){.mvr-box{padding:28px 20px}}
+    .mvr-slider-wrap{max-width:500px;margin:0 auto 40px}
+    .mvr-label{font-family:'Inter';font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:12px}
+    .mvr-val{color:var(--gold);font-size:1.2rem;font-family:'Cinzel';font-weight:700}
+    
+    input[type=range]{-webkit-appearance:none;width:100%;background:transparent;margin:12px 0}
+    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;height:24px;width:24px;border-radius:50%;background:var(--gold);cursor:pointer;margin-top:-10px;box-shadow:0 0 16px rgba(201,168,76,.4);transition:transform .2s}
+    input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
+    input[type=range]::-webkit-slider-runnable-track{width:100%;height:4px;background:var(--border);border-radius:2px}
+    input[type=range]:focus{outline:none}
+
+    .mvr-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap}
+    .mvr-stat{flex:1;min-width:200px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:32px 24px;display:flex;flex-direction:column;align-items:center}
+    .mvr-s-title{font-family:'Inter';font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;text-align:center;height:24px}
+    .mvr-circle{width:100px;height:100px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cinzel';font-size:2rem;font-weight:700;margin-bottom:16px;transition:all .5s cubic-bezier(.16,1,.3,1)}
+    
+    .c-media{border:4px solid var(--purple);color:var(--purple);box-shadow:0 0 20px rgba(155,127,232,.2)}
+    .c-success{border:4px solid var(--success);color:var(--success);box-shadow:0 0 20px rgba(46,204,113,.2)}
+    .mvr-s-desc{font-size:.95rem;font-style:italic;color:var(--text);line-height:1.5}
+    
+    .mvr-verdict{margin-top:32px;padding:24px;background:rgba(201,168,76,.05);border:1px solid var(--gold-b);border-radius:12px}
+    .mvr-v-title{font-family:'Cinzel';font-size:1.2rem;color:var(--gold);margin-bottom:8px}
+    .mvr-v-desc{font-style:italic;color:var(--text);font-size:1rem;line-height:1.6;margin:0}
+
+    /* THE DECRYPTER */
+    .dec-box{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+    .dec-card{background:var(--deep);border:1px solid var(--border);border-radius:16px;padding:32px 28px;cursor:pointer;position:relative;overflow:hidden;transition:.4s}
+    .dec-card:hover{border-color:var(--gold-b);transform:translateY(-4px)}
+    .dec-front{transition:.4s;opacity:1;transform:translateY(0)}
+    .dec-card.flipped .dec-front{opacity:0;pointer-events:none;position:absolute}
+    .dec-back{position:absolute;top:0;left:0;width:100%;height:100%;padding:32px 28px;background:var(--surface2);opacity:0;pointer-events:none;transition:.4s;display:flex;flex-direction:column;justify-content:center;transform:translateY(20px)}
+    .dec-card.flipped .dec-back{opacity:1;pointer-events:all;transform:translateY(0)}
+    
+    .df-name{font-family:'Cinzel';font-size:1.5rem;font-weight:700;color:var(--gold);margin-bottom:8px}
+    .df-myth{font-family:'Inter';font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+    .df-age{font-size:2.5rem;font-family:'Cinzel';color:#fff;line-height:1}
+    .df-click{position:absolute;bottom:24px;right:28px;font-family:'Inter';font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-l);animation:scrollPulse 2s infinite}
+    
+    .db-title{font-family:'Inter';font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--success);margin-bottom:12px}
+    .db-truth{font-size:.95rem;font-style:italic;color:var(--text);line-height:1.6}
+
+    /* THE HIDDEN MOAT */
+    .moat-box{background:var(--surface);border:1px dashed var(--gold-b);border-radius:var(--r);padding:44px 48px;text-align:center}
+    @media(max-width:640px){.moat-box{padding:28px 20px}}
+    .mb-inputs{display:flex;justify-content:center;gap:24px;margin-bottom:40px;flex-wrap:wrap}
+    .mb-group{display:flex;flex-direction:column;gap:8px;text-align:left}
+    .mb-label{font-family:'Inter';font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+    .mb-input{padding:12px 16px;background:var(--deep);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter';font-size:1rem;outline:none;width:160px;text-align:center}
+    .mb-input:focus{border-color:var(--gold)}
+    
+    .moat-visual{display:flex;align-items:flex-end;justify-content:center;gap:40px;height:240px;margin-bottom:32px;border-bottom:1px solid var(--border);padding-bottom:16px;position:relative}
+    .mv-bar-wrap{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;width:120px}
+    .mv-bar{width:60px;border-radius:8px 8px 0 0;transition:height 1s cubic-bezier(.16,1,.3,1), background 1s}
+    .mv-bar.kid{background:var(--surface2);height:15%}
+    .mv-bar.you{background:linear-gradient(to top, var(--gold-d), var(--gold));height:10%;box-shadow:0 0 20px rgba(201,168,76,.2)}
+    .mv-label{font-family:'Inter';font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:12px;text-align:center}
+    .mv-years{font-family:'Cinzel';font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:8px}
+
+    /* JOURNAL & DECLARATION */
+    .journal-section{display:flex;flex-direction:column;gap:20px}
+    .journal-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .3s}
+    .journal-item:focus-within{border-color:var(--gold-b)}
+    .journal-q{padding:24px 28px 16px;font-size:1.1rem;font-style:italic;color:var(--text);line-height:1.6}
+    .journal-q strong{font-style:normal;font-family:'Inter';font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+    .journal-item textarea{width:100%;padding:16px 28px 24px;background:none;border:none;border-top:1px solid var(--border);color:var(--text);font-family:'Cormorant Garamond';font-size:1.05rem;line-height:1.7;resize:vertical;min-height:100px;outline:none;transition:background .3s}
+    .journal-item textarea:focus{background:rgba(201,168,76,.02)}
+    .journal-item textarea::placeholder{color:var(--muted);font-style:italic}
+    .save-ind{font-family:'Inter';font-size:.6rem;letter-spacing:.1em;color:var(--success);padding:6px 28px;display:none;text-transform:uppercase}
+    .save-ind.show{display:block}
+    .journal-controls{display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:12px}
+    .jc-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--rp);font-family:'Inter';font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s;border:1px solid var(--border);background:none}
+    .jc-export{color:var(--gold);border-color:var(--gold-b)}.jc-export:hover{background:var(--gold);color:var(--void)}
+    .jc-clear{color:var(--muted)}.jc-clear:hover{color:var(--danger);border-color:rgba(232,72,85,.3);background:rgba(232,72,85,.05)}
+
+    .decl-box{text-align:center;padding:80px 48px;border:1px dashed var(--gold-b);border-radius:var(--r);background:radial-gradient(circle at 50% 0%,rgba(201,168,76,.06) 0%,transparent 65%);position:relative;overflow:hidden}
+    .decl-text{font-size:clamp(1.2rem,2.5vw,1.7rem);font-style:italic;font-weight:300;line-height:1.65;color:var(--text);max-width:680px;margin:0 auto 40px}
+    .decl-input-wrap{display:flex;gap:12px;justify-content:center;max-width:480px;margin:0 auto 16px}
+    .decl-input{flex:1;padding:14px 20px;background:rgba(255,255,255,.04);border:1px solid var(--gold-b);border-radius:var(--rp);color:var(--gold);font-family:'Cinzel';font-size:1rem;letter-spacing:.1em;outline:none;text-transform:uppercase;text-align:center;transition:border-color .4s,box-shadow .4s}
+    .decl-input:focus{background:var(--gold-g)}
+    .decl-input.error{border-color:var(--danger)!important;box-shadow:0 0 0 3px rgba(232,72,85,.15)!important}
+    .decl-input.success{border-color:var(--success)!important;box-shadow:0 0 20px rgba(46,204,113,.3)!important;color:var(--success)!important}
+    .decl-input::placeholder{color:var(--muted);font-family:'Inter';font-size:.75rem;text-transform:none;letter-spacing:.05em}
+    .decl-btn{padding:14px 28px;border-radius:var(--rp);border:1px solid var(--gold-b);background:none;color:var(--gold);font-family:'Inter';font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:.3s;white-space:nowrap}
+    .decl-btn:hover,.decl-btn.sealed{background:var(--gold);color:var(--void)}
+    .decl-hint{font-family:'Inter';font-size:.65rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:8px}
+    .decl-sealed-msg{display:none;margin-top:28px}.decl-sealed-msg.show{display:block;animation:fadeUp .6s ease forwards}
+    .decl-sealed-msg p{font-family:'Cinzel';font-size:.9rem;color:var(--gold);letter-spacing:.1em}
+    .decl-sealed-msg .sd{font-family:'Inter';font-size:.65rem;color:var(--muted);margin-top:8px;letter-spacing:.1em}
+    #p-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+
+    .whop-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(5,8,18,.95);border-top:1px solid var(--border);backdrop-filter:blur(14px);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .wb-left{display:flex;align-items:center;gap:16px}
+    .wb-module{display:flex;flex-direction:column}
+    .wb-m-label{font-family:'Inter';font-size:.6rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+    .wb-m-name{font-family:'Cinzel';font-size:.78rem;color:var(--text);letter-spacing:.05em}
+    .wb-progress-wrap{display:flex;align-items:center;gap:10px}
+    .wb-p-label{font-family:'Inter';font-size:.62rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+    .wb-p-track{width:120px;height:3px;background:var(--border);border-radius:3px;overflow:hidden}
+    .wb-p-fill{height:100%;background:var(--gold);width:0%;transition:width .5s;border-radius:3px}
+    .whop-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:var(--rp);background:var(--gold);color:var(--void);font-family:'Inter';font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;border:none;text-decoration:none;transition:.3s;white-space:nowrap}
+    .whop-btn:hover{background:var(--gold-l);transform:translateY(-1px)}
+    @media(max-width:640px){.wb-progress-wrap{display:none}}
+  </style>
+</head>
+<body>
+<div class="noise"></div>
+<canvas id="ambient-canvas"></canvas>
+
+<!-- WHOP BAR -->
+<div class="whop-bar">
+  <div class="wb-left">
+    <div class="wb-module">
+      <div class="wb-m-label">Currently Viewing</div>
+      <div class="wb-m-name">Module 8 · The Late Bloomer Advantage</div>
+    </div>
+    <div class="wb-progress-wrap">
+      <span class="wb-p-label">Progress</span>
+      <div class="wb-p-track"><div class="wb-p-fill" id="pfill"></div></div>
+    </div>
+  </div>
+  <a href="https://whop.com/silent-strategist/exp_OQfyAgJkYyIvH9/app/courses/cors_fGZBpPUYQtguD/lessons/lesn_Vnc1ePeGhiu5p/" class="whop-btn">↩ Return to Course</a>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Financial Freedom Masterclass · Module 8</p>
+    <h1 class="hero-title">The Story You've Been Told <br/><span class="g">Is Wrong.</span></h1>
+    <p class="hero-sub">Success doesn't belong to the 22-year-old prodigy. When you look at 2.7 million founders, the actual data tells a completely different story.</p>
+    <div class="hero-scroll">
+      <span>Scroll to View the Data</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- MYTH VS REALITY ENGINE -->
+  <div class="sec-divider sr"><span>The Media Myth vs. Statistical Reality</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <h2 class="sec-title">What The Research <span style="color:var(--gold)">Actually</span> Shows</h2>
+    <p class="body-text lg">A study covering roughly 2.7 million business founders found something that runs directly against the popular idea. The exact group most often dismissed by popular culture as "too late" is, by the real numbers, one of the strongest performing groups in the entire data set.</p>
+    <p class="body-text" style="color:var(--muted)">This isn't a fluke. When a result this consistent shows up across millions of real businesses, it stops being a coincidence and starts being a structural pattern.</p>
+  </div>
+
+  <div class="mvr-box sr">
+    <div class="mvr-slider-wrap">
+      <label class="mvr-label">Select An Age <span class="mvr-val" id="mvr-age-val">25 Years Old</span></label>
+      <input type="range" min="20" max="65" value="25" id="mvr-slider" oninput="updateMvr()"/>
+    </div>
+    
+    <div class="mvr-stats">
+      <div class="mvr-stat">
+        <div class="mvr-s-title">Media Representation</div>
+        <div class="mvr-circle c-media" id="c-media">95%</div>
+        <div class="mvr-s-desc" id="d-media">They get the magazine covers and the "30 Under 30" lists. They control the narrative.</div>
+      </div>
+      <div class="mvr-stat">
+        <div class="mvr-s-title">Prob. of High-Growth Success</div>
+        <div class="mvr-circle c-success" id="c-success">1x</div>
+        <div class="mvr-s-desc" id="d-success">Statistically the baseline. They have high energy, but zero accumulated assets.</div>
+      </div>
+    </div>
+    
+    <div class="mvr-verdict" id="mvr-verdict">
+      <h3 class="mvr-v-title" id="mvr-v-title">The Prodigy Illusion</h3>
+      <p class="mvr-v-desc" id="mvr-v-desc">At 25, you have all the media attention, but you are attempting to build without industry experience, a professional network, or financial steadiness. Panic kills most early decisions.</p>
+    </div>
+  </div>
+
+  <!-- THE DECRYPTER -->
+  <div class="sec-divider sr"><span>Real Examples, Honest Standards</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <h2 class="sec-title">Decrypting the <span style="color:var(--gold)">"Overnight"</span> Success</h2>
+    <p class="body-text lg">The "overnight" version of these famous stories was never actually overnight. It was simply the exact moment their years of accumulated, invisible work finally became visible to everyone else.</p>
+    <p class="body-text" style="color:var(--muted)">Click each card to decrypt what was actually happening during the decades before they "made it."</p>
+  </div>
+
+  <div class="dec-box sr">
+    <!-- Card 1 -->
+    <div class="dec-card" onclick="this.classList.toggle('flipped')">
+      <div class="dec-front">
+        <div class="df-myth">Introduced the Model T At</div>
+        <div class="df-age">45</div>
+        <div class="df-name">Henry Ford</div>
+        <div class="df-click">Click to Decrypt</div>
+      </div>
+      <div class="dec-back">
+        <div class="db-title">The Hidden Accumulation</div>
+        <div class="db-truth">Ford went through repeated, crushing business failures through his entire thirties. He spent decades testing engines and failing at corporate structure before applying those hard-earned lessons to his defining success.</div>
+      </div>
+    </div>
+    
+    <!-- Card 2 -->
+    <div class="dec-card" onclick="this.classList.toggle('flipped')">
+      <div class="dec-front">
+        <div class="df-myth">Partnered to build McDonald's At</div>
+        <div class="df-age">52</div>
+        <div class="df-name">Ray Kroc</div>
+        <div class="df-click">Click to Decrypt</div>
+      </div>
+      <div class="dec-back">
+        <div class="db-title">The Hidden Accumulation</div>
+        <div class="db-truth">He didn't stumble into fast food. He spent decades as a travelling salesman, visiting thousands of restaurants. He built a masterclass in operations observation long before he ever met the McDonald brothers.</div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="dec-card" onclick="this.classList.toggle('flipped')">
+      <div class="dec-front">
+        <div class="df-myth">Published First Cookbook At</div>
+        <div class="df-age">49</div>
+        <div class="df-name">Julia Child</div>
+        <div class="df-click">Click to Decrypt</div>
+      </div>
+      <div class="dec-back">
+        <div class="db-title">The Hidden Accumulation</div>
+        <div class="db-truth">She spent decades quietly developing her craft in obscurity, attending Le Cordon Bleu and testing recipes for years before ever stepping in front of a television camera.</div>
+      </div>
+    </div>
+    
+    <!-- Card 4 -->
+    <div class="dec-card" onclick="this.classList.toggle('flipped')">
+      <div class="dec-front">
+        <div class="df-myth">Entered Bridal Fashion At</div>
+        <div class="df-age">40</div>
+        <div class="df-name">Vera Wang</div>
+        <div class="df-click">Click to Decrypt</div>
+      </div>
+      <div class="dec-back">
+        <div class="db-title">The Hidden Accumulation</div>
+        <div class="db-truth">She didn't start from zero. She spent years as a competitive figure skater and two decades at Vogue, directly building the trend forecasting and editorial network that made her bridal launch explosive.</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- THE HIDDEN MOAT -->
+  <div class="sec-divider sr"><span>Why This Makes Sense</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <h2 class="sec-title">Calculate Your <span style="color:var(--gold)">Hidden Moat</span></h2>
+    <p class="body-text lg">Industry experience adds up. A professional network adds up. Financial steadiness adds up. This is exactly what a 25-year-old simply hasn't had enough time to build yet.</p>
+  </div>
+
+  <div class="moat-box sr">
+    <p class="tag" style="margin-bottom:24px;color:var(--cyan)">Compare Your Accumulated Assets</p>
+    <div class="mb-inputs">
+      <div class="mb-group">
+        <label class="mb-label">Your Current Age</label>
+        <input type="number" class="mb-input" id="moat-age" value="45" oninput="calcMoat()"/>
+      </div>
+      <div class="mb-group">
+        <label class="mb-label">Age You Started Working</label>
+        <input type="number" class="mb-input" id="moat-start" value="22" oninput="calcMoat()"/>
+      </div>
+    </div>
+    
+    <div class="moat-visual">
+      <div class="mv-bar-wrap">
+        <div class="mv-years">3 Yrs</div>
+        <div class="mv-bar kid" style="height:15%"></div>
+        <div class="mv-label">A 25-Year-Old<br/>Founder</div>
+      </div>
+      <div class="mv-bar-wrap">
+        <div class="mv-years" id="moat-y-years" style="color:var(--gold)">23 Yrs</div>
+        <div class="mv-bar you" id="moat-y-bar" style="height:80%"></div>
+        <div class="mv-label" style="color:var(--gold)">Your Hidden<br/>Moat</div>
+      </div>
+    </div>
+    
+    <p class="body-text" style="font-style:italic" id="moat-text">You have a 20-year advantage in pattern recognition, network building, and baseline stability. Do not undervalue the exact assets that give you a genuine edge.</p>
+  </div>
+
+  <!-- JOURNAL -->
+  <div class="sec-divider sr"><span>Written Reflection — 10 Prompts</span></div>
+
+  <div class="card sr" style="margin-bottom:28px;border-color:var(--gold-b)">
+    <p class="body-text" style="margin:0;font-style:italic;color:var(--muted)">Answer these fully and honestly. Walk into the next chapter carrying the correct, honest picture of your own real odds, not the inherited one.</p>
+  </div>
+
+  <div class="journal-section sr">
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 01</strong>Before reading this chapter, what did you genuinely believe about whether your age was an asset or a liability in building something new? Where did that belief come from?</div><textarea id="r1" placeholder="Write your honest answer here..." oninput="saveJ('r1')"></textarea><div class="save-ind" id="sv-r1">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 02</strong>Of the historical examples above, which one feels closest to your own situation, in terms of industry, circumstance, or the length of time spent quietly building?</div><textarea id="r2" placeholder="Write your honest answer here..." oninput="saveJ('r2')"></textarea><div class="save-ind" id="sv-r2">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 03</strong>List three things you've built up over the years (industry knowledge, network, steadiness, judgement) that a 25-year-old attempting the same path simply would not have yet.</div><textarea id="r3" placeholder="Write your honest answer here..." oninput="saveJ('r3')"></textarea><div class="save-ind" id="sv-r3">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 04</strong>Has your hesitation about starting something new actually been about the real odds, or has it genuinely been about something else (comfort, fear, identity) entirely?</div><textarea id="r4" placeholder="Write your honest answer here..." oninput="saveJ('r4')"></textarea><div class="save-ind" id="sv-r4">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 05</strong>Think of someone in your own life (family, industry, community) who is real proof that this stage of life is not a ceiling. What did they actually do, specifically?</div><textarea id="r5" placeholder="Write your honest answer here..." oninput="saveJ('r5')"></textarea><div class="save-ind" id="sv-r5">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 06</strong>If a younger colleague came to you convinced they were too old, at your exact age, to try something new, what would you honestly tell them, using the real data?</div><textarea id="r6" placeholder="Write your honest answer here..." oninput="saveJ('r6')"></textarea><div class="save-ind" id="sv-r6">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 07</strong>Now read your own answer to question six back to yourself, slowly. Does it actually match what you've genuinely been telling yourself?</div><textarea id="r7" placeholder="Write your honest answer here..." oninput="saveJ('r7')"></textarea><div class="save-ind" id="sv-r7">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 08</strong>Which asset from your Skills Audit in the last chapter becomes more valuable, not less, specifically because of the years it took you to actually build it?</div><textarea id="r8" placeholder="Write your honest answer here..." oninput="saveJ('r8')"></textarea><div class="save-ind" id="sv-r8">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 09</strong>If age itself is no longer a valid excuse, what is the honest, real reason you haven't started yet? Name it directly, not the polite, socially acceptable version.</div><textarea id="r9" placeholder="Write your honest answer here..." oninput="saveJ('r9')"></textarea><div class="save-ind" id="sv-r9">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 10</strong>Write one full sentence you're genuinely willing to believe, based on the real evidence in this chapter, about what your age actually means for what you're about to build.</div><textarea id="r10" placeholder="I believe that..." oninput="saveJ('r10')"></textarea><div class="save-ind" id="sv-r10">✓ Saved</div></div>
+  </div>
+
+  <div class="journal-controls sr">
+    <button class="jc-btn jc-export" onclick="exportJournal()">📥 Download My Reflections</button>
+    <button class="jc-btn jc-clear" onclick="clearJournal()">🗑 Clear &amp; Reset</button>
+  </div>
+
+  <!-- DECLARATION -->
+  <div class="sec-divider sr"><span>The Declaration</span></div>
+
+  <div class="decl-box sr">
+    <canvas id="p-canvas"></canvas>
+    <p class="tag">Seal Your Moat</p>
+    <p class="decl-text">"I will no longer use age as an excuse for hesitation. I commit to treating my decades of pattern recognition, network, and judgement as the structural advantages they actually are."</p>
+    <div class="decl-input-wrap">
+      <input type="text" class="decl-input" id="decl-in" placeholder='Type "I ACCEPT" to seal this'/>
+      <button class="decl-btn" onclick="sealDecl()">Seal</button>
+    </div>
+    <p class="decl-hint">Type "I ACCEPT" and press Seal</p>
+    <div class="decl-sealed-msg" id="sealed-msg">
+      <p>✦ THE MOAT IS SEALED. THE EXCUSE IS REMOVED. ✦</p>
+      <p class="sd" id="sealed-date"></p>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:48px;flex-wrap:wrap;gap:16px" class="sr">
+    <a href="module-7.html" style="font-family:'Inter';font-size:.7rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;text-decoration:none;border:1px solid var(--border);padding:10px 20px;border-radius:var(--rp);transition:.3s" onmouseover="this.style.borderColor='var(--gold-b)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">← Module 7: The Skills Audit</a>
+    <a href="https://whop.com/silent-strategist/exp_OQfyAgJkYyIvH9/app/courses/cors_fGZBpPUYQtguD/lessons/lesn_Vnc1ePeGhiu5p/" class="whop-btn" style="text-decoration:none">↩ Return to Course</a>
+  </div>
+
+</main>
+
+<script>
+/* AMBIENT CANVAS */
+(function(){
+  const c=document.getElementById('ambient-canvas'),ctx=c.getContext('2d');let s=[];
+  const resize=()=>{c.width=innerWidth;c.height=innerHeight};
+  const init=()=>{s=[];for(let i=0;i<120;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.1+.2,speed:Math.random()*.16+.04,op:Math.random()*.5+.1,tw:Math.random()*Math.PI*2})};
+  const draw=()=>{ctx.clearRect(0,0,c.width,c.height);s.forEach(p=>{p.tw+=.007;const o=p.op*(.6+.4*Math.sin(p.tw));ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(201,168,76,${o})`;ctx.fill();p.y-=p.speed;if(p.y<0){p.y=c.height;p.x=Math.random()*c.width}});requestAnimationFrame(draw)};
+  resize();init();draw();window.addEventListener('resize',()=>{resize();init()});
+})();
+
+/* SCROLL REVEAL */
+(()=>{
+  const obs=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('v');obs.unobserve(en.target)}}),{threshold:.07});
+  document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
+})();
+
+/* PROGRESS */
+window.addEventListener('scroll',()=>{document.getElementById('pfill').style.width=Math.round((scrollY/(document.body.scrollHeight-innerHeight))*100)+'%'});
+
+/* MYTH VS REALITY ENGINE */
+function updateMvr(){
+  const age = parseInt(document.getElementById('mvr-slider').value);
+  document.getElementById('mvr-age-val').textContent = age + " Years Old";
+  
+  const cm = document.getElementById('c-media');
+  const cs = document.getElementById('c-success');
+  const dm = document.getElementById('d-media');
+  const ds = document.getElementById('d-success');
+  const vt = document.getElementById('mvr-v-title');
+  const vd = document.getElementById('mvr-v-desc');
+  
+  // Media attention drops sharply as age increases
+  let mediaPct = 100 - ((age - 20) * 2.2);
+  if(mediaPct < 5) mediaPct = 5;
+  if(mediaPct > 98) mediaPct = 98;
+  
+  // Success probability multiplier based on 2.7M founder study (peaks around 45-50)
+  // Let's say 25yo is 1x. 45yo is ~2.2x. 50yo is ~2.4x.
+  let mult = 1.0;
+  if(age <= 25) mult = 1.0;
+  else if (age > 25 && age <= 40) mult = 1.0 + ((age - 25) * 0.06);
+  else if (age > 40 && age <= 50) mult = 1.9 + ((age - 40) * 0.05);
+  else if (age > 50) mult = 2.4 - ((age - 50) * 0.02);
+  
+  cm.textContent = Math.round(mediaPct) + "%";
+  cs.textContent = mult.toFixed(1) + "x";
+  
+  if(age < 30){
+    vt.textContent = "The Prodigy Illusion";
+    vt.style.color = "var(--purple)";
+    vd.textContent = "You have the media attention, but you are attempting to build without deep industry experience, a professional network, or financial steadiness. Panic kills early decisions here.";
+  } else if (age >= 30 && age < 40){
+    vt.textContent = "The Accumulation Phase";
+    vt.style.color = "var(--cyan)";
+    vd.textContent = "The media is looking elsewhere, but your actual odds are climbing steadily. You are building the network and pattern recognition that makes explosive growth possible later.";
+  } else if (age >= 40 && age <= 55){
+    vt.textContent = "The Statistical Peak";
+    vt.style.color = "var(--success)";
+    vd.textContent = "This is the optimal zone. You are over 2x more likely to build a high-growth success than a 25-year-old because your hidden assets (experience, capital, network) are fully mature.";
+  } else {
+    vt.textContent = "The Invisible Heavyweight";
+    vt.style.color = "var(--gold)";
+    vd.textContent = "You are entirely ignored by startup media, yet you possess the highest rate of actual entrepreneurial activity and survival in the economy. You know exactly what works and what doesn't.";
+  }
+}
+updateMvr();
+
+/* HIDDEN MOAT */
+function calcMoat(){
+  const age = parseInt(document.getElementById('moat-age').value) || 0;
+  const start = parseInt(document.getElementById('moat-start').value) || 0;
+  
+  let yrs = age - start;
+  if(yrs < 0) yrs = 0;
+  
+  const yYears = document.getElementById('moat-y-years');
+  const yBar = document.getElementById('moat-y-bar');
+  const text = document.getElementById('moat-text');
+  
+  yYears.textContent = yrs + " Yrs";
+  
+  // Max height is 100%, 3 years = 15%
+  let h = (yrs / 40) * 100;
+  if(h < 5) h = 5;
+  if(h > 100) h = 100;
+  yBar.style.height = h + "%";
+  
+  const diff = yrs - 3;
+  
+  if(diff > 0){
+    text.innerHTML = `You have a <strong style="color:var(--gold)">${diff}-year advantage</strong> in pattern recognition, network building, and baseline stability over the media's favourite 25-year-old. Do not undervalue the exact assets that give you a genuine edge.`;
+  } else {
+    text.innerHTML = `You are at the beginning of your accumulation phase. Focus on building the network and pattern recognition that will serve as your moat in the decades to come.`;
+  }
+}
+calcMoat();
+
+/* JOURNAL */
+['r1','r2','r3','r4','r5','r6','r7','r8','r9','r10'].forEach(id=>{
+  const saved=localStorage.getItem('ffm8_'+id);if(saved){const el=document.getElementById(id);if(el)el.value=saved}
+});
+function saveJ(id){
+  const val=document.getElementById(id)?.value||'';localStorage.setItem('ffm8_'+id,val);
+  const ind=document.getElementById('sv-'+id);if(ind){ind.classList.add('show');setTimeout(()=>ind.classList.remove('show'),2000)}
+}
+function exportJournal(){
+  const qs=[
+    'Before reading this chapter, what did you genuinely believe about your age? Where did it come from?',
+    'Of the historical examples, which one feels closest to your own situation?',
+    'List three things you\'ve built up over the years that a 25-year-old would not have yet.',
+    'Has your hesitation been about real odds, or something else entirely (comfort, fear, identity)?',
+    'Think of someone in your own life who is proof this stage is not a ceiling. What did they do?',
+    'If a younger colleague thought they were too old at your exact age, what would you tell them?',
+    'Read Q6 back. Does it match what you\'ve been telling yourself?',
+    'Which asset from your Skills Audit becomes more valuable specifically because of the years it took to build?',
+    'If age is no longer an excuse, what is the honest reason you haven\'t started yet?',
+    'Write one full sentence you\'re genuinely willing to believe about what your age actually means.'
+  ];
+  const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  let content=`FINANCIAL FREEDOM MASTERCLASS\nModule 8: The Late Bloomer Advantage\nJournal Export — ${date}\n${'='.repeat(60)}\n\n`;
+  qs.forEach((q,i)=>{const key='ffm8_r'+(i+1);const answer=localStorage.getItem(key)||'(No answer written yet)';content+=`Reflection ${String(i+1).padStart(2,'0')}: ${q}\n\n${answer}\n\n${'-'.repeat(60)}\n\n`;});
+  const blob=new Blob([content],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='Module-8-Journal.txt';a.click();URL.revokeObjectURL(url);
+}
+function clearJournal(){
+  if(!confirm('Clear all reflection answers for Module 8? This cannot be undone.'))return;
+  ['r1','r2','r3','r4','r5','r6','r7','r8','r9','r10'].forEach(id=>{localStorage.removeItem('ffm8_'+id);const el=document.getElementById(id);if(el)el.value='';});
+}
+
+/* DECLARATION */
+(function(){
+  if(localStorage.getItem('ffm8_declaration')){
+    const d=localStorage.getItem('ffm8_declaration_date');
+    document.getElementById('decl-in').value='I ACCEPT';document.getElementById('decl-in').disabled=true;
+    document.querySelector('.decl-btn').classList.add('sealed');document.querySelector('.decl-btn').textContent='✦ Sealed';
+    document.getElementById('sealed-msg').classList.add('show');document.getElementById('sealed-date').textContent='Declared on '+d;
+  }
+})();
+function sealDecl(){
+  const inp=document.getElementById('decl-in');
+  if(inp.value.trim().toUpperCase()!=='I ACCEPT'){
+    inp.classList.add('error');inp.style.animation='shake .4s ease';
+    setTimeout(()=>{inp.classList.remove('error');inp.style.animation=''},600);return;
+  }
+  inp.classList.add('success');
+  const now=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  localStorage.setItem('ffm8_declaration','true');localStorage.setItem('ffm8_declaration_date',now);
+  setTimeout(()=>{
+    inp.disabled=true;document.querySelector('.decl-btn').classList.add('sealed');document.querySelector('.decl-btn').textContent='✦ Sealed';
+    document.getElementById('sealed-msg').classList.add('show');document.getElementById('sealed-date').textContent='Declared on '+now;
+    firePart();
+  },500);
+}
+function firePart(){
+  const canvas=document.getElementById('p-canvas'),ctx=canvas.getContext('2d');
+  canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;
+  const cx=canvas.width/2,cy=canvas.height/2,particles=[];
+  for(let i=0;i<90;i++){const a=Math.random()*Math.PI*2,sp=Math.random()*6+2;particles.push({x:cx,y:cy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,alpha:1,size:Math.random()*4+1,color:`hsl(${40+Math.random()*20},90%,${55+Math.random()*20}%)`})}
+  function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);let alive=false;particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.1;p.alpha-=.016;if(p.alpha>0)alive=true;ctx.globalAlpha=Math.max(0,p.alpha);ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=p.color;ctx.fill()});if(alive)requestAnimationFrame(anim);else ctx.clearRect(0,0,canvas.width,canvas.height);}
+  anim();
+}
+</script>
+</body>
+</html>

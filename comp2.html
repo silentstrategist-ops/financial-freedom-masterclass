@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Victorious Believer | Chapter 1 Framework</title>
+  <meta name="description" content="A systematic framework map of the Victorious Believer — defining alignment, the law of process, and the three marks of victory."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--void:#02040A;--deep:#050810;--cyan:#00F0FF;--cyan-d:rgba(0,240,255,.15);--gold:#FFD700;--gold-d:rgba(255,215,0,.15);--glass:rgba(255,255,255,.03);--border:rgba(255,255,255,.06);--hover:rgba(255,255,255,.06);--text:#F0F4F8;--muted:#8B949E;--danger:#FF3366;--success:#00D97E;--r:24px;--rp:100px}
+    ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--void)}::-webkit-scrollbar-thumb{background:#3a3a3a;border-radius:3px}
+    *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',serif;overflow-x:hidden}
+    .noise{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;opacity:.12;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+    #cvs{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.25}
+    .word{display:inline-block;opacity:0;transform:translateY(18px) scale(.96);transition:opacity .55s ease,transform .55s ease}.word.v{opacity:1;transform:none}
+    .sr{opacity:0;transform:translateY(50px);transition:all 1s cubic-bezier(.16,1,.3,1)}.sr.v{opacity:1;transform:none}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+    @keyframes pulse{0%,100%{box-shadow:0 0 20px var(--cyan-d)}50%{box-shadow:0 0 50px rgba(0,240,255,.3)}}
+    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+    @keyframes popIn{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:none}}
+    main{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 30px 160px}
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+    .hero-img{width:340px;height:340px;border-radius:50%;overflow:hidden;border:1px solid var(--border);box-shadow:0 0 80px rgba(0,240,255,.1),0 0 160px rgba(255,215,0,.05);animation:float 7s ease-in-out infinite,pulse 4s ease-in-out infinite;margin-bottom:40px}
+    .hero-img img{width:100%;height:100%;object-fit:cover}
+    .ch-tag{font-family:'Inter',sans-serif;font-size:.7rem;letter-spacing:.35em;color:var(--cyan);text-transform:uppercase;margin-bottom:18px;opacity:.8}
+    .hero-title{font-family:'Cinzel',serif;font-size:clamp(2.6rem,6.5vw,5.5rem);font-weight:900;color:#fff;line-height:1;margin-bottom:16px}
+    .hero-sub{font-family:'Inter',sans-serif;font-size:.8rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+    .hero-def{font-size:1.35rem;font-style:italic;color:var(--muted);max-width:640px;margin:30px auto 0;line-height:1.6}
+    .sec-head{display:flex;align-items:center;gap:14px;margin:90px 0 28px}
+    .layer-badge{font-family:'Inter',sans-serif;font-size:.65rem;letter-spacing:.2em;color:var(--cyan);background:rgba(0,240,255,.07);border:1px solid var(--cyan-d);padding:5px 14px;border-radius:var(--rp);white-space:nowrap}
+    .sec-label{font-family:'Cinzel',serif;font-size:clamp(1.1rem,2.5vw,1.6rem);color:var(--gold);font-weight:600}
+    .card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:48px;backdrop-filter:blur(12px)}
+    .card.cyan-border{border-color:var(--cyan-d)}.card.gold-border{border-color:var(--gold-d)}.card.danger-border{border-color:rgba(255,51,102,.2);background:rgba(255,51,102,.02)}
+    .ac{background:var(--glass);border:1px solid var(--border);border-radius:20px;overflow:hidden;cursor:pointer;margin-bottom:16px;transition:border-color .3s}
+    .ac:hover{border-color:var(--gold-d)}
+    .ac-hdr{padding:26px 36px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .ac-title{font-family:'Cinzel',serif;font-size:1rem;color:#fff;letter-spacing:.06em}
+    .ac-icon{font-size:1.4rem;color:var(--cyan);font-weight:200;transition:transform .5s cubic-bezier(.4,0,.2,1);flex-shrink:0}
+    .ac-body{max-height:0;opacity:0;overflow:hidden;transition:max-height .75s cubic-bezier(.4,0,.2,1),opacity .55s cubic-bezier(.4,0,.2,1),padding .55s cubic-bezier(.4,0,.2,1)}
+    .ac.open .ac-body{max-height:2400px;opacity:1;padding:0 36px 40px;border-top:1px solid var(--border);margin-top:8px;padding-top:32px;transition:max-height .9s cubic-bezier(0,1,0,1),opacity .6s cubic-bezier(.4,0,.2,1)}
+    .ac.open .ac-icon{transform:rotate(135deg);color:var(--gold)}
+    .body-text{font-size:1.2rem;line-height:1.85;font-weight:300;color:var(--text);margin-bottom:18px}.body-text.lg{font-size:1.45rem}
+    .em-text{color:var(--cyan);font-style:italic}.gold-text{color:var(--gold);font-style:italic}
+    .pipe{padding-left:20px;border-left:2px solid var(--gold);font-style:italic;font-size:1.3rem;margin:24px 0;color:var(--text)}
+    .statement{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;font-style:italic;text-align:center;line-height:1.5;color:#fff}
+    .img-box{width:100%;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.6)}
+    .img-box img{width:100%;display:block;object-fit:cover;transition:transform .5s}.img-box:hover img{transform:scale(1.02)}
+    .g2{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+    @media(max-width:860px){.g2{grid-template-columns:1fr}}.rev{direction:rtl}.rev>*{direction:ltr}
+    .map-wrap{width:100%;overflow-x:auto;padding:20px 0}
+    .map-canvas{min-width:700px;position:relative;padding:30px}
+    .fw-row{display:flex;justify-content:center;gap:20px;position:relative;z-index:1;margin-bottom:10px;flex-wrap:wrap}
+    .map-arrow{display:flex;justify-content:center;align-items:center;height:36px;color:var(--cyan);font-size:1.4rem;opacity:.5;position:relative;z-index:1}
+    .map-label{font-family:'Inter',sans-serif;font-size:.6rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;text-align:center;margin-bottom:6px;position:relative;z-index:1}
+    .node{border-radius:20px;border:1px solid var(--border);background:var(--glass);backdrop-filter:blur(12px);cursor:pointer;transition:all .35s;text-align:center}
+    .node:hover{transform:translateY(-3px);border-color:var(--cyan-d);box-shadow:0 8px 30px rgba(0,240,255,.1)}
+    .node.root{width:260px;padding:28px 20px;border-color:var(--gold-d);background:rgba(255,215,0,.04)}.node.root .n-title{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold);margin-bottom:6px}.node.root .n-sub{font-family:'Inter',sans-serif;font-size:.7rem;color:var(--muted)}
+    .node.sm{width:175px;padding:18px 14px}.node.sm .n-title{font-family:'Cinzel',serif;font-size:.8rem;color:#fff;margin-bottom:4px}.node.sm .n-sub{font-family:'Inter',sans-serif;font-size:.6rem;color:var(--muted)}
+    .node.sm.god{border-color:rgba(0,240,255,.3);background:rgba(0,240,255,.04)}.node.sm.god .n-title{color:var(--cyan)}
+    .node.sm.human{border-color:rgba(255,215,0,.3);background:rgba(255,215,0,.04)}.node.sm.human .n-title{color:var(--gold)}
+    .node.sm.process{border-color:rgba(0,217,126,.25);background:rgba(0,217,126,.04)}.node.sm.process .n-title{color:var(--success)}
+    .node.sign{width:155px;padding:16px 10px}.node.sign .n-title{font-family:'Cinzel',serif;font-size:.72rem;color:#fff;margin-bottom:4px}.node.sign .n-sub{font-family:'Inter',sans-serif;font-size:.58rem;color:var(--muted)}
+    .node.sign.s1{border-color:rgba(0,240,255,.3)}.node.sign.s2{border-color:rgba(255,215,0,.3)}.node.sign.s3{border-color:rgba(0,217,126,.3)}
+    .node.type{width:200px;padding:20px 14px}.node.type .n-title{font-family:'Cinzel',serif;font-size:.78rem;color:#fff;margin-bottom:6px}.node.type .n-sub{font-family:'Inter',sans-serif;font-size:.58rem;color:var(--muted);line-height:1.5}
+    .node.formation{width:138px;padding:14px 10px}.node.formation .n-title{font-family:'Cinzel',serif;font-size:.7rem;color:var(--gold);margin-bottom:3px}
+    .node-panel{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:10000;width:min(560px,90vw);background:#0A0E18;border:1px solid var(--border);border-radius:28px;padding:40px;animation:popIn .4s ease;box-shadow:0 40px 100px rgba(0,0,0,.9)}
+    .node-panel.show{display:block}.np-close{position:absolute;top:16px;right:20px;background:none;border:1px solid var(--border);color:var(--muted);border-radius:50%;width:34px;height:34px;font-size:1.2rem;cursor:pointer;transition:all .3s}.np-close:hover{background:var(--hover);color:#fff}
+    .np-tag{font-family:'Inter',sans-serif;font-size:.65rem;letter-spacing:.2em;color:var(--cyan);margin-bottom:10px}
+    .np-title{font-family:'Cinzel',serif;font-size:1.4rem;color:var(--gold);margin-bottom:18px}
+    .np-body{font-size:1.1rem;line-height:1.8;color:var(--text);font-family:'Cormorant Garamond',serif;font-weight:300}
+    #overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;backdrop-filter:blur(3px)}#overlay.show{display:block}
+    .lab{border:1px solid var(--cyan-d);border-radius:20px;background:var(--deep);overflow:hidden;margin:36px 0}
+    .lab-stage{padding:48px;display:flex;flex-direction:column;align-items:center;min-height:320px;justify-content:center}
+    .lab-footer{padding:16px 36px;background:rgba(0,0,0,.7);font-family:'Inter',sans-serif;font-size:.78rem;letter-spacing:.05em;color:var(--muted);border-top:1px solid var(--border)}
+    .btn{background:transparent;border:1px solid var(--border);color:#fff;font-family:'Inter',sans-serif;font-size:.72rem;letter-spacing:.1em;padding:12px 22px;border-radius:var(--rp);cursor:pointer;transition:all .3s;margin:6px}.btn:hover{background:var(--hover)}.btn.c{border-color:var(--cyan);color:var(--cyan)}.btn.c:hover,.btn.c.on{background:rgba(0,240,255,.1)}.btn.g{border-color:var(--gold);color:var(--gold)}.btn.g:hover,.btn.g.on{background:rgba(255,215,0,.1)}.btn.d{border-color:var(--danger);color:var(--danger)}.btn.d:hover,.btn.d.on{background:rgba(255,51,102,.1)}.btn.s{border-color:var(--success);color:var(--success)}.btn.s:hover,.btn.s.on{background:rgba(0,217,126,.1)}
+    .align-ring{width:200px;height:200px;border-radius:50%;border:1px dashed rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;margin-bottom:28px}
+    .align-inner{width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,rgba(255,215,0,.08),transparent);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:.65rem;color:var(--gold);transition:all .3s;text-align:center;padding:10px}
+    .align-slider{-webkit-appearance:none;width:280px;height:3px;background:rgba(255,255,255,.15);border-radius:3px}.align-slider::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--gold);cursor:pointer}
+    .suf-grid{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:28px}
+    .suf-card{width:160px;padding:20px 14px;border-radius:16px;border:1px solid var(--border);background:var(--glass);text-align:center;cursor:pointer;transition:all .35s}.suf-card .sc-icon{font-size:1.8rem;margin-bottom:8px}.suf-card .sc-title{font-family:'Cinzel',serif;font-size:.75rem;color:#fff;margin-bottom:4px}.suf-card .sc-tag{font-family:'Inter',sans-serif;font-size:.6rem;color:var(--muted)}
+    .crucible{width:200px;height:50px;border:1px dashed var(--gold-d);border-radius:var(--rp);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:.75rem;color:var(--gold);letter-spacing:.08em;transition:all .4s}
+    .crucible.evict{border-color:var(--danger);color:var(--danger);background:rgba(255,51,102,.08);animation:shake .4s}
+    .crucible.approve{border-color:var(--success);color:var(--success);background:rgba(0,217,126,.08)}
+    .process-track{display:flex;align-items:center;gap:0;width:100%;max-width:600px;margin-bottom:32px}
+    .p-stage{flex:1;padding:18px 10px;border:1px solid var(--border);background:var(--glass);text-align:center;cursor:pointer;transition:all .35s}
+    .p-stage:first-child{border-radius:16px 0 0 16px}.p-stage:last-child{border-radius:0 16px 16px 0}
+    .p-stage .ps-name{font-family:'Cinzel',serif;font-size:.72rem;color:var(--muted);transition:color .3s;margin-bottom:4px}.p-stage .ps-icon{font-size:1.6rem}
+    .p-stage.active{background:rgba(255,215,0,.06);border-color:var(--gold-d)}.p-stage.active .ps-name{color:var(--gold)}
+    .p-arrow{color:var(--cyan);font-size:1.1rem;opacity:.4;flex-shrink:0;margin:0 -1px;z-index:2}
+    .p-detail{border:1px solid var(--gold-d);border-radius:16px;padding:24px;background:rgba(255,215,0,.03);text-align:left;display:none;animation:popIn .4s ease}.p-detail.show{display:block}
+    .p-detail .pd-title{font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);margin-bottom:10px}.p-detail .pd-warfare{color:var(--danger);font-size:1rem;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,51,102,.1)}
+    .rq{display:none;animation:popIn .6s ease}.rq.show{display:block}
+    .q-nav{display:flex;gap:8px;justify-content:center;margin-top:24px}.q-dot{width:8px;height:8px;border-radius:50%;border:1px solid var(--cyan);cursor:pointer;transition:background .3s}.q-dot.active{background:var(--cyan)}
+    .decl{border:1px dashed var(--border);border-radius:var(--r);padding:80px 40px;text-align:center;background:radial-gradient(circle,rgba(255,215,0,.04) 0%,transparent 70%)}
+  </style>
+</head>
+<body>
+<div class="noise"></div><canvas id="cvs"></canvas>
+<div id="overlay" onclick="closePanel()"></div>
+<div class="node-panel" id="np"><button class="np-close" onclick="closePanel()">✕</button><p class="np-tag" id="np-tag"></p><h2 class="np-title" id="np-title"></h2><p class="np-body" id="np-body"></p></div>
+<main>
+  <section class="hero sr">
+    <div class="hero-img"><img src="images/vb_figure.png" alt="Figure in Alignment" onerror="this.style.opacity=0"></div>
+    <p class="ch-tag">Chapter 1 · The Foundational Framework</p>
+    <h1 class="hero-title stag">THE VICTORIOUS<br>BELIEVER</h1>
+    <p class="hero-sub">The Night I Realised I Had Been Asking the Wrong Question</p>
+    <p class="hero-def stag">Victory is not a title you claim. It is a life that consistently reflects God's intention in the natural, visible, measurable dimensions of your actual existence.</p>
+  </section>
+
+  <section class="sr">
+    <div class="sec-head"><span class="layer-badge">LAYER 1 OF 7</span><h2 class="sec-label">🔑 One-Line Thesis</h2></div>
+    <div class="card gold-border"><p class="statement stag">A victorious believer is not someone who never faces difficulty — they are someone whose life is in <span style="color:var(--gold)">precise alignment</span> with the will of God, where nothing is purposeless.</p></div>
+  </section>
+
+  <section class="sr">
+    <div class="sec-head"><span class="layer-badge">LAYER 2 OF 7</span><h2 class="sec-label">📜 The Core Scripture</h2></div>
+    <div class="card cyan-border" style="border-left:3px solid var(--cyan)">
+      <p class="body-text lg stag" style="font-style:italic">"Do not conform to the pattern of this world, but be transformed by the renewing of your mind. Then you will be able to test and approve what God's will is — his good, pleasing and perfect will."</p>
+      <p style="font-family:'Cinzel',serif;color:var(--cyan);letter-spacing:.12em;margin-top:14px;font-size:.85rem">— ROMANS 12:2</p>
+    </div>
+  </section>
+
+  <section class="sr">
+    <div class="sec-head"><span class="layer-badge">LAYER 3 OF 7</span><h2 class="sec-label">🗺 The Master Framework Map</h2></div>
+    <p class="body-text" style="text-align:center;color:var(--muted);margin-bottom:30px">Click or tap any node to reveal the deep insight behind it.</p>
+    <div class="map-wrap"><div class="map-canvas">
+      <p class="map-label" style="color:var(--cyan)">FROM GOD'S SIDE</p>
+      <div class="fw-row">
+        <div class="node sm god" onclick="showPanel('god1','God\'s Contribution: Power','His power is the supernatural backing that makes the impossible consistently possible for the aligned believer. This is not willpower or spiritual discipline — it is divine energy operating through a person who has positioned themselves inside God\'s will.')"><div class="n-title">⚡ POWER</div><div class="n-sub">Supernatural backing</div></div>
+        <div class="node sm god" onclick="showPanel('god2','God\'s Contribution: Grace','His grace is the unearned enablement that equips you for what you could never produce through natural talent or effort alone. Grace is not just forgiveness. It is the divine ability deposited in you for your assignment.')"><div class="n-title">🕊 GRACE</div><div class="n-sub">Unearned enablement</div></div>
+        <div class="node sm god" onclick="showPanel('god3','God\'s Contribution: Mercy','His mercy is the covering that protects you from what your imperfection and process would otherwise expose you to. Mercy is the reason God does not disqualify you mid-process when your character is still being formed.')"><div class="n-title">🛡 MERCY</div><div class="n-sub">Divine covering</div></div>
+      </div>
+      <div class="map-arrow">↓ &nbsp; ↓ &nbsp; ↓</div>
+      <div class="fw-row">
+        <div class="node root" onclick="showPanel('root','The Victorious Believer Defined','A victorious believer is a believer whose life is in precise alignment with the will of God. Not partial alignment. Precise alignment. Victory is not a title you claim — it is a life that consistently reflects God\'s intention in the natural, visible, measurable dimensions of your actual existence. Victory lives in alignment.')"><div class="n-title">👑 THE VICTORIOUS BELIEVER</div><div class="n-sub">Life in Precise Alignment with God's Will</div></div>
+      </div>
+      <div class="map-arrow">↓</div>
+      <p class="map-label">THE THREE MARKS (VISIBLE EVIDENCE)</p>
+      <div class="fw-row">
+        <div class="node sign s1" onclick="showPanel('sign1','Sign 1: Cannot Suffer Illegally','God allows suffering for only two reasons: for His glory, and for the fulfilment of your assignment. Outside those two, suffering has no legal ground. Daniel survived the lions den. Shadrach walked through fire. Not by luck — because death had no legal authority over their uncompleted assignments.')"><div class="n-title">⚔️ Cannot Suffer<br>Illegally</div><div class="n-sub">Divine purpose filter</div></div>
+        <div class="node sign s2" onclick="showPanel('sign2','Sign 2: Cannot Be Stranded','A victorious believer is never ultimately abandoned. Elijah sat by a brook in drought — ravens brought food. When the brook dried, God moved him to a widow whose flour never ran out. The provision changed form. The method changed. But the supply never stopped.')"><div class="n-title">🧭 Cannot Be<br>Stranded</div><div class="n-sub">Covenant provision</div></div>
+        <div class="node sign s3" onclick="showPanel('sign3','Sign 3: Authority to Cause Change','A victorious believer does not simply exist in environments — they shift them. Where there is death, life begins to respond. Where there is lack, supply starts to appear. They carry something invisible but undeniable that makes situations bend toward God\'s intention.')"><div class="n-title">✨ Authority to<br>Cause Change</div><div class="n-sub">Atmospheric shift</div></div>
+      </div>
+      <div class="map-arrow" style="color:var(--gold)">↓</div>
+      <p class="map-label" style="color:var(--gold)">FROM YOUR SIDE (MUST BE CULTIVATED)</p>
+      <div class="fw-row">
+        <div class="node sm human" onclick="showPanel('h1','Human Responsibility: Wisdom','Wisdom is the illuminated ability to navigate life correctly. Not intelligence. Not information. The spirit-sourced capacity to know when to act and when to wait, what to say and what to leave unsaid. Proverbs 4:7 — Wisdom is the principal thing. The governing thing.')"><div class="n-title">🧠 WISDOM</div><div class="n-sub">Illuminated navigation</div></div>
+        <div class="node sm human" onclick="showPanel('h2','Human Responsibility: Character','Character is the internal structure that determines how much of God\'s power you can carry without being corrupted by it. God delays power until character can support it. Power given to a person without character does not produce blessing — it produces catastrophe.')"><div class="n-title">🏛 CHARACTER</div><div class="n-sub">Internal load-bearing structure</div></div>
+        <div class="node sm human" onclick="showPanel('h3','Human Responsibility: Faith','Faith is the active, obedient response to what God has spoken. Obedience is not a separate category from faith — it is faith expressed through action. A faith that produces no corresponding action is not deep faith. It is incomplete faith.')"><div class="n-title">🔥 FAITH</div><div class="n-sub">Active obedient response</div></div>
+      </div>
+      <div class="map-arrow">↓</div>
+      <div class="fw-row">
+        <div class="node sm" style="width:240px;border-color:rgba(150,100,255,.3);background:rgba(150,100,255,.04)" onclick="showPanel('hs','The Holy Spirit: The Non-Negotiable Connector','He is not simply the atmosphere in which growth happens. He is a Person — the most important Person available to you in this life. Without a cultivated, intentional relationship with Him, you will attempt through striving what can only be received through communion.')"><div class="n-title" style="color:#B08FFF">✦ THE HOLY SPIRIT</div><div class="n-sub">Non-negotiable connector for all three</div></div>
+      </div>
+      <div class="map-arrow">↓</div>
+      <div class="fw-row">
+        <div class="node sm process" style="width:260px;padding:22px" onclick="showPanel('lop','The Law of Process','Between where you are and where God intends you to be, there is a structured pathway. It is not mysterious or random. Most believers stall not because God has abandoned them — but because they do not know which stage they are in, what it requires, or what the next stage demands.')"><div class="n-title">⚙️ THE LAW OF PROCESS</div><div class="n-sub">God's structured pathway forward</div></div>
+      </div>
+      <div class="map-arrow">↓ &nbsp; ↓</div>
+      <p class="map-label">TWO DIMENSIONS OF THE LAW OF PROCESS</p>
+      <div class="fw-row">
+        <div class="node type" onclick="showPanel('t1','Type 1: The Progression of Transformation','The journey from Unbeliever → Believer → Transformed Believer → Empowered Believer. Each stage is distinct and requires something specific. Each unlocks a dimension of what God can do through your life that the previous stage could not access.')"><div class="n-title">TYPE 1 · Progression</div><div class="n-sub">Unbeliever → Believer → Transformed → Empowered</div></div>
+        <div class="node type" onclick="showPanel('t2','Type 2: The Three Seasons','Season of Discovery — God revealing who you are and what you carry. Season of Pruning &amp; Testing — everything that cannot survive the weight of your assignment is stripped away. Season of Emerging &amp; Manifestation — what has been built internally appears externally.')"><div class="n-title">TYPE 2 · Seasons</div><div class="n-sub">Discovery 🌿 → Pruning 🔥 → Manifestation ✨</div></div>
+      </div>
+      <div class="map-arrow" style="color:var(--gold)">↓</div>
+      <p class="map-label" style="color:var(--gold)">WHAT THE PROCESS BUILDS THROUGH</p>
+      <div class="fw-row">
+        <div class="node formation" onclick="showPanel('f1','Formation Tool: Revelation','Truth that restructures your understanding at a spirit level rather than just an intellectual one. Revelation does not merely inform — it transforms.')"><div class="n-title">📖 Revelation</div></div>
+        <div class="node formation" onclick="showPanel('f2','Formation Tool: Encounters','Direct moments with God that shift your internal reality in ways that no amount of study can fully replicate. An encounter repositions you.')"><div class="n-title">⚡ Encounters</div></div>
+        <div class="node formation" onclick="showPanel('f3','Formation Tool: Interventions','The ways God moves in your external circumstances to demonstrate His reality and deepen your trust in ways comfortable seasons never could.')"><div class="n-title">🕊 Interventions</div></div>
+        <div class="node formation" onclick="showPanel('f4','Formation Tool: Instructions','Specific directions that require your obedience before the reason becomes clear. Following without the full picture is the only way to receive the full reward.')"><div class="n-title">🧭 Instructions</div></div>
+      </div>
+      <div class="map-arrow">↓</div>
+      <p class="map-label" style="color:var(--danger)">THE GAP — What Separates You From God's Intention</p>
+      <div class="fw-row">
+        <div class="node sm" style="border-color:rgba(255,51,102,.25);background:rgba(255,51,102,.03)" onclick="showPanel('gap1','Gap 1: Timing','Even a fully prepared person must wait for the appointed moment. God\'s calendar does not bend to impatience. Things that are genuinely God\'s will have not yet arrived not because they are not coming, but because the moment has not yet been reached.')"><div class="n-title" style="color:rgba(255,130,130,.9)">⏳ TIMING</div><div class="n-sub">God's appointed moment</div></div>
+        <div class="node sm" style="border-color:rgba(255,51,102,.25);background:rgba(255,51,102,.03)" onclick="showPanel('gap2','Gap 2: Warfare','The enemy targets you in Discovery with identity confusion, in Pruning with temptation to exit prematurely, and approaching Manifestation with pride and distraction. Intelligence in warfare separates those who survive from those who advance.')"><div class="n-title" style="color:rgba(255,130,130,.9)">⚔️ WARFARE</div><div class="n-sub">Strategic opposition</div></div>
+        <div class="node sm" style="border-color:rgba(255,51,102,.25);background:rgba(255,51,102,.03)" onclick="showPanel('gap3','Gap 3: Capacity','Your character gaps. The dimensions of revelation you have not yet received. These are not permanent limitations — every one of them is closeable through the process God has designed.')"><div class="n-title" style="color:rgba(255,130,130,.9)">📈 CAPACITY</div><div class="n-sub">Character &amp; revelation gaps</div></div>
+      </div>
+      <div class="map-arrow">↓</div>
+      <div class="fw-row">
+        <div class="node root" style="width:300px;border-color:rgba(0,240,255,.25);background:rgba(0,240,255,.03)" onclick="showPanel('cov','The Legal Foundation: Covenant','Covenant is the legal instrument through which everything God has promised becomes enforceable in your life. Every right as a believer is a covenant right. Not a hope. A legal reality established through the blood of Jesus and sealed by the resurrection.')"><div class="n-title" style="color:var(--cyan)">⚖️ THE COVENANT FOUNDATION</div><div class="n-sub">The legal instrument behind every promise</div></div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="sr">
+    <div class="sec-head"><span class="layer-badge">LAYER 4 OF 7</span><h2 class="sec-label">🧩 Experiential Deep-Dives & Labs</h2></div>
+    <div class="g2" style="margin-bottom:60px">
+      <div>
+        <h3 style="font-family:'Cinzel',serif;color:var(--cyan);margin-bottom:16px;font-size:1.4rem">THE ARCHITECTURE BEHIND EVERYTHING</h3>
+        <p class="body-text stag">This is not a collection of spiritual ideas assembled loosely. Every chapter, every framework, every assignment is part of a single integrated system. Think of it like arriving in a city with no map — driving slowly, taking wrong turns, wasting time. Then someone hands you a map. Suddenly the roads make sense.</p>
+        <div class="ac" onclick="this.classList.toggle('open')">
+          <div class="ac-hdr"><h3 class="ac-title">TAP: WHAT VICTORY IS NOT</h3><span class="ac-icon">+</span></div>
+          <div class="ac-body" onclick="event.stopPropagation()"><p class="body-text stag">Many believers genuinely love God — their love is not the problem. But they do not walk fully in His will and their lives reflect <span class="em-text">mixture</span>. A little of God. A little of chance. A little of confusion. Victory does not live in mixture. Victory lives in alignment.</p></div>
+        </div>
+      </div>
+      <div class="img-box"><img src="images/vb_blueprint.png" alt="Framework Blueprint"></div>
+    </div>
+
+    <div class="ac" onclick="this.classList.toggle('open')">
+      <div class="ac-hdr"><h3 class="ac-title">⚡ LAB 1: THE ALIGNMENT DIAGNOSTIC</h3><span class="ac-icon">+</span></div>
+      <div class="ac-body" onclick="event.stopPropagation()">
+        <p class="body-text stag">Slide the dial to 100 — the point of precise alignment. Belief without alignment produces mixture. Only full, precise alignment activates the framework.</p>
+        <div class="lab">
+          <div class="lab-stage">
+            <div class="align-ring"><div class="align-inner" id="al-inner">ADJUSTING...</div></div>
+            <input type="range" class="align-slider" id="al-slide" min="0" max="100" value="0">
+            <p style="font-family:'Inter';font-size:.65rem;color:var(--muted);margin-top:12px;letter-spacing:.12em">SLIDE TO CALIBRATE ALIGNMENT</p>
+          </div>
+          <div class="lab-footer" id="al-con">STATUS: Misaligned. Victory inaccessible.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="g2 rev" style="margin:60px 0">
+      <div>
+        <h3 style="font-family:'Cinzel',serif;color:var(--gold);margin-bottom:16px;font-size:1.4rem">THE LEGAL FOUNDATION: COVENANT</h3>
+        <p class="body-text stag">Covenant is not background theology — it is the actual ground you stand on when you refuse to accept suffering with no divine purpose. Every promise in this course is a covenant promise. Not a hope. A legal reality established through the blood of Jesus and sealed by the resurrection.</p>
+        <p class="pipe stag" style="border-color:var(--gold)">This is your foundation. Build everything else on it.</p>
+      </div>
+      <div class="img-box"><img src="images/vb_covenant.png" alt="Covenant Foundation"></div>
+    </div>
+
+    <div class="ac" onclick="this.classList.toggle('open')">
+      <div class="ac-hdr"><h3 class="ac-title">🔥 LAB 2: THE SUFFERING CRUCIBLE</h3><span class="ac-icon">+</span></div>
+      <div class="ac-body" onclick="event.stopPropagation()">
+        <p class="body-text stag">God allows suffering for only two reasons: His glory or the fulfilment of your assignment. Place a type of suffering into the Crucible to test if it is legal or must be evicted.</p>
+        <div class="lab">
+          <div class="lab-stage">
+            <div class="suf-grid">
+              <div class="suf-card" onclick="testSuf('glory',true)"><div class="sc-icon">✨</div><div class="sc-title">FOR HIS GLORY</div><div class="sc-tag">Legal Ground</div></div>
+              <div class="suf-card" onclick="testSuf('assign',true)"><div class="sc-icon">📋</div><div class="sc-title">FOR ASSIGNMENT</div><div class="sc-tag">Legal Ground</div></div>
+              <div class="suf-card" onclick="testSuf('fear',false)"><div class="sc-icon">😨</div><div class="sc-title">FEAR &amp; CYCLES</div><div class="sc-tag">No Divine Purpose</div></div>
+              <div class="suf-card" onclick="testSuf('lack',false)"><div class="sc-icon">📉</div><div class="sc-title">SUSTAINED LACK</div><div class="sc-tag">No Divine Purpose</div></div>
+            </div>
+            <div class="crucible" id="crucible">PLACE SUFFERING INTO THE CRUCIBLE</div>
+          </div>
+          <div class="lab-footer" id="suf-con">STATUS: Select a type of suffering to test its legal standing.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="g2" style="margin:60px 0">
+      <div>
+        <h3 style="font-family:'Cinzel',serif;color:var(--success);margin-bottom:16px;font-size:1.4rem">THE THREE SEASONS</h3>
+        <p class="body-text stag">Within the Law of Process, every believer moves through three distinct seasons. You are not lost — you are on a road you have not been given a map for. Until now.</p>
+        <div class="ac" onclick="this.classList.toggle('open')">
+          <div class="ac-hdr"><h3 class="ac-title">TAP: THE ENEMY'S TACTICS PER SEASON</h3><span class="ac-icon">+</span></div>
+          <div class="ac-body" onclick="event.stopPropagation()"><p class="body-text stag">In <span class="em-text">Discovery</span>: Identity confusion. In <span class="em-text">Pruning</span>: Temptation to exit the process prematurely. Approaching <span class="em-text">Manifestation</span>: Pride, distraction, and misalignment — so what God releases is mishandled and short-lived.</p></div>
+        </div>
+      </div>
+      <div class="img-box"><img src="images/vb_seasons.png" alt="Three Seasons Path"></div>
+    </div>
+
+    <div class="ac" onclick="this.classList.toggle('open')">
+      <div class="ac-hdr"><h3 class="ac-title">⚙️ LAB 3: THE LAW OF PROCESS ENGINE</h3><span class="ac-icon">+</span></div>
+      <div class="ac-body" onclick="event.stopPropagation()">
+        <p class="body-text stag">Click through the three seasons to reveal what God is doing in each one, and what the enemy specifically targets to keep you there permanently.</p>
+        <div class="lab">
+          <div class="lab-stage">
+            <div class="process-track">
+              <div class="p-stage active" id="ps-1" onclick="setStage(1)"><div class="ps-icon">🌿</div><div class="ps-name">DISCOVERY</div></div>
+              <div class="p-arrow">›</div>
+              <div class="p-stage" id="ps-2" onclick="setStage(2)"><div class="ps-icon">🔥</div><div class="ps-name">PRUNING</div></div>
+              <div class="p-arrow">›</div>
+              <div class="p-stage" id="ps-3" onclick="setStage(3)"><div class="ps-icon">✨</div><div class="ps-name">MANIFESTATION</div></div>
+            </div>
+            <div id="pd-wrap" style="width:100%;max-width:600px">
+              <div class="p-detail show" id="pd-1"><div class="pd-title">🌿 Season of Discovery</div><p style="font-size:1rem;color:var(--text);line-height:1.7">God is revealing who you are, what you carry, and what you have been sent to do.</p><p class="pd-warfare">⚔️ Enemy Tactic: Identity confusion — making you spend years unsure of who you are.</p></div>
+              <div class="p-detail" id="pd-2"><div class="pd-title">🔥 Season of Pruning & Testing</div><p style="font-size:1rem;color:var(--text);line-height:1.7">Everything that cannot survive the weight of your assignment is stripped away. This is not punishment — it is preparation.</p><p class="pd-warfare">⚔️ Enemy Tactic: Temptation to exit the process prematurely.</p></div>
+              <div class="p-detail" id="pd-3"><div class="pd-title">✨ Season of Emerging & Manifestation</div><p style="font-size:1rem;color:var(--text);line-height:1.7">What has been built internally begins to appear externally. The prepared person meets the appointed moment.</p><p class="pd-warfare">⚔️ Enemy Tactic: Pride, distraction, and misalignment — so that what God releases is mishandled.</p></div>
+            </div>
+          </div>
+          <div class="lab-footer" id="proc-con">ACTIVE SEASON: Discovery — Tap another stage to navigate the Law of Process.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sr">
+    <div class="sec-head"><span class="layer-badge">LAYER 5 OF 7</span><h2 class="sec-label">⚠️ Warning: Belief Without Alignment</h2></div>
+    <div class="card danger-border"><p class="body-text stag" style="color:#FF8F9C">Millions believe God exists. Their lives still reflect confusion, fear, lack, and cycles of defeat regardless of how sincerely they pray. <span style="color:var(--danger)">Belief without alignment is not victory. It is religion.</span> Victory does not live in mixture. Victory lives in alignment.</p><p class="pipe stag" style="border-color:var(--danger);color:#FF8F9C">You cannot close what you cannot see.</p></div>
+  </section>
+
+  <section class="sr">
+    <div class="sec-head"><span class="layer-badge">LAYER 6 OF 7</span><h2 class="sec-label">🪞 Reflection Prompts</h2></div>
+    <div class="card" style="text-align:center">
+      <div id="rq1" class="rq show"><p class="body-text lg stag" style="font-style:italic">Is your life showing consistent victory? Not occasional breakthroughs. Not the kind that exists in your declarations but not your daily reality. Consistent. Measurable. Sustained.</p></div>
+      <div id="rq2" class="rq"><p class="body-text lg stag" style="font-style:italic">Which of the three signs of a victorious believer — inability to suffer illegally, inability to be stranded, authority to cause change — is most underdeveloped in your current experience? What do you sense is the reason?</p></div>
+      <div id="rq3" class="rq"><p class="body-text lg stag" style="font-style:italic">Which season of the Law of Process are you in right now — discovery, pruning, or emerging — and what is the evidence in your life pointing to that answer?</p></div>
+      <button class="btn g" style="margin-top:28px" id="rq-btn" onclick="nextQ()">✦ REVEAL NEXT QUESTION</button>
+      <div class="q-nav"><div class="q-dot active" id="qd1" onclick="goQ(1)"></div><div class="q-dot" id="qd2" onclick="goQ(2)"></div><div class="q-dot" id="qd3" onclick="goQ(3)"></div></div>
+    </div>
+  </section>
+
+  <section class="sr">
+    <div class="sec-head"><span class="layer-badge">LAYER 7 OF 7</span><h2 class="sec-label">🔥 The Closing Declaration</h2></div>
+    <div class="decl">
+      <p style="font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.3em;color:var(--gold);margin-bottom:18px">THE MAP ACCEPTED</p>
+      <p class="statement stag">"I am not lost. I am on a road I had not been given a map for — until now. I recognise that <span style="color:var(--gold)">victory lives in alignment</span>, and I choose today to stop existing in mixture and to pursue the precise will of God for my life."</p>
+      <button class="btn g" style="margin-top:40px" id="decl-btn" onclick="declarationAccepted()">✦ ACCEPT THIS DECLARATION</button>
+      <p id="decl-confirm" style="display:none;font-family:'Cinzel',serif;color:var(--success);margin-top:20px;letter-spacing:.15em;font-size:.85rem">DECLARATION ESTABLISHED. YOUR JOURNEY BEGINS NOW.</p>
+    </div>
+  </section>
+</main>
+<script>
+const cvs=document.getElementById('cvs'),ctx=cvs.getContext('2d');let pts=[];
+function rs(){cvs.width=innerWidth;cvs.height=innerHeight}addEventListener('resize',rs);rs();
+for(let i=0;i<90;i++)pts.push({x:Math.random()*cvs.width,y:Math.random()*cvs.height,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,s:Math.random()*1.2,a:Math.random()*.5});
+function anim(){ctx.clearRect(0,0,cvs.width,cvs.height);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>cvs.width)p.vx*=-1;if(p.y<0||p.y>cvs.height)p.vy*=-1;ctx.fillStyle=`rgba(0,240,255,${p.a*.3})`;ctx.beginPath();ctx.arc(p.x,p.y,p.s,0,Math.PI*2);ctx.fill();});requestAnimationFrame(anim);}anim();
+const oSR=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v');else e.target.classList.remove('v');});},{threshold:.08});
+document.querySelectorAll('.sr').forEach(el=>oSR.observe(el));
+const oTX=new IntersectionObserver(es=>{es.forEach(e=>{const ws=e.target.querySelectorAll('.word');if(e.isIntersecting)ws.forEach((w,i)=>setTimeout(()=>w.classList.add('v'),i*32));else ws.forEach(w=>w.classList.remove('v'));});},{threshold:.15});
+document.querySelectorAll('.stag').forEach(el=>{el.innerHTML=el.innerHTML.split(' ').map(t=>(t.includes('<')||t.includes('>'))? t:`<span class="word">${t}</span>`).join(' ');oTX.observe(el);});
+const panelData={god1:{tag:'GOD\'S SIDE',title:'Power',body:'His power is the supernatural backing that makes the impossible consistently possible for the aligned believer.'},god2:{tag:'GOD\'S SIDE',title:'Grace',body:'His grace is the unearned enablement that equips you for what you could never produce through natural talent or effort alone.'},god3:{tag:'GOD\'S SIDE',title:'Mercy',body:'His mercy is the covering that protects you from what your imperfection and process would otherwise expose you to.'},root:{tag:'THE DEFINITION',title:'The Victorious Believer',body:'A victorious believer is a believer whose life is in precise alignment with the will of God. Not partial alignment. Precise alignment.'},sign1:{tag:'MARK #1',title:'Cannot Suffer Illegally',body:'God allows suffering for only two reasons: for His glory, and for the fulfilment of your assignment. Daniel survived the lions den. Shadrach walked in fire. Because death had no legal authority over their uncompleted assignments.'},sign2:{tag:'MARK #2',title:'Cannot Be Stranded',body:'Elijah sat by a brook in drought. God sent ravens. When the brook dried, a widow\'s flour never ran out. The provision changed form. But the supply never stopped.'},sign3:{tag:'MARK #3',title:'Authority to Cause Change',body:'A victorious believer does not simply exist in environments — they shift them. They carry something invisible but undeniable that makes situations bend toward God\'s intention.'},h1:{tag:'YOUR SIDE',title:'Wisdom',body:'The illuminated ability to navigate life correctly. The spirit-sourced capacity to know when to act and when to wait. Proverbs 4:7 — Wisdom is the principal thing.'},h2:{tag:'YOUR SIDE',title:'Character',body:'The internal structure that determines how much of God\'s power you can carry without being corrupted. God delays power until character can support it.'},h3:{tag:'YOUR SIDE',title:'Faith',body:'The active, obedient response to what God has spoken. A faith that produces no corresponding action is not deep faith — it is incomplete faith.'},hs:{tag:'THE CONNECTOR',title:'The Holy Spirit',body:'He is not simply the atmosphere in which growth happens. He is a Person. Without a cultivated relationship with Him, you will attempt through striving what can only be received through communion.'},lop:{tag:'THE PATHWAY',title:'The Law of Process',body:'Between where you are and where God intends you to be, there is a structured pathway. Most believers stall not because God has abandoned them, but because they do not know which stage they are in.'},t1:{tag:'TYPE 1',title:'Progression of Transformation',body:'Unbeliever → Believer → Transformed Believer → Empowered Believer. Each stage is distinct, requires something specific, and unlocks a dimension the previous stage could not access.'},t2:{tag:'TYPE 2',title:'The Three Seasons',body:'Discovery: God revealing who you are. Pruning: everything stripped away that cannot survive your assignment. Manifestation: what was built internally appears externally.'},f1:{tag:'FORMATION TOOL',title:'Revelation',body:'Truth that restructures your understanding at a spirit level. It does not merely inform — it transforms.'},f2:{tag:'FORMATION TOOL',title:'Encounters',body:'Direct moments with God that shift your internal reality in ways no amount of study can replicate.'},f3:{tag:'FORMATION TOOL',title:'Interventions',body:'God moving in your external circumstances to demonstrate His reality and deepen your trust.'},f4:{tag:'FORMATION TOOL',title:'Instructions',body:'Specific directions requiring obedience before the reason becomes clear. Following without the full picture is the only way to receive the full reward.'},gap1:{tag:'THE GAP',title:'Timing',body:'Even a fully prepared person must wait for the appointed moment. God\'s calendar does not bend to impatience.'},gap2:{tag:'THE GAP',title:'Warfare',body:'The enemy targets you in Discovery with identity confusion, in Pruning with the temptation to exit prematurely, approaching Manifestation with pride and distraction.'},gap3:{tag:'THE GAP',title:'Capacity',body:'Your character gaps and dimensions of revelation not yet received. These are not permanent — every one is closeable through the process God has designed.'},cov:{tag:'THE FOUNDATION',title:'Covenant',body:'Covenant is the legal instrument through which everything God has promised becomes enforceable. Every right as a believer is a covenant right. Not a hope — a legal reality established through the blood of Jesus.'}};
+function showPanel(id,t,b){const d=panelData[id]||{tag:'',title:t,body:b};document.getElementById('np-tag').textContent=d.tag||'';document.getElementById('np-title').textContent=d.title||t;document.getElementById('np-body').textContent=d.body||b;document.getElementById('np').classList.add('show');document.getElementById('overlay').classList.add('show');}
+function closePanel(){document.getElementById('np').classList.remove('show');document.getElementById('overlay').classList.remove('show');}
+const alSlide=document.getElementById('al-slide'),alInner=document.getElementById('al-inner'),alCon=document.getElementById('al-con');
+alSlide.addEventListener('input',function(){const v=+this.value;if(v<40){alInner.textContent='MISALIGNED';alInner.style.borderColor='var(--danger)';alInner.style.color='var(--danger)';alCon.textContent=`ALIGNMENT ${v}%: Mixture detected. Victory inaccessible.`;}else if(v<80){alInner.textContent='APPROACHING';alInner.style.borderColor='var(--cyan)';alInner.style.color='var(--cyan)';alCon.textContent=`ALIGNMENT ${v}%: Partial alignment still produces mixture.`;}else if(v<100){alInner.textContent='NEARLY ALIGNED';alInner.style.borderColor='var(--gold)';alInner.style.color='var(--gold)';alCon.textContent=`ALIGNMENT ${v}%: Very close. The framework is responding.`;}else{alInner.textContent='PRECISE ALIGNMENT';alInner.style.borderColor='var(--success)';alInner.style.color='var(--success)';alCon.style.color='var(--success)';alCon.textContent='ALIGNMENT 100% ✓ VICTORY UNLOCKED. The three signs are now active.';}});
+const crucible=document.getElementById('crucible'),sufCon=document.getElementById('suf-con');
+const sufData={glory:{legal:true,msg:'APPROVED ✓ — Suffering for His glory has legal ground. You carry a witness this season that the world needs.'},assign:{legal:true,msg:'APPROVED ✓ — Suffering for your assignment has legal ground. God is building capacity through this process.'},fear:{legal:false,msg:'EVICTED ✗ — Sustained fear cycles have no divine mandate. You have authority to refuse this intrusion.'},lack:{legal:false,msg:'EVICTED ✗ — Sustained lack with no divine purpose has no legal ground. Covenant provision must be enforced.'}};
+function testSuf(type){const d=sufData[type];crucible.className='crucible '+(d.legal?'approve':'evict');crucible.textContent=d.legal?'LEGALLY APPROVED':'MUST BE EVICTED';sufCon.style.color=d.legal?'var(--success)':'var(--danger)';sufCon.textContent=d.msg;setTimeout(()=>{crucible.className='crucible';crucible.textContent='PLACE SUFFERING INTO THE CRUCIBLE';sufCon.style.color='var(--muted)';sufCon.textContent='STATUS: Select a type of suffering to test its legal standing.';},4000);}
+function setStage(n){[1,2,3].forEach(i=>{document.getElementById('ps-'+i).classList.remove('active');document.getElementById('pd-'+i).classList.remove('show');});document.getElementById('ps-'+n).classList.add('active');document.getElementById('pd-'+n).classList.add('show');const names=['Discovery','Pruning & Testing','Emerging & Manifestation'];document.getElementById('proc-con').textContent='ACTIVE SEASON: '+names[n-1]+' — Tap another stage to navigate.';}
+let curQ=1;
+function goQ(n){[1,2,3].forEach(i=>{document.getElementById('rq'+i).classList.remove('show');document.getElementById('qd'+i).classList.remove('active');});document.getElementById('rq'+n).classList.add('show');document.getElementById('qd'+n).classList.add('active');curQ=n;document.getElementById('rq-btn').style.display=curQ>=3?'none':'inline-block';}
+function nextQ(){if(curQ<3)goQ(curQ+1);}
+function declarationAccepted(){document.getElementById('decl-btn').style.display='none';document.getElementById('decl-confirm').style.display='block';}
+</script>
+</body>
+</html>
