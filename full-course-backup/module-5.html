@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 5: The Fragility Shape | Financial Freedom Masterclass</title>
+  <meta name="description" content="One number is never enough. Map your full fragility profile across income concentration, debt composition, re-employability speed, and the protection gap."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --void:#030507;--deep:#060A12;--surface:rgba(255,255,255,.03);
+      --surface2:rgba(255,255,255,.06);--gold:#C9A84C;--gold-l:#E8C97A;
+      --gold-d:rgba(201,168,76,.15);--gold-g:rgba(201,168,76,.06);
+      --gold-b:rgba(201,168,76,.25);--text:#EEF0F4;--muted:#7A8290;
+      --muted2:#4A5260;--danger:#E84855;--success:#2ECC71;
+      --cyan:#4FC3F7;--purple:#9B7FE8;--border:rgba(255,255,255,.07);
+      --r:20px;--rp:100px;
+    }
+    ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--void)}
+    ::-webkit-scrollbar-thumb{background:var(--gold-b);border-radius:3px}
+    *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+    body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',serif;overflow-x:hidden;line-height:1.7}
+
+    .noise{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;opacity:.08;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+    #ambient-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.2}
+
+    main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 28px 180px}
+    @media(max-width:640px){main{padding:0 18px 180px}}
+
+    .sr{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+    .sr.v{opacity:1;transform:none}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes scaleIn{from{transform:scale(.93);opacity:0}to{transform:scale(1);opacity:1}}
+    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+    .tag{font-family:'Inter';font-size:.65rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;display:inline-block;margin-bottom:14px}
+    .sec-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;color:#fff;letter-spacing:.05em;margin-bottom:1rem;line-height:1.2}
+    .body-text{font-size:1.18rem;font-weight:300;color:var(--text);margin-bottom:1rem;line-height:1.85}
+    .em{color:var(--gold);font-style:italic}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:44px 48px}
+    @media(max-width:640px){.card{padding:28px 22px}}
+
+    .sec-divider{display:flex;align-items:center;gap:16px;margin:80px 0 32px}
+    .sec-divider::before,.sec-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+    .sec-divider span{font-family:'Inter';font-size:.6rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;white-space:nowrap}
+
+    /* HERO */
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 0 60px}
+    .hero-eyebrow{font-family:'Inter';font-size:.68rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fadeUp .8s .3s forwards}
+    .hero-title{font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;line-height:1.05;color:#fff;margin-bottom:24px;opacity:0;animation:fadeUp .9s .5s forwards}
+    .hero-sub{font-size:1.3rem;font-style:italic;color:var(--muted);max-width:640px;margin:0 auto 40px;font-weight:300;opacity:0;animation:fadeUp .9s .7s forwards}
+    .hero-scroll{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 1s 1.2s forwards}
+    .hero-scroll span{font-family:'Inter';font-size:.6rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+    .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s infinite}
+    @keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+    /* SLIDERS & INPUTS */
+    input[type=range]{-webkit-appearance:none;width:100%;background:transparent;margin:12px 0}
+    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;height:24px;width:24px;border-radius:50%;background:var(--gold);cursor:pointer;margin-top:-10px;box-shadow:0 0 12px rgba(201,168,76,.4);transition:transform .2s}
+    input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+    input[type=range]::-webkit-slider-runnable-track{width:100%;height:4px;background:var(--border);border-radius:2px}
+    input[type=range]:focus{outline:none}
+
+    /* EXPOSURE 1: INCOME CONCENTRATION */
+    .inc-box{background:var(--deep);border:1px solid var(--border);border-radius:var(--r);padding:44px 48px;text-align:center}
+    @media(max-width:640px){.inc-box{padding:28px 20px}}
+    .inc-val{font-family:'Cinzel';font-size:5rem;font-weight:900;line-height:1;margin:20px 0 10px;transition:color .4s}
+    .inc-label{font-family:'Inter';font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+    .inc-verdict{font-size:1.1rem;font-style:italic;color:var(--text);margin-top:24px;min-height:60px;transition:all .4s}
+
+    /* EXPOSURE 2: DEBT COMPOSITION */
+    .debt-box{background:var(--deep);border:1px solid var(--border);border-radius:var(--r);padding:44px 48px}
+    @media(max-width:640px){.debt-box{padding:28px 20px}}
+    .debt-builder{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:12px;margin-bottom:24px;align-items:end}
+    @media(max-width:800px){.debt-builder{grid-template-columns:1fr 1fr;gap:16px}.db-name{grid-column:1/-1}.db-btn{grid-column:1/-1}}
+    .db-group{display:flex;flex-direction:column;gap:6px}
+    .db-label{font-family:'Inter';font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+    .db-input,.db-select{width:100%;padding:12px 14px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter';font-size:.9rem;outline:none}
+    .db-input:focus,.db-select:focus{border-color:var(--gold-b);background:var(--gold-g)}
+    .db-select option{background:var(--deep);color:var(--text)}
+    .db-btn{padding:12px 20px;border-radius:8px;border:1px solid var(--gold-b);background:none;color:var(--gold);font-family:'Inter';font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:.3s;height:43px}
+    .db-btn:hover{background:var(--gold);color:var(--void)}
+    
+    .debt-list{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+    .debt-item{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:12px;animation:scaleIn .3s ease}
+    @media(max-width:640px){.debt-item{flex-direction:column;align-items:flex-start;gap:12px}}
+    .di-left{display:flex;flex-direction:column;gap:4px}
+    .di-name{font-family:'Cinzel';font-size:1.1rem;color:var(--text)}
+    .di-tags{display:flex;gap:8px}
+    .di-tag{font-family:'Inter';font-size:.55rem;letter-spacing:.1em;padding:4px 8px;border-radius:4px;text-transform:uppercase}
+    .tag-high{background:rgba(232,72,85,.1);color:var(--danger);border:1px solid rgba(232,72,85,.3)}
+    .tag-low{background:rgba(46,204,113,.1);color:var(--success);border:1px solid rgba(46,204,113,.3)}
+    .tag-rigid{background:rgba(232,72,85,.1);color:var(--danger);border:1px solid rgba(232,72,85,.3)}
+    .tag-flex{background:rgba(46,204,113,.1);color:var(--success);border:1px solid rgba(46,204,113,.3)}
+    .di-amt{font-family:'Inter';font-size:1rem;color:var(--muted)}
+    .di-del{background:none;border:none;color:var(--muted2);cursor:pointer;font-size:1rem;padding:4px}
+    .di-del:hover{color:var(--danger)}
+    .debt-empty{font-style:italic;color:var(--muted2);text-align:center;padding:24px 0}
+    .debt-verdict{padding:24px;background:var(--surface);border-radius:12px;border:1px solid var(--border);font-style:italic;font-size:1.05rem;line-height:1.6;transition:all .3s}
+
+    /* EXPOSURE 3: RE-EMPLOYABILITY */
+    .emp-box{background:var(--deep);border:1px solid var(--border);border-radius:var(--r);padding:44px 48px;text-align:center}
+    @media(max-width:640px){.emp-box{padding:28px 20px}}
+    .emp-val{font-family:'Cinzel';font-size:4rem;font-weight:900;line-height:1;margin:20px 0 10px;color:var(--gold)}
+    .emp-label{font-family:'Inter';font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+    .emp-verdict{font-size:1.1rem;font-style:italic;color:var(--text);margin-top:24px;min-height:60px}
+    .time-ticks{display:flex;justify-content:space-between;font-family:'Inter';font-size:.55rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.1em;margin-top:-8px;padding:0 10px}
+
+    /* EXPOSURE 4: PROTECTION GAP */
+    .prot-box{background:var(--deep);border:1px solid var(--border);border-radius:var(--r);padding:44px 48px}
+    @media(max-width:640px){.prot-box{padding:28px 20px}}
+    .prot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-bottom:24px}
+    .prot-item{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-radius:12px;transition:.3s}
+    .pi-info{display:flex;flex-direction:column;gap:4px}
+    .pi-title{font-family:'Cinzel';font-size:1.1rem;color:var(--text)}
+    .pi-desc{font-family:'Inter';font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+    
+    /* Custom Toggle */
+    .toggle{position:relative;display:inline-block;width:50px;height:26px}
+    .toggle input{opacity:0;width:0;height:0}
+    .slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background-color:rgba(255,255,255,.1);transition:.4s;border-radius:26px;border:1px solid var(--border)}
+    .slider:before{position:absolute;content:"";height:18px;width:18px;left:3px;bottom:3px;background-color:var(--muted);transition:.4s;border-radius:50%}
+    input:checked + .slider{background-color:rgba(46,204,113,.15);border-color:var(--success)}
+    input:checked + .slider:before{transform:translateX(24px);background-color:var(--success)}
+
+    .prot-verdict{padding:24px;background:var(--surface);border-radius:12px;border:1px solid var(--border);font-style:italic;font-size:1.05rem;line-height:1.6;text-align:center}
+
+    /* THE SHAPE (RADAR CANVAS) */
+    .shape-container{display:flex;flex-direction:column;align-items:center;padding:44px 0;background:var(--deep);border:1px solid var(--gold-b);border-radius:var(--r);position:relative;overflow:hidden}
+    .shape-bg-glow{position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(201,168,76,.1) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+    canvas#radar{display:block;margin:0 auto;max-width:100%}
+    .shape-summary{max-width:680px;margin:32px auto 0;padding:28px 36px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid var(--border)}
+    .shape-summary p{font-size:1.1rem;font-style:italic;line-height:1.8;color:var(--text);margin-bottom:16px}
+    .shape-summary .fill-in{display:inline-block;border-bottom:1px solid var(--gold);color:var(--gold);min-width:60px;text-align:center;padding:0 8px}
+
+    /* JOURNAL & DECLARATION */
+    .journal-section{display:flex;flex-direction:column;gap:20px}
+    .journal-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .3s}
+    .journal-item:focus-within{border-color:var(--gold-b)}
+    .journal-q{padding:24px 28px 16px;font-size:1.1rem;font-style:italic;color:var(--text);line-height:1.6}
+    .journal-q strong{font-style:normal;font-family:'Inter';font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+    .journal-item textarea{width:100%;padding:16px 28px 24px;background:none;border:none;border-top:1px solid var(--border);color:var(--text);font-family:'Cormorant Garamond';font-size:1.05rem;line-height:1.7;resize:vertical;min-height:100px;outline:none;transition:background .3s}
+    .journal-item textarea:focus{background:rgba(201,168,76,.02)}
+    .journal-item textarea::placeholder{color:var(--muted);font-style:italic}
+    .save-ind{font-family:'Inter';font-size:.6rem;letter-spacing:.1em;color:var(--success);padding:6px 28px;display:none;text-transform:uppercase}
+    .save-ind.show{display:block}
+    .journal-controls{display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:12px}
+    .jc-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--rp);font-family:'Inter';font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s;border:1px solid var(--border);background:none}
+    .jc-export{color:var(--gold);border-color:var(--gold-b)}.jc-export:hover{background:var(--gold);color:var(--void)}
+    .jc-clear{color:var(--muted)}.jc-clear:hover{color:var(--danger);border-color:rgba(232,72,85,.3);background:rgba(232,72,85,.05)}
+
+    .decl-box{text-align:center;padding:80px 48px;border:1px dashed var(--gold-b);border-radius:var(--r);background:radial-gradient(circle at 50% 0%,rgba(201,168,76,.06) 0%,transparent 65%);position:relative;overflow:hidden}
+    .decl-text{font-size:clamp(1.2rem,2.5vw,1.7rem);font-style:italic;font-weight:300;line-height:1.65;color:var(--text);max-width:680px;margin:0 auto 40px}
+    .decl-input-wrap{display:flex;gap:12px;justify-content:center;max-width:480px;margin:0 auto 16px}
+    .decl-input{flex:1;padding:14px 20px;background:rgba(255,255,255,.04);border:1px solid var(--gold-b);border-radius:var(--rp);color:var(--gold);font-family:'Cinzel';font-size:1rem;letter-spacing:.1em;outline:none;text-transform:uppercase;text-align:center;transition:border-color .4s,box-shadow .4s}
+    .decl-input:focus{background:var(--gold-g)}
+    .decl-input.error{border-color:var(--danger)!important;box-shadow:0 0 0 3px rgba(232,72,85,.15)!important}
+    .decl-input.success{border-color:var(--success)!important;box-shadow:0 0 20px rgba(46,204,113,.3)!important;color:var(--success)!important}
+    .decl-input::placeholder{color:var(--muted);font-family:'Inter';font-size:.75rem;text-transform:none;letter-spacing:.05em}
+    .decl-btn{padding:14px 28px;border-radius:var(--rp);border:1px solid var(--gold-b);background:none;color:var(--gold);font-family:'Inter';font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:.3s;white-space:nowrap}
+    .decl-btn:hover,.decl-btn.sealed{background:var(--gold);color:var(--void)}
+    .decl-hint{font-family:'Inter';font-size:.65rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:8px}
+    .decl-sealed-msg{display:none;margin-top:28px}.decl-sealed-msg.show{display:block;animation:fadeUp .6s ease forwards}
+    .decl-sealed-msg p{font-family:'Cinzel';font-size:.9rem;color:var(--gold);letter-spacing:.1em}
+    .decl-sealed-msg .sd{font-family:'Inter';font-size:.65rem;color:var(--muted);margin-top:8px;letter-spacing:.1em}
+    #p-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+
+    .whop-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(5,8,18,.95);border-top:1px solid var(--border);backdrop-filter:blur(14px);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .wb-left{display:flex;align-items:center;gap:16px}
+    .wb-module{display:flex;flex-direction:column}
+    .wb-m-label{font-family:'Inter';font-size:.6rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+    .wb-m-name{font-family:'Cinzel';font-size:.78rem;color:var(--text);letter-spacing:.05em}
+    .wb-progress-wrap{display:flex;align-items:center;gap:10px}
+    .wb-p-label{font-family:'Inter';font-size:.62rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+    .wb-p-track{width:120px;height:3px;background:var(--border);border-radius:3px;overflow:hidden}
+    .wb-p-fill{height:100%;background:var(--gold);width:0%;transition:width .5s;border-radius:3px}
+    .whop-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:var(--rp);background:var(--gold);color:var(--void);font-family:'Inter';font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;border:none;text-decoration:none;transition:.3s;white-space:nowrap}
+    .whop-btn:hover{background:var(--gold-l);transform:translateY(-1px)}
+    @media(max-width:640px){.wb-progress-wrap{display:none}}
+  </style>
+</head>
+<body>
+<div class="noise"></div>
+<canvas id="ambient-canvas"></canvas>
+
+<!-- WHOP BAR -->
+<div class="whop-bar">
+  <div class="wb-left">
+    <div class="wb-module">
+      <div class="wb-m-label">Currently Viewing</div>
+      <div class="wb-m-name">Module 5 · The Fragility Shape</div>
+    </div>
+    <div class="wb-progress-wrap">
+      <span class="wb-p-label">Progress</span>
+      <div class="wb-p-track"><div class="wb-p-fill" id="pfill"></div></div>
+    </div>
+  </div>
+  <a href="index.html" class="whop-btn">↩ Return to Course</a>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Financial Freedom Masterclass · Module 5</p>
+    <h1 class="hero-title">One Number Was<br/>Never Going to Be <span class="g">Enough</span></h1>
+    <p class="hero-sub">Wealth-in-months only measures how long your cash lasts. It doesn't tell you how exposed you are to smaller shocks, or how fast you could recover. Fragility isn't one number. It's a shape.</p>
+    <div class="hero-scroll">
+      <span>Scroll to Build Your Profile</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+<!-- LESSON BODY -->
+<div class="lesson-body-container" style="max-width: 800px; margin: 40px auto 60px; padding: 0 10px;">
+<div class="sec-divider sr"><span>One Number Was Never Going To Be Enough</span></div>
+<p class="body-text sr">You already calculated your wealth in months. That number matters, but it only measures one thing, how long your cash would last if income stopped completely. It doesn't tell you how likely that stop actually is, how exposed you are to smaller shocks that never fully stop your income but quietly bleed it, or how fast you could recover if something did go wrong.</p>
+<p class="body-text sr">Fragility isn't one number. It's a shape, made up of several different exposures stacked on top of each other. Two people can have identical savings and completely different levels of real risk, because one of them has four separate income streams and no debt, and the other has one employer, a large loan, and zero backup plan if that employer disappears tomorrow. Same wealth-in-months figure. Wildly different reality.</p>
+<p class="body-text sr">This section builds the fuller picture. Go through each part properly. This isn't a quiz to rush through, it's an honest audit of exactly where you're standing, so nothing you build afterward is built on a floor you haven't actually inspected.</p>
+<div class="sec-divider sr"><span>Exposure One: Income Concentration</span></div>
+<p class="body-text sr">The single biggest hidden fragility most working adults carry isn't debt, it's dependence on one source of income.</p>
+<p class="body-text sr">If one employer, one client, or one contract represents all, or nearly all, of your monthly income, you don't just have a job. You have a single point of failure. It doesn't matter how stable that employer feels right now, stability is a feeling, not a guarantee, and every stable-feeling job eventually meets a restructuring, an acquisition, an economic downturn, or simply a decision made in a room you weren't in.</p>
+<p class="body-text sr">Work this out properly. What percentage of your total monthly income currently comes from a single source? Write the actual number, not an estimate rounded down to sound better than it is.</p>
+<p class="body-text sr">If that number is 100%, you are carrying maximum income concentration risk, regardless of how much you're earning or how much you've saved. A high salary from one source is not diversification. It's a large amount of exposure to a single point of failure.</p>
+<div class="sec-divider sr"><span>Exposure Two: Debt Composition, Not Just Debt Amount</span></div>
+<p class="body-text sr">Two people can owe the exact same total amount and carry very different levels of real fragility, because what matters isn't only the number, it's the shape of the debt.</p>
+<p class="body-text sr">Ask three questions about every debt you're carrying. Is the interest rate high or low? Is the repayment fixed or does it move with market rates? Could the lender demand full repayment or seize an asset quickly if you missed payments, or is there flexibility built in?</p>
+<p class="body-text sr">A large, low-interest, flexible mortgage is a very different creature to a smaller but high-interest, rigid personal loan. Total debt gives you a headline number. Debt composition tells you how much pressure that debt can actually apply to you in a bad month, and how fast that pressure can escalate.</p>
+<p class="body-text sr">Write it down. List every debt you currently carry, the amount, the interest rate, and whether the repayment terms are flexible or rigid. Total fragility isn't just the sum at the bottom. It's how many of those debts are rigid and high-interest at the same time, because those are the ones that turn a temporary income dip into a genuine crisis.</p>
+<div class="sec-divider sr"><span>Exposure Three: Re-Employability Speed</span></div>
+<p class="body-text sr">If your main income stopped tomorrow, how long would it realistically take you to replace it, even partially?</p>
+<p class="body-text sr">This is different from your wealth-in-months number, which measures how long your savings last. This measures how long the wound would actually stay open. Someone with three months of savings but skills that are in high demand and a strong professional network might realistically replace lost income within weeks. Someone with six months of savings but a narrow, highly specialised skill set tied to one shrinking industry, and no active network, might take the better part of a year to recover equivalent income. The second person, despite looking more stable on paper, is often more fragile in practice.</p>
+<p class="body-text sr">Answer honestly. If you lost your main income source this month, how many weeks or months do you estimate it would take you to replace at least half of it? What would you actually do first? Who would you actually call? If you're not sure, that uncertainty is itself useful information, it tells you that part of your fragility work isn't financial at all, it's making sure your skills and network stay active and visible even while you're comfortably employed.</p>
+<div class="sec-divider sr"><span>Exposure Four: The Protection Gap</span></div>
+<p class="body-text sr">A liquidity buffer handles small shocks, a broken appliance, an unexpected bill, a slow month. It was never designed to handle the large ones, a serious illness, a disability, a death, an accident. Those events don't dent a buffer. They can erase years of progress in a single event, and they're exactly the kind of risk that feels unlikely enough to ignore, right up until it isn't.</p>
+<p class="body-text sr">We'll build this out properly in a later module, but for the diagnosis to be honest, it needs to be named here. Answer plainly. Do you currently have any form of protection, insurance or otherwise, against a serious medical event, disability, or the loss of the household's main earner? If the honest answer is no, that's not a failure, it's simply an accurate reading of a real gap, and it belongs in your fragility picture right now, not just in a future module.</p>
+<div class="sec-divider sr"><span>Putting The Shape Together</span></div>
+<p class="body-text sr">You now have four separate readings, alongside the wealth-in-months number from the last module. Not to average into one score, fragility doesn't compress cleanly into a single digit, but to actually look at as a shape.</p>
+<p class="body-text sr">Write out your full fragility profile in one place:</p>
+<p class="body-text sr">My wealth in months is ______. My income concentration is ______ percent from a single source. My debt composition is mostly flexible / mostly rigid / a mix of both. My estimated re-employability speed is ______ weeks or months. My protection gap is currently open / partially covered / covered.</p>
+<p class="body-text sr">Look at what you've written. Where does the real weak point actually sit? For a lot of people, it's not the savings number at all, it's the income concentration, or the protection gap, sitting quietly unaddressed while all the attention goes toward the buffer. Knowing exactly where your specific weak point sits is what makes the modules ahead useful instead of generic. You're not about to follow a one-size-fits-all plan. You're about to follow one built on your actual shape.</p>
+<div class="sec-divider sr"><span>Step 4: Sit With Your Full Picture</span></div>
+<p class="body-text sr">Answer these fully in your journal before moving forward.</p>
+<ul style="list-style-type: none; padding-left: 20px; margin-bottom: 24px;">
+  <li class="body-text sr" style="position: relative; padding-left: 15px; margin-bottom: 8px;">
+    <span style="position: absolute; left: 0; color: var(--gold);">&bull;</span>
+    Of the four exposures above, which one surprised you most once you actually worked out the real number?
+  </li>
+  <li class="body-text sr" style="position: relative; padding-left: 15px; margin-bottom: 8px;">
+    <span style="position: absolute; left: 0; color: var(--gold);">&bull;</span>
+    Which exposure have you been quietly aware of but avoided looking at directly until now?
+  </li>
+  <li class="body-text sr" style="position: relative; padding-left: 15px; margin-bottom: 8px;">
+    <span style="position: absolute; left: 0; color: var(--gold);">&bull;</span>
+    If you had to fix only one of these four exposures in the next six months, which would move the needle most, and why?
+  </li>
+  <li class="body-text sr" style="position: relative; padding-left: 15px; margin-bottom: 8px;">
+    <span style="position: absolute; left: 0; color: var(--gold);">&bull;</span>
+    Think about your income concentration number. What would it take, realistically, to bring even one additional, smaller income source into your life in the next year?
+  </li>
+  <li class="body-text sr" style="position: relative; padding-left: 15px; margin-bottom: 8px;">
+    <span style="position: absolute; left: 0; color: var(--gold);">&bull;</span>
+    Look at your debt list. Is there one rigid, high-interest debt that deserves to be the very first target once we reach the debt module?
+  </li>
+  <li class="body-text sr" style="position: relative; padding-left: 15px; margin-bottom: 8px;">
+    <span style="position: absolute; left: 0; color: var(--gold);">&bull;</span>
+    Picture the scenario where your main income actually stopped next month. Walk through, in detail, the first two weeks. What would you do first?
+  </li>
+  <li class="body-text sr" style="position: relative; padding-left: 15px; margin-bottom: 8px;">
+    <span style="position: absolute; left: 0; color: var(--gold);">&bull;</span>
+    Who are three people in your current network who could genuinely help you re-employ quickly if you needed to? If you struggled to name three, what does that tell you?
+  </li>
+  <li class="body-text sr" style="position: relative; padding-left: 15px; margin-bottom: 8px;">
+    <span style="position: absolute; left: 0; color: var(--gold);">&bull;</span>
+    Have you ever avoided thinking about the protection gap because it felt too heavy to consider? What would it take to look at it directly, even briefly, this month?
+  </li>
+  <li class="body-text sr" style="position: relative; padding-left: 15px; margin-bottom: 8px;">
+    <span style="position: absolute; left: 0; color: var(--gold);">&bull;</span>
+    Compare your fragility shape to the version of yourself you described in the Rewiring the Governor exercise. Does your current shape match who you're trying to become, or is it still shaped by the old version of you?
+  </li>
+  <li class="body-text sr" style="position: relative; padding-left: 15px; margin-bottom: 8px;">
+    <span style="position: absolute; left: 0; color: var(--gold);">&bull;</span>
+    Write one sentence describing exactly what "stable" would look like across all four exposures, not just the savings number. This is the target the rest of the course is going to help you build toward.
+  </li>
+</ul>
+<p class="body-text sr">Keep this fragility profile close. Every module from here addresses one or more of these exact four exposures directly, this isn't background reflection, it's the map the rest of the course follows.</p>
+
+</div>
+<!-- END LESSON BODY -->
+
+  <!-- EXPOSURE 1: INCOME CONCENTRATION -->
+  <div class="sec-divider sr"><span>Exposure One · Income Concentration</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <h2 class="sec-title">The Single Biggest <span style="color:var(--gold)">Hidden Fragility</span></h2>
+    <p class="body-text lg">If one employer, one client, or one contract represents all, or nearly all, of your monthly income, you don't just have a job. You have a single point of failure.</p>
+    <p class="body-text" style="color:var(--muted)">It doesn't matter how stable that employer feels right now. Stability is a feeling, not a guarantee. Every stable-feeling job eventually meets a restructuring, a downturn, or a decision made in a room you weren't in.</p>
+  </div>
+
+  <div class="inc-box sr">
+    <p class="tag" style="margin-bottom:8px">What percentage of your income comes from one source?</p>
+    <div class="inc-val" id="inc-val-text">100<span style="font-size:2.5rem">%</span></div>
+    <p class="inc-label">Maximum Concentration Risk</p>
+    <input type="range" min="0" max="100" value="100" id="inc-slider" oninput="updateInc()"/>
+    <div class="time-ticks" style="margin-top:8px"><span>0%</span><span>50%</span><span>100%</span></div>
+    <div class="inc-verdict" id="inc-verdict-text">You are carrying maximum income concentration risk, regardless of how much you're earning. A high salary from one source is not diversification. It's a large amount of exposure to a single point of failure.</div>
+  </div>
+
+  <!-- EXPOSURE 2: DEBT COMPOSITION -->
+  <div class="sec-divider sr"><span>Exposure Two · Debt Composition</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <h2 class="sec-title">The <span style="color:var(--gold)">Shape</span> of the Debt Matters</h2>
+    <p class="body-text lg">Two people can owe the exact same total amount and carry very different levels of real fragility. A large, low-interest, flexible mortgage is a very different creature to a smaller but high-interest, rigid personal loan.</p>
+    <p class="body-text" style="color:var(--muted)">List every debt you currently carry. Total fragility isn't just the sum at the bottom — it's how many of those debts are rigid and high-interest at the same time. Those are the ones that turn a temporary income dip into a crisis.</p>
+  </div>
+
+  <div class="debt-box sr">
+    <p class="tag" style="margin-bottom:24px">Map Your Debt Composition</p>
+    <div class="debt-builder">
+      <div class="db-group db-name">
+        <label class="db-label">Debt Name</label>
+        <input type="text" id="db-name" class="db-input" placeholder="e.g. Car Loan"/>
+      </div>
+      <div class="db-group">
+        <label class="db-label">Amount</label>
+        <input type="text" id="db-amt" class="db-input" placeholder="Total owed"/>
+      </div>
+      <div class="db-group">
+        <label class="db-label">Interest</label>
+        <select id="db-int" class="db-select">
+          <option value="high">High (e.g. Credit Card)</option>
+          <option value="low">Low (e.g. Mortgage)</option>
+        </select>
+      </div>
+      <div class="db-group">
+        <label class="db-label">Terms</label>
+        <select id="db-flex" class="db-select">
+          <option value="rigid">Rigid (Strict)</option>
+          <option value="flex">Flexible</option>
+        </select>
+      </div>
+      <button class="db-btn" onclick="addDebt()">Add Debt</button>
+    </div>
+    <div class="debt-list" id="debt-list">
+      <div class="debt-empty">No debts mapped yet. Add your debts above to reveal your composition score.</div>
+    </div>
+    <div class="debt-verdict" id="debt-verdict" style="display:none"></div>
+  </div>
+
+  <!-- EXPOSURE 3: RE-EMPLOYABILITY -->
+  <div class="sec-divider sr"><span>Exposure Three · Re-Employability Speed</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <h2 class="sec-title">How Long Does the <span style="color:var(--gold)">Wound</span> Stay Open?</h2>
+    <p class="body-text lg">If your main income stopped tomorrow, how long would it realistically take you to replace at least half of it?</p>
+    <p class="body-text" style="color:var(--muted)">Someone with three months of savings but high-demand skills and a strong network might recover in weeks. Someone with six months of savings but a highly specialised, shrinking skillset might take a year. The second person, despite looking more stable on paper, is often more fragile in practice.</p>
+  </div>
+
+  <div class="emp-box sr">
+    <p class="tag" style="margin-bottom:8px">Estimated time to replace 50%+ of your income</p>
+    <div class="emp-val" id="emp-val-text">6 Months</div>
+    <input type="range" min="1" max="52" value="26" id="emp-slider" oninput="updateEmp()"/>
+    <div class="time-ticks"><span>1 Week</span><span>6 Months</span><span>1+ Year</span></div>
+    <div class="emp-verdict" id="emp-verdict-text">If it takes half a year to recover, your wealth-in-months buffer needs to be exceptionally deep. This signals a need to actively warm up your professional network and visibility while you are still employed.</div>
+  </div>
+
+  <!-- EXPOSURE 4: PROTECTION GAP -->
+  <div class="sec-divider sr"><span>Exposure Four · The Protection Gap</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <h2 class="sec-title">Buffer vs. <span style="color:var(--gold)">Catastrophe</span></h2>
+    <p class="body-text lg">A liquidity buffer handles small shocks: a broken appliance, an unexpected bill, a slow month. It was never designed to handle serious illness, disability, or death.</p>
+    <p class="body-text" style="color:var(--muted)">Those events don't dent a buffer. They erase years of progress in a single event. If you don't have protection, that's not a failure — it's simply an accurate reading of a real gap, and it belongs in your fragility picture right now.</p>
+  </div>
+
+  <div class="prot-box sr">
+    <p class="tag" style="margin-bottom:24px">Do you have active cover for these scenarios?</p>
+    <div class="prot-grid">
+      <div class="prot-item" id="pi-med">
+        <div class="pi-info">
+          <span class="pi-title">Medical Event</span>
+          <span class="pi-desc">Health / Critical Illness Cover</span>
+        </div>
+        <label class="toggle"><input type="checkbox" id="pt-med" onchange="updateProt()"/><span class="slider"></span></label>
+      </div>
+      <div class="prot-item" id="pi-dis">
+        <div class="pi-info">
+          <span class="pi-title">Disability</span>
+          <span class="pi-desc">Income Protection Cover</span>
+        </div>
+        <label class="toggle"><input type="checkbox" id="pt-dis" onchange="updateProt()"/><span class="slider"></span></label>
+      </div>
+      <div class="prot-item" id="pi-life">
+        <div class="pi-info">
+          <span class="pi-title">Loss of Earner</span>
+          <span class="pi-desc">Life Insurance (If Dependents)</span>
+        </div>
+        <label class="toggle"><input type="checkbox" id="pt-life" onchange="updateProt()"/><span class="slider"></span></label>
+      </div>
+    </div>
+    <div class="prot-verdict" id="prot-verdict">Your protection gap is completely open. A severe event wouldn't just pause your progress; it could erase it entirely.</div>
+  </div>
+
+  <!-- THE FRAGILITY SHAPE -->
+  <div class="sec-divider sr"><span>Putting It Together</span></div>
+
+  <div class="card sr" style="margin-bottom:28px;text-align:center">
+    <p class="body-text lg" style="margin:0">You now have four separate readings. Not to average into one score — fragility doesn't compress cleanly into a single digit — but to look at as a complete shape.<br/><span class="em">A smaller shape means a stronger, less fragile foundation.</span></p>
+  </div>
+
+  <div class="shape-container sr">
+    <div class="shape-bg-glow"></div>
+    <p class="tag">Your Fragility Profile</p>
+    <canvas id="radar" width="500" height="400"></canvas>
+    
+    <div class="shape-summary">
+      <p>My wealth in months is <input type="text" style="background:none;border:none;border-bottom:1px solid var(--gold);color:var(--gold);font-family:'Cinzel';font-size:1.1rem;width:40px;text-align:center;outline:none" placeholder="??" id="shape-wim"/>. My income concentration is <span class="fill-in" id="sf-inc">100%</span> from a single source.</p>
+      <p>My debt composition is <span class="fill-in" id="sf-debt">unknown</span>. My estimated re-employability speed is <span class="fill-in" id="sf-emp">6 months</span>.</p>
+      <p>My protection gap is currently <span class="fill-in" id="sf-prot">open</span>.</p>
+      <p style="margin-top:24px;font-family:'Inter';font-size:.75rem;letter-spacing:.05em;color:var(--muted);text-transform:uppercase;text-align:center;border-top:1px solid var(--border);padding-top:16px">Knowing exactly where your specific weak point sits is what makes the modules ahead useful. You're about to follow a plan built on your actual shape.</p>
+    </div>
+  </div>
+
+
+  <!-- JOURNAL -->
+  <div class="sec-divider sr"><span>Written Reflection — 10 Prompts</span></div>
+
+  <div class="card sr" style="margin-bottom:28px;border-color:var(--gold-b)">
+    <p class="body-text" style="margin:0;font-style:italic;color:var(--muted)">Sit with your full picture. Answer these fully in your journal before moving forward. Your answers are saved privately to your browser.</p>
+  </div>
+
+  <div class="journal-section sr">
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 01</strong>Of the four exposures above, which one surprised you most once you actually worked out the real number?</div><textarea id="r1" placeholder="Write your honest answer here..." oninput="saveJ('r1')"></textarea><div class="save-ind" id="sv-r1">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 02</strong>Which exposure have you been quietly aware of but avoided looking at directly until now?</div><textarea id="r2" placeholder="Write your honest answer here..." oninput="saveJ('r2')"></textarea><div class="save-ind" id="sv-r2">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 03</strong>If you had to fix only one of these four exposures in the next six months, which would move the needle most, and why?</div><textarea id="r3" placeholder="Write your honest answer here..." oninput="saveJ('r3')"></textarea><div class="save-ind" id="sv-r3">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 04</strong>Think about your income concentration number. What would it take, realistically, to bring even one additional, smaller income source into your life in the next year?</div><textarea id="r4" placeholder="Write your honest answer here..." oninput="saveJ('r4')"></textarea><div class="save-ind" id="sv-r4">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 05</strong>Look at your debt list. Is there one rigid, high-interest debt that deserves to be the very first target once we reach the debt module?</div><textarea id="r5" placeholder="Name it and explain why..." oninput="saveJ('r5')"></textarea><div class="save-ind" id="sv-r5">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 06</strong>Picture the scenario where your main income actually stopped next month. Walk through, in detail, the first two weeks. What would you do first?</div><textarea id="r6" placeholder="Be specific about your immediate actions..." oninput="saveJ('r6')"></textarea><div class="save-ind" id="sv-r6">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 07</strong>Who are three people in your current network who could genuinely help you re-employ quickly if you needed to? (If you struggled to name three, what does that tell you?)</div><textarea id="r7" placeholder="Name them. If you can't, write about the gap..." oninput="saveJ('r7')"></textarea><div class="save-ind" id="sv-r7">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 08</strong>Have you ever avoided thinking about the protection gap because it felt too heavy to consider? What would it take to look at it directly, even briefly, this month?</div><textarea id="r8" placeholder="Write your honest answer here..." oninput="saveJ('r8')"></textarea><div class="save-ind" id="sv-r8">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 09</strong>Compare your fragility shape to the version of yourself you described in the 'Rewiring the Governor' exercise. Does your current shape match who you're trying to become, or is it still shaped by the old version of you?</div><textarea id="r9" placeholder="Write your honest answer here..." oninput="saveJ('r9')"></textarea><div class="save-ind" id="sv-r9">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 10</strong>Write one sentence describing exactly what "stable" would look like across all four exposures, not just the savings number.</div><textarea id="r10" placeholder="This is the target the rest of the course is going to help you build toward." oninput="saveJ('r10')"></textarea><div class="save-ind" id="sv-r10">✓ Saved</div></div>
+  </div>
+
+  <div class="journal-controls sr">
+    <button class="jc-btn jc-export" onclick="exportJournal()">📥 Download My Reflections</button>
+    <button class="jc-btn jc-clear" onclick="clearJournal()">🗑 Clear &amp; Reset</button>
+  </div>
+
+  <!-- DECLARATION -->
+  <div class="sec-divider sr"><span>The Declaration</span></div>
+
+  <div class="decl-box sr">
+    <canvas id="p-canvas"></canvas>
+    <p class="tag">Seal Your Shape</p>
+    <p class="decl-text">"I have looked honestly at my full fragility shape. I understand that my real risk goes beyond just my savings number. I am ready to build a plan based on this actual reality, not on estimates or avoidance."</p>
+    <div class="decl-input-wrap">
+      <input type="text" class="decl-input" id="decl-in" placeholder='Type "I ACCEPT" to seal this'/>
+      <button class="decl-btn" onclick="sealDecl()">Seal</button>
+    </div>
+    <p class="decl-hint">Type "I ACCEPT" and press Seal</p>
+    <div class="decl-sealed-msg" id="sealed-msg">
+      <p>✦ THE FOUNDATION IS INSPECTED. WE BUILD FROM HERE. ✦</p>
+      <p class="sd" id="sealed-date"></p>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:center;align-items:center;margin-top:60px;margin-bottom:20px;flex-wrap:wrap;gap:16px" class="sr">
+  <a href="module-4.html" class="whop-btn" style="text-decoration:none; background:transparent; color:var(--gold); border:1px solid var(--gold);">&#8592; Previous</a>
+  <a href="index.html" class="whop-btn" style="text-decoration:none;">&#8617; Return to Course</a>
+</div>
+</main>
+
+<script>
+/* GLOBAL FRAGILITY STATE (0-100 scales, higher = more fragile) */
+const F = { inc: 100, debt: 0, emp: 50, prot: 100 };
+
+/* AMBIENT CANVAS */
+(function(){
+  const c=document.getElementById('ambient-canvas'),ctx=c.getContext('2d');let s=[];
+  const resize=()=>{c.width=innerWidth;c.height=innerHeight};
+  const init=()=>{s=[];for(let i=0;i<120;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.1+.2,speed:Math.random()*.16+.04,op:Math.random()*.5+.1,tw:Math.random()*Math.PI*2})};
+  const draw=()=>{ctx.clearRect(0,0,c.width,c.height);s.forEach(p=>{p.tw+=.007;const o=p.op*(.6+.4*Math.sin(p.tw));ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(201,168,76,${o})`;ctx.fill();p.y-=p.speed;if(p.y<0){p.y=c.height;p.x=Math.random()*c.width}});requestAnimationFrame(draw)};
+  resize();init();draw();window.addEventListener('resize',()=>{resize();init()});
+})();
+
+/* SCROLL REVEAL */
+(()=>{
+  const obs=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('v');obs.unobserve(en.target)}}),{threshold:.07});
+  document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
+})();
+
+/* PROGRESS */
+window.addEventListener('scroll',()=>{document.getElementById('pfill').style.width=Math.round((scrollY/(document.body.scrollHeight-innerHeight))*100)+'%'});
+
+/* EXPOSURE 1: INCOME */
+function updateInc(){
+  const val = parseInt(document.getElementById('inc-slider').value);
+  F.inc = val;
+  const txt = document.getElementById('inc-val-text');
+  const verd = document.getElementById('inc-verdict-text');
+  txt.innerHTML = val + '<span style="font-size:2.5rem">%</span>';
+  
+  if(val >= 90){
+    txt.style.color = 'var(--danger)';
+    verd.textContent = "You are carrying maximum income concentration risk. A high salary from one source is not diversification. It's a large amount of exposure to a single point of failure.";
+  } else if (val >= 60){
+    txt.style.color = 'var(--gold)';
+    verd.textContent = "You have some secondary income, but your primary source still dictates your survival. If this source vanished, your lifestyle would immediately require severe changes.";
+  } else {
+    txt.style.color = 'var(--success)';
+    verd.textContent = "Strong diversification. If one source fails, the others can carry the load or give you time to pivot without panic. Your fragility here is low.";
+  }
+  document.getElementById('sf-inc').textContent = val + '%';
+  drawRadar();
+}
+
+/* EXPOSURE 2: DEBT */
+let debts = [];
+function addDebt(){
+  const name = document.getElementById('db-name').value.trim();
+  const amt = document.getElementById('db-amt').value.trim();
+  const int = document.getElementById('db-int').value;
+  const flex = document.getElementById('db-flex').value;
+  if(!name || !amt) return;
+  debts.push({ name, amt, int, flex });
+  document.getElementById('db-name').value = '';
+  document.getElementById('db-amt').value = '';
+  renderDebts();
+}
+function delDebt(i){ debts.splice(i,1); renderDebts(); }
+function renderDebts(){
+  const list = document.getElementById('debt-list');
+  const verd = document.getElementById('debt-verdict');
+  list.innerHTML = '';
+  
+  if(debts.length === 0){
+    list.innerHTML = '<div class="debt-empty">No debts mapped yet. Add your debts above.</div>';
+    verd.style.display = 'none';
+    F.debt = 0;
+    document.getElementById('sf-debt').textContent = 'debt-free';
+    drawRadar();
+    return;
+  }
+  
+  let highRigid = 0; let totalScore = 0;
+  
+  debts.forEach((d, i) => {
+    let score = 0;
+    if(d.int === 'high') score += 1;
+    if(d.flex === 'rigid') score += 1;
+    if(score === 2) highRigid++;
+    totalScore += score;
+    
+    const el = document.createElement('div'); el.className = 'debt-item';
+    el.innerHTML = `
+      <div class="di-left">
+        <div class="di-name">${d.name}</div>
+        <div class="di-tags">
+          <span class="di-tag ${d.int==='high'?'tag-high':'tag-low'}">${d.int} Interest</span>
+          <span class="di-tag ${d.flex==='rigid'?'tag-rigid':'tag-flex'}">${d.flex} Terms</span>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <div class="di-amt">${d.amt}</div>
+        <button class="di-del" onclick="delDebt(${i})">✕</button>
+      </div>
+    `;
+    list.appendChild(el);
+  });
+  
+  // Calculate a 0-100 fragility score for debt. Max score is 2 per debt.
+  F.debt = Math.round((totalScore / (debts.length * 2)) * 100);
+  verd.style.display = 'block';
+  
+  if(F.debt === 0){
+    verd.style.color = 'var(--success)'; verd.style.borderColor = 'rgba(46,204,113,0.3)';
+    verd.textContent = "Your debt composition is highly resilient. Low interest and flexible terms mean this debt acts as a tool, not a pressure point in a crisis.";
+    document.getElementById('sf-debt').textContent = 'highly flexible';
+  } else if(F.debt > 60){
+    verd.style.color = 'var(--danger)'; verd.style.borderColor = 'rgba(232,72,85,0.3)';
+    verd.textContent = `You have ${highRigid} high-interest, rigid debts. This is a severe fragility point. If your income dips, these specific debts will immediately force a crisis.`;
+    document.getElementById('sf-debt').textContent = 'mostly rigid/high-interest';
+  } else {
+    verd.style.color = 'var(--gold)'; verd.style.borderColor = 'var(--gold-b)';
+    verd.textContent = "A mix of debt types. The rigid/high-interest ones need to be your primary target when we reach the debt module.";
+    document.getElementById('sf-debt').textContent = 'a mix of flexible and rigid';
+  }
+  drawRadar();
+}
+
+/* EXPOSURE 3: RE-EMPLOYABILITY */
+function updateEmp(){
+  const val = parseInt(document.getElementById('emp-slider').value);
+  const txt = document.getElementById('emp-val-text');
+  const verd = document.getElementById('emp-verdict-text');
+  
+  F.emp = Math.round((val / 52) * 100); // map 1-52 weeks to 0-100 scale
+  
+  let label = val + (val === 1 ? ' Week' : ' Weeks');
+  if(val >= 4) {
+    let m = Math.round(val / 4.33);
+    label = m + (m === 1 ? ' Month' : ' Months');
+    if(val === 52) label = '1+ Year';
+  }
+  txt.textContent = label;
+  document.getElementById('sf-emp').textContent = label;
+  
+  if(val <= 4){
+    txt.style.color = 'var(--success)';
+    verd.textContent = "Highly re-employable. Your skills are liquid and in demand. Even with a small cash buffer, your ability to recover income quickly acts as a massive invisible asset.";
+  } else if (val <= 16){
+    txt.style.color = 'var(--gold)';
+    verd.textContent = "Moderate recovery speed. You'd need a few months to pivot or find a comparable role. Your cash buffer needs to be solid to cross this gap without taking on toxic debt.";
+  } else {
+    txt.style.color = 'var(--danger)';
+    verd.textContent = "High fragility here. If it takes half a year or more to recover, a standard 3-month buffer will fail. You must actively warm up your network while you're still employed.";
+  }
+  drawRadar();
+}
+
+/* EXPOSURE 4: PROTECTION GAP */
+function updateProt(){
+  const med = document.getElementById('pt-med').checked;
+  const dis = document.getElementById('pt-dis').checked;
+  const life = document.getElementById('pt-life').checked;
+  
+  let covered = 0;
+  if(med) covered++; if(dis) covered++; if(life) covered++;
+  
+  F.prot = (3 - covered) * 33.33; // 3 covered = 0 fragility, 0 covered = 100 fragility
+  
+  const verd = document.getElementById('prot-verdict');
+  const items = [document.getElementById('pi-med'), document.getElementById('pi-dis'), document.getElementById('pi-life')];
+  
+  items.forEach((item, idx) => {
+    const isChecked = [med, dis, life][idx];
+    if(isChecked) {
+      item.style.borderColor = 'rgba(46,204,113,0.4)'; item.style.background = 'rgba(46,204,113,0.05)';
+    } else {
+      item.style.borderColor = 'var(--border)'; item.style.background = 'var(--surface)';
+    }
+  });
+
+  if(covered === 3){
+    verd.style.color = 'var(--success)'; verd.textContent = "Fully covered. Your foundation is protected against catastrophic shocks.";
+    document.getElementById('sf-prot').textContent = 'fully covered';
+  } else if (covered > 0){
+    verd.style.color = 'var(--gold)'; verd.textContent = "Partially covered. You have some protection, but missing pillars could still erase years of progress.";
+    document.getElementById('sf-prot').textContent = 'partially covered';
+  } else {
+    verd.style.color = 'var(--danger)'; verd.textContent = "Your protection gap is completely open. A severe event wouldn't just pause your progress; it could erase it entirely.";
+    document.getElementById('sf-prot').textContent = 'open';
+  }
+  drawRadar();
+}
+
+/* RADAR CANVAS */
+function drawRadar(){
+  const c = document.getElementById('radar');
+  const ctx = c.getContext('2d');
+  const cx = c.width/2; const cy = c.height/2;
+  const maxR = 140;
+  
+  ctx.clearRect(0,0,c.width,c.height);
+  
+  // Draw Background Grid
+  ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+  ctx.lineWidth = 1;
+  for(let i=1; i<=4; i++){
+    let r = (maxR/4) * i;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - r);
+    ctx.lineTo(cx + r, cy);
+    ctx.lineTo(cx, cy + r);
+    ctx.lineTo(cx - r, cy);
+    ctx.closePath();
+    ctx.stroke();
+  }
+  
+  // Draw Axes
+  ctx.beginPath();
+  ctx.moveTo(cx, cy - maxR); ctx.lineTo(cx, cy + maxR);
+  ctx.moveTo(cx - maxR, cy); ctx.lineTo(cx + maxR, cy);
+  ctx.stroke();
+  
+  // Labels
+  ctx.fillStyle = 'var(--muted)'; ctx.font = '10px Inter'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText('INCOME CONC.', cx, cy - maxR - 15);
+  ctx.fillText('RE-EMPLOY.', cx + maxR + 35, cy);
+  ctx.fillText('PROTECTION', cx, cy + maxR + 15);
+  ctx.fillText('DEBT RIGIDITY', cx - maxR - 40, cy);
+  
+  // Calculate points (0 = center, 100 = outer edge)
+  const pInc = cy - (maxR * (F.inc/100));
+  const pEmp = cx + (maxR * (F.emp/100));
+  const pProt = cy + (maxR * (F.prot/100));
+  const pDebt = cx - (maxR * (F.debt/100));
+  
+  // Draw Polygon
+  ctx.beginPath();
+  ctx.moveTo(cx, pInc);
+  ctx.lineTo(pEmp, cy);
+  ctx.lineTo(cx, pProt);
+  ctx.lineTo(pDebt, cy);
+  ctx.closePath();
+  
+  // Calculate average fragility to pick color
+  const avgF = (F.inc + F.emp + F.prot + F.debt) / 4;
+  let color = 'rgba(46,204,113,'; // green
+  if(avgF > 60) color = 'rgba(232,72,85,'; // red
+  else if(avgF > 30) color = 'rgba(201,168,76,'; // gold
+  
+  ctx.fillStyle = color + '0.3)';
+  ctx.fill();
+  ctx.strokeStyle = color + '1)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  
+  // Dots
+  ctx.fillStyle = '#fff';
+  [ [cx, pInc], [pEmp, cy], [cx, pProt], [pDebt, cy] ].forEach(pt => {
+    ctx.beginPath(); ctx.arc(pt[0], pt[1], 4, 0, Math.PI*2); ctx.fill();
+  });
+}
+
+// Init
+updateInc(); updateEmp(); updateProt(); drawRadar();
+
+/* JOURNAL */
+['r1','r2','r3','r4','r5','r6','r7','r8','r9','r10'].forEach(id=>{
+  const saved=localStorage.getItem('ffm5_'+id);if(saved){const el=document.getElementById(id);if(el)el.value=saved}
+});
+function saveJ(id){
+  const val=document.getElementById(id)?.value||'';localStorage.setItem('ffm5_'+id,val);
+  const ind=document.getElementById('sv-'+id);if(ind){ind.classList.add('show');setTimeout(()=>ind.classList.remove('show'),2000)}
+}
+function exportJournal(){
+  const qs=[
+    'Of the four exposures above, which one surprised you most once you actually worked out the real number?',
+    'Which exposure have you been quietly aware of but avoided looking at directly until now?',
+    'If you had to fix only one of these four exposures in the next six months, which would move the needle most, and why?',
+    'Think about your income concentration number. What would it take, realistically, to bring even one additional, smaller income source into your life in the next year?',
+    'Look at your debt list. Is there one rigid, high-interest debt that deserves to be the very first target once we reach the debt module?',
+    'Picture the scenario where your main income actually stopped next month. Walk through, in detail, the first two weeks. What would you do first?',
+    'Who are three people in your current network who could genuinely help you re-employ quickly if you needed to?',
+    'Have you ever avoided thinking about the protection gap because it felt too heavy to consider? What would it take to look at it directly this month?',
+    'Compare your fragility shape to the version of yourself you described in the Rewiring the Governor exercise. Does it match who you are trying to become?',
+    'Write one sentence describing exactly what "stable" would look like across all four exposures, not just the savings number.'
+  ];
+  const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  let content=`FINANCIAL FREEDOM MASTERCLASS\nModule 5: The Fragility Shape\nJournal Export — ${date}\n${'='.repeat(60)}\n\n`;
+  qs.forEach((q,i)=>{const key='ffm5_r'+(i+1);const answer=localStorage.getItem(key)||'(No answer written yet)';content+=`Reflection ${String(i+1).padStart(2,'0')}: ${q}\n\n${answer}\n\n${'-'.repeat(60)}\n\n`;});
+  const blob=new Blob([content],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='Module-5-Journal.txt';a.click();URL.revokeObjectURL(url);
+}
+function clearJournal(){
+  if(!confirm('Clear all reflection answers for Module 5? This cannot be undone.'))return;
+  ['r1','r2','r3','r4','r5','r6','r7','r8','r9','r10'].forEach(id=>{localStorage.removeItem('ffm5_'+id);const el=document.getElementById(id);if(el)el.value='';});
+}
+
+/* DECLARATION */
+(function(){
+  if(localStorage.getItem('ffm5_declaration')){
+    const d=localStorage.getItem('ffm5_declaration_date');
+    document.getElementById('decl-in').value='I ACCEPT';document.getElementById('decl-in').disabled=true;
+    document.querySelector('.decl-btn').classList.add('sealed');document.querySelector('.decl-btn').textContent='✦ Sealed';
+    document.getElementById('sealed-msg').classList.add('show');document.getElementById('sealed-date').textContent='Declared on '+d;
+  }
+})();
+function sealDecl(){
+  const inp=document.getElementById('decl-in');
+  if(inp.value.trim().toUpperCase()!=='I ACCEPT'){
+    inp.classList.add('error');inp.style.animation='shake .4s ease';
+    setTimeout(()=>{inp.classList.remove('error');inp.style.animation=''},600);return;
+  }
+  inp.classList.add('success');
+  const now=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  localStorage.setItem('ffm5_declaration','true');localStorage.setItem('ffm5_declaration_date',now);
+  setTimeout(()=>{
+    inp.disabled=true;document.querySelector('.decl-btn').classList.add('sealed');document.querySelector('.decl-btn').textContent='✦ Sealed';
+    document.getElementById('sealed-msg').classList.add('show');document.getElementById('sealed-date').textContent='Declared on '+now;
+    firePart();
+  },500);
+}
+function firePart(){
+  const canvas=document.getElementById('p-canvas'),ctx=canvas.getContext('2d');
+  canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;
+  const cx=canvas.width/2,cy=canvas.height/2,particles=[];
+  for(let i=0;i<90;i++){const a=Math.random()*Math.PI*2,sp=Math.random()*6+2;particles.push({x:cx,y:cy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,alpha:1,size:Math.random()*4+1,color:`hsl(${40+Math.random()*20},90%,${55+Math.random()*20}%)`})}
+  function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);let alive=false;particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.1;p.alpha-=.016;if(p.alpha>0)alive=true;ctx.globalAlpha=Math.max(0,p.alpha);ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=p.color;ctx.fill()});if(alive)requestAnimationFrame(anim);else ctx.clearRect(0,0,canvas.width,canvas.height);}
+  anim();
+}
+</script>
+</body>
+</html>

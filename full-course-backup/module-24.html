@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 24: Why This Module Isn't Optional | Financial Freedom Masterclass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    
+    :root {
+      --void: #030507; --deep: #060A12; --surface: rgba(255, 255, 255, .03); --surface2: rgba(255, 255, 255, .06);
+      --gold: #C9A84C; --gold-l: #E8C97A; --gold-d: rgba(201, 168, 76, .15); --gold-g: rgba(201, 168, 76, .06); --gold-b: rgba(201, 168, 76, .25);
+      --text: #EEF0F4; --muted: #7A8290; --muted2: #4A5260; --danger: #E84855; --success: #2ECC71; --cyan: #4FC3F7; --purple: #9B7FE8;
+      --border: rgba(255, 255, 255, .07); --r: 20px; --rp: 100px;
+    }
+    ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: var(--void); } ::-webkit-scrollbar-thumb { background: var(--gold-b); border-radius: 4px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--void); color: var(--text); font-family: 'Cormorant Garamond', serif; overflow-x: hidden; line-height: 1.7; }
+    .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: .08; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    main { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 28px 180px; }
+    @media(max-width:640px) { main { padding: 0 18px 180px; } }
+    .tag { font-family: 'Inter'; font-size: .65rem; letter-spacing: .3em; color: var(--gold); text-transform: uppercase; display: inline-block; margin-bottom: 14px; }
+    .sec-title { font-family: 'Cinzel', serif; font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 700; color: #fff; letter-spacing: .05em; margin-bottom: 1rem; line-height: 1.2; }
+    .body-text { font-size: 1.18rem; font-weight: 300; color: var(--text); margin-bottom: 1rem; line-height: 1.85; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 44px 48px; margin-bottom:24px;}
+    .sec-divider { display: flex; align-items: center; gap: 16px; margin: 80px 0 32px; }
+    .sec-divider::before, .sec-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .sec-divider span { font-family: 'Inter'; font-size: .6rem; letter-spacing: .25em; color: var(--gold); text-transform: uppercase; white-space: nowrap; }
+    .hero { min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 0 60px; }
+    .hero-eyebrow { font-family: 'Inter'; font-size: .68rem; letter-spacing: .35em; color: var(--gold); text-transform: uppercase; margin-bottom: 28px; }
+    .hero-title { font-family: 'Cinzel', serif; font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.1; color: #fff; margin-bottom: 24px; max-width:900px; }
+    .hero-title .g { color: var(--gold); font-style: italic; }
+    .hero-sub { font-size: 1.3rem; font-style: italic; color: var(--muted); max-width: 680px; margin: 0 auto 56px; font-weight: 300; }
+    
+    .journal-section { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
+    .journal-item { background: var(--deep); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: .3s; }
+    .journal-item:focus-within { border-color: var(--gold-b); }
+    .journal-q { padding: 24px 28px 16px; font-size: 1.1rem; font-style: italic; color: var(--text); line-height: 1.6; }
+    .journal-q strong { font-style: normal; font-family: 'Inter'; font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 8px; }
+    .journal-item textarea { width: 100%; padding: 16px 28px 24px; background: none; border: none; border-top: 1px solid var(--border); color: var(--text); font-family: 'Cormorant Garamond'; font-size: 1.05rem; line-height: 1.7; resize: vertical; min-height: 100px; outline: none; }
+    .journal-item textarea:focus { background: var(--surface); }
+    .journal-item textarea::placeholder { color: var(--muted2); font-style: italic; }
+    
+    .decl-box { text-align: center; padding: 80px 48px; border: 1px dashed var(--gold-b); border-radius: var(--r); background: radial-gradient(circle at 50% 0%, rgba(201,168,76,.06) 0%, transparent 65%); margin-top: 60px; }
+    .decl-text { font-size: clamp(1.2rem, 2.5vw, 1.7rem); font-style: italic; font-weight: 300; line-height: 1.65; color: var(--text); max-width: 680px; margin: 0 auto 40px; }
+    .decl-input-wrap { display: flex; gap: 12px; justify-content: center; max-width: 480px; margin: 0 auto; }
+    .decl-input { flex: 1; padding: 14px 20px; background: var(--void); border: 1px solid var(--gold-b); border-radius: var(--rp); color: var(--gold); font-family: 'Cinzel'; font-size: 1rem; text-align: center; outline: none; transition: .3s; }
+    .decl-input:focus { border-color: var(--gold); }
+    .decl-btn { padding: 14px 28px; border-radius: var(--rp); border: 1px solid var(--gold-b); background: none; color: var(--gold); font-family: 'Inter'; font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; cursor: pointer; transition: .3s; }
+    .decl-btn:hover { background: var(--gold); color: var(--void); }
+    .decl-hint { font-family: 'Inter'; font-size: .65rem; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; margin-top: 12px; }
+    .decl-sealed-msg { display: none; margin-top: 28px; } .decl-sealed-msg.show { display: block; }
+    
+    .whop-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; background: rgba(3,5,7,.95); border-top: 1px solid var(--border); backdrop-filter: blur(14px); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .wb-left { display: flex; align-items: center; gap: 16px; }
+    .wb-module { display: flex; flex-direction: column; }
+    .wb-m-label { font-family: 'Inter'; font-size: .6rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+    .wb-m-name { font-family: 'Cinzel'; font-size: .78rem; color: var(--text); letter-spacing: .05em; }
+    .wb-progress-wrap { display: flex; align-items: center; gap: 10px; }
+    .wb-p-label { font-family: 'Inter'; font-size: .62rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+    .wb-p-track { width: 120px; height: 3px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .wb-p-fill { height: 100%; background: var(--gold); width: 0%; transition: width .2s; border-radius: 3px; }
+    .whop-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: var(--rp); background: var(--gold); color: var(--void); font-family: 'Inter'; font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; border: none; text-decoration: none; transition: .3s; white-space: nowrap; }
+    .whop-btn:hover { background: #fff; transform: translateY(-1px); }
+
+    
+      .legacy-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin: 40px 0; }
+      .legacy-card { background: var(--deep); border: 1px solid var(--border); border-radius: var(--r); padding: 32px 40px; display: flex; align-items: center; gap: 32px; }
+      @media(max-width:768px) { .legacy-card { flex-direction: column; text-align: center; } }
+      .lc-icon { width: 80px; height: 80px; border-radius: 50%; background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 2rem; border: 1px solid var(--border); flex-shrink: 0; }
+      .lc-content { flex: 1; }
+      .lc-title { font-family: 'Cinzel'; font-size: 1.4rem; color: #fff; margin-bottom: 8px; }
+      .lc-desc { font-size: 1rem; color: var(--muted); line-height: 1.6; }
+      .lc-stat { font-family: 'Inter'; font-size: 0.75rem; letter-spacing: 0.05em; color: var(--gold); background: var(--gold-g); padding: 8px 12px; border-radius: 6px; display: inline-block; margin-top: 16px; border: 1px solid var(--gold-d); }
+    
+  </style>
+</head>
+<body>
+<div class="noise"></div>
+
+<div class="whop-bar">
+  <div class="wb-left">
+    <div class="wb-module">
+      <div class="wb-m-label">Currently Viewing</div>
+      <div class="wb-m-name">Module 24 · Why This Module Isn't Optional</div>
+    </div>
+    <div class="wb-progress-wrap">
+      <span class="wb-p-label">Progress</span>
+      <div class="wb-p-track"><div class="wb-p-fill" id="pfill"></div></div>
+    </div>
+  </div>
+  <div style="display:flex;gap:12px">
+    <a href="index.html" class="whop-btn" style="background:var(--surface);color:#fff;border:1px solid var(--border)">← Dashboard</a>
+    <a href="index.html" class="whop-btn">↩ Return to Course</a>
+  </div>
+</div>
+
+<main>
+  <section class="hero">
+    <p class="hero-eyebrow">Financial Freedom Masterclass · Module 24</p>
+    <h1 class="hero-title">Why This Module <br/><span class="g">Isn't Optional</span></h1>
+    <p class="hero-sub">Money habits are rarely solitary. They're absorbed, negotiated, and hidden inside a household. The health of your finances is inseparable from the health of your relationships.</p>
+  </section>
+<!-- LESSON BODY -->
+<div class="lesson-body-container" style="max-width: 800px; margin: 40px auto 60px; padding: 0 10px;">
+<div class="sec-divider sr"><span>Why This Module Isn't Optional</span></div>
+<p class="body-text sr">None of the work in this course holds up long if the people closest to you aren't part of it. Money habits are rarely solitary, they're absorbed, negotiated, and sometimes hidden inside a household, and the health of that household's finances is inseparable from the health of the relationships inside it. This lesson covers three things that are each, individually, easy to keep postponing indefinitely: honest conversations with a partner, the way children absorb financial behavior before they can even count, and the basic legal steps that determine what happens to everything you've built if you're no longer the one managing it.</p>
+<div class="sec-divider sr"><span>Talking to a Partner: What the Data Actually Shows</span></div>
+<p class="body-text sr">Financial secrecy is far more common than most people assume, and it's worth looking at the actual numbers rather than treating it as a rare or shameful edge case.</p>
+<p class="body-text sr">A national survey conducted by The Harris Poll on behalf of the National Endowment for Financial Education found that among U.S. adults who have ever combined finances with a partner, 43 percent admitted to having committed at least one act of financial deception, hiding a purchase, a bank account, a bill, or lying outright about debt, income, or spending. More recent surveys from Bankrate have found broadly consistent numbers, with roughly 40 to 42 percent of adults in committed, financially combined relationships admitting to keeping some kind of money secret from their partner, and notably higher rates among younger generations. In the same research, a meaningful share of respondents, close to 30 percent in some surveys, said they consider keeping financial secrets from a partner to be just as damaging to a relationship as physical infidelity, and a smaller but real share said they consider it worse.</p>
+<p class="body-text sr">The point of these numbers isn't to induce guilt. It's to normalize the conversation. If financial secrecy, in some form, touches something close to four in ten committed relationships, it isn't a rare moral failing confined to obviously troubled couples, it's an extremely common default that most households drift into simply by avoiding the topic rather than deliberately deciding to be transparent. The reasons people give for hiding financial information are rarely dramatic, embarrassment, a belief that some things should stay private, a wish to avoid a predictable argument. None of those reasons are evil. All of them compound quietly over time if they're never addressed directly.</p>
+<p class="body-text sr">The fix isn't a single dramatic, once-and-done conversation. It's a recurring, low-stakes one, a regular check-in where both people can see the same numbers, name the same goals, and raise a concern before it calcifies into resentment. If money conversations in your household currently happen only during a crisis, that pattern is worth changing on its own, independent of how much you currently have saved or how well you think your finances are managed.</p>
+<div class="sec-divider sr"><span>Teaching Children About Money: What the Research Actually Says, and What It Doesn't</span></div>
+<p class="body-text sr">You'll frequently see the claim, repeated almost word for word across parenting and financial media, that "children's money habits are set by age seven." The claim traces back to a real, specific piece of research: a 2013 review conducted by developmental psychologists David Whitebread and Sue Bingham at the University of Cambridge, commissioned by the UK's Money Advice Service, examining how young children develop the cognitive building blocks behind financial behavior.</p>
+<p class="body-text sr">It's worth being precise about what that research actually found, because the popularized version oversells it slightly. The study's core finding was that by around age seven, most children have developed the basic cognitive concepts underlying financial behavior, understanding that money has value independent of the physical size of a coin, grasping the concept of exchange, and beginning to develop the capacity to plan ahead and delay gratification. The researchers argued that these are the "habits of mind" that later financial decision-making is built on top of, and that they form earlier, and more durably, than most parents assume. It is not, technically, a claim that a child's specific financial fate is permanently locked in by age seven, and change later in life is absolutely possible. But it is a well-supported claim that the foundational cognitive architecture, how a person approaches planning, patience, and the basic concept of value, is substantially in place far earlier than most people think to start teaching it deliberately.</p>
+<p class="body-text sr">Separately, research published in the Journal of Family and Economic Issues has found that parents are consistently the single largest influence on their children's financial attitudes and behavior, more than schools, more than peers, transmitted largely through observation rather than direct instruction. Children notice, long before they understand the underlying concepts, whether money is discussed calmly or anxiously in their household, whether saving is ever modeled or only spending is, and whether they're ever handed a real, if small, financial decision of their own to make.</p>
+<p class="body-text sr">None of this requires a formal curriculum. An allowance with some portion deliberately set aside for saving, the chance to make a small spending mistake and talk through it calmly afterward rather than being lectured, and honest, age-appropriate answers when a child asks what something costs or why you said no to a purchase, do more over time than any single sit-down lecture about money ever will.</p>
+<div class="sec-divider sr"><span>The Basics of a Will and Estate Plan</span></div>
+<p class="body-text sr">This is the piece most people in their forties, fifties, and beyond keep postponing, often for years past the point where it's genuinely inconvenient to keep avoiding, and the data on this is stark.</p>
+<p class="body-text sr">According to Caring.com's 2025 Wills and Estate Planning survey, only 24 percent of American adults currently have a will, down sharply from 33 percent as recently as 2022. Among adults who don't have one, the single most common reason given, cited by roughly 43 percent of respondents, is simply that they "haven't gotten around to it," not cost, not complexity, not lack of assets, just ordinary procrastination applied to an uncomfortable topic. Separate estimates suggest that somewhere between half and seventy percent of Americans will ultimately die without a will in place at all, leaving a state's default inheritance laws, rather than their own wishes, to determine who receives what and who cares for any minor children.</p>
+<p class="body-text sr">A will doesn't need to be complicated to be worth having. At minimum, it should name who receives what, who would care for any dependents, and who is legally responsible for carrying out those instructions. Beneficiary designations on retirement accounts, life insurance policies, and other financial accounts matter just as much as the will itself, and are one of the most commonly overlooked pieces of the process, people update their will after a major life change and forget entirely that the beneficiary form sitting quietly behind their 401(k) or insurance policy still names an ex-spouse or an outdated arrangement from a decade earlier. None of this needs to be perfect on the first attempt. It needs to exist, and it needs to be revisited every few years or after any major life change, a marriage, a divorce, a new child, a significant change in assets.</p>
+<div class="sec-divider sr"><span>The Thread Connecting All Three</span></div>
+<p class="body-text sr">The theme underneath talking to a partner, teaching children, and getting a will in place is the same one that's run through this entire course: clarity beats good intentions, every time, without exception. A vague intention to "talk about money eventually" or "sort out a will someday" carries the exact same structural risk as a vague financial goal with no number and no date attached to it. It rarely survives contact with a genuinely busy life, and the cost of that avoidance isn't paid by you, it's paid later, by the people you were trying to protect.</p>
+<div class="sec-divider sr"><span>Reflection: Legacy and Family Alignment</span></div>
+<p class="body-text sr">1. How often does money actually get discussed openly in your household, and who tends to avoid the topic when it comes up?</p>
+<p class="body-text sr">2. Is there anything financial you've never fully disclosed to your partner, or that they haven't disclosed to you? What, specifically, would it take to change that?</p>
+<p class="body-text sr">3. What did you personally absorb about money from watching your own parents handle it, and which of those exact lessons are you now passing on to your own children without meaning to?</p>
+<p class="body-text sr">4. If you have children, what is one real, if small, financial decision you could let them make this year?</p>
+<p class="body-text sr">5. Do you currently have a will? If not, what is the actual, honest reason you've put it off, beyond "I haven't gotten around to it"?</p>
+<p class="body-text sr">6. If something happened to you tomorrow, would the people closest to you actually know where to find your accounts, policies, and passwords?</p>
+<p class="body-text sr">7. Are your beneficiary designations on retirement and insurance accounts current, or have they quietly gone stale behind an outdated will or none at all?</p>
+<p class="body-text sr">8. Who would you want making decisions on your behalf if you couldn't make them yourself, and have you ever told that person directly, in words, that you want that role for them?</p>
+<p class="body-text sr">9. What's one specific money conversation you've been avoiding having with someone in your life, and what do you think has actually kept you from starting it?</p>
+<p class="body-text sr">10. Write down the exact date you'll have that conversation, or take that estate-planning step, by. Not "soon." A date.</p>
+
+</div>
+<!-- END LESSON BODY -->
+
+  <section>
+    
+      <div class="legacy-grid">
+        <div class="legacy-card">
+          <div class="lc-icon">🗣️</div>
+          <div class="lc-content">
+            <div class="lc-title">Talking to a Partner</div>
+            <div class="lc-desc">Financial secrecy is incredibly common. The fix isn't one dramatic conversation. It's a recurring, low-stakes check-in where both people can see the same numbers and name the same goals before resentments calcify.</div>
+            <div class="lc-stat">~40% of adults in committed relationships admit to keeping a financial secret.</div>
+          </div>
+        </div>
+        
+        <div class="legacy-card">
+          <div class="lc-icon">🌱</div>
+          <div class="lc-content">
+            <div class="lc-title">Teaching Children</div>
+            <div class="lc-desc">Parents are consistently the single largest influence on children's financial attitudes, transmitted through observation. They notice if money is discussed calmly or anxiously long before they understand the math.</div>
+            <div class="lc-stat">Basic cognitive "habits of mind" for money are largely formed by age 7.</div>
+          </div>
+        </div>
+
+        <div class="legacy-card">
+          <div class="lc-icon">📜</div>
+          <div class="lc-content">
+            <div class="lc-title">The Basics of a Will</div>
+            <div class="lc-desc">A will doesn't need to be perfect. It just needs to name who receives what, who cares for dependents, and who executes it. Don't forget beneficiary designations on retirement accounts—they override the will.</div>
+            <div class="lc-stat">Only 24% of American adults currently have a will.</div>
+          </div>
+        </div>
+      </div>
+    
+  </section>
+
+  <div class="sec-divider"><span>Step 23 Integration</span></div>
+
+  <section>
+    <h2 class="sec-title" style="text-align:center">Plan Your Own Approach</h2>
+    <div class="journal-section">
+      
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 01</strong>How often does money actually get discussed openly in your household, and who tends to avoid the topic?</div>
+        <textarea id="j24_1" placeholder="Write your reflection here..." oninput="saveJ(1)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 02</strong>Is there anything financial you've never fully disclosed to your partner? What would it take to change that?</div>
+        <textarea id="j24_2" placeholder="Write your reflection here..." oninput="saveJ(2)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 03</strong>What did you personally absorb about money from watching your own parents, and what are you passing on to your children?</div>
+        <textarea id="j24_3" placeholder="Write your reflection here..." oninput="saveJ(3)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 04</strong>If you have children, what is one real, small financial decision you could let them make this year?</div>
+        <textarea id="j24_4" placeholder="Write your reflection here..." oninput="saveJ(4)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 05</strong>Do you currently have a will? If not, what is the actual, honest reason you've put it off?</div>
+        <textarea id="j24_5" placeholder="Write your reflection here..." oninput="saveJ(5)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 06</strong>If something happened to you tomorrow, would the people closest to you actually know where to find your accounts and passwords?</div>
+        <textarea id="j24_6" placeholder="Write your reflection here..." oninput="saveJ(6)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 07</strong>Are your beneficiary designations on retirement and insurance accounts current, or have they gone stale?</div>
+        <textarea id="j24_7" placeholder="Write your reflection here..." oninput="saveJ(7)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 08</strong>Who would you want making decisions on your behalf if you couldn't, and have you ever told them directly?</div>
+        <textarea id="j24_8" placeholder="Write your reflection here..." oninput="saveJ(8)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 09</strong>What's one specific money conversation you've been avoiding having with someone in your life?</div>
+        <textarea id="j24_9" placeholder="Write your reflection here..." oninput="saveJ(9)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 10</strong>Write down the exact date you'll have that conversation, or take that estate-planning step, by. A date, not "soon."</div>
+        <textarea id="j24_10" placeholder="Write your reflection here..." oninput="saveJ(10)"></textarea>
+      </div>
+    </div>
+
+    <div class="decl-box">
+      <p class="tag" style="margin-bottom:16px;letter-spacing:0.2em">SEAL YOUR COMMITMENT</p>
+      <p class="decl-text">"I will not let avoidance endanger the people I love. Clarity beats good intentions, every time."</p>
+      <div class="decl-input-wrap" id="d-wrap">
+        <input type="text" class="decl-input" id="d-input" placeholder="Type &quot;I ACCEPT&quot; to seal this" />
+        <button class="decl-btn" id="d-btn" onclick="seal()">SEAL</button>
+      </div>
+      <p class="decl-hint" id="d-hint">TYPE "I ACCEPT" AND PRESS SEAL</p>
+      <div class="decl-sealed-msg" id="d-msg">
+        <p style="font-family:'Cinzel';color:var(--gold);font-size:.9rem;letter-spacing:.1em">✓ DECLARATION SEALED</p>
+        <div id="d-date" style="font-family:'Inter';font-size:.65rem;color:var(--muted);margin-top:8px;letter-spacing:.1em"></div>
+      </div>
+    </div>
+  </section>
+
+
+<div style="display:flex;justify-content:center;align-items:center;margin-top:60px;margin-bottom:20px;flex-wrap:wrap;gap:16px" class="sr">
+  <a href="module-23.html" class="whop-btn" style="text-decoration:none; background:transparent; color:var(--gold); border:1px solid var(--gold);">&#8592; Previous</a>
+  <a href="index.html" class="whop-btn" style="text-decoration:none;">&#8617; Return to Course</a>
+  <a href="module-25.html" class="whop-btn" style="text-decoration:none; background:transparent; color:var(--gold); border:1px solid var(--gold);">Next Module &#8594;</a>
+</div>
+</main>
+
+<script>
+
+function saveJ(n){
+  const v = document.getElementById('j24_'+n).value;
+  localStorage.setItem('ffm24_r'+n, v);
+}
+
+function loadJ(){
+  for(let i=1;i<=10;i++){
+    const saved = localStorage.getItem('ffm24_r'+i);
+    if(saved) document.getElementById('j24_'+i).value = saved;
+  }
+  const dec = localStorage.getItem('ffm24_declaration');
+  if(dec){
+    document.getElementById('d-wrap').style.display='none';
+    const hint = document.getElementById('d-hint'); if(hint) hint.style.display='none';
+    document.getElementById('d-msg').classList.add('show');
+    document.getElementById('d-date').textContent = dec;
+  }
+}
+
+function seal(){
+  const input = document.getElementById('d-input');
+  if(input.value.trim().toUpperCase() !== 'I ACCEPT'){
+    input.style.borderColor = 'var(--danger)';
+    setTimeout(() => input.style.borderColor = '', 500);
+    return;
+  }
+  const dateStr = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  const sig = 'Declared on ' + dateStr;
+  localStorage.setItem('ffm24_declaration', sig);
+  document.getElementById('d-wrap').style.display='none';
+  const hint = document.getElementById('d-hint'); if(hint) hint.style.display='none';
+  document.getElementById('d-msg').classList.add('show');
+  document.getElementById('d-date').textContent = sig;
+}
+
+window.addEventListener('scroll', () => {
+  const pfill = document.getElementById('pfill');
+  if(pfill) {
+    let scrollPct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+    pfill.style.width = scrollPct + '%';
+  }
+});
+
+window.addEventListener('DOMContentLoaded', loadJ);
+</script>
+</body>
+</html>

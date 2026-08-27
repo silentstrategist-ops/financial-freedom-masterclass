@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 1: The Foundation of Financial Freedom</title>
+  <meta name="description" content="An interactive journey through the foundations of financial freedom — defining rich vs. wealth vs. true freedom, the 4 seasons of financial life, and your personal fragility test."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* ═══════════════════════════════════════════════
+       ROOT TOKENS
+    ═══════════════════════════════════════════════ */
+    :root {
+      --void: #030507;
+      --deep: #080C12;
+      --surface: rgba(255,255,255,0.03);
+      --surface-2: rgba(255,255,255,0.06);
+      --gold: #C9A84C;
+      --gold-light: #E8C97A;
+      --gold-d: rgba(201,168,76,0.15);
+      --gold-g: rgba(201,168,76,0.06);
+      --gold-border: rgba(201,168,76,0.25);
+      --text: #EEF0F4;
+      --muted: #7A8290;
+      --danger: #E84855;
+      --success: #2ECC71;
+      --cyan: #4FC3F7;
+      --border: rgba(255,255,255,0.07);
+      --r: 20px;
+      --rp: 100px;
+    }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--void); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 3px; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--void);
+      color: var(--text);
+      font-family: 'Cormorant Garamond', serif;
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    /* ═══════════════════════════════════════════════
+       NOISE + AMBIENT CANVAS
+    ═══════════════════════════════════════════════ */
+    .noise {
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none; z-index: 9999;
+      opacity: 0.08; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    #ambient-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0.3; }
+
+    /* ═══════════════════════════════════════════════
+       LAYOUT
+    ═══════════════════════════════════════════════ */
+    main { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 28px 180px; }
+
+    /* ═══════════════════════════════════════════════
+       SCROLL REVEAL
+    ═══════════════════════════════════════════════ */
+    .sr { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+    .sr.visible { opacity: 1; transform: translateY(0); }
+    .sr-delay-1 { transition-delay: 0.1s; }
+    .sr-delay-2 { transition-delay: 0.2s; }
+    .sr-delay-3 { transition-delay: 0.3s; }
+    .sr-delay-4 { transition-delay: 0.4s; }
+    .sr-delay-5 { transition-delay: 0.5s; }
+
+    /* ═══════════════════════════════════════════════
+       TYPOGRAPHY
+    ═══════════════════════════════════════════════ */
+    .label-tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      opacity: 0.85;
+      display: inline-block;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .gold-title { color: var(--gold); }
+    .body-text { font-size: 1.18rem; font-weight: 300; color: var(--text); margin-bottom: 1rem; line-height: 1.85; }
+    .body-text.lg { font-size: 1.35rem; }
+    .muted { color: var(--muted); }
+    .pipe-quote {
+      padding: 16px 24px;
+      border-left: 2px solid var(--gold);
+      font-style: italic;
+      font-size: 1.25rem;
+      margin: 28px 0;
+      color: var(--text);
+      background: var(--gold-g);
+      border-radius: 0 10px 10px 0;
+    }
+    .em { color: var(--gold); font-style: italic; }
+    .cn { color: var(--cyan); }
+
+    /* ═══════════════════════════════════════════════
+       SECTION HEADERS
+    ═══════════════════════════════════════════════ */
+    .sec-head { margin: 80px 0 32px; }
+    .sec-divider {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
+    }
+    .sec-divider::before, .sec-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .sec-divider span {
+      font-family: 'Inter'; font-size: 0.6rem; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; white-space: nowrap;
+    }
+
+    /* ═══════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 80px 0 60px;
+      position: relative;
+    }
+    .hero-eyebrow {
+      font-family: 'Inter'; font-size: 0.68rem;
+      letter-spacing: 0.35em; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 28px;
+      opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+    }
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: #fff;
+      margin-bottom: 24px;
+      opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
+    }
+    .hero-title .gold-word { color: var(--gold); }
+    .hero-sub {
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 48px;
+      font-weight: 300;
+      opacity: 0; animation: fadeUp 0.9s 0.7s forwards;
+    }
+    .hero-scroll-hint {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      opacity: 0; animation: fadeIn 1s 1.5s forwards;
+      margin-top: 32px;
+    }
+    .hero-scroll-hint span { font-family: 'Inter'; font-size: 0.6rem; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; }
+    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 2s infinite; }
+
+    /* Stat bar above hero scroll */
+    .hero-stats-strip {
+      display: flex; gap: 48px; justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.9s 1.1s forwards;
+      margin-bottom: 20px;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat .hs-num { font-family: 'Cinzel'; font-size: 2.2rem; color: var(--gold); font-weight: 700; line-height: 1; }
+    .hero-stat .hs-label { font-family: 'Inter'; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--muted); margin-top: 6px; text-transform: uppercase; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes scrollPulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+    @keyframes pulse-gold { 0%,100% { box-shadow: 0 0 20px rgba(201,168,76,0.1); } 50% { box-shadow: 0 0 60px rgba(201,168,76,0.25); } }
+    @keyframes popIn { from { opacity:0; transform:translate(-50%,-50%) scale(.94); } to { opacity:1; transform:translate(-50%,-50%) scale(1); } }
+    @keyframes countUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes shimmer {
+      0% { background-position: -400px 0; }
+      100% { background-position: 400px 0; }
+    }
+
+    /* ═══════════════════════════════════════════════
+       FRAGILITY TEST (CALCULATOR)
+    ═══════════════════════════════════════════════ */
+    .fragility-box {
+      background: var(--deep);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--r);
+      overflow: hidden;
+      animation: pulse-gold 6s ease-in-out infinite;
+    }
+    .fragility-header {
+      background: linear-gradient(135deg, rgba(201,168,76,0.12) 0%, transparent 100%);
+      padding: 44px 48px 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .fragility-body { padding: 44px 48px; }
+    .input-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;
+    }
+    @media(max-width:640px) { .input-row { grid-template-columns: 1fr; } }
+    .input-group { display: flex; flex-direction: column; gap: 8px; }
+    .input-group label {
+      font-family: 'Inter'; font-size: 0.72rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .input-group .currency-wrap {
+      position: relative; display: flex; align-items: center;
+    }
+    .input-group .currency-symbol {
+      position: absolute; left: 16px;
+      font-family: 'Inter'; font-size: 1rem; color: var(--gold); font-weight: 600;
+    }
+    .input-group input {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px 14px 36px;
+      color: var(--text);
+      font-size: 1.1rem;
+      font-family: 'Inter';
+      transition: border-color 0.3s;
+      outline: none;
+    }
+    .input-group input:focus { border-color: var(--gold-border); background: rgba(201,168,76,0.04); }
+    .input-group input::placeholder { color: var(--muted); font-size: 0.9rem; }
+
+    .fragility-result {
+      margin-top: 32px;
+      padding: 36px 40px;
+      border-radius: var(--r);
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--border);
+      text-align: center;
+      transition: all 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    .fragility-result.danger { border-color: rgba(232,72,85,0.4); background: rgba(232,72,85,0.04); }
+    .fragility-result.warning { border-color: rgba(255,165,0,0.4); background: rgba(255,165,0,0.04); }
+    .fragility-result.safe { border-color: rgba(46,204,113,0.4); background: rgba(46,204,113,0.04); }
+    .fragility-result.free { border-color: var(--gold-border); background: var(--gold-g); }
+
+    .result-number { font-family: 'Cinzel'; font-size: 4rem; font-weight: 900; line-height: 1; margin-bottom: 8px; }
+    .result-number.danger { color: var(--danger); }
+    .result-number.warning { color: orange; }
+    .result-number.safe { color: var(--success); }
+    .result-number.free { color: var(--gold); }
+    .result-label { font-family: 'Inter'; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; }
+    .result-verdict { font-size: 1.1rem; font-style: italic; color: var(--muted); line-height: 1.6; }
+
+    .wealth-bar-track { width: 100%; height: 8px; background: rgba(255,255,255,0.06); border-radius: 8px; overflow: hidden; margin: 24px 0 10px; }
+    .wealth-bar-fill {
+      height: 100%; border-radius: 8px; width: 0%;
+      transition: width 1.2s cubic-bezier(0.16,1,0.3,1), background 0.8s;
+    }
+    .wealth-bar-markers {
+      display: flex; justify-content: space-between;
+      font-family: 'Inter'; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em;
+    }
+
+    /* ═══════════════════════════════════════════════
+       DEFINITIONS: RICH vs WEALTH vs FREEDOM
+    ═══════════════════════════════════════════════ */
+    .def-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 24px; }
+    .def-card {
+      padding: 40px 36px;
+      border-radius: var(--r);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .def-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      transition: opacity 0.3s;
+    }
+    .def-card.rich::before { background: linear-gradient(90deg, #888, #aaa); }
+    .def-card.wealthy::before { background: linear-gradient(90deg, var(--cyan), #3a9bd5); }
+    .def-card.free::before { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+    .def-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    .def-card.rich:hover { border-color: rgba(170,170,170,0.3); }
+    .def-card.wealthy:hover { border-color: rgba(79,195,247,0.3); }
+    .def-card.free:hover { border-color: var(--gold-border); box-shadow: 0 20px 60px rgba(201,168,76,0.1); }
+
+    .def-icon { font-size: 2rem; margin-bottom: 20px; display: block; }
+    .def-badge {
+      font-family: 'Inter'; font-size: 0.6rem; letter-spacing: 0.25em;
+      text-transform: uppercase; margin-bottom: 12px; display: block;
+    }
+    .def-card.rich .def-badge { color: #aaa; }
+    .def-card.wealthy .def-badge { color: var(--cyan); }
+    .def-card.free .def-badge { color: var(--gold); }
+    .def-title { font-family: 'Cinzel'; font-size: 1.2rem; margin-bottom: 16px; color: #fff; }
+    .def-body { font-size: 1.05rem; color: var(--muted); line-height: 1.7; }
+    .def-formula {
+      margin-top: 20px; padding: 14px 18px;
+      border-radius: 10px;
+      font-family: 'Inter'; font-size: 0.82rem;
+      font-weight: 500; line-height: 1.5;
+    }
+    .def-card.rich .def-formula { background: rgba(150,150,150,0.06); color: #aaa; border: 1px solid rgba(150,150,150,0.15); }
+    .def-card.wealthy .def-formula { background: rgba(79,195,247,0.05); color: var(--cyan); border: 1px solid rgba(79,195,247,0.15); }
+    .def-card.free .def-formula { background: var(--gold-g); color: var(--gold); border: 1px solid var(--gold-d); }
+    .def-trap {
+      margin-top: 14px; padding: 10px 14px;
+      border-radius: 8px;
+      font-family: 'Inter'; font-size: 0.75rem; color: var(--danger);
+      background: rgba(232,72,85,0.06); border: 1px solid rgba(232,72,85,0.15);
+    }
+    .def-trap strong { display: block; margin-bottom: 2px; letter-spacing: 0.05em; }
+
+    /* ═══════════════════════════════════════════════
+       4 SEASONS TIMELINE
+    ═══════════════════════════════════════════════ */
+    .seasons-outer { position: relative; }
+    .seasons-track {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; margin-bottom: 32px; position: relative;
+    }
+    .seasons-track::before {
+      content: '';
+      position: absolute; top: 48px; left: 12.5%; right: 12.5%;
+      height: 2px;
+      background: linear-gradient(90deg, #333, var(--gold), var(--gold-light), #555);
+      z-index: 0;
+    }
+    @media(max-width:700px) {
+      .seasons-track { grid-template-columns: 1fr 1fr; }
+      .seasons-track::before { display: none; }
+    }
+    .season-btn {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 20px 10px; cursor: pointer;
+      position: relative; z-index: 1;
+      background: none; border: none;
+      transition: all 0.3s;
+    }
+    .season-dot {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--void);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .season-btn.active .season-dot, .season-btn:hover .season-dot {
+      transform: scale(1.15);
+    }
+    .season-btn[data-s="morning"].active .season-dot { border-color: #FFA94D; background: rgba(255,169,77,0.12); box-shadow: 0 0 20px rgba(255,169,77,0.3); }
+    .season-btn[data-s="noon"].active .season-dot { border-color: var(--gold); background: var(--gold-g); box-shadow: 0 0 20px rgba(201,168,76,0.35); }
+    .season-btn[data-s="afternoon"].active .season-dot { border-color: #FF8A65; background: rgba(255,138,101,0.1); box-shadow: 0 0 20px rgba(255,138,101,0.3); }
+    .season-btn[data-s="evening"].active .season-dot { border-color: #9575CD; background: rgba(149,117,205,0.1); box-shadow: 0 0 20px rgba(149,117,205,0.3); }
+    .season-label { font-family: 'Cinzel'; font-size: 0.72rem; color: var(--muted); text-align: center; letter-spacing: 0.08em; transition: color 0.3s; }
+    .season-age { font-family: 'Inter'; font-size: 0.6rem; color: var(--muted); opacity: 0.6; margin-top: 4px; }
+    .season-btn.active .season-label { color: var(--text); }
+
+    .season-detail {
+      background: var(--deep);
+      border-radius: var(--r);
+      overflow: hidden;
+      display: none;
+      animation: popIn 0.4s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    .season-detail.show { display: block; }
+    @keyframes popIn { from { opacity: 0; transform: translateY(-10px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    .season-detail-inner { padding: 44px 48px; }
+    @media(max-width:640px) { .season-detail-inner { padding: 28px 24px; } }
+    .season-detail-header {
+      display: flex; align-items: flex-start; gap: 24px;
+      margin-bottom: 28px; padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .season-detail-icon { font-size: 2.5rem; flex-shrink: 0; }
+    .season-detail-meta .sd-age { font-family: 'Inter'; font-size: 0.68rem; letter-spacing: 0.2em; margin-bottom: 8px; text-transform: uppercase; }
+    .season-detail-meta .sd-title { font-family: 'Cinzel'; font-size: 1.5rem; color: #fff; }
+    .season-detail-meta .sd-subtitle { font-size: 1rem; color: var(--muted); font-style: italic; margin-top: 4px; }
+    .season-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    @media(max-width:640px) { .season-columns { grid-template-columns: 1fr; } }
+    .season-col h4 { font-family: 'Inter'; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 14px; }
+    .season-col.goal h4 { color: var(--success); }
+    .season-col.mistake h4 { color: var(--danger); }
+    .season-col p { font-size: 1.05rem; color: var(--muted); line-height: 1.7; }
+    .season-col .mistake-box {
+      padding: 16px 20px;
+      background: rgba(232,72,85,0.05);
+      border: 1px solid rgba(232,72,85,0.15);
+      border-radius: 10px;
+      font-size: 1.05rem; color: rgba(255,120,130,0.9); line-height: 1.7;
+    }
+
+    /* Where are you marker */
+    .you-are-here { display: flex; gap: 8px; margin-top: 28px; flex-wrap: wrap; }
+    .yah-label { font-family: 'Inter'; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; align-self: center; }
+    .yah-btn {
+      font-family: 'Inter'; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 7px 14px; border-radius: var(--rp);
+      border: 1px solid var(--border); background: none; color: var(--muted);
+      cursor: pointer; transition: all 0.3s;
+    }
+    .yah-btn:hover, .yah-btn.active { border-color: var(--gold-border); color: var(--gold); background: var(--gold-g); }
+
+    /* ═══════════════════════════════════════════════
+       STAT COUNTERS
+    ═══════════════════════════════════════════════ */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 20px; }
+    .stat-card {
+      padding: 36px 28px; border-radius: var(--r);
+      border: 1px solid var(--border); background: var(--surface);
+      text-align: center; position: relative; overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .stat-card:hover { transform: translateY(-4px); border-color: var(--gold-border); }
+    .stat-card .stat-num {
+      font-family: 'Cinzel'; font-size: 3rem; font-weight: 900; line-height: 1;
+      color: var(--gold); margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-card .stat-desc { font-size: 1rem; color: var(--muted); line-height: 1.6; font-style: italic; }
+    .stat-card .stat-source { font-family: 'Inter'; font-size: 0.58rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.2); margin-top: 14px; text-transform: uppercase; }
+
+    /* ═══════════════════════════════════════════════
+       REFLECTION JOURNAL
+    ═══════════════════════════════════════════════ */
+    .journal-section { display: flex; flex-direction: column; gap: 20px; }
+    .journal-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .journal-item:focus-within { border-color: var(--gold-border); }
+    .journal-q {
+      padding: 24px 28px 16px;
+      font-size: 1.1rem; font-style: italic; color: var(--text); line-height: 1.6;
+    }
+    .journal-q strong { font-style: normal; font-family: 'Inter'; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 8px; }
+    .journal-item textarea {
+      width: 100%; padding: 16px 28px 24px;
+      background: none; border: none; border-top: 1px solid var(--border);
+      color: var(--text); font-family: 'Cormorant Garamond'; font-size: 1.05rem;
+      line-height: 1.7; resize: vertical; min-height: 100px;
+      outline: none; transition: background 0.3s;
+    }
+    .journal-item textarea:focus { background: rgba(201,168,76,0.02); }
+    .journal-item textarea::placeholder { color: var(--muted); font-style: italic; }
+    .journal-saved-indicator {
+      font-family: 'Inter'; font-size: 0.6rem; letter-spacing: 0.1em;
+      color: var(--success); padding: 6px 28px;
+      display: none; text-transform: uppercase;
+    }
+    .journal-saved-indicator.show { display: block; }
+
+    /* Journal Controls */
+    .journal-controls {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 16px; flex-wrap: wrap; gap: 12px;
+    }
+    .jc-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: var(--rp);
+      font-family: 'Inter'; font-size: 0.7rem; letter-spacing: 0.12em;
+      text-transform: uppercase; cursor: pointer; transition: all 0.3s;
+      border: 1px solid var(--border); background: none;
+    }
+    .jc-export { color: var(--gold); border-color: var(--gold-border); }
+    .jc-export:hover { background: var(--gold); color: var(--void); }
+    .jc-clear { color: var(--muted); }
+    .jc-clear:hover { color: var(--danger); border-color: rgba(232,72,85,0.3); background: rgba(232,72,85,0.05); }
+
+    /* ═══════════════════════════════════════════════
+       DECLARATION
+    ═══════════════════════════════════════════════ */
+    .declaration-box {
+      text-align: center;
+      padding: 80px 48px;
+      border: 1px dashed var(--gold-border);
+      border-radius: var(--r);
+      background: radial-gradient(circle at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 65%);
+      position: relative; overflow: hidden;
+    }
+    .declaration-text {
+      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+      font-style: italic; font-weight: 300; line-height: 1.65; color: var(--text);
+      max-width: 680px; margin: 0 auto 40px;
+    }
+    .declaration-input-wrap {
+      display: flex; gap: 12px; justify-content: center; max-width: 480px; margin: 0 auto 16px;
+    }
+    .declaration-input {
+      flex: 1; padding: 14px 20px;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--gold-border);
+      border-radius: var(--rp); color: var(--gold);
+      font-family: 'Cinzel'; font-size: 1rem; letter-spacing: 0.1em;
+      outline: none; text-transform: uppercase; text-align: center;
+      transition: all 0.3s;
+    }
+    .declaration-input:focus { background: var(--gold-g); }
+    .declaration-input.error { border-color: var(--danger) !important; box-shadow: 0 0 0 3px rgba(232,72,85,0.15) !important; }
+    .declaration-input.success { border-color: var(--success) !important; box-shadow: 0 0 20px rgba(46,204,113,0.3) !important; color: var(--success) !important; }
+    .declaration-input::placeholder { color: var(--muted); font-family: 'Inter'; font-size: 0.75rem; text-transform: none; letter-spacing: 0.05em; }
+    .declaration-btn {
+      padding: 14px 28px; border-radius: var(--rp);
+      border: 1px solid var(--gold-border); background: none;
+      color: var(--gold); font-family: 'Inter'; font-size: 0.72rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      cursor: pointer; transition: all 0.3s;
+      white-space: nowrap;
+    }
+    .declaration-btn:hover, .declaration-btn.sealed { background: var(--gold); color: var(--void); }
+    .declaration-hint { font-family: 'Inter'; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; margin-top: 8px; }
+    .declaration-sealed-msg { display: none; margin-top: 28px; }
+    .declaration-sealed-msg.show { display: block; animation: fadeUp 0.6s ease forwards; }
+    .declaration-sealed-msg p { font-family: 'Cinzel'; font-size: 0.9rem; color: var(--gold); letter-spacing: 0.1em; }
+    .declaration-sealed-msg .sealed-date { font-family: 'Inter'; font-size: 0.65rem; color: var(--muted); margin-top: 8px; letter-spacing: 0.1em; }
+
+    /* Particle canvas for declaration */
+    #particle-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+
+    /* ═══════════════════════════════════════════════
+       WHOP RETURN BUTTON (fixed bottom)
+    ═══════════════════════════════════════════════ */
+    .whop-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(5,8,18,0.95);
+      border-top: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+      padding: 14px 28px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .whop-bar-left { display: flex; align-items: center; gap: 16px; }
+    .whop-progress-wrap { display: flex; align-items: center; gap: 10px; }
+    .whop-progress-label { font-family: 'Inter'; font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
+    .whop-progress-track { width: 120px; height: 3px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .whop-progress-fill { height: 100%; background: var(--gold); width: 0%; transition: width 0.5s; border-radius: 3px; }
+    .whop-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px; border-radius: var(--rp);
+      background: var(--gold); color: var(--void);
+      font-family: 'Inter'; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      cursor: pointer; border: none; text-decoration: none;
+      transition: all 0.3s; white-space: nowrap;
+    }
+    .whop-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .whop-module-label { font-family: 'Inter'; font-size: 0.62rem; color: var(--muted); letter-spacing: 0.05em; }
+    .whop-module-name { font-family: 'Cinzel'; font-size: 0.78rem; color: var(--text); letter-spacing: 0.05em; }
+
+    /* ═══════════════════════════════════════════════
+       CARD UTILITY
+    ═══════════════════════════════════════════════ */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 44px 48px; backdrop-filter: blur(10px);
+    }
+    .card.gold-l { border-left: 3px solid var(--gold); }
+    .card.danger-l { border-left: 3px solid var(--danger); }
+    @media(max-width:640px) { .card { padding: 28px 24px; } main { padding: 0 18px 180px; } }
+
+    /* ═══════════════════════════════════════════════
+       MODULE NAV
+    ═══════════════════════════════════════════════ */
+    .module-nav { display: flex; justify-content: flex-end; padding: 24px 0 0; }
+    .nav-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: var(--rp);
+      border: 1px solid var(--border); background: none;
+      color: var(--muted); font-family: 'Inter'; font-size: 0.7rem;
+      letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+      transition: all 0.3s;
+    }
+    .nav-btn:hover { border-color: var(--gold-border); color: var(--gold); }
+  </style>
+</head>
+<body>
+<div class="noise"></div>
+<canvas id="ambient-canvas"></canvas>
+
+<!-- WHOP RETURN BAR (fixed bottom) -->
+<div class="whop-bar">
+  <div class="whop-bar-left">
+    <div>
+      <div class="whop-module-label">Currently Viewing</div>
+      <div class="whop-module-name">Module 1 · The Foundation</div>
+    </div>
+    <div class="whop-progress-wrap">
+      <span class="whop-progress-label">Progress</span>
+      <div class="whop-progress-track"><div class="whop-progress-fill" id="progress-fill"></div></div>
+    </div>
+  </div>
+  <a href="https://whop.com/silent-strategist/exp_OQfyAgJkYyIvH9/app/courses/cors_fGZBpPUYQtguD/lessons/lesn_OWT4tQRFfedph/" class="whop-btn" id="whop-return-btn">
+    ↩ Return to Course
+  </a>
+</div>
+
+<main>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 1: HERO
+  ══════════════════════════════════════════ -->
+  <section class="hero">
+    <p class="hero-eyebrow">Financial Freedom Masterclass · Module 1</p>
+    <h1 class="hero-title">The Foundation<br/>of <span class="gold-word">Financial</span><br/>Freedom</h1>
+    <p class="hero-sub">Before you can build freedom, you must understand exactly what it is — and measure how far you are from it today.</p>
+
+    <div class="hero-stats-strip">
+      <div class="hero-stat">
+        <div class="hs-num" data-target="65" data-suffix="%">0%</div>
+        <div class="hs-label">Adults stressed by money</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hs-num" data-target="37" data-suffix="%">0%</div>
+        <div class="hs-label">Can't cover an emergency</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hs-num" data-target="80" data-suffix="%">0%</div>
+        <div class="hs-label">Under-35s financially stressed</div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <span>Scroll to Begin</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+<!-- LESSON BODY -->
+<div class="lesson-body-container" style="max-width: 800px; margin: 40px auto 60px; padding: 0 10px;">
+<p class="body-text sr">Take a deep breath and pause right here.</p>
+<p class="body-text sr">Before you read another line, do one simple thing: slow down.</p>
+<p class="body-text sr">Do not skim these pages. Do not rush through this text like another article you scroll through on your phone.</p>
+<p class="body-text sr">To get real value from this course, you need to read slowly. You need to think deeply about what is written here, and you need to actually complete the written reflection exercises at the end of each section.</p>
+<p class="body-text sr">Here is why: right now, roughly two out of every three working adults say money is a significant source of stress in their lives, and that number climbs even higher among younger adults and parents.</p>
+<p class="body-text sr">When your brain is stuck in survival mode, you cannot make smart, long-term decisions. You are constantly reacting to bills, financial panic, and daily pressure. You are trapped in a cycle of survival.</p>
+<p class="body-text sr">You cannot build real freedom when your mind is in a state of panic.</p>
+<p class="body-text sr">That is why this written course is structured differently. Achieving true financial freedom is not just about memorizing money tricks or chasing temporary opportunities. It is about understanding your own mind, your psychology, and how your brain handles stress, money, and risk.</p>
+<div class="sec-divider sr"><span>The Cost of Peace</span></div>
+<p class="body-text sr">At the end of the day, everyone wants peace.</p>
+<p class="body-text sr">When palliative care nurse Bronnie Ware documented the reflections of people at the end of their lives, one of the most common regrets shared by working adults, especially men, was:</p>
+<p class="body-text sr">"I wish I hadn't worked so hard."</p>
+<p class="body-text sr">It sat right alongside the single most common regret of all: wishing they had lived a life true to themselves, rather than the life others expected of them. Neither regret was about missing a promotion. Neither was about missing out on a luxury car. They regretted spending their best health, their best years, and their energy on an endless hamster wheel just to pay for a lifestyle they rarely had time to enjoy.</p>
+<p class="body-text sr">They spent their entire lives chasing money because money, when you do not control it, is the biggest thief of mental peace.</p>
+<p class="body-text sr">Annual surveys on financial stress consistently find that around 64 to 66 percent of adults rate money as a significant source of daily stress, a figure that has stayed near the top of the stress list for over a decade.</p>
+<p class="body-text sr">People want to spend quality time with their families. They want to protect their physical and mental health. They want to own their time. But recurring monthly bills force them back to work every single morning.</p>
+<p class="body-text sr">This course exists to change that. You are reading this to attain financial freedom, not to buy fancy things to show off, but to buy back total control over your life and your time.</p>
+<p class="body-text sr">Ask yourself this one simple question right now:</p>
+<p class="body-text sr">If your main source of income stopped today, could your existing assets pay for your exact lifestyle for an entire year without you borrowing a single dollar, or note, or working?</p>
+<p class="body-text sr">If your answer is no, then your financial life is not stable yet. It is fragile.</p>
+<div class="sec-divider sr"><span>Clear Definitions: Rich vs. Wealth vs. Financial Freedom</span></div>
+<p class="body-text sr">Before we fix your finances, we must use clear, simple language. Let us eliminate confusing financial jargon and define these three core terms cleanly:</p>
+<p class="body-text sr">Being Rich (High Money In, High Money Out) What it means: Being rich only means you generate a high active income right now. The trap: Making a lot of money does not make you free. If you earn a large amount every month but spend nearly all of it on an expensive car, an oversized mortgage or rent, and debt, you are simply a high-paid worker living on fragile ground. The moment your active labour stops, the entire structure collapses.</p>
+<p class="body-text sr">Wealth (How Long You Can Survive) What it means: Wealth is not what you spend. Wealth is the unspent money and assets you have accumulated. How to measure it: Wealth is measured in Time, not currency. The simple math: If your baseline living expenses are 4,000 a month, and you have 24,000 saved, your wealth is exactly 6 months. Wealth is simply the buffer of time between your normal life and financial ruin.</p>
+<p class="body-text sr">Financial Freedom (Total Control) What it means: Financial freedom happens when your non-active assets generate enough ongoing income to cover your baseline living expenses without requiring your daily labour. The simple rule: Passive Asset Income must be greater than or equal to Your Monthly Living Expenses. The reality: Freedom is not about having a fortune sitting in a bank account. Freedom is about permanently breaking the requirement that you must trade your physical time just to survive. When your assets pay your bills, working becomes a voluntary choice, not a structural necessity.</p>
+<div class="sec-divider sr"><span>The 4 Seasons of Financial Life</span></div>
+<p class="body-text sr">Your life with money moves through four main seasons. What you do in each age bracket dictates whether you end up trapped or free.</p>
+<p class="body-text sr">Ages 0 to 24: Morning, the season of learning</p>
+<p class="body-text sr">Ages 25 to 50: Noon, the season of building</p>
+<p class="body-text sr">Ages 51 to 75: Afternoon, the season of harvesting</p>
+<p class="body-text sr">Ages 76 to 80+: Evening, the season of legacy</p>
+<p class="body-text sr">1. The Morning Stage (Ages 0 to 24): The Season of Learning                                                                                             What happens: You have zero capital, but you have time and high physical energy. You depend on parents, guardians, or educational institutions while absorbing a worldview on money. Your goal: Acquire useful high-value skills, build personal discipline, and master baseline financial literacy.                                                                                                  The big mistake: Entering adult life burdened with bad consumer debt (credit cards, unnecessary loans) without knowing how to manage a single unit of money.</p>
+<p class="body-text sr">2. The Noon Stage (Ages 25 to 50): The Season of Building Assets                                                                                      What happens: You enter the core workforce. Your active earning capacity grows, but your expenses peak simultaneously, family obligations, raising children, mortgages, cars, and taxes all hit at once. Your goal: Take the money you earn from your work and buy productive assets, stocks, real estate, or cash-flowing digital properties, that generate income independent of your labour.                                                                                                                           The big mistake (The Golden Trap): Upgrading your lifestyle in direct proportion to your income raises. By your early to mid forties, you earn great money, but your monthly liability burn rate demands 100% of your paycheck. Your income is high, but your job owns your life.</p>
+<p class="body-text sr">3. The Afternoon Stage (Ages 51 to 75): The Season of Harvesting Income                                                                         What happens: Physical energy and career runway begin to taper off. Awareness of time passing reaches an all-time high. You look back at your working years and evaluate whether your building phase actually worked. Your goal: Shift your focus from aggressive growth to structuring your assets so they pay you steady, low-friction monthly income to systematically replace your main paycheck.                                                                                                                          The big mistake: Realizing in your late fifties or early sixties that decades of hard work paid for a lot of temporary lifestyle expenses, but left you with zero real independence, forcing you to keep working out of financial dependency rather than choice.</p>
+<p class="body-text sr">4. The Evening Stage (Ages 76+): The Season of Peace and Legacy                                                                                            What happens: Active workforce participation stops completely. You rely entirely on the financial engine built across prior decades. Your goal: Enjoy complete peace of mind, protect your principal capital against inflation, and transfer clear financial structures and wisdom to the next generation. The big mistake: Running out of capital due to poor planning, becoming a financial burden on your children, or living in constant anxiety over medical and baseline expenses in your final years.</p>
+<div class="sec-divider sr"><span>Real Facts and Numbers</span></div>
+<p class="body-text sr">The Stress Fact: Around 64 to 66 percent of adults consistently rate money as a significant source of daily stress, a number that rises to over 80 percent among adults under 35, keeping their nervous systems in heightened alarm states.</p>
+<p class="body-text sr">The Deathbed Regret: Research with end-of-life patients found that wishing they hadn't worked so hard was one of the most common regrets shared by working adults reflecting on their lives, sitting alongside the single most common regret of all: not living true to themselves.</p>
+<p class="body-text sr">The Emergency Fact: National financial surveys consistently show that around 37 percent of working adults cannot cover a small, sudden emergency expense using cash on hand, meaning just under 4 in 10 households are one unexpected bill away from real trouble.</p>
+
+</div>
+<!-- END LESSON BODY -->
+
+  <!-- ══════════════════════════════════════════
+       SECTION 2: THE COST OF PEACE
+  ══════════════════════════════════════════ -->
+  <div class="sec-divider sr"><span>The Cost of Peace</span></div>
+
+  <div class="card sr sr-delay-1" style="margin-bottom: 24px;">
+    <p class="body-text lg">When palliative care nurse Bronnie Ware documented the reflections of people at the end of their lives, one of the most common regrets of working adults was simple and devastating:</p>
+    <div class="pipe-quote sr sr-delay-2">"I wish I hadn't worked so hard."</div>
+    <p class="body-text sr sr-delay-3">It sat right alongside the single most common regret of all: wishing they had lived a life true to themselves. Neither regret was about missing a promotion. Neither was about a luxury car. They regretted spending their best health and best years on an endless hamster wheel — just to pay for a lifestyle they rarely had time to enjoy.</p>
+    <p class="body-text sr sr-delay-4" style="color: var(--muted);">They spent their entire lives chasing money because money, when you do not control it, is the biggest thief of mental peace.</p>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 3: THE FRAGILITY TEST (CALCULATOR)
+  ══════════════════════════════════════════ -->
+  <div class="sec-divider sr"><span>The Fragility Test</span></div>
+
+  <div class="fragility-box sr">
+    <div class="fragility-header">
+      <p class="label-tag">Interactive Calculator</p>
+      <h2 class="section-title">Could You Survive <span class="gold-title">12 Months</span> Without Working?</h2>
+      <p class="body-text" style="margin: 0; color: var(--muted);">If your main source of income stopped today, could your existing assets pay for your exact lifestyle for an entire year — without borrowing a single dollar or working? Enter your numbers to find out exactly where you stand.</p>
+    </div>
+
+    <div class="fragility-body">
+      <div class="input-row">
+        <div class="input-group">
+          <label for="monthly-expenses">Monthly Living Expenses</label>
+          <div class="currency-wrap">
+            <span class="currency-symbol">$</span>
+            <input type="number" id="monthly-expenses" placeholder="e.g. 3500" min="0" step="100"/>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="liquid-savings">Liquid Savings &amp; Assets</label>
+          <div class="currency-wrap">
+            <span class="currency-symbol">$</span>
+            <input type="number" id="liquid-savings" placeholder="e.g. 12000" min="0" step="500"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <div class="input-group">
+          <label for="passive-income">Monthly Passive Income (if any)</label>
+          <div class="currency-wrap">
+            <span class="currency-symbol">$</span>
+            <input type="number" id="passive-income" placeholder="e.g. 0" min="0" step="100"/>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="active-income">Monthly Active Income</label>
+          <div class="currency-wrap">
+            <span class="currency-symbol">$</span>
+            <input type="number" id="active-income" placeholder="e.g. 5000" min="0" step="100"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="fragility-result" id="fragility-result">
+        <p style="color: var(--muted); font-style: italic; font-size: 1.1rem;">Enter your numbers above to see your financial reality.</p>
+      </div>
+
+      <div id="freedom-check" style="display:none; margin-top: 20px; padding: 20px 24px; border-radius: 12px; border: 1px solid var(--gold-border); background: var(--gold-g);">
+        <p id="freedom-check-text" style="font-size: 1.05rem; color: var(--text); font-style: italic; line-height: 1.6;"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 4: DEFINITIONS
+  ══════════════════════════════════════════ -->
+  <div class="sec-divider sr"><span>Clear Definitions</span></div>
+
+  <p class="body-text sr" style="margin-bottom: 32px; font-size: 1.25rem; font-style: italic; text-align: center; color: var(--muted);">Before we fix your finances, we must use clear language. These three terms are not the same — and confusing them is why most people never reach freedom.</p>
+
+  <div class="def-grid sr">
+    <div class="def-card rich">
+      <span class="def-icon">💸</span>
+      <span class="def-badge">Stage 1</span>
+      <h3 class="def-title">Being Rich</h3>
+      <p class="def-body">A high active income — right now. Rich means your monthly inflows are large. But if you stop working, everything stops with it.</p>
+      <div class="def-formula">
+        <strong>High Income In = High Money Out</strong><br/>
+        Income is high. Lifestyle cost is equally high.
+      </div>
+      <div class="def-trap">
+        <strong>⚠ The Trap</strong>
+        Making a lot does not make you free. Your job still owns your life.
+      </div>
+    </div>
+
+    <div class="def-card wealthy">
+      <span class="def-icon">⏳</span>
+      <span class="def-badge">Stage 2</span>
+      <h3 class="def-title">Wealth</h3>
+      <p class="def-body">Wealth is not what you spend. It is the unspent assets you have accumulated. Measured not in currency — but in <em>time</em>.</p>
+      <div class="def-formula">
+        <strong>Wealth = Savings ÷ Monthly Expenses</strong><br/>
+        $24,000 saved ÷ $4,000/mo = <strong>6 months</strong> of wealth
+      </div>
+      <div class="def-trap" style="border-color: rgba(79,195,247,0.2); color: var(--cyan); background: rgba(79,195,247,0.05);">
+        <strong>📌 The Reality</strong>
+        Wealth is the buffer of time between your normal life and financial ruin.
+      </div>
+    </div>
+
+    <div class="def-card free">
+      <span class="def-icon">🔓</span>
+      <span class="def-badge">The Goal</span>
+      <h3 class="def-title">Financial Freedom</h3>
+      <p class="def-body">Your non-active assets generate enough ongoing income to cover your baseline living expenses — without requiring your daily labour.</p>
+      <div class="def-formula">
+        <strong>Passive Income ≥ Monthly Expenses</strong><br/>
+        When assets pay your bills, work becomes a choice.
+      </div>
+      <div class="def-trap" style="border-color: var(--gold-border); color: var(--gold); background: var(--gold-g);">
+        <strong>✦ The Truth</strong>
+        Freedom is not a fortune in a bank. It's the permanent end of mandatory labour.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 5: 4 SEASONS TIMELINE
+  ══════════════════════════════════════════ -->
+  <div class="sec-divider sr"><span>The 4 Seasons of Financial Life</span></div>
+
+  <p class="body-text sr" style="text-align:center; font-style: italic; color: var(--muted); margin-bottom: 36px;">Your financial life moves through four seasons. Click any season to explore what happens, what your goal is, and the one mistake that keeps people trapped.</p>
+
+  <div class="seasons-outer sr">
+    <div class="seasons-track">
+      <button class="season-btn active" data-s="morning" onclick="showSeason('morning')">
+        <div class="season-dot">🌅</div>
+        <div class="season-label">Morning</div>
+        <div class="season-age">Ages 0–24</div>
+      </button>
+      <button class="season-btn" data-s="noon" onclick="showSeason('noon')">
+        <div class="season-dot">☀️</div>
+        <div class="season-label">Noon</div>
+        <div class="season-age">Ages 25–50</div>
+      </button>
+      <button class="season-btn" data-s="afternoon" onclick="showSeason('afternoon')">
+        <div class="season-dot">🌇</div>
+        <div class="season-label">Afternoon</div>
+        <div class="season-age">Ages 51–75</div>
+      </button>
+      <button class="season-btn" data-s="evening" onclick="showSeason('evening')">
+        <div class="season-dot">🌙</div>
+        <div class="season-label">Evening</div>
+        <div class="season-age">Ages 76+</div>
+      </button>
+    </div>
+
+    <div id="season-detail" class="season-detail show">
+      <!-- dynamically filled by JS -->
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 6: REAL FACTS
+  ══════════════════════════════════════════ -->
+  <div class="sec-divider sr"><span>Real Facts &amp; Numbers</span></div>
+
+  <div class="stats-grid sr">
+    <div class="stat-card">
+      <div class="stat-num" data-count="65" data-suffix="%">0%</div>
+      <p class="stat-desc">of adults consistently rate money as a significant source of <em>daily stress</em> — a figure stable for over a decade.</p>
+      <p class="stat-source">Annual Financial Stress Surveys</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" data-count="80" data-suffix="%">0%</div>
+      <p class="stat-desc">of adults under 35 report high financial stress, keeping their nervous systems in <em>constant survival mode.</em></p>
+      <p class="stat-source">Youth Financial Health Research</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" data-count="37" data-suffix="%">0%</div>
+      <p class="stat-desc">of working adults cannot cover a small, sudden emergency in cash — one unexpected bill from real trouble.</p>
+      <p class="stat-source">National Financial Survey</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 7: REFLECTION JOURNAL
+  ══════════════════════════════════════════ -->
+  <div class="sec-divider sr"><span>Written Reflection</span></div>
+
+  <p class="body-text sr" style="text-align: center; font-style: italic; color: var(--muted); margin-bottom: 28px;">Do not skip this. These prompts are where the real work begins. Your answers are saved privately to your browser — no one else can see them. As you move through the course, you will return to these reflections to measure how your thinking has shifted and to guide the decisions you take next.</p>
+
+  <div class="journal-section sr">
+    <div class="journal-item">
+      <div class="journal-q"><strong>Reflection 01</strong>If your main source of income stopped today, could your existing assets pay for your exact lifestyle for an entire year without you borrowing or working? What does your honest answer reveal?</div>
+      <textarea id="r1" placeholder="Write your honest answer here..." oninput="saveJournal('r1')"></textarea>
+      <div class="journal-saved-indicator" id="saved-r1">✓ Saved</div>
+    </div>
+    <div class="journal-item">
+      <div class="journal-q"><strong>Reflection 02</strong>Using the three definitions above — Rich, Wealthy, and Free — where do you honestly place yourself today? And where do you intend to be by the end of this course?</div>
+      <textarea id="r2" placeholder="Write your honest answer here..." oninput="saveJournal('r2')"></textarea>
+      <div class="journal-saved-indicator" id="saved-r2">✓ Saved</div>
+    </div>
+    <div class="journal-item">
+      <div class="journal-q"><strong>Reflection 03</strong>Which of the 4 Seasons are you in right now? Looking at the "Big Mistake" for your season — are you making it? What would you do differently starting this week?</div>
+      <textarea id="r3" placeholder="Write your honest answer here..." oninput="saveJournal('r3')"></textarea>
+      <div class="journal-saved-indicator" id="saved-r3">✓ Saved</div>
+    </div>
+  </div>
+
+  <div class="journal-controls sr">
+    <button class="jc-btn jc-export" onclick="exportJournal()">📥 Download My Reflections</button>
+    <button class="jc-btn jc-clear" onclick="clearJournal()">🗑 Clear &amp; Reset</button>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 8: DECLARATION
+  ══════════════════════════════════════════ -->
+  <div class="sec-divider sr"><span>The Declaration</span></div>
+
+  <div class="declaration-box sr">
+    <canvas id="particle-canvas"></canvas>
+    <p class="label-tag">Seal Your Commitment</p>
+    <p class="declaration-text">"I understand that my financial life is either fragile or free — and there is no comfortable middle. I commit to doing the real work of this course: not to memorize money tricks, but to permanently change the structure of my financial life. I am not just learning. I am building."</p>
+    <div class="declaration-input-wrap">
+      <input type="text" class="declaration-input" id="declaration-input" placeholder='Type "I ACCEPT" to seal this commitment'/>
+      <button class="declaration-btn" onclick="sealDeclaration()">Seal</button>
+    </div>
+    <p class="declaration-hint">Type "I ACCEPT" and press Seal to lock in your commitment</p>
+    <div class="declaration-sealed-msg" id="sealed-msg">
+      <p>✦ DECLARATION SEALED — YOUR JOURNEY BEGINS NOW ✦</p>
+      <p class="sealed-date" id="sealed-date"></p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MODULE NAV
+  ══════════════════════════════════════════ -->
+  <div style="display:flex;justify-content:center;align-items:center;margin-top:60px;margin-bottom:20px;flex-wrap:wrap;gap:16px" class="sr">
+  <a href="index.html" class="whop-btn" style="text-decoration:none;">&#8617; Return to Course</a>
+  <a href="module-2.html" class="whop-btn" style="text-decoration:none; background:transparent; color:var(--gold); border:1px solid var(--gold);">Next Module &#8594;</a>
+</div>
+</main>
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+/* ─── AMBIENT STARFIELD CANVAS ─── */
+(function(){
+  const canvas = document.getElementById('ambient-canvas');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+  function initStars(){
+    stars = [];
+    for(let i=0;i<140;i++){
+      stars.push({ x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*1.2+0.2, speed:Math.random()*0.2+0.05, opacity:Math.random()*0.6+0.1, twinkle:Math.random()*Math.PI*2 });
+    }
+  }
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    stars.forEach(s=>{
+      s.twinkle+=0.008;
+      const op = s.opacity*(0.6+0.4*Math.sin(s.twinkle));
+      ctx.beginPath();
+      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(201,168,76,${op})`;
+      ctx.fill();
+      s.y-=s.speed;
+      if(s.y<0){ s.y=canvas.height; s.x=Math.random()*canvas.width; }
+    });
+    requestAnimationFrame(draw);
+  }
+  resize(); initStars(); draw();
+  window.addEventListener('resize',()=>{ resize(); initStars(); });
+})();
+
+/* ─── SCROLL REVEAL ─── */
+(function(){
+  const els = document.querySelectorAll('.sr');
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  },{ threshold:0.08 });
+  els.forEach(el=>observer.observe(el));
+})();
+
+/* ─── COUNTER ANIMATION ─── */
+function animateCounter(el){
+  const target = parseInt(el.dataset.target||el.dataset.count);
+  const suffix = el.dataset.suffix||'';
+  let current = 0;
+  const step = target/60;
+  const timer = setInterval(()=>{
+    current = Math.min(current+step, target);
+    el.textContent = Math.floor(current)+suffix;
+    if(current>=target){ clearInterval(timer); el.textContent=target+suffix; }
+  },22);
+}
+const counterEls = document.querySelectorAll('[data-target],[data-count]');
+const counterObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ animateCounter(e.target); counterObserver.unobserve(e.target); } });
+},{ threshold:0.5 });
+counterEls.forEach(el=>counterObserver.observe(el));
+
+/* ─── SCROLL PROGRESS BAR ─── */
+window.addEventListener('scroll',()=>{
+  const scrolled = window.scrollY;
+  const total = document.body.scrollHeight - window.innerHeight;
+  const pct = Math.round((scrolled/total)*100);
+  document.getElementById('progress-fill').style.width = pct+'%';
+});
+
+/* ─── FRAGILITY CALCULATOR ─── */
+function calcFragility(){
+  const expenses = parseFloat(document.getElementById('monthly-expenses').value)||0;
+  const savings  = parseFloat(document.getElementById('liquid-savings').value)||0;
+  const passive  = parseFloat(document.getElementById('passive-income').value)||0;
+  const active   = parseFloat(document.getElementById('active-income').value)||0;
+  const result   = document.getElementById('fragility-result');
+  const fcDiv    = document.getElementById('freedom-check');
+  const fcText   = document.getElementById('freedom-check-text');
+
+  if(!expenses && !savings){ return; }
+
+  const monthsOfWealth = expenses > 0 ? savings / expenses : 0;
+  const netMonthly = passive - expenses;
+  const isFree = passive >= expenses;
+
+  let cls, numClass, verdict, barWidth, barGrad;
+
+  if(isFree){
+    cls='free'; numClass='free';
+    verdict=`Your passive income exceeds your expenses. You have crossed into financial freedom. Work is now a choice, not a requirement.`;
+    barWidth='100%'; barGrad='linear-gradient(90deg,var(--gold),var(--gold-light))';
+  } else if(monthsOfWealth>=12){
+    cls='safe'; numClass='safe';
+    verdict=`Your savings can sustain you for ${monthsOfWealth.toFixed(1)} months. You have solid wealth. Now convert that buffer into income-generating assets.`;
+    barWidth=Math.min(100,monthsOfWealth/24*100)+'%'; barGrad='linear-gradient(90deg,var(--success),#68d391)';
+  } else if(monthsOfWealth>=3){
+    cls='warning'; numClass='warning';
+    verdict=`You have ${monthsOfWealth.toFixed(1)} months of runway. Your financial life is survivable but fragile. A single crisis would put you under pressure.`;
+    barWidth=Math.min(100,monthsOfWealth/24*100)+'%'; barGrad='linear-gradient(90deg,orange,gold)';
+  } else {
+    cls='danger'; numClass='danger';
+    verdict=`You have ${monthsOfWealth.toFixed(1)} months of runway. This is financial fragility. One unexpected event — job loss, health crisis, emergency — is a genuine threat.`;
+    barWidth=Math.min(100,monthsOfWealth/24*100)+'%'; barGrad='linear-gradient(90deg,var(--danger),orange)';
+  }
+
+  result.className='fragility-result '+cls;
+  result.innerHTML=`
+    <div class="result-number ${numClass}">${isFree?'FREE':monthsOfWealth.toFixed(1)}</div>
+    <div class="result-label">${isFree?'Financial Freedom Achieved':'Months of Wealth Runway'}</div>
+    <div class="wealth-bar-track"><div class="wealth-bar-fill" style="width:${barWidth};background:${barGrad};"></div></div>
+    <div class="wealth-bar-markers"><span>0 mo</span><span>3 mo</span><span>6 mo</span><span>12 mo</span><span>24 mo</span></div>
+    <p class="result-verdict" style="margin-top:16px;">${verdict}</p>
+  `;
+
+  if(expenses>0){
+    const gap = expenses - passive;
+    const gapMonthly = gap.toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
+    fcDiv.style.display='block';
+    fcText.innerHTML = isFree
+      ? `<span style="color:var(--gold)">✦ You are financially free.</span> Your passive income covers your lifestyle by <strong>${Math.abs(netMonthly).toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0})}/month.</strong> The goal now is to protect and grow this margin.`
+      : `To reach financial freedom, you need passive income to grow by <strong>${gapMonthly}/month</strong>. The rest of this course shows you how.`;
+  }
+}
+['monthly-expenses','liquid-savings','passive-income','active-income'].forEach(id=>{
+  const el=document.getElementById(id);
+  el.addEventListener('input',calcFragility);
+  el.addEventListener('change',calcFragility);
+});
+
+/* ─── 4 SEASONS ─── */
+const seasonData = {
+  morning:{
+    icon:'🌅', age:'Ages 0–24', title:'Morning', subtitle:'The Season of Learning',
+    accentColor:'#FFA94D',
+    goal:'Acquire high-value skills, build personal discipline, and master baseline financial literacy. You have zero capital — but maximum time and energy.',
+    mistake:'Entering adult life burdened with bad consumer debt (credit cards, unnecessary loans) without knowing how to manage a single unit of money.'
+  },
+  noon:{
+    icon:'☀️', age:'Ages 25–50', title:'Noon', subtitle:'The Season of Building Assets',
+    accentColor:'var(--gold)',
+    goal:'Take the money you earn from your work and systematically buy productive assets — stocks, real estate, cash-flowing digital properties — that generate income independent of your labour.',
+    mistake:'The Golden Trap: Upgrading your lifestyle in direct proportion to your income raises. By your early forties, you earn great money, but your monthly burn rate demands 100% of your paycheck. Your income is high — but your job owns your life.'
+  },
+  afternoon:{
+    icon:'🌇', age:'Ages 51–75', title:'Afternoon', subtitle:'The Season of Harvesting Income',
+    accentColor:'#FF8A65',
+    goal:'Shift focus from aggressive growth to structuring your assets so they pay you steady, low-friction monthly income — systematically replacing your main paycheck.',
+    mistake:'Realising in your late fifties that decades of hard work paid for temporary lifestyle expenses but left zero real independence — forcing you to keep working out of financial dependency rather than choice.'
+  },
+  evening:{
+    icon:'🌙', age:'Ages 76+', title:'Evening', subtitle:'The Season of Peace and Legacy',
+    accentColor:'#9575CD',
+    goal:'Enjoy complete peace of mind, protect your principal capital against inflation, and transfer clear financial structures and wisdom to the next generation.',
+    mistake:'Running out of capital due to poor planning, becoming a financial burden on your children, or living in constant anxiety over medical and baseline expenses in your final years.'
+  }
+};
+
+function showSeason(key){
+  const d = seasonData[key];
+  document.querySelectorAll('.season-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`[data-s="${key}"]`).classList.add('active');
+
+  const detail=document.getElementById('season-detail');
+  detail.className='season-detail show';
+  detail.style.borderColor=d.accentColor+'44';
+  detail.innerHTML=`
+    <div class="season-detail-inner">
+      <div class="season-detail-header">
+        <div class="season-detail-icon">${d.icon}</div>
+        <div class="season-detail-meta">
+          <div class="sd-age" style="color:${d.accentColor};">${d.age}</div>
+          <div class="sd-title">${d.title}</div>
+          <div class="sd-subtitle">${d.subtitle}</div>
+        </div>
+      </div>
+      <div class="season-columns">
+        <div class="season-col goal">
+          <h4>✦ Your Goal This Season</h4>
+          <p>${d.goal}</p>
+        </div>
+        <div class="season-col mistake">
+          <h4>⚠ The Big Mistake</h4>
+          <div class="mistake-box">${d.mistake}</div>
+        </div>
+      </div>
+    </div>`;
+}
+showSeason('morning');
+
+/* ─── JOURNAL localStorage ─── */
+['r1','r2','r3'].forEach(id=>{
+  const saved=localStorage.getItem('ffm1_'+id);
+  if(saved){ const el=document.getElementById(id); if(el) el.value=saved; }
+});
+function saveJournal(id){
+  const val=document.getElementById(id)?.value||'';
+  localStorage.setItem('ffm1_'+id, val);
+  const ind=document.getElementById('saved-'+id);
+  if(ind){ ind.classList.add('show'); setTimeout(()=>ind.classList.remove('show'),2000); }
+}
+
+/* ─── EXPORT JOURNAL ─── */
+function exportJournal(){
+  const questions=[
+    'Reflection 01: If your main source of income stopped today, could your existing assets pay for your exact lifestyle for an entire year without you borrowing or working? What does your honest answer reveal?',
+    'Reflection 02: Using the three definitions above — Rich, Wealthy, and Free — where do you honestly place yourself today? And where do you intend to be by the end of this course?',
+    'Reflection 03: Which of the 4 Seasons are you in right now? Looking at the "Big Mistake" for your season — are you making it? What would you do differently starting this week?'
+  ];
+  const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  let content=`FINANCIAL FREEDOM MASTERCLASS\nModule 1: The Foundation of Financial Freedom\nJournal Export — ${date}\n${'='.repeat(60)}\n\n`;
+  questions.forEach((q,i)=>{
+    const key='ffm1_r'+(i+1);
+    const answer=localStorage.getItem(key)||'(No answer written yet)';
+    content+=`${q}\n\n${answer}\n\n${'-'.repeat(60)}\n\n`;
+  });
+  const decl=localStorage.getItem('ffm1_declaration');
+  const declDate=localStorage.getItem('ffm1_declaration_date');
+  if(decl) content+=`DECLARATION SEALED on ${declDate}\n`;
+  const blob=new Blob([content],{type:'text/plain;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download='Module-1-Journal.txt'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+/* ─── CLEAR JOURNAL ─── */
+function clearJournal(){
+  if(!confirm('Are you sure you want to clear all your reflection answers for Module 1? This cannot be undone.'))return;
+  ['r1','r2','r3'].forEach(id=>{
+    localStorage.removeItem('ffm1_'+id);
+    const el=document.getElementById(id); if(el) el.value='';
+  });
+}
+
+/* ─── DECLARATION ─── */
+(function(){
+  const savedDecl = localStorage.getItem('ffm1_declaration');
+  if(savedDecl){
+    const parsedDate = localStorage.getItem('ffm1_declaration_date');
+    document.getElementById('declaration-input').value='I ACCEPT';
+    document.getElementById('declaration-input').disabled=true;
+    document.querySelector('.declaration-btn').classList.add('sealed');
+    document.querySelector('.declaration-btn').textContent='✦ Sealed';
+    document.getElementById('sealed-msg').classList.add('show');
+    document.getElementById('sealed-date').textContent='Declared on '+parsedDate;
+  }
+})();
+
+function sealDeclaration(){
+  const inp=document.getElementById('declaration-input');
+  if(inp.value.trim().toUpperCase()!=='I ACCEPT'){
+    inp.classList.add('error');
+    inp.style.animation='shake 0.4s ease';
+    setTimeout(()=>{inp.classList.remove('error');inp.style.animation=''},600);
+    return;
+  }
+  inp.classList.add('success');
+  const now=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  localStorage.setItem('ffm1_declaration','true');
+  localStorage.setItem('ffm1_declaration_date',now);
+  setTimeout(()=>{
+    inp.disabled=true;
+    document.querySelector('.declaration-btn').classList.add('sealed');
+    document.querySelector('.declaration-btn').textContent='✦ Sealed';
+    document.getElementById('sealed-msg').classList.add('show');
+    document.getElementById('sealed-date').textContent='Declared on '+now;
+    fireParticles();
+  },500);
+}
+
+/* ─── PARTICLE BURST ─── */
+function fireParticles(){
+  const canvas=document.getElementById('particle-canvas');
+  const ctx=canvas.getContext('2d');
+  canvas.width=canvas.offsetWidth; canvas.height=canvas.offsetHeight;
+  const cx=canvas.width/2, cy=canvas.height/2;
+  const particles=[];
+  for(let i=0;i<80;i++){
+    const angle=Math.random()*Math.PI*2;
+    const speed=Math.random()*5+2;
+    particles.push({
+      x:cx, y:cy,
+      vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed,
+      alpha:1, size:Math.random()*4+1,
+      color:`hsl(${40+Math.random()*20},90%,${55+Math.random()*20}%)`
+    });
+  }
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    let alive=false;
+    particles.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy; p.vy+=0.12;
+      p.alpha-=0.018;
+      if(p.alpha>0){ alive=true; }
+      ctx.globalAlpha=Math.max(0,p.alpha);
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+      ctx.fillStyle=p.color;
+      ctx.fill();
+    });
+    if(alive) requestAnimationFrame(animate);
+    else ctx.clearRect(0,0,canvas.width,canvas.height);
+  }
+  animate();
+}
+
+/* ─── SHAKE ANIMATION for declaration ─── */
+const styleEl=document.createElement('style');
+styleEl.textContent='@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}';
+document.head.appendChild(styleEl);
+</script>
+</body>
+</html>

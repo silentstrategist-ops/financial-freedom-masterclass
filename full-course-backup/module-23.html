@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 23: A Word on Accuracy Before the Stories | Financial Freedom Masterclass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    
+    :root {
+      --void: #030507; --deep: #060A12; --surface: rgba(255, 255, 255, .03); --surface2: rgba(255, 255, 255, .06);
+      --gold: #C9A84C; --gold-l: #E8C97A; --gold-d: rgba(201, 168, 76, .15); --gold-g: rgba(201, 168, 76, .06); --gold-b: rgba(201, 168, 76, .25);
+      --text: #EEF0F4; --muted: #7A8290; --muted2: #4A5260; --danger: #E84855; --success: #2ECC71; --cyan: #4FC3F7; --purple: #9B7FE8;
+      --border: rgba(255, 255, 255, .07); --r: 20px; --rp: 100px;
+    }
+    ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: var(--void); } ::-webkit-scrollbar-thumb { background: var(--gold-b); border-radius: 4px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--void); color: var(--text); font-family: 'Cormorant Garamond', serif; overflow-x: hidden; line-height: 1.7; }
+    .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: .08; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    main { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 28px 180px; }
+    @media(max-width:640px) { main { padding: 0 18px 180px; } }
+    .tag { font-family: 'Inter'; font-size: .65rem; letter-spacing: .3em; color: var(--gold); text-transform: uppercase; display: inline-block; margin-bottom: 14px; }
+    .sec-title { font-family: 'Cinzel', serif; font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 700; color: #fff; letter-spacing: .05em; margin-bottom: 1rem; line-height: 1.2; }
+    .body-text { font-size: 1.18rem; font-weight: 300; color: var(--text); margin-bottom: 1rem; line-height: 1.85; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 44px 48px; margin-bottom:24px;}
+    .sec-divider { display: flex; align-items: center; gap: 16px; margin: 80px 0 32px; }
+    .sec-divider::before, .sec-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .sec-divider span { font-family: 'Inter'; font-size: .6rem; letter-spacing: .25em; color: var(--gold); text-transform: uppercase; white-space: nowrap; }
+    .hero { min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 0 60px; }
+    .hero-eyebrow { font-family: 'Inter'; font-size: .68rem; letter-spacing: .35em; color: var(--gold); text-transform: uppercase; margin-bottom: 28px; }
+    .hero-title { font-family: 'Cinzel', serif; font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.1; color: #fff; margin-bottom: 24px; max-width:900px; }
+    .hero-title .g { color: var(--gold); font-style: italic; }
+    .hero-sub { font-size: 1.3rem; font-style: italic; color: var(--muted); max-width: 680px; margin: 0 auto 56px; font-weight: 300; }
+    
+    .journal-section { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
+    .journal-item { background: var(--deep); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: .3s; }
+    .journal-item:focus-within { border-color: var(--gold-b); }
+    .journal-q { padding: 24px 28px 16px; font-size: 1.1rem; font-style: italic; color: var(--text); line-height: 1.6; }
+    .journal-q strong { font-style: normal; font-family: 'Inter'; font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 8px; }
+    .journal-item textarea { width: 100%; padding: 16px 28px 24px; background: none; border: none; border-top: 1px solid var(--border); color: var(--text); font-family: 'Cormorant Garamond'; font-size: 1.05rem; line-height: 1.7; resize: vertical; min-height: 100px; outline: none; }
+    .journal-item textarea:focus { background: var(--surface); }
+    .journal-item textarea::placeholder { color: var(--muted2); font-style: italic; }
+    
+    .decl-box { text-align: center; padding: 80px 48px; border: 1px dashed var(--gold-b); border-radius: var(--r); background: radial-gradient(circle at 50% 0%, rgba(201,168,76,.06) 0%, transparent 65%); margin-top: 60px; }
+    .decl-text { font-size: clamp(1.2rem, 2.5vw, 1.7rem); font-style: italic; font-weight: 300; line-height: 1.65; color: var(--text); max-width: 680px; margin: 0 auto 40px; }
+    .decl-input-wrap { display: flex; gap: 12px; justify-content: center; max-width: 480px; margin: 0 auto; }
+    .decl-input { flex: 1; padding: 14px 20px; background: var(--void); border: 1px solid var(--gold-b); border-radius: var(--rp); color: var(--gold); font-family: 'Cinzel'; font-size: 1rem; text-align: center; outline: none; transition: .3s; }
+    .decl-input:focus { border-color: var(--gold); }
+    .decl-btn { padding: 14px 28px; border-radius: var(--rp); border: 1px solid var(--gold-b); background: none; color: var(--gold); font-family: 'Inter'; font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; cursor: pointer; transition: .3s; }
+    .decl-btn:hover { background: var(--gold); color: var(--void); }
+    .decl-hint { font-family: 'Inter'; font-size: .65rem; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; margin-top: 12px; }
+    .decl-sealed-msg { display: none; margin-top: 28px; } .decl-sealed-msg.show { display: block; }
+    
+    .whop-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; background: rgba(3,5,7,.95); border-top: 1px solid var(--border); backdrop-filter: blur(14px); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .wb-left { display: flex; align-items: center; gap: 16px; }
+    .wb-module { display: flex; flex-direction: column; }
+    .wb-m-label { font-family: 'Inter'; font-size: .6rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+    .wb-m-name { font-family: 'Cinzel'; font-size: .78rem; color: var(--text); letter-spacing: .05em; }
+    .wb-progress-wrap { display: flex; align-items: center; gap: 10px; }
+    .wb-p-label { font-family: 'Inter'; font-size: .62rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+    .wb-p-track { width: 120px; height: 3px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .wb-p-fill { height: 100%; background: var(--gold); width: 0%; transition: width .2s; border-radius: 3px; }
+    .whop-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: var(--rp); background: var(--gold); color: var(--void); font-family: 'Inter'; font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; border: none; text-decoration: none; transition: .3s; white-space: nowrap; }
+    .whop-btn:hover { background: #fff; transform: translateY(-1px); }
+
+    
+      .timeline-wrap { background: var(--deep); border: 1px solid var(--border); border-radius: var(--r); padding: 48px; margin: 40px 0; }
+      .age-marker { display: flex; align-items: center; gap: 20px; margin-bottom: 32px; position:relative; }
+      .age-marker::before { content: ''; position: absolute; left: 40px; top: 0; bottom: -32px; width: 2px; background: var(--border); z-index: 1; }
+      .age-marker:last-child::before { display: none; }
+      .age-circle { width: 80px; height: 80px; border-radius: 50%; background: var(--void); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; flex-direction: column; z-index: 2; flex-shrink: 0; box-shadow: 0 0 20px rgba(201,168,76,0.1); }
+      .ac-num { font-family: 'Cinzel'; font-size: 1.8rem; color: #fff; font-weight: 700; line-height: 1; }
+      .ac-lbl { font-family: 'Inter'; font-size: 0.55rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+      .age-text { flex: 1; background: var(--surface); padding: 24px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.04); }
+      .age-text h4 { font-family: 'Cinzel'; font-size: 1.2rem; color: #fff; margin-bottom: 8px; }
+      .age-text p { font-size: 0.95rem; color: var(--muted); line-height: 1.6; }
+      .age-text strong { color: var(--gold); }
+    
+  </style>
+</head>
+<body>
+<div class="noise"></div>
+
+<div class="whop-bar">
+  <div class="wb-left">
+    <div class="wb-module">
+      <div class="wb-m-label">Currently Viewing</div>
+      <div class="wb-m-name">Module 23 · A Word on Accuracy Before the Stories</div>
+    </div>
+    <div class="wb-progress-wrap">
+      <span class="wb-p-label">Progress</span>
+      <div class="wb-p-track"><div class="wb-p-fill" id="pfill"></div></div>
+    </div>
+  </div>
+  <div style="display:flex;gap:12px">
+    <a href="index.html" class="whop-btn" style="background:var(--surface);color:#fff;border:1px solid var(--border)">← Dashboard</a>
+    <a href="index.html" class="whop-btn">↩ Return to Course</a>
+  </div>
+</div>
+
+<main>
+  <section class="hero">
+    <p class="hero-eyebrow">Financial Freedom Masterclass · Module 23</p>
+    <h1 class="hero-title">A Word on Accuracy <br/><span class="g">Before the Stories</span></h1>
+    <p class="hero-sub">The "young genius founder" narrative is a myth. Here is what the actual research says about the real age of high-growth business founders.</p>
+  </section>
+<!-- LESSON BODY -->
+<div class="lesson-body-container" style="max-width: 800px; margin: 40px auto 60px; padding: 0 10px;">
+<div class="sec-divider sr"><span>A Word on Accuracy Before the Stories</span></div>
+<p class="body-text sr">Age-and-success anecdotes get repeated constantly online, and a lot of them drift steadily from the facts with each retelling, ages get rounded, sale prices get inflated, timelines get compressed into something more dramatic than what actually happened. Everything in this lesson has been checked against multiple, independent, verifiable sources and corrected wherever the commonly repeated version turned out to be slightly wrong. A handful of names that circulate constantly in this genre, including one or two you may have seen in earlier drafts of this course, couldn't be confirmed to a standard worth putting in front of paying customers, so they've been left out entirely rather than repeated on faith. If a story matters enough to build a chapter around, it should be able to survive being checked.</p>
+<div class="sec-divider sr"><span>The Data, First</span></div>
+<p class="body-text sr">Anecdotes are persuasive, but they're not evidence on their own, a handful of famous examples can always be found to support almost any claim. So before the individual stories, here is what the actual research says.</p>
+<p class="body-text sr">In 2018, a team of researchers, Pierre Azoulay of MIT, Benjamin Jones and J. Daniel Kim, and Javier Miranda of the U.S. Census Bureau, published a study that had never been attempted at this scale before: an analysis of 2.7 million business founders across the United States, using Census and IRS records rather than self-reported survey data. Their headline finding, published in the Harvard Business Review, directly contradicted the popular "young genius founder" narrative built around figures like Zuckerberg, Gates, and Jobs.</p>
+<p class="body-text sr">Across all businesses in their dataset, the average founder age at the time of founding was 41.9 years. That alone is worth sitting with, but the researchers went further. They narrowed their sample to the fastest-growing 0.1 percent of new technology companies, the exclusive tier that actually reshapes industries and generates outsized returns, and found the average founder age in that group was 45.0 years old, meaningfully older than the overall average, not younger. A given 50-year-old founder, the study found, was roughly 1.8 times more likely to build one of these breakout companies than a 30-year-old founder, and founders in their early twenties had the lowest odds of high-growth success of any age group measured. When the researchers broke this down by industry, the pattern held with some variation: software company founders averaged around 40 years old at founding, while founders in fields like biotechnology and oil and gas averaged closer to 47. Even within the most "youth-coded" industry in the dataset, the average founder was still solidly middle-aged.</p>
+<p class="body-text sr">Separately, the Kauffman Foundation, a nonprofit that has tracked American entrepreneurship for decades, reports that people aged 55 to 64 now start close to a quarter of all new U.S. businesses, up from roughly 15 percent two decades earlier. The U.S. Census Bureau has additionally found that more than half of small businesses in the country are owned by people aged 55 and older. None of this means youth is a disadvantage. It means the "young founder" story is a real but minority pattern that has been culturally mistaken for the default one.</p>
+<div class="sec-divider sr"><span>Colonel Harland Sanders</span></div>
+<p class="body-text sr">Sanders opened his first Kentucky Fried Chicken franchise in Salt Lake City in 1952, at around age 62, several years after a newly built highway bypassed his original roadside restaurant and motel in Corbin, Kentucky, and forced him to sell the property at a loss. Living for a period on little more than a Social Security check, he began traveling the country by car, cooking his pressure-fried chicken recipe for restaurant owners in exchange for a nickel per chicken sold if they agreed to use his method. By 1963 that slow, person-by-person sales process had grown into roughly 600 franchised locations across multiple countries. In 1964, at age 73, he sold the company to a group of investors for $2 million, retaining a lifetime salary and a contractual role as the brand's public face, a role he continued, white suit and all, until his death in 1980.</p>
+<div class="sec-divider sr"><span>Ray Kroc</span></div>
+<p class="body-text sr">At 52, Kroc was a struggling salesman of milkshake mixing machines when he visited a small, unusually efficient hamburger stand in San Bernardino, California, run by brothers Richard and Maurice McDonald. Impressed by the speed and consistency of their operation, he convinced them to let him manage the franchising of their concept nationally. He spent nearly a decade building out that franchise system before finally purchasing the company outright in 1961, at age 58, and transforming it over the following two decades into the largest fast-food company in the world.</p>
+<div class="sec-divider sr"><span>Vera Wang</span></div>
+<p class="body-text sr">After a competitive figure-skating career that fell short of qualifying for the Olympics, and roughly two decades working at Vogue and then Ralph Lauren, Wang struggled to find a wedding dress she liked while planning her own wedding at 39. That frustration led her, with seed capital from her father, to open her first bridal boutique at the Carlyle Hotel in New York City in 1990, at around age 40. She has said publicly that she assumed at the time it was simply too late in her career for something new, describing the early years of the business as filled with days of genuine self-doubt. The boutique has since grown into a global bridal and fashion brand.</p>
+<div class="sec-divider sr"><span>Julia Child</span></div>
+<p class="body-text sr">Child didn't learn to cook until her mid-thirties, after an earlier career in advertising and a period working for a wartime intelligence agency during World War II, where she was, at one point, fired from an advertising job for what her employer called "gross insubordination." After moving to Paris with her husband, she trained at Le Cordon Bleu and co-founded a small cooking school with two French collaborators. Their combined work became Mastering the Art of French Cooking, published in 1961 when Child was 49. Her television career, and the fame that followed, began roughly two years later, around age 51, when her show The French Chef first aired.</p>
+<div class="sec-divider sr"><span>Anna Mary Robertson Moses ("Grandma Moses")</span></div>
+<p class="body-text sr">Moses spent most of her adult life as a farmer and housewife, taking up embroidery as a hobby in her later years. When arthritis made needlework too painful to continue, she picked up painting instead, almost by default, at age 78. Her folk-art depictions of rural American life gained attention quickly, and her work was eventually exhibited in major museums, making her one of the most recognized American folk artists of the twentieth century by the time of her death at 101.</p>
+<div class="sec-divider sr"><span>Sam Walton</span></div>
+<p class="body-text sr">Walton spent his twenties and thirties running a series of successful variety stores in Arkansas, building deep, hands-on retail experience well before Walmart existed in any form. He opened the first Walmart store in Rogers, Arkansas, in 1962, at age 44. What followed was not an overnight transformation, the company grew steadily and methodically for years before becoming the retail giant it is today.</p>
+<div class="sec-divider sr"><span>Arianna Huffington</span></div>
+<p class="body-text sr">After an established career as an author and political commentator, Huffington co-founded The Huffington Post in 2005, at age 54, at a moment when critics widely dismissed the idea of a blog-driven news site as a passing gimmick. The site grew into one of the most visited news properties in the United States and was acquired by AOL in 2011 for $315 million.</p>
+<div class="sec-divider sr"><span>Henry Ford, With a Necessary Caveat</span></div>
+<p class="body-text sr">Ford's first attempt at a car company, founded in 1899 at age 36, collapsed within two years. A second attempt also failed. Ford Motor Company, his third attempt, was founded in 1903 when he was 40, and it took another five years of iteration before the Model T, the breakthrough that actually made him a household name, arrived in 1908, when he was 44. His story is often flattened into a single inspirational line about "starting late," but the more accurate and more useful version is that his eventual success followed two outright business failures in his thirties, a detail that's usually cut from the shorter version of the story.</p>
+<div class="sec-divider sr"><span>What the Pattern Actually Is</span></div>
+<p class="body-text sr">None of these are stories about a single lucky break landing on an unprepared person. Every one of them involves someone who kept a specific skill, network, reputation, or plain stubbornness intact through years, sometimes decades, of unglamorous work, until a particular opportunity finally met it. Sanders' chicken recipe was decades in the making before it became a franchise. Kroc had spent a working lifetime as a salesman before he ever set foot in the McDonald brothers' restaurant. Wang, Child, Walton, and Huffington all built the specific expertise their later success depended on long before that success arrived. That's the actual pattern worth taking from this section. Not the individual ages, the underlying mechanism: accumulated, specific experience, combined with the willingness to act on an opportunity when it appeared.</p>
+<div class="sec-divider sr"><span>Reflection: Real-Life Case Studies</span></div>
+<p class="body-text sr">1. Which of these stories surprised you most, and why do you think it surprised you specifically?</p>
+<p class="body-text sr">2. Before reading this section, what age did you privately assume was "too late" to start something new? Where do you think that specific number actually came from?</p>
+<p class="body-text sr">3. Sanders, Kroc, and Walton all built on decades of unrelated or unglamorous work experience before their eventual success. What unglamorous experience are you sitting on that might be more transferable than you currently think?</p>
+<p class="body-text sr">4. Vera Wang has said publicly she assumed it was too late for her at 40. What is the equivalent thought you catch yourself having, and at what age does it show up?</p>
+<p class="body-text sr">5. Which of these figures had the least dramatic "leap," building on something close to what they already knew how to do? What would your own equivalent, low-drama version of that leap look like?</p>
+<p class="body-text sr">6. Henry Ford failed twice before his third company succeeded. How would you personally respond to a comparable failure right now, at this stage of your life, compared to how you might have responded to it in your twenties?</p>
+<p class="body-text sr">7. If you had to describe your own career honestly as a case study for someone else, what would the one-paragraph version say right now?</p>
+<p class="body-text sr">8. What is one piece of evidence from your own life, not from someone else's story, that directly contradicts the idea that your window has closed?</p>
+
+</div>
+<!-- END LESSON BODY -->
+
+  <section>
+    
+      <div class="card">
+        <h2 class="sec-title">The Data, First</h2>
+        <p class="body-text">An analysis of 2.7 million business founders across the US found the average founder age was <strong>41.9 years</strong>. For the fastest-growing 0.1% of new technology companies, the average founder age was <strong>45.0 years old</strong>.</p>
+        <p class="body-text">A 50-year-old founder is roughly <strong>1.8 times more likely</strong> to build a breakout company than a 30-year-old founder. The "young founder" story is a minority pattern mistakenly treated as the default.</p>
+      </div>
+      
+      <h2 class="sec-title" style="margin-top:60px">The Actual Timeline of Success</h2>
+      <div class="timeline-wrap">
+        
+        <div class="age-marker">
+          <div class="age-circle"><div class="ac-num">44</div><div class="ac-lbl">Ford</div></div>
+          <div class="age-text">
+            <h4>Henry Ford</h4>
+            <p>His first two attempts failed in his thirties. Ford Motor Company arrived when he was 40, and the breakthrough Model T didn't arrive until he was 44.</p>
+          </div>
+        </div>
+        
+        <div class="age-marker">
+          <div class="age-circle"><div class="ac-num">49</div><div class="ac-lbl">Child</div></div>
+          <div class="age-text">
+            <h4>Julia Child</h4>
+            <p>Didn't learn to cook until her mid-thirties. Published <em>Mastering the Art of French Cooking</em> at 49. Her TV fame began around age 51.</p>
+          </div>
+        </div>
+
+        <div class="age-marker">
+          <div class="age-circle"><div class="ac-num">54</div><div class="ac-lbl">Huffington</div></div>
+          <div class="age-text">
+            <h4>Arianna Huffington</h4>
+            <p>Co-founded The Huffington Post at age 54. It was acquired by AOL six years later for $315 million.</p>
+          </div>
+        </div>
+        
+        <div class="age-marker">
+          <div class="age-circle"><div class="ac-num">58</div><div class="ac-lbl">Kroc</div></div>
+          <div class="age-text">
+            <h4>Ray Kroc</h4>
+            <p>A struggling milkshake machine salesman at 52. He didn't purchase McDonald's outright to begin building it into an empire until age 58.</p>
+          </div>
+        </div>
+        
+        <div class="age-marker">
+          <div class="age-circle"><div class="ac-num">62</div><div class="ac-lbl">Sanders</div></div>
+          <div class="age-text">
+            <h4>Colonel Harland Sanders</h4>
+            <p>Opened his first KFC franchise at age 62 after his original restaurant failed. Sold the company for $2 million at age 73.</p>
+          </div>
+        </div>
+        
+      </div>
+    
+  </section>
+
+  <div class="sec-divider"><span>Step 22 Integration</span></div>
+
+  <section>
+    <h2 class="sec-title" style="text-align:center">Plan Your Own Approach</h2>
+    <div class="journal-section">
+      
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 01</strong>Which of these stories surprised you most, and why do you think it surprised you specifically?</div>
+        <textarea id="j23_1" placeholder="Write your reflection here..." oninput="saveJ(1)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 02</strong>Before reading this section, what age did you privately assume was "too late" to start something new? Where did that number come from?</div>
+        <textarea id="j23_2" placeholder="Write your reflection here..." oninput="saveJ(2)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 03</strong>Sanders, Kroc, and Walton all built on decades of unglamorous work. What unglamorous experience are you sitting on that might be transferable?</div>
+        <textarea id="j23_3" placeholder="Write your reflection here..." oninput="saveJ(3)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 04</strong>Vera Wang assumed it was too late for her at 40. What is the equivalent thought you catch yourself having, and at what age does it show up?</div>
+        <textarea id="j23_4" placeholder="Write your reflection here..." oninput="saveJ(4)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 05</strong>Which of these figures had the least dramatic "leap," building on something close to what they already knew? What would your low-drama leap look like?</div>
+        <textarea id="j23_5" placeholder="Write your reflection here..." oninput="saveJ(5)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 06</strong>Henry Ford failed twice before his third company succeeded. How would you personally respond to a comparable failure right now?</div>
+        <textarea id="j23_6" placeholder="Write your reflection here..." oninput="saveJ(6)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 07</strong>If you had to describe your own career honestly as a case study for someone else, what would the one-paragraph version say right now?</div>
+        <textarea id="j23_7" placeholder="Write your reflection here..." oninput="saveJ(7)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 08</strong>What is one piece of evidence from your own life, not from someone else's story, that directly contradicts the idea that your window has closed?</div>
+        <textarea id="j23_8" placeholder="Write your reflection here..." oninput="saveJ(8)"></textarea>
+      </div>
+    </div>
+
+    <div class="decl-box">
+      <p class="tag" style="margin-bottom:16px;letter-spacing:0.2em">SEAL YOUR COMMITMENT</p>
+      <p class="decl-text">"I reject the myth that my window has closed. My accumulated experience is not a delay—it is my leverage."</p>
+      <div class="decl-input-wrap" id="d-wrap">
+        <input type="text" class="decl-input" id="d-input" placeholder="Type &quot;I ACCEPT&quot; to seal this" />
+        <button class="decl-btn" id="d-btn" onclick="seal()">SEAL</button>
+      </div>
+      <p class="decl-hint" id="d-hint">TYPE "I ACCEPT" AND PRESS SEAL</p>
+      <div class="decl-sealed-msg" id="d-msg">
+        <p style="font-family:'Cinzel';color:var(--gold);font-size:.9rem;letter-spacing:.1em">✓ DECLARATION SEALED</p>
+        <div id="d-date" style="font-family:'Inter';font-size:.65rem;color:var(--muted);margin-top:8px;letter-spacing:.1em"></div>
+      </div>
+    </div>
+  </section>
+
+
+<div style="display:flex;justify-content:center;align-items:center;margin-top:60px;margin-bottom:20px;flex-wrap:wrap;gap:16px" class="sr">
+  <a href="module-22.html" class="whop-btn" style="text-decoration:none; background:transparent; color:var(--gold); border:1px solid var(--gold);">&#8592; Previous</a>
+  <a href="index.html" class="whop-btn" style="text-decoration:none;">&#8617; Return to Course</a>
+  <a href="module-24.html" class="whop-btn" style="text-decoration:none; background:transparent; color:var(--gold); border:1px solid var(--gold);">Next Module &#8594;</a>
+</div>
+</main>
+
+<script>
+
+function saveJ(n){
+  const v = document.getElementById('j23_'+n).value;
+  localStorage.setItem('ffm23_r'+n, v);
+}
+
+function loadJ(){
+  for(let i=1;i<=10;i++){
+    const saved = localStorage.getItem('ffm23_r'+i);
+    if(saved) document.getElementById('j23_'+i).value = saved;
+  }
+  const dec = localStorage.getItem('ffm23_declaration');
+  if(dec){
+    document.getElementById('d-wrap').style.display='none';
+    const hint = document.getElementById('d-hint'); if(hint) hint.style.display='none';
+    document.getElementById('d-msg').classList.add('show');
+    document.getElementById('d-date').textContent = dec;
+  }
+}
+
+function seal(){
+  const input = document.getElementById('d-input');
+  if(input.value.trim().toUpperCase() !== 'I ACCEPT'){
+    input.style.borderColor = 'var(--danger)';
+    setTimeout(() => input.style.borderColor = '', 500);
+    return;
+  }
+  const dateStr = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  const sig = 'Declared on ' + dateStr;
+  localStorage.setItem('ffm23_declaration', sig);
+  document.getElementById('d-wrap').style.display='none';
+  const hint = document.getElementById('d-hint'); if(hint) hint.style.display='none';
+  document.getElementById('d-msg').classList.add('show');
+  document.getElementById('d-date').textContent = sig;
+}
+
+window.addEventListener('scroll', () => {
+  const pfill = document.getElementById('pfill');
+  if(pfill) {
+    let scrollPct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+    pfill.style.width = scrollPct + '%';
+  }
+});
+
+window.addEventListener('DOMContentLoaded', loadJ);
+</script>
+</body>
+</html>

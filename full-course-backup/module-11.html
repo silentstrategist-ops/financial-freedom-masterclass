@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 11: The Debt Decoder | Financial Freedom Masterclass</title>
+  <meta name="description" content="Most debt advice picks a side. This module gives you both the Avalanche and Snowball methods and helps you choose based on your actual psychology."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --void:#030507;--deep:#060A12;--surface:rgba(255,255,255,.03);
+      --surface2:rgba(255,255,255,.06);--gold:#C9A84C;--gold-l:#E8C97A;
+      --gold-d:rgba(201,168,76,.15);--gold-g:rgba(201,168,76,.06);
+      --gold-b:rgba(201,168,76,.25);--text:#EEF0F4;--muted:#7A8290;
+      --muted2:#4A5260;--danger:#E84855;--success:#2ECC71;
+      --cyan:#4FC3F7;--purple:#9B7FE8;--border:rgba(255,255,255,.07);
+      --r:20px;--rp:100px;
+    }
+    ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--void)}
+    ::-webkit-scrollbar-thumb{background:var(--gold-b);border-radius:3px}
+    *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+    body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',serif;overflow-x:hidden;line-height:1.7}
+
+    .noise{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;opacity:.08;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+    #ambient-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.2}
+
+    main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 28px 180px}
+    @media(max-width:640px){main{padding:0 18px 180px}}
+
+    .sr{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+    .sr.v{opacity:1;transform:none}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes scaleIn{from{transform:scale(.93);opacity:0}to{transform:scale(1);opacity:1}}
+    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+    .tag{font-family:'Inter';font-size:.65rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;display:inline-block;margin-bottom:14px}
+    .sec-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;color:#fff;letter-spacing:.05em;margin-bottom:1rem;line-height:1.2}
+    .body-text{font-size:1.18rem;font-weight:300;color:var(--text);margin-bottom:1rem;line-height:1.85}
+    .em{color:var(--gold);font-style:italic}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:44px 48px}
+    @media(max-width:640px){.card{padding:28px 22px}}
+
+    .sec-divider{display:flex;align-items:center;gap:16px;margin:80px 0 32px}
+    .sec-divider::before,.sec-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+    .sec-divider span{font-family:'Inter';font-size:.6rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;white-space:nowrap}
+
+    /* HERO */
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 0 60px}
+    .hero-eyebrow{font-family:'Inter';font-size:.68rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fadeUp .8s .3s forwards}
+    .hero-title{font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;line-height:1.05;color:#fff;margin-bottom:24px;opacity:0;animation:fadeUp .9s .5s forwards}
+    .hero-sub{font-size:1.3rem;font-style:italic;color:var(--muted);max-width:640px;margin:0 auto 40px;font-weight:300;opacity:0;animation:fadeUp .9s .7s forwards}
+    .hero-scroll{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 1s 1.2s forwards}
+    .hero-scroll span{font-family:'Inter';font-size:.6rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+    .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s infinite}
+    @keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+    /* DEBT TABLE ENGINE */
+    .debt-engine{background:var(--deep);border:1px solid var(--border);border-radius:var(--r);padding:44px 48px;position:relative}
+    @media(max-width:640px){.debt-engine{padding:28px 20px}}
+    
+    .debt-input-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 80px;gap:12px;margin-bottom:24px;align-items:end}
+    @media(max-width:768px){.debt-input-grid{grid-template-columns:1fr;gap:8px}}
+    .di-group{display:flex;flex-direction:column;gap:6px}
+    .di-label{font-family:'Inter';font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+    .di-input{height:42px;padding:0 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter';font-size:.9rem;outline:none}
+    .di-input:focus{border-color:var(--gold)}
+    .di-btn{height:42px;padding:0 16px;background:var(--gold-d);border:1px solid var(--gold-b);border-radius:8px;color:var(--gold);font-family:'Inter';font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:.3s;display:flex;align-items:center;justify-content:center}
+    .di-btn:hover{background:var(--gold);color:var(--void)}
+    
+    .debt-list{display:flex;flex-direction:column;gap:8px;margin-bottom:40px;min-height:60px}
+    .dl-item{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:12px;align-items:center;background:rgba(255,255,255,.02);border:1px solid var(--border);padding:12px 16px;border-radius:8px;font-family:'Inter';font-size:.85rem}
+    @media(max-width:768px){.dl-item{grid-template-columns:1fr;text-align:center;padding:16px}}
+    .dl-name{color:var(--text);font-weight:600}
+    .dl-val{color:var(--muted)}
+    .dl-rate{color:var(--danger)}
+    .dl-del{color:var(--muted2);cursor:pointer;background:none;border:none;font-size:1.1rem}
+    .dl-del:hover{color:var(--danger)}
+    .dl-empty{text-align:center;color:var(--muted2);font-style:italic;padding:20px;font-family:'Cormorant Garamond';font-size:1.1rem}
+
+    /* PSYCHOLOGY TOGGLE & RESULTS */
+    .pt-box{background:var(--surface);border:1px dashed var(--gold-b);border-radius:12px;padding:32px;text-align:center;margin-bottom:32px}
+    .pt-title{font-family:'Cinzel';font-size:1.2rem;color:var(--gold);margin-bottom:16px}
+    .pt-q{font-size:1.1rem;font-style:italic;color:var(--text);margin-bottom:24px}
+    .pt-options{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+    .pt-opt{flex:1;min-width:200px;max-width:280px;padding:16px;background:var(--deep);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:.3s;font-family:'Inter';font-size:.8rem;line-height:1.5;color:var(--muted)}
+    .pt-opt.active{background:rgba(201,168,76,.1);border-color:var(--gold);color:var(--gold)}
+    
+    .result-paths{display:none;grid-template-columns:1fr 1fr;gap:24px}
+    @media(max-width:768px){.result-paths{grid-template-columns:1fr}}
+    .rp-col{background:var(--deep);border:1px solid var(--border);border-radius:12px;padding:28px;position:relative;opacity:.4;transition:.5s}
+    .rp-col.active{opacity:1;border-color:var(--gold-b);box-shadow:0 0 30px rgba(201,168,76,.05)}
+    .rp-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--void);font-family:'Inter';font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:4px 12px;border-radius:20px;font-weight:700;display:none}
+    .rp-col.active .rp-badge{display:block}
+    
+    .rp-title{font-family:'Cinzel';font-size:1.3rem;color:#fff;margin-bottom:8px;text-align:center}
+    .rp-desc{font-size:.95rem;font-style:italic;color:var(--muted);text-align:center;margin-bottom:24px;min-height:48px}
+    
+    .rp-list{display:flex;flex-direction:column;gap:12px}
+    .rp-item{display:flex;align-items:center;gap:12px;background:var(--surface);padding:12px 16px;border-radius:8px;border:1px solid var(--border)}
+    .rp-num{width:28px;height:28px;border-radius:50%;background:var(--deep);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Inter';font-size:.7rem;color:var(--muted)}
+    .rp-col.active .rp-item{border-color:var(--gold-d)}
+    .rp-col.active .rp-num{background:var(--gold-d);color:var(--gold);border-color:var(--gold-b)}
+    .rp-i-name{flex:1;font-family:'Inter';font-size:.85rem;color:var(--text)}
+    .rp-i-stat{font-family:'Inter';font-size:.75rem;color:var(--danger)}
+
+    /* JOURNAL & DECLARATION */
+    .journal-section{display:flex;flex-direction:column;gap:20px}
+    .journal-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .3s}
+    .journal-item:focus-within{border-color:var(--gold-b)}
+    .journal-q{padding:24px 28px 16px;font-size:1.1rem;font-style:italic;color:var(--text);line-height:1.6}
+    .journal-q strong{font-style:normal;font-family:'Inter';font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+    .journal-item textarea{width:100%;padding:16px 28px 24px;background:none;border:none;border-top:1px solid var(--border);color:var(--text);font-family:'Cormorant Garamond';font-size:1.05rem;line-height:1.7;resize:vertical;min-height:100px;outline:none;transition:background .3s}
+    .journal-item textarea:focus{background:rgba(201,168,76,.02)}
+    .journal-item textarea::placeholder{color:var(--muted);font-style:italic}
+    .save-ind{font-family:'Inter';font-size:.6rem;letter-spacing:.1em;color:var(--success);padding:6px 28px;display:none;text-transform:uppercase}
+    .save-ind.show{display:block}
+    .journal-controls{display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:12px}
+    .jc-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--rp);font-family:'Inter';font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s;border:1px solid var(--border);background:none}
+    .jc-export{color:var(--gold);border-color:var(--gold-b)}.jc-export:hover{background:var(--gold);color:var(--void)}
+    .jc-clear{color:var(--muted)}.jc-clear:hover{color:var(--danger);border-color:rgba(232,72,85,.3);background:rgba(232,72,85,.05)}
+
+    .decl-box{text-align:center;padding:80px 48px;border:1px dashed var(--gold-b);border-radius:var(--r);background:radial-gradient(circle at 50% 0%,rgba(201,168,76,.06) 0%,transparent 65%);position:relative;overflow:hidden}
+    .decl-text{font-size:clamp(1.2rem,2.5vw,1.7rem);font-style:italic;font-weight:300;line-height:1.65;color:var(--text);max-width:680px;margin:0 auto 40px}
+    .decl-input-wrap{display:flex;gap:12px;justify-content:center;max-width:480px;margin:0 auto 16px}
+    .decl-input{flex:1;padding:14px 20px;background:rgba(255,255,255,.04);border:1px solid var(--gold-b);border-radius:var(--rp);color:var(--gold);font-family:'Cinzel';font-size:1rem;letter-spacing:.1em;outline:none;text-transform:uppercase;text-align:center;transition:border-color .4s,box-shadow .4s}
+    .decl-input:focus{background:var(--gold-g)}
+    .decl-input.error{border-color:var(--danger)!important;box-shadow:0 0 0 3px rgba(232,72,85,.15)!important}
+    .decl-input.success{border-color:var(--success)!important;box-shadow:0 0 20px rgba(46,204,113,.3)!important;color:var(--success)!important}
+    .decl-input::placeholder{color:var(--muted);font-family:'Inter';font-size:.75rem;text-transform:none;letter-spacing:.05em}
+    .decl-btn{padding:14px 28px;border-radius:var(--rp);border:1px solid var(--gold-b);background:none;color:var(--gold);font-family:'Inter';font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:.3s;white-space:nowrap}
+    .decl-btn:hover,.decl-btn.sealed{background:var(--gold);color:var(--void)}
+    .decl-hint{font-family:'Inter';font-size:.65rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:8px}
+    .decl-sealed-msg{display:none;margin-top:28px}.decl-sealed-msg.show{display:block;animation:fadeUp .6s ease forwards}
+    .decl-sealed-msg p{font-family:'Cinzel';font-size:.9rem;color:var(--gold);letter-spacing:.1em}
+    .decl-sealed-msg .sd{font-family:'Inter';font-size:.65rem;color:var(--muted);margin-top:8px;letter-spacing:.1em}
+    #p-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+
+    .whop-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(5,8,18,.95);border-top:1px solid var(--border);backdrop-filter:blur(14px);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .wb-left{display:flex;align-items:center;gap:16px}
+    .wb-module{display:flex;flex-direction:column}
+    .wb-m-label{font-family:'Inter';font-size:.6rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+    .wb-m-name{font-family:'Cinzel';font-size:.78rem;color:var(--text);letter-spacing:.05em}
+    .wb-progress-wrap{display:flex;align-items:center;gap:10px}
+    .wb-p-label{font-family:'Inter';font-size:.62rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+    .wb-p-track{width:120px;height:3px;background:var(--border);border-radius:3px;overflow:hidden}
+    .wb-p-fill{height:100%;background:var(--gold);width:0%;transition:width .5s;border-radius:3px}
+    .whop-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:var(--rp);background:var(--gold);color:var(--void);font-family:'Inter';font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;border:none;text-decoration:none;transition:.3s;white-space:nowrap}
+    .whop-btn:hover{background:var(--gold-l);transform:translateY(-1px)}
+    @media(max-width:640px){.wb-progress-wrap{display:none}}
+  </style>
+</head>
+<body>
+<div class="noise"></div>
+<canvas id="ambient-canvas"></canvas>
+
+<!-- WHOP BAR -->
+<div class="whop-bar">
+  <div class="wb-left">
+    <div class="wb-module">
+      <div class="wb-m-label">Currently Viewing</div>
+      <div class="wb-m-name">Module 11 · The Debt Decoder</div>
+    </div>
+    <div class="wb-progress-wrap">
+      <span class="wb-p-label">Progress</span>
+      <div class="wb-p-track"><div class="wb-p-fill" id="pfill"></div></div>
+    </div>
+  </div>
+  <a href="index.html" class="whop-btn">↩ Return to Course</a>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Financial Freedom Masterclass · Module 11</p>
+    <h1 class="hero-title">The Math & Your Psychology <br/><span class="g">Are Not The Same Problem.</span></h1>
+    <p class="hero-sub">Most debt advice picks a side and argues it like there's one correct answer. There isn't. The right method depends entirely on which failure mode is more likely to actually happen to you.</p>
+    <div class="hero-scroll">
+      <span>Scroll to Build Your Plan</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+<!-- LESSON BODY -->
+<div class="lesson-body-container" style="max-width: 800px; margin: 40px auto 60px; padding: 0 10px;">
+<div class="sec-divider sr"><span>The Math And Your Psychology Are Not The Same Problem</span></div>
+<p class="body-text sr">Most debt advice picks a side and argues it like there's one correct answer. There isn't. There are two different methods, optimising for two different things, and the right one for you depends on an honest read of your own psychology, not on which method sounds more disciplined.</p>
+<p class="body-text sr">This chapter gives you both methods in full, a real worked example so the difference isn't abstract, and a direct way to figure out which one actually fits you.</p>
+<div class="sec-divider sr"><span>Why This Comes Before Investing</span></div>
+<p class="body-text sr">High interest debt is a negative compounding force working against you exactly the way investment growth works for you, just in reverse. Clearing a debt charging 24% annual interest is mathematically equivalent to earning a guaranteed 24% return, risk free, because that's exactly how much you stop losing the moment it's gone. Almost no legitimate investment offers a guaranteed return anywhere close to that. Which means, in nearly every case, aggressively clearing high interest debt is the single highest return move available to you, ahead of most investing decisions.</p>
+<p class="body-text sr">This is why debt sits in this module before assets are built in upcoming Modules. Clear the leak before you try to fill the bucket.</p>
+<div class="sec-divider sr"><span>List Every Debt You Carry, Properly</span></div>
+<p class="body-text sr">Before choosing a method, build the actual list. For every debt you're carrying, write down four things: the total balance, the interest rate, the minimum monthly payment, and whether the terms are flexible or rigid.</p>
+<p class="body-text sr">This list is the raw material both methods work from. Don't skip building it properly to jump to the method, the method is meaningless without accurate numbers underneath it.</p>
+<div class="sec-divider sr"><span>Method One: The Debt Avalanche</span></div>
+<p class="body-text sr"><strong>The rule.</strong> Pay the minimum on every debt to stay in good standing. Every extra dollar of surplus goes to the debt with the highest interest rate, regardless of its balance. Once that debt is cleared, roll its full payment amount into the next highest interest rate debt, and repeat.</p>
+<p class="body-text sr"><strong>What it optimises for.</strong> The lowest total interest paid, and the shortest total time to being fully debt free, mathematically.</p>
+<p class="body-text sr"><strong>The real weakness.</strong> If your highest interest debt also happens to be your largest balance, it can take a long time before you clear a single account completely, and that stretch of invisible progress is where a lot of people quietly lose motivation and abandon the plan.</p>
+<div class="sec-divider sr"><span>Method Two: The Debt Snowball</span></div>
+<p class="body-text sr"><strong>The rule.</strong> Pay the minimum on every debt. Every extra dollar goes to the debt with the smallest balance, regardless of its interest rate. Once that one is cleared, roll its payment into the next smallest balance, and repeat.</p>
+<p class="body-text sr"><strong>What it optimises for.</strong> Visible, fast wins. You get to fully close an account quickly, which produces a real psychological reward, and that reward is what keeps most people actually sticking with the plan long enough to finish it.</p>
+<p class="body-text sr"><strong>The real weakness.</strong> It costs more in total interest over the life of the debts, and takes mathematically longer, than the Avalanche method, because it deliberately ignores which debt is actually costing you the most.</p>
+<div class="sec-divider sr"><span>A Full Worked Example, So You Can See The Difference</span></div>
+<p class="body-text sr">Say you're carrying three debts.</p>
+<p class="body-text sr">Debt A: a personal loan, balance 80,000, interest rate 28%, minimum payment 4,000 a month. Debt B: a credit card, balance 20,000, interest rate 24%, minimum payment 1,500 a month. Debt C: an asset loan, balance 150,000, interest rate 14%, minimum payment 6,000 a month.</p>
+<p class="body-text sr">You have 3,000 a month in genuine surplus to put toward extra payments, beyond the minimums.</p>
+<p class="body-text sr"><strong>Under the Avalanche method:</strong> Debt A has the highest rate at 28%, so all 3,000 extra goes there first, on top of its 4,000 minimum, meaning 7,000 a month toward Debt A while B and C get only their minimums. Once A is fully cleared, its entire 7,000 rolls into Debt B, the next highest rate at 24%, clearing it fast. Then everything rolls into Debt C. Total interest paid across all three debts, over the life of the plan, is the lowest mathematically possible outcome.</p>
+<p class="body-text sr"><strong>Under the Snowball method:</strong> Debt B has the smallest balance at 20,000, so all 3,000 extra goes there first, on top of its 1,500 minimum, meaning 4,500 a month toward B. B clears fast, likely within a handful of months, producing a real, visible win. That full 4,500 then rolls into Debt A, the next smallest balance, even though it carries the highest interest rate of the three. Total interest paid across all three debts will end up higher than the Avalanche outcome, but you'll have closed your first account significantly sooner.</p>
+<p class="body-text sr">Neither number is wrong. They're optimising for two different things, and the "correct" one depends entirely on which failure mode is more likely to actually happen to you, giving up from lack of visible progress, or losing money from an emotionally driven but mathematically suboptimal order.</p>
+<div class="sec-divider sr"><span>The Honest Question That Actually Decides This</span></div>
+<p class="body-text sr">Don't choose based on which method sounds more disciplined or more impressive to say out loud. Choose based on an honest read of your own track record.</p>
+<p class="body-text sr">Ask yourself directly: when you've tried structured financial plans before, have you more often abandoned them because progress felt too slow and invisible, or have you generally stuck with a plan once you understood the math behind it, regardless of how long the first win took?</p>
+<p class="body-text sr">If the honest answer is that you've abandoned plans before from lack of visible progress, the Snowball method isn't a lesser choice. It's the one actually likely to get you to debt free, because a mathematically perfect plan you abandon in month four is worth nothing compared to a slightly less efficient plan you actually finish.</p>
+<p class="body-text sr">If the honest answer is that you can sustain motivation through a long stretch without a visible win, as long as you trust the math is working, the Avalanche method will save you real money and time, and there's no reason to pay extra interest for a psychological cushion you don't actually need.</p>
+<div class="sec-divider sr"><span>A Third Option Worth Naming</span></div>
+<p class="body-text sr">Some people use a hybrid: Snowball the smallest one or two debts first specifically to build momentum and prove the plan to themselves, then switch to pure Avalanche ordering for the rest once that initial motivation is established. This isn't cheating either method. It's a reasonable middle path if you're genuinely unsure which failure mode is more likely for you.</p>
+<div class="sec-divider sr"><span>What Happens Once The Debt Is Cleared</span></div>
+<p class="body-text sr">Whichever method you choose, the moment a debt is cleared, don't let that freed up monthly payment quietly absorb into your regular spending. That amount should roll directly into the next debt on your list, and once every debt on the list is gone, that same monthly amount becomes the fastest possible way to close any remaining gap in your liquidity buffer, or, once the buffer is fully funded, the fastest possible way to accelerate your investing from the last chapter. The discipline of that monthly amount doesn't disappear once the debt does. It just changes jobs.</p>
+<p class="body-text sr">---</p>
+<div class="sec-divider sr"><span>Step 10: Build Your Actual Plan</span></div>
+<p class="body-text sr">Work through this with your real numbers.</p>
+<p class="body-text sr">1. List every debt you currently carry: balance, interest rate, minimum payment, and whether the terms are flexible or rigid.</p>
+<p class="body-text sr">2. Order that list two ways: once by interest rate, highest to lowest, and once by balance, smallest to largest. Write both orderings out.</p>
+<p class="body-text sr">3. How much genuine monthly surplus do you have available to put toward extra payments, beyond all your minimums combined?</p>
+<p class="body-text sr">4. Honestly, when you've attempted structured plans before, financial or otherwise, have you more often abandoned them from lack of visible progress, or stuck with them once you trusted the underlying logic?</p>
+<p class="body-text sr">5. Based on your honest answer to question four, which method, Avalanche, Snowball, or the hybrid approach, actually fits your track record?</p>
+<p class="body-text sr">6. Using your chosen method, name the exact first debt your extra surplus will be directed toward starting this month.</p>
+<p class="body-text sr">7. Estimate, using your real numbers, roughly how many months it will take to fully clear that first debt at your current surplus level.</p>
+<p class="body-text sr">8. Once that first debt is cleared, which debt does the freed up payment roll into next? Write out the full sequence in order.</p>
+<p class="body-text sr">9. Is there a rigid, high interest debt on your list that deserves special attention regardless of which method you choose, simply because of how much it's actively costing you?</p>
+<p class="body-text sr">10. Commit in writing to your chosen method, your first target debt, and the date you'll check your progress against this plan.</p>
+<p class="body-text sr">---</p>
+<p class="body-text sr"><em>Keep this plan visible somewhere you'll actually see it. The next chapter deals with the leak that quietly undoes debt plans and buffers alike, lifestyle inflation, and why the exact surplus you just built a plan around is the same surplus that's most at risk of quietly disappearing before it ever reaches a debt payment.</em></p>
+
+</div>
+<!-- END LESSON BODY -->
+
+  <!-- DEBT DECODER ENGINE -->
+  <div class="sec-divider sr"><span>List The Raw Materials</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <h2 class="sec-title">Clear The Leak <span style="color:var(--gold)">Before</span> You Fill The Bucket</h2>
+    <p class="body-text lg">High interest debt is a negative compounding force. Clearing a 24% debt is mathematically equivalent to earning a guaranteed 24% return, risk-free. Almost no legitimate investment offers that.</p>
+    <p class="body-text" style="color:var(--muted)">Don't skip building this list properly to jump to the method. The method is meaningless without accurate numbers underneath it.</p>
+  </div>
+
+  <div class="debt-engine sr">
+    <div class="debt-input-grid">
+      <div class="di-group">
+        <label class="di-label">Debt Name</label>
+        <input type="text" class="di-input" id="d-name" placeholder="e.g. Credit Card A"/>
+      </div>
+      <div class="di-group">
+        <label class="di-label">Balance</label>
+        <input type="number" class="di-input" id="d-bal" placeholder="20000"/>
+      </div>
+      <div class="di-group">
+        <label class="di-label">Interest Rate (%)</label>
+        <input type="number" class="di-input" id="d-rate" placeholder="24"/>
+      </div>
+      <div class="di-group">
+        <label class="di-label">Min Payment</label>
+        <input type="number" class="di-input" id="d-min" placeholder="1500"/>
+      </div>
+      <div class="di-group">
+        <label class="di-label" style="visibility:hidden">Add</label>
+        <button class="di-btn" onclick="addDebt()">+ Add</button>
+      </div>
+    </div>
+    
+    <div class="debt-list" id="debt-list">
+      <div class="dl-empty">Add your debts above to generate your strategy.</div>
+    </div>
+
+    <div class="pt-box" id="pt-box" style="display:none;opacity:0;transition:.5s">
+      <div class="pt-title">The Honest Question</div>
+      <div class="pt-q">When you've tried structured financial plans before, why did you abandon them?</div>
+      <div class="pt-options">
+        <div class="pt-opt" id="opt-snow" onclick="selectStrategy('snow')">
+          <strong style="color:var(--text);display:block;margin-bottom:8px">"I gave up because progress felt too slow."</strong>
+          I need fast, visible wins to stay motivated, even if it mathematically costs slightly more interest.
+        </div>
+        <div class="pt-opt" id="opt-ava" onclick="selectStrategy('ava')">
+          <strong style="color:var(--text);display:block;margin-bottom:8px">"I stuck with it because I trusted the logic."</strong>
+          I can survive a long stretch without a visible win, as long as I know I am saving the absolute maximum amount of money.
+        </div>
+      </div>
+    </div>
+    
+    <div class="result-paths" id="result-paths">
+      <!-- Avalanche Path -->
+      <div class="rp-col" id="col-ava">
+        <div class="rp-badge">Your Recommended Path</div>
+        <div class="rp-title">The Avalanche</div>
+        <div class="rp-desc">Optimises for the lowest total interest paid and the shortest absolute time to being debt free.</div>
+        <div class="rp-list" id="list-ava"></div>
+      </div>
+      
+      <!-- Snowball Path -->
+      <div class="rp-col" id="col-snow">
+        <div class="rp-badge">Your Recommended Path</div>
+        <div class="rp-title">The Snowball</div>
+        <div class="rp-desc">Optimises for visible psychological wins by fully closing accounts as fast as possible.</div>
+        <div class="rp-list" id="list-snow"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISUAL DIAGRAM: THE ROLLOVER EFFECT -->
+  <div class="card sr" style="margin-top:28px">
+    <h2 class="sec-title" style="font-size:1.6rem;text-align:center">Visualising The Rollover Effect</h2>
+    <p class="body-text" style="text-align:center;color:var(--text);max-width:700px;margin:0 auto 24px">Follow the arrows below. When Debt 1 is cleared, its $1,500 minimum payment doesn't get absorbed into your lifestyle. It rolls directly into the next debt on your list, creating a $4,500 payment. By the time the final debt is cleared, you are left with a massive $10,500 monthly surplus.</p>
+    <p class="body-text" style="text-align:center;color:var(--muted);font-style:italic;max-width:600px;margin:0 auto 40px">Whichever method you choose, the discipline of the monthly payment does not disappear when the debt does. It just changes jobs.</p>
+    
+    <div style="display:flex;flex-direction:column;gap:16px;max-width:800px;margin:0 auto">
+      <!-- Step 1 -->
+      <div style="display:flex;align-items:center;gap:16px">
+        <div style="width:120px;padding:12px;background:var(--deep);border:1px solid var(--border);border-radius:8px;text-align:center;font-family:'Inter';font-size:.75rem">
+          <div style="color:var(--danger);font-weight:700;font-size:1rem;margin-bottom:4px">$1,500</div>
+          Min Payment
+        </div>
+        <div style="flex:1;height:2px;background:var(--border);position:relative">
+          <div style="position:absolute;right:0;top:-4px;width:10px;height:10px;border-top:2px solid var(--muted);border-right:2px solid var(--muted);transform:rotate(45deg)"></div>
+        </div>
+        <div style="width:160px;padding:16px;background:rgba(232,72,85,.05);border:1px solid var(--danger);border-radius:8px;text-align:center;font-family:'Cinzel';font-size:.9rem;color:var(--danger)">
+          Debt 1 Cleared
+        </div>
+      </div>
+      
+      <!-- Step 2 -->
+      <div style="display:flex;align-items:center;gap:16px">
+        <div style="width:120px;padding:12px;background:var(--deep);border:1px solid var(--border);border-radius:8px;text-align:center;font-family:'Inter';font-size:.75rem">
+          <div style="color:var(--danger);font-weight:700;font-size:1rem;margin-bottom:4px">$4,500</div>
+          Rolled Payment
+        </div>
+        <div style="flex:1;height:2px;background:var(--border);position:relative">
+          <div style="position:absolute;right:0;top:-4px;width:10px;height:10px;border-top:2px solid var(--muted);border-right:2px solid var(--muted);transform:rotate(45deg)"></div>
+        </div>
+        <div style="width:160px;padding:16px;background:rgba(232,72,85,.05);border:1px solid var(--danger);border-radius:8px;text-align:center;font-family:'Cinzel';font-size:.9rem;color:var(--danger)">
+          Debt 2 Cleared
+        </div>
+      </div>
+
+      <!-- Step 3 (The Flip) -->
+      <div style="display:flex;align-items:center;gap:16px">
+        <div style="width:120px;padding:12px;background:var(--deep);border:1px solid var(--gold);border-radius:8px;text-align:center;font-family:'Inter';font-size:.75rem">
+          <div style="color:var(--gold);font-weight:700;font-size:1rem;margin-bottom:4px">$10,500</div>
+          Surplus Freed
+        </div>
+        <div style="flex:1;height:2px;background:var(--gold-b);position:relative">
+          <div style="position:absolute;right:0;top:-4px;width:10px;height:10px;border-top:2px solid var(--gold);border-right:2px solid var(--gold);transform:rotate(45deg)"></div>
+        </div>
+        <div style="width:160px;padding:16px;background:rgba(46,204,113,.1);border:1px solid var(--success);border-radius:8px;text-align:center;font-family:'Cinzel';font-size:.9rem;color:var(--success);box-shadow:0 0 20px rgba(46,204,113,.15)">
+          Wealth Engine
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- JOURNAL -->
+  <div class="sec-divider sr"><span>Written Reflection — 10 Prompts</span></div>
+
+  <div class="card sr" style="margin-bottom:28px;border-color:var(--gold-b)">
+    <p class="body-text" style="margin:0;font-style:italic;color:var(--muted)">Don't choose based on which method sounds more impressive to say out loud. Choose based on an honest read of your own track record.</p>
+  </div>
+
+  <div class="journal-section sr">
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 01</strong>List every debt you currently carry: balance, interest rate, minimum payment, and whether the terms are flexible or rigid.</div><textarea id="r1" placeholder="Write your honest answer here..." oninput="saveJ('r1')"></textarea><div class="save-ind" id="sv-r1">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 02</strong>Order that list two ways: once by interest rate (highest to lowest), and once by balance (smallest to largest).</div><textarea id="r2" placeholder="Write your honest answer here..." oninput="saveJ('r2')"></textarea><div class="save-ind" id="sv-r2">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 03</strong>How much genuine monthly surplus do you have available to put toward extra payments, beyond all your minimums combined?</div><textarea id="r3" placeholder="Write your honest answer here..." oninput="saveJ('r3')"></textarea><div class="save-ind" id="sv-r3">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 04</strong>Honestly, when you've attempted structured plans before, have you more often abandoned them from lack of visible progress, or stuck with them once you trusted the logic?</div><textarea id="r4" placeholder="Write your honest answer here..." oninput="saveJ('r4')"></textarea><div class="save-ind" id="sv-r4">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 05</strong>Based on your honest answer to question four, which method (Avalanche, Snowball, or hybrid) actually fits your track record?</div><textarea id="r5" placeholder="Write your honest answer here..." oninput="saveJ('r5')"></textarea><div class="save-ind" id="sv-r5">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 06</strong>Using your chosen method, name the exact first debt your extra surplus will be directed toward starting this month.</div><textarea id="r6" placeholder="Write your honest answer here..." oninput="saveJ('r6')"></textarea><div class="save-ind" id="sv-r6">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 07</strong>Estimate roughly how many months it will take to fully clear that first debt at your current surplus level.</div><textarea id="r7" placeholder="Write your honest answer here..." oninput="saveJ('r7')"></textarea><div class="save-ind" id="sv-r7">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 08</strong>Once that first debt is cleared, which debt does the freed-up payment roll into next? Write out the full sequence in order.</div><textarea id="r8" placeholder="Write your honest answer here..." oninput="saveJ('r8')"></textarea><div class="save-ind" id="sv-r8">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 09</strong>Is there a rigid, high interest debt on your list that deserves special attention regardless of your method, simply because of how much it costs you?</div><textarea id="r9" placeholder="Write your honest answer here..." oninput="saveJ('r9')"></textarea><div class="save-ind" id="sv-r9">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 10</strong>Commit in writing to your chosen method, your first target debt, and the date you'll check your progress against this plan.</div><textarea id="r10" placeholder="I commit to..." oninput="saveJ('r10')"></textarea><div class="save-ind" id="sv-r10">✓ Saved</div></div>
+  </div>
+
+  <div class="journal-controls sr">
+    <button class="jc-btn jc-export" onclick="exportJournal()">📥 Download My Reflections</button>
+    <button class="jc-btn jc-clear" onclick="clearJournal()">🗑 Clear &amp; Reset</button>
+  </div>
+
+  <!-- DECLARATION -->
+  <div class="sec-divider sr"><span>The Declaration</span></div>
+
+  <div class="decl-box sr">
+    <canvas id="p-canvas"></canvas>
+    <p class="tag">Seal The Target</p>
+    <p class="decl-text">"I will not pay minimums equally and hope for the best. I commit to a targeted attack on my debt, ordered not by what sounds impressive, but by what will actually keep me in the fight until it is gone."</p>
+    <div class="decl-input-wrap">
+      <input type="text" class="decl-input" id="decl-in" placeholder='Type "I ACCEPT" to seal this'/>
+      <button class="decl-btn" onclick="sealDecl()">Seal</button>
+    </div>
+    <p class="decl-hint">Type "I ACCEPT" and press Seal</p>
+    <div class="decl-sealed-msg" id="sealed-msg">
+      <p>✦ THE PLAN IS SET. THE ATTACK BEGINS. ✦</p>
+      <p class="sd" id="sealed-date"></p>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:center;align-items:center;margin-top:60px;margin-bottom:20px;flex-wrap:wrap;gap:16px" class="sr">
+  <a href="module-10.html" class="whop-btn" style="text-decoration:none; background:transparent; color:var(--gold); border:1px solid var(--gold);">&#8592; Previous</a>
+  <a href="index.html" class="whop-btn" style="text-decoration:none;">&#8617; Return to Course</a>
+  <a href="module-12.html" class="whop-btn" style="text-decoration:none; background:transparent; color:var(--gold); border:1px solid var(--gold);">Next Module &#8594;</a>
+</div>
+</main>
+
+<script>
+/* AMBIENT CANVAS */
+(function(){
+  const c=document.getElementById('ambient-canvas'),ctx=c.getContext('2d');let s=[];
+  const resize=()=>{c.width=innerWidth;c.height=innerHeight};
+  const init=()=>{s=[];for(let i=0;i<120;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.1+.2,speed:Math.random()*.16+.04,op:Math.random()*.5+.1,tw:Math.random()*Math.PI*2})};
+  const draw=()=>{ctx.clearRect(0,0,c.width,c.height);s.forEach(p=>{p.tw+=.007;const o=p.op*(.6+.4*Math.sin(p.tw));ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(201,168,76,${o})`;ctx.fill();p.y-=p.speed;if(p.y<0){p.y=c.height;p.x=Math.random()*c.width}});requestAnimationFrame(draw)};
+  resize();init();draw();window.addEventListener('resize',()=>{resize();init()});
+})();
+
+/* SCROLL REVEAL */
+(()=>{
+  const obs=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('v');obs.unobserve(en.target)}}),{threshold:.07});
+  document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
+})();
+
+/* PROGRESS */
+window.addEventListener('scroll',()=>{document.getElementById('pfill').style.width=Math.round((scrollY/(document.body.scrollHeight-innerHeight))*100)+'%'});
+
+/* DEBT DECODER ENGINE */
+let debts = [];
+function addDebt(){
+  const name = document.getElementById('d-name').value.trim();
+  const bal = parseFloat(document.getElementById('d-bal').value);
+  const rate = parseFloat(document.getElementById('d-rate').value);
+  const min = parseFloat(document.getElementById('d-min').value);
+  
+  if(!name || isNaN(bal) || isNaN(rate) || isNaN(min)) return;
+  
+  debts.push({id: Date.now(), name, bal, rate, min});
+  
+  document.getElementById('d-name').value = '';
+  document.getElementById('d-bal').value = '';
+  document.getElementById('d-rate').value = '';
+  document.getElementById('d-min').value = '';
+  
+  renderDebts();
+}
+
+function removeDebt(id){
+  debts = debts.filter(d => d.id !== id);
+  renderDebts();
+}
+
+function renderDebts(){
+  const list = document.getElementById('debt-list');
+  const ptBox = document.getElementById('pt-box');
+  const resultPaths = document.getElementById('result-paths');
+  
+  if(debts.length === 0){
+    list.innerHTML = '<div class="dl-empty">Add your debts above to generate your strategy.</div>';
+    ptBox.style.display = 'none';
+    resultPaths.style.display = 'none';
+    return;
+  }
+  
+  let html = '';
+  debts.forEach(d => {
+    html += `
+      <div class="dl-item">
+        <div class="dl-name">${d.name}</div>
+        <div class="dl-val">Bal: $${d.bal.toLocaleString()}</div>
+        <div class="dl-rate">Rate: ${d.rate}%</div>
+        <div class="dl-val">Min: $${d.min.toLocaleString()}</div>
+        <button class="dl-del" onclick="removeDebt(${d.id})">×</button>
+      </div>
+    `;
+  });
+  list.innerHTML = html;
+  
+  // Show the psychology question and results
+  ptBox.style.display = 'block';
+  setTimeout(()=> ptBox.style.opacity = '1', 50);
+  resultPaths.style.display = 'grid';
+  
+  generatePaths();
+}
+
+function generatePaths(){
+  // Avalanche = Highest Rate First
+  const ava = [...debts].sort((a,b) => b.rate - a.rate);
+  const avaList = document.getElementById('list-ava');
+  let avaHtml = '';
+  ava.forEach((d, i) => {
+    avaHtml += `
+      <div class="rp-item">
+        <div class="rp-num">${i+1}</div>
+        <div class="rp-i-name">${d.name} <span style="color:var(--muted);font-size:.7rem">($${d.bal.toLocaleString()})</span></div>
+        <div class="rp-i-stat">${d.rate}%</div>
+      </div>
+    `;
+  });
+  avaList.innerHTML = avaHtml;
+
+  // Snowball = Lowest Balance First
+  const snow = [...debts].sort((a,b) => a.bal - b.bal);
+  const snowList = document.getElementById('list-snow');
+  let snowHtml = '';
+  snow.forEach((d, i) => {
+    snowHtml += `
+      <div class="rp-item">
+        <div class="rp-num">${i+1}</div>
+        <div class="rp-i-name">${d.name} <span style="color:var(--danger);font-size:.7rem">(${d.rate}%)</span></div>
+        <div class="rp-i-stat">$${d.bal.toLocaleString()}</div>
+      </div>
+    `;
+  });
+  snowList.innerHTML = snowHtml;
+}
+
+function selectStrategy(type){
+  document.getElementById('opt-snow').classList.remove('active');
+  document.getElementById('opt-ava').classList.remove('active');
+  document.getElementById('col-snow').classList.remove('active');
+  document.getElementById('col-ava').classList.remove('active');
+  
+  if(type === 'snow'){
+    document.getElementById('opt-snow').classList.add('active');
+    document.getElementById('col-snow').classList.add('active');
+  } else {
+    document.getElementById('opt-ava').classList.add('active');
+    document.getElementById('col-ava').classList.add('active');
+  }
+}
+
+/* JOURNAL */
+['r1','r2','r3','r4','r5','r6','r7','r8','r9','r10'].forEach(id=>{
+  const saved=localStorage.getItem('ffm11_'+id);if(saved){const el=document.getElementById(id);if(el)el.value=saved}
+});
+function saveJ(id){
+  const val=document.getElementById(id)?.value||'';localStorage.setItem('ffm11_'+id,val);
+  const ind=document.getElementById('sv-'+id);if(ind){ind.classList.add('show');setTimeout(()=>ind.classList.remove('show'),2000)}
+}
+function exportJournal(){
+  const qs=[
+    'List every debt you currently carry.',
+    'Order that list two ways: once by rate, once by balance.',
+    'How much genuine monthly surplus do you have available?',
+    'When you\'ve attempted plans before, have you abandoned them from lack of progress, or stuck with the logic?',
+    'Which method actually fits your track record?',
+    'Name the exact first debt your surplus will be directed toward.',
+    'Estimate how many months it will take to fully clear that first debt.',
+    'Once cleared, which debt does the freed-up payment roll into next?',
+    'Is there a rigid, high interest debt that deserves special attention?',
+    'Commit in writing to your chosen method and first target debt.'
+  ];
+  const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  let content=`FINANCIAL FREEDOM MASTERCLASS\nModule 11: The Debt Decoder\nJournal Export — ${date}\n${'='.repeat(60)}\n\n`;
+  qs.forEach((q,i)=>{const key='ffm11_r'+(i+1);const answer=localStorage.getItem(key)||'(No answer written yet)';content+=`Reflection ${String(i+1).padStart(2,'0')}: ${q}\n\n${answer}\n\n${'-'.repeat(60)}\n\n`;});
+  const blob=new Blob([content],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='Module-11-Journal.txt';a.click();URL.revokeObjectURL(url);
+}
+function clearJournal(){
+  if(!confirm('Clear all reflection answers for Module 11? This cannot be undone.'))return;
+  ['r1','r2','r3','r4','r5','r6','r7','r8','r9','r10'].forEach(id=>{localStorage.removeItem('ffm11_'+id);const el=document.getElementById(id);if(el)el.value='';});
+}
+
+/* DECLARATION */
+(function(){
+  if(localStorage.getItem('ffm11_declaration')){
+    const d=localStorage.getItem('ffm11_declaration_date');
+    document.getElementById('decl-in').value='I ACCEPT';document.getElementById('decl-in').disabled=true;
+    document.querySelector('.decl-btn').classList.add('sealed');document.querySelector('.decl-btn').textContent='✦ Sealed';
+    document.getElementById('sealed-msg').classList.add('show');document.getElementById('sealed-date').textContent='Declared on '+d;
+  }
+})();
+function sealDecl(){
+  const inp=document.getElementById('decl-in');
+  if(inp.value.trim().toUpperCase()!=='I ACCEPT'){
+    inp.classList.add('error');inp.style.animation='shake .4s ease';
+    setTimeout(()=>{inp.classList.remove('error');inp.style.animation=''},600);return;
+  }
+  inp.classList.add('success');
+  const now=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  localStorage.setItem('ffm11_declaration','true');localStorage.setItem('ffm11_declaration_date',now);
+  setTimeout(()=>{
+    inp.disabled=true;document.querySelector('.decl-btn').classList.add('sealed');document.querySelector('.decl-btn').textContent='✦ Sealed';
+    document.getElementById('sealed-msg').classList.add('show');document.getElementById('sealed-date').textContent='Declared on '+now;
+    firePart();
+  },500);
+}
+function firePart(){
+  const canvas=document.getElementById('p-canvas'),ctx=canvas.getContext('2d');
+  canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;
+  const cx=canvas.width/2,cy=canvas.height/2,particles=[];
+  for(let i=0;i<120;i++){const a=Math.random()*Math.PI*2,sp=Math.random()*7+2;particles.push({x:cx,y:cy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,alpha:1,size:Math.random()*5+1,color:`hsl(${40+Math.random()*20},90%,${55+Math.random()*20}%)`})}
+  function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);let alive=false;particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.1;p.alpha-=.014;if(p.alpha>0)alive=true;ctx.globalAlpha=Math.max(0,p.alpha);ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=p.color;ctx.fill()});if(alive)requestAnimationFrame(anim);else ctx.clearRect(0,0,canvas.width,canvas.height);}
+  anim();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard | Financial Freedom Masterclass</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root { --void:#030507; --gold:#C9A84C; --gold-l:#E8C97A; --gold-d:rgba(201,168,76,0.15); --gold-g:rgba(201,168,76,0.06); --border:rgba(255,255,255,0.07); --text:#EEF0F4; --muted:#7A8290; --surface:rgba(255,255,255,0.03); --r:20px; --rp:100px; --success:#2ECC71;}
+    *{box-sizing:border-box;margin:0;padding:0}
+    ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--void)}::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.3);border-radius:4px}
+    body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',serif;overflow-x:hidden;min-height:100vh}
+    .noise{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:999;opacity:0.07;mix-blend-mode:overlay;background-image:url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)"/%3E%3C/svg%3E')}
+    #ambient-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.25}
+    main{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:80px 28px 80px}
+    
+    .hero{min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 0}
+    .hero-eyebrow{font-family:'Inter';font-size:0.68rem;letter-spacing:0.35em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;}
+    .hero-title{font-family:'Cinzel',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:900;line-height:1.05;color:#fff;margin-bottom:20px;}
+    .hero-title .g{color:var(--gold)}
+    .hero-sub{font-size:1.3rem;font-style:italic;color:var(--muted);max-width:580px;margin:0 auto;font-weight:300;}
+    
+    .chapter-wrap{margin-bottom:80px;}
+    .chap-title{font-family:'Cinzel';font-size:2rem;color:#fff;margin-bottom:32px;display:flex;align-items:center;gap:24px;}
+    .chap-title::after{content:'';flex:1;height:1px;background:var(--border);}
+
+    .module-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;}
+    .module-card{
+      background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+      padding:36px 32px;cursor:pointer;transition:all 0.4s; text-decoration:none;display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden;
+    }
+    .module-card:hover{transform:translateY(-6px);border-color:rgba(201,168,76,0.3);background:var(--gold-g)}
+    .mc-num{font-family:'Inter';font-size:0.6rem;letter-spacing:0.25em;color:var(--gold);text-transform:uppercase}
+    .mc-title{font-family:'Cinzel';font-size:1.1rem;color:#fff;letter-spacing:0.04em}
+    .mc-desc{font-size:1rem;color:var(--muted);line-height:1.6}
+    .mc-arrow{font-family:'Inter';font-size:.7rem;color:var(--gold);margin-top:auto;padding-top:12px;letter-spacing:.1em;text-transform:uppercase}
+    
+    .mc-progress{margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+    .mc-prog-bar{width:100%;height:3px;background:var(--border);border-radius:3px;overflow:hidden;margin-bottom:8px}
+    .mc-prog-fill{height:100%;background:var(--gold);border-radius:3px;width:0%;transition:width .8s;}
+    .mc-prog-labels{display:flex;justify-content:space-between;align-items:center}
+    .mc-prog-text{font-family:'Inter';font-size:.6rem;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+    .mc-prog-decl{font-family:'Inter';font-size:.58rem;color:var(--success);letter-spacing:.08em;text-transform:uppercase;display:none}
+    .mc-prog-decl.show{display:inline}
+  </style>
+</head>
+<body>
+<div class="noise"></div>
+<canvas id="ambient-canvas"></canvas>
+<main>
+  <section class="hero">
+    <p class="hero-eyebrow">Financial Freedom Masterclass</p>
+    <h1 class="hero-title">Your Path to<br/><span class="g">Financial</span><br/>Freedom</h1>
+    <p class="hero-sub">Select a module to begin its interactive infographic experience.</p>
+  </section>
+
+  <div class="chapter-wrap">
+    <div class="chap-title">Chapter 1: The Foundation</div>
+    <div class="module-grid"><a href="module-1.html" class="module-card">
+    <div class="mc-num">Module 01</div>
+    <div class="mc-title">The Foundation</div>
+    <div class="mc-desc">Understand the real meaning of rich vs. wealthy vs. free. Take the Fragility Test.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-1"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-1">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-1">✓ Declared</span></div>
+    </div>
+  </a><a href="module-2.html" class="module-card">
+    <div class="mc-num">Module 02</div>
+    <div class="mc-title">The Fragility Trap</div>
+    <div class="mc-desc">Diagnose the four seasons of your financial life.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-2"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-2">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-2">✓ Declared</span></div>
+    </div>
+  </a><a href="module-3.html" class="module-card">
+    <div class="mc-num">Module 03</div>
+    <div class="mc-title">The Mind Behind the Money</div>
+    <div class="mc-desc">Strategy without identity change is temporary.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-3"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-3">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-3">✓ Declared</span></div>
+    </div>
+  </a><a href="module-4.html" class="module-card">
+    <div class="mc-num">Module 04</div>
+    <div class="mc-title">Your Internal Operating System</div>
+    <div class="mc-desc">Diagnose your financial OS.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-4"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-4">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-4">✓ Declared</span></div>
+    </div>
+  </a><a href="module-5.html" class="module-card">
+    <div class="mc-num">Module 05</div>
+    <div class="mc-title">The Real Cost of Comfort</div>
+    <div class="mc-desc">Map your income concentration and reveal your true foundation.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-5"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-5">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-5">✓ Declared</span></div>
+    </div>
+  </a></div></div>
+<div class="chapter-wrap">
+  <div class="chap-title">Chapter 2: Earn More</div>
+  <div class="module-grid"><a href="module-6.html" class="module-card">
+    <div class="mc-num">Module 06</div>
+    <div class="mc-title">Earn More (Inside)</div>
+    <div class="mc-desc">Master visibility and diagnose if you are a Workhorse, an Empty Suit, or a Linchpin.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-6"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-6">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-6">✓ Declared</span></div>
+    </div>
+  </a><a href="module-7.html" class="module-card">
+    <div class="mc-num">Module 07</div>
+    <div class="mc-title">The Skills Audit</div>
+    <div class="mc-desc">Unbundle your job title into raw value. Avoid the Second Nature trap.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-7"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-7">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-7">✓ Declared</span></div>
+    </div>
+  </a><a href="module-8.html" class="module-card">
+    <div class="mc-num">Module 08</div>
+    <div class="mc-title">The Late Bloomer Advantage</div>
+    <div class="mc-desc">Calculate your hidden moat and decrypt the overnight success myth.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-8"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-8">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-8">✓ Declared</span></div>
+    </div>
+  </a><a href="module-9.html" class="module-card">
+    <div class="mc-num">Module 09</div>
+    <div class="mc-title">The Low-Risk Test</div>
+    <div class="mc-desc">Simulate the Dual Track approach and build your 30-day Micro-Test Blueprint.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-9"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-9">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-9">✓ Declared</span></div>
+    </div>
+  </a></div></div>
+<div class="chapter-wrap">
+  <div class="chap-title">Chapter 3: Manage Better</div>
+  <div class="module-grid"><a href="module-10.html" class="module-card">
+    <div class="mc-num">Module 10</div>
+    <div class="mc-title">Two Different Jobs</div>
+    <div class="mc-desc">Calculate your buffer, identify your idle surplus, and see the Silent Tax.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-10"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-10">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-10">✓ Declared</span></div>
+    </div>
+  </a><a href="module-11.html" class="module-card">
+    <div class="mc-num">Module 11</div>
+    <div class="mc-title">The Debt Decoder</div>
+    <div class="mc-desc">Input your debts and map out the exact Avalanche and Snowball payoff paths.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-11"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-11">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-11">✓ Declared</span></div>
+    </div>
+  </a><a href="module-12.html" class="module-card">
+    <div class="mc-num">Module 12</div>
+    <div class="mc-title">The Leak That Undoes Everything</div>
+    <div class="mc-desc">Automate the 50/30/20 split and simulate the 12-Month Freeze.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-12"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-12">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-12">✓ Declared</span></div>
+    </div>
+  </a><a href="module-13.html" class="module-card">
+    <div class="mc-num">Module 13</div>
+    <div class="mc-title">Pressure Testing Defences</div>
+    <div class="mc-desc">The Bullshit Detector and the Structural Scam Visualizer.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-13"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-13">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-13">✓ Declared</span></div>
+    </div>
+  </a></div></div>
+<div class="chapter-wrap">
+  <div class="chap-title">Chapter 4: The Ultimate Defence</div>
+  <div class="module-grid"><a href="module-14.html" class="module-card">
+    <div class="mc-num">Module 14</div>
+    <div class="mc-title">The Bucket That Protects Everything Else</div>
+    <div class="mc-desc">Build your liquidity buffer to catch life's sudden shocks.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-14"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-14">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-14">✓ Declared</span></div>
+    </div>
+  </a><a href="module-15.html" class="module-card">
+    <div class="mc-num">Module 15</div>
+    <div class="mc-title">The Events Your Buffer Was Never Built For</div>
+    <div class="mc-desc">Close the protection gaps: Health, Life, Disability, and Asset Cover.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-15"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-15">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-15">✓ Declared</span></div>
+    </div>
+  </a><a href="module-16.html" class="module-card">
+    <div class="mc-num">Module 16</div>
+    <div class="mc-title">Turning A Big Idea Into One Clear Number</div>
+    <div class="mc-desc">Calculate your exact Freedom Number and Partial Freedom target.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-16"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-16">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-16">✓ Declared</span></div>
+    </div>
+  </a></div></div>
+<div class="chapter-wrap">
+  <div class="chap-title">Chapter 5: The Master Mix</div>
+  <div class="module-grid"><a href="module-17.html" class="module-card">
+    <div class="mc-num">Module 17</div>
+    <div class="mc-title">Why One Stock Is A Bet, And Many Is A Plan</div>
+    <div class="mc-desc">Spread your risk across industries, sizes, and countries.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-17"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-17">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-17">✓ Declared</span></div>
+    </div>
+  </a><a href="module-18.html" class="module-card">
+    <div class="mc-num">Module 18</div>
+    <div class="mc-title">The Boring Tool That Actually Works</div>
+    <div class="mc-desc">Remove the guessing by owning the whole market through Index Funds and ETFs.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-18"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-18">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-18">✓ Declared</span></div>
+    </div>
+  </a><a href="module-19.html" class="module-card">
+    <div class="mc-num">Module 19</div>
+    <div class="mc-title">The Familiar Route To Wealth</div>
+    <div class="mc-desc">Property and land are strong assets, but you must verify before you buy.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-19"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-19">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-19">✓ Declared</span></div>
+    </div>
+  </a><a href="module-20.html" class="module-card">
+    <div class="mc-num">Module 20</div>
+    <div class="mc-title">The Financial World You Already Know</div>
+    <div class="mc-desc">SACCOs, table banking, and mobile money are trusted tools that quietly build wealth.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-20"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-20">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-20">✓ Declared</span></div>
+    </div>
+  </a><a href="module-21.html" class="module-card">
+    <div class="mc-num">Module 21</div>
+    <div class="mc-title">The Mix Should Change As You Change</div>
+    <div class="mc-desc">Calculate your exact asset mix based on your age and timeline.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-21"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-21">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-21">✓ Declared</span></div>
+    </div>
+  </a></div></div>
+<div class="chapter-wrap">
+  <div class="chap-title">Chapter 6: Stealth & Autonomy</div>
+  <div class="module-grid"><a href="module-22.html" class="module-card">
+    <div class="mc-num">Module 22</div>
+    <div class="mc-title">Why "Stealth" Is the Right Word</div>
+    <div class="mc-desc">Turn decades of accumulated experience into an actual second stream of income.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-22"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-22">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-22">✓ Declared</span></div>
+    </div>
+  </a><a href="module-23.html" class="module-card">
+    <div class="mc-num">Module 23</div>
+    <div class="mc-title">A Word on Accuracy Before the Stories</div>
+    <div class="mc-desc">The average founder age for breakout companies is 45.0.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-23"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-23">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-23">✓ Declared</span></div>
+    </div>
+  </a><a href="module-24.html" class="module-card">
+    <div class="mc-num">Module 24</div>
+    <div class="mc-title">Why This Module Isn't Optional</div>
+    <div class="mc-desc">Money habits are absorbed and negotiated inside a household. Talk to your partner.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-24"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-24">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-24">✓ Declared</span></div>
+    </div>
+  </a><a href="module-25.html" class="module-card">
+    <div class="mc-num">Module 25</div>
+    <div class="mc-title">Returning to Where This Course Started</div>
+    <div class="mc-desc">Freedom is structural autonomy. It changes your relationship to work.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-25"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-25">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-25">✓ Declared</span></div>
+    </div>
+  </a></div></div>
+<div class="chapter-wrap">
+  <div class="chap-title">Chapter 7: The Expertise Audit</div>
+  <div class="module-grid"><a href="module-26.html" class="module-card">
+    <div class="mc-num">Module 26</div>
+    <div class="mc-title">Why This Chapter Exists</div>
+    <div class="mc-desc">You cannot sell what you have not named. Audit your expertise.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-26"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-26">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-26">✓ Declared</span></div>
+    </div>
+  </a><a href="module-27.html" class="module-card">
+    <div class="mc-num">Module 27</div>
+    <div class="mc-title">The Phenomenon</div>
+    <div class="mc-desc">The sentence "I just did my job" is the most expensive sentence in your life.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-27"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-27">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-27">✓ Declared</span></div>
+    </div>
+  </a><a href="module-28.html" class="module-card">
+    <div class="mc-num">Module 28</div>
+    <div class="mc-title">Tacit vs. Explicit Knowledge</div>
+    <div class="mc-desc">The market pays a premium for tacit knowledge.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-28"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-28">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-28">✓ Declared</span></div>
+    </div>
+  </a><a href="module-29.html" class="module-card">
+    <div class="mc-num">Module 29</div>
+    <div class="mc-title">The Shadow Work Audit</div>
+    <div class="mc-desc">Extract your proof-of-work record from the hidden gaps in your role.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-29"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-29">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-29">✓ Declared</span></div>
+    </div>
+  </a><a href="module-30.html" class="module-card">
+    <div class="mc-num">Module 30</div>
+    <div class="mc-title">The CCRI Framework</div>
+    <div class="mc-desc">Build your private database of Context, Complication, Resolution, and Impact.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-30"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-30">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-30">✓ Declared</span></div>
+    </div>
+  </a><a href="module-31.html" class="module-card">
+    <div class="mc-num">Module 31</div>
+    <div class="mc-title">The Packaging Shift</div>
+    <div class="mc-desc">Turn raw experience into a named, priced offer and calculate your floor rate.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-31"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-31">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-31">✓ Declared</span></div>
+    </div>
+  </a><a href="module-32.html" class="module-card">
+    <div class="mc-num">Module 32</div>
+    <div class="mc-title">The One-Line Value Statement</div>
+    <div class="mc-desc">Distill twenty years into a single sentence that makes the right people lean in.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-32"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-32">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-32">✓ Declared</span></div>
+    </div>
+  </a><a href="module-33.html" class="module-card">
+    <div class="mc-num">Module 33</div>
+    <div class="mc-title">The Private Record</div>
+    <div class="mc-desc">The living document that acts as the operating manual for your own value.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-33"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-33">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-33">✓ Declared</span></div>
+    </div>
+  </a><a href="module-34.html" class="module-card">
+    <div class="mc-num">Module 34</div>
+    <div class="mc-title">The Psychological Barrier</div>
+    <div class="mc-desc">Why this audit feels like lying, and how to reframe the Imposter Response.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-34"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-34">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-34">✓ Declared</span></div>
+    </div>
+  </a><a href="module-35.html" class="module-card">
+    <div class="mc-num">Module 35</div>
+    <div class="mc-title">Connecting the Inventory to the Market</div>
+    <div class="mc-desc">You are not starting from zero. You are redirecting an existing asset.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-35"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-35">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-35">✓ Declared</span></div>
+    </div>
+  </a><a href="module-36.html" class="module-card">
+    <div class="mc-num">Module 36</div>
+    <div class="mc-title">Chapter 7 Final Reflection</div>
+    <div class="mc-desc">Answer 12 foundational questions to lock in your offer before moving forward.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-36"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-36">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-36">✓ Declared</span></div>
+    </div>
+  </a></div></div>
+<div class="chapter-wrap">
+  <div class="chap-title">Chapter 8: The Posture Shift</div>
+  <div class="module-grid"><a href="module-37.html" class="module-card">
+    <div class="mc-num">Module 37</div>
+    <div class="mc-title">Why This Comes After Chapter 7</div>
+    <div class="mc-desc">Paper does not close deals. People do. Learn the expert posture.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-37"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-37">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-37">✓ Declared</span></div>
+    </div>
+  </a><a href="module-38.html" class="module-card">
+    <div class="mc-num">Module 38</div>
+    <div class="mc-title">Where the Habit Comes From</div>
+    <div class="mc-desc">Identify and unlearn the reflexes that keep you acting like an employee.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-38"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-38">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-38">✓ Declared</span></div>
+    </div>
+  </a><a href="module-39.html" class="module-card">
+    <div class="mc-num">Module 39</div>
+    <div class="mc-title">The Trap Almost Everyone Falls Into First</div>
+    <div class="mc-desc">Stop selling your hours and start selling your compressed pattern recognition.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-39"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-39">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-39">✓ Declared</span></div>
+    </div>
+  </a><a href="module-40.html" class="module-card">
+    <div class="mc-num">Module 40</div>
+    <div class="mc-title">The Myth That's Been Sold to You</div>
+    <div class="mc-desc">Why clients actually prefer to hire founders and consultants in their 40s and 50s.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-40"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-40">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-40">✓ Declared</span></div>
+    </div>
+  </a><a href="module-41.html" class="module-card">
+    <div class="mc-num">Module 41</div>
+    <div class="mc-title">The Old, Costly Definition</div>
+    <div class="mc-desc">How to overdeliver through clarity and foresight without sacrificing your weekends.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-41"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-41">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-41">✓ Declared</span></div>
+    </div>
+  </a><a href="module-42.html" class="module-card">
+    <div class="mc-num">Module 42</div>
+    <div class="mc-title">Quiet Confidence Beats Loud Claims</div>
+    <div class="mc-desc">Master the quiet markers of real authority and hold the sales pause.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-42"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-42">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-42">✓ Declared</span></div>
+    </div>
+  </a></div></div>
+<div class="chapter-wrap">
+  <div class="chap-title">Chapter 9: The Consulting Offer</div>
+  <div class="module-grid"><a href="module-43.html" class="module-card">
+    <div class="mc-num">Module 43</div>
+    <div class="mc-title">Why This Stage Of Life Fits Consulting Better</div>
+    <div class="mc-desc">Consulting sells judgment and pattern recognition, which only come from time.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-43"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-43">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-43">✓ Declared</span></div>
+    </div>
+  </a><a href="module-44.html" class="module-card">
+    <div class="mc-num">Module 44</div>
+    <div class="mc-title">Why A Normal Resume Doesn't Work Here</div>
+    <div class="mc-desc">Translate your internal job responsibilities into specific, provable outcomes.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-44"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-44">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-44">✓ Declared</span></div>
+    </div>
+  </a><a href="module-45.html" class="module-card">
+    <div class="mc-num">Module 45</div>
+    <div class="mc-title">Why Jumping To A Proposal Is A Beginner's Mistake</div>
+    <div class="mc-desc">Learn the four pillars of diagnostic questions to uncover the real problem.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-45"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-45">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-45">✓ Declared</span></div>
+    </div>
+  </a><a href="module-46.html" class="module-card">
+    <div class="mc-num">Module 46</div>
+    <div class="mc-title">Why Hourly Pricing Quietly Punishes You</div>
+    <div class="mc-desc">Calculate your profit floor and escape the trap of selling your time.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-46"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-46">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-46">✓ Declared</span></div>
+    </div>
+  </a><a href="module-47.html" class="module-card">
+    <div class="mc-num">Module 47</div>
+    <div class="mc-title">The Two Different Cost Pictures & Protecting The Practice</div>
+    <div class="mc-desc">Set written boundaries before scope creep turns a good deal into a loss.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-47"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-47">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-47">✓ Declared</span></div>
+    </div>
+  </a></div></div>
+<div class="chapter-wrap">
+  <div class="chap-title">Chapter 10: The Coaching Architecture</div>
+  <div class="module-grid"><a href="module-48.html" class="module-card">
+    <div class="mc-num">Module 48</div>
+    <div class="mc-title">The Line Most People Never Draw Clearly</div>
+    <div class="mc-desc">Understand the exact difference between consulting and coaching.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-48"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-48">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-48">✓ Declared</span></div>
+    </div>
+  </a><a href="module-49.html" class="module-card">
+    <div class="mc-num">Module 49</div>
+    <div class="mc-title">Why "Life Coach" Is The Weakest Possible Starting Point</div>
+    <div class="mc-desc">Translate your lived experience into a specific, trust-earning lane.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-49"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-49">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-49">✓ Declared</span></div>
+    </div>
+  </a><a href="module-50.html" class="module-card">
+    <div class="mc-num">Module 50</div>
+    <div class="mc-title">Why Structure Matters More Than Personality</div>
+    <div class="mc-desc">Build the repeatable session architecture that produces real change.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-50"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-50">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-50">✓ Declared</span></div>
+    </div>
+  </a><a href="module-51.html" class="module-card">
+    <div class="mc-num">Module 51</div>
+    <div class="mc-title">Why Coaching Sells On Trust More Than Almost Anything Else</div>
+    <div class="mc-desc">Master the discovery call to earn trust before the first sale.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-51"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-51">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-51">✓ Declared</span></div>
+    </div>
+  </a><a href="module-52.html" class="module-card">
+    <div class="mc-num">Module 52</div>
+    <div class="mc-title">The Real Ceiling Built Into One-On-One Coaching</div>
+    <div class="mc-desc">Package your work properly and calculate your true mathematical ceiling.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-52"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-52">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-52">✓ Declared</span></div>
+    </div>
+  </a></div></div>
+<div class="chapter-wrap">
+  <div class="chap-title">Chapter 11: Relationships & Referrals</div>
+  <div class="module-grid"><a href="module-53.html" class="module-card">
+    <div class="mc-num">Module 53</div>
+    <div class="mc-title">Why Warm Beats Cold, Almost Every Single Time</div>
+    <div class="mc-desc">Understand the transfer of trust that makes referrals so powerful.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-53"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-53">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-53">✓ Declared</span></div>
+    </div>
+  </a><a href="module-54.html" class="module-card">
+    <div class="mc-num">Module 54</div>
+    <div class="mc-title">Give Before You Ask, Every Time</div>
+    <div class="mc-desc">Learn the four specific ways to give real value to your network.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-54"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-54">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-54">✓ Declared</span></div>
+    </div>
+  </a><a href="module-55.html" class="module-card">
+    <div class="mc-num">Module 55</div>
+    <div class="mc-title">Referrals Rarely Just "Happen" On Their Own</div>
+    <div class="mc-desc">Master the timing and phrasing of the specific referral ask.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-55"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-55">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-55">✓ Declared</span></div>
+    </div>
+  </a><a href="module-56.html" class="module-card">
+    <div class="mc-num">Module 56</div>
+    <div class="mc-title">Why The First Message Matters So Much</div>
+    <div class="mc-desc">Use the zero-agenda outreach template to reconnect naturally.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-56"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-56">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-56">✓ Declared</span></div>
+    </div>
+  </a><a href="module-57.html" class="module-card">
+    <div class="mc-num">Module 57</div>
+    <div class="mc-title">Why Tracking Matters, Even For Something This Personal</div>
+    <div class="mc-desc">Build a minimalist tracking system that tests for genuine care.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-57"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-57">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-57">✓ Declared</span></div>
+    </div>
+  </a></div></div>
+<div class="chapter-wrap">
+  <div class="chap-title">Chapter 12: The Modern Menu</div>
+  <div class="module-grid"><a href="module-58.html" class="module-card">
+    <div class="mc-num">Module 58</div>
+    <div class="mc-title">Why "Get A Job" Is No Longer The Only Real Option</div>
+    <div class="mc-desc">Tour the modern menu: fractional, AI advisory, licensing, and board seats.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-58"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-58">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-58">✓ Declared</span></div>
+    </div>
+  </a><a href="module-59.html" class="module-card">
+    <div class="mc-num">Module 59</div>
+    <div class="mc-title">Two Very Different Kinds Of Platforms</div>
+    <div class="mc-desc">Freelance marketplaces vs expert networks — mechanics, fit, and positioning.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-59"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-59">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-59">✓ Declared</span></div>
+    </div>
+  </a><a href="module-60.html" class="module-card">
+    <div class="mc-num">Module 60</div>
+    <div class="mc-title">The Ceiling Every Time-For-Money Model Eventually Hits</div>
+    <div class="mc-desc">Build once, license many — escape the hourly cap with a documented framework.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-60"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-60">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-60">✓ Declared</span></div>
+    </div>
+  </a><a href="module-61.html" class="module-card">
+    <div class="mc-num">Module 61</div>
+    <div class="mc-title">Getting Paid For Judgment, Not Hours</div>
+    <div class="mc-desc">Advisory board seats: compensation, traits, and how they are really won.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-61"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-61">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-61">✓ Declared</span></div>
+    </div>
+  </a><a href="module-62.html" class="module-card">
+    <div class="mc-num">Module 62</div>
+    <div class="mc-title">Why This Matters More For You Than It Might Seem</div>
+    <div class="mc-desc">Use AI to protect your margins — drafting, research, and organizing without losing the judgment that makes you valuable.</div>
+    <div class="mc-arrow">Open Interactive →</div>
+    <div class="mc-progress">
+      <div class="mc-prog-bar"><div class="mc-prog-fill" id="prog-fill-62"></div></div>
+      <div class="mc-prog-labels"><span class="mc-prog-text" id="prog-text-62">0 / 10 reflections</span><span class="mc-prog-decl" id="prog-decl-62">✓ Declared</span></div>
+    </div>
+  </a></div></div>
+</main>
+<script>
+  function checkModule(moduleId) {
+    let numR = 10;
+    if(moduleId===1) numR=3;
+    if(moduleId===2) numR=4;
+    
+    let written = 0;
+    for(let i=1; i<=numR; i++){
+      if(localStorage.getItem('ffm'+moduleId+'_r'+i)) written++;
+    }
+    const pct = (written/numR)*100;
+    
+    const fillEl = document.getElementById('prog-fill-'+moduleId);
+    if(fillEl) fillEl.style.width = pct + '%';
+    
+    const textEl = document.getElementById('prog-text-'+moduleId);
+    if(textEl) {
+      if(written === numR) {
+         textEl.textContent = 'Completed';
+         textEl.style.color = 'var(--gold)';
+      } else {
+         textEl.textContent = written + ' / ' + numR + ' reflections';
+      }
+    }
+    
+    const dec = localStorage.getItem('ffm'+moduleId+'_declaration');
+    if(dec) {
+      const declEl = document.getElementById('prog-decl-'+moduleId);
+      if(declEl) declEl.classList.add('show');
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    for(let i=1; i<=62; i++){
+      checkModule(i);
+    }
+    
+    const canvas = document.getElementById('ambient-canvas');
+    if(canvas) {
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const particles = [];
+      for(let i=0;i<40;i++) particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*2+1, vx:(Math.random()-0.5)*0.5, vy:(Math.random()-0.5)*0.5});
+      function anim(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle = 'rgba(201,168,76,0.3)';
+        particles.forEach(p => {
+          p.x += p.vx; p.y += p.vy;
+          if(p.x<0||p.x>canvas.width) p.vx*=-1;
+          if(p.y<0||p.y>canvas.height) p.vy*=-1;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+        });
+        requestAnimationFrame(anim);
+      }
+      anim();
+    }
+  });
+</script>
+</body>
+</html>

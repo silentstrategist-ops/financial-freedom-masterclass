@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 27: The Phenomenon | Financial Freedom Masterclass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    
+    :root {
+      --void: #030507; --deep: #060A12; --surface: rgba(255, 255, 255, .03); --surface2: rgba(255, 255, 255, .06);
+      --gold: #C9A84C; --gold-l: #E8C97A; --gold-d: rgba(201, 168, 76, .15); --gold-g: rgba(201, 168, 76, .06); --gold-b: rgba(201, 168, 76, .25);
+      --text: #EEF0F4; --muted: #7A8290; --muted2: #4A5260; --danger: #E84855; --success: #2ECC71; --cyan: #4FC3F7; --purple: #9B7FE8;
+      --border: rgba(255, 255, 255, .07); --r: 20px; --rp: 100px;
+    }
+    ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: var(--void); } ::-webkit-scrollbar-thumb { background: var(--gold-b); border-radius: 4px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--void); color: var(--text); font-family: 'Cormorant Garamond', serif; overflow-x: hidden; line-height: 1.7; }
+    .noise { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999; opacity: .08; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    main { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 28px 180px; }
+    @media(max-width:640px) { main { padding: 0 18px 180px; } }
+    .tag { font-family: 'Inter'; font-size: .65rem; letter-spacing: .3em; color: var(--gold); text-transform: uppercase; display: inline-block; margin-bottom: 14px; }
+    .sec-title { font-family: 'Cinzel', serif; font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 700; color: #fff; letter-spacing: .05em; margin-bottom: 1rem; line-height: 1.2; }
+    .body-text { font-size: 1.18rem; font-weight: 300; color: var(--text); margin-bottom: 1rem; line-height: 1.85; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 44px 48px; margin-bottom:24px;}
+    .sec-divider { display: flex; align-items: center; gap: 16px; margin: 80px 0 32px; }
+    .sec-divider::before, .sec-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .sec-divider span { font-family: 'Inter'; font-size: .6rem; letter-spacing: .25em; color: var(--gold); text-transform: uppercase; white-space: nowrap; }
+    .hero { min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 0 60px; }
+    .hero-eyebrow { font-family: 'Inter'; font-size: .68rem; letter-spacing: .35em; color: var(--gold); text-transform: uppercase; margin-bottom: 28px; }
+    .hero-title { font-family: 'Cinzel', serif; font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.1; color: #fff; margin-bottom: 24px; max-width:900px; }
+    .hero-title .g { color: var(--gold); font-style: italic; }
+    .hero-sub { font-size: 1.3rem; font-style: italic; color: var(--muted); max-width: 680px; margin: 0 auto 56px; font-weight: 300; }
+    
+    .journal-section { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
+    .journal-item { background: var(--deep); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: .3s; }
+    .journal-item:focus-within { border-color: var(--gold-b); }
+    .journal-q { padding: 24px 28px 16px; font-size: 1.1rem; font-style: italic; color: var(--text); line-height: 1.6; }
+    .journal-q strong { font-style: normal; font-family: 'Inter'; font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 8px; }
+    .journal-item textarea { width: 100%; padding: 16px 28px 24px; background: none; border: none; border-top: 1px solid var(--border); color: var(--text); font-family: 'Cormorant Garamond'; font-size: 1.05rem; line-height: 1.7; resize: vertical; min-height: 100px; outline: none; }
+    .journal-item textarea:focus { background: var(--surface); }
+    .journal-item textarea::placeholder { color: var(--muted2); font-style: italic; }
+    
+    .decl-box { text-align: center; padding: 80px 48px; border: 1px dashed var(--gold-b); border-radius: var(--r); background: radial-gradient(circle at 50% 0%, rgba(201,168,76,.06) 0%, transparent 65%); margin-top: 60px; }
+    .decl-text { font-size: clamp(1.2rem, 2.5vw, 1.7rem); font-style: italic; font-weight: 300; line-height: 1.65; color: var(--text); max-width: 680px; margin: 0 auto 40px; }
+    .decl-input-wrap { display: flex; gap: 12px; justify-content: center; max-width: 480px; margin: 0 auto; }
+    .decl-input { flex: 1; padding: 14px 20px; background: var(--void); border: 1px solid var(--gold-b); border-radius: var(--rp); color: var(--gold); font-family: 'Cinzel'; font-size: 1rem; text-align: center; outline: none; transition: .3s; }
+    .decl-input:focus { border-color: var(--gold); }
+    .decl-btn { padding: 14px 28px; border-radius: var(--rp); border: 1px solid var(--gold-b); background: none; color: var(--gold); font-family: 'Inter'; font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; cursor: pointer; transition: .3s; }
+    .decl-btn:hover { background: var(--gold); color: var(--void); }
+    .decl-hint { font-family: 'Inter'; font-size: .65rem; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; margin-top: 12px; }
+    .decl-sealed-msg { display: none; margin-top: 28px; } .decl-sealed-msg.show { display: block; }
+    
+    .whop-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; background: rgba(3,5,7,.95); border-top: 1px solid var(--border); backdrop-filter: blur(14px); padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .wb-left { display: flex; align-items: center; gap: 16px; }
+    .wb-module { display: flex; flex-direction: column; }
+    .wb-m-label { font-family: 'Inter'; font-size: .6rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+    .wb-m-name { font-family: 'Cinzel'; font-size: .78rem; color: var(--text); letter-spacing: .05em; }
+    .wb-progress-wrap { display: flex; align-items: center; gap: 10px; }
+    .wb-p-label { font-family: 'Inter'; font-size: .62rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+    .wb-p-track { width: 120px; height: 3px; background: var(--border); border-radius: 3px; overflow: hidden; }
+    .wb-p-fill { height: 100%; background: var(--gold); width: 0%; transition: width .2s; border-radius: 3px; }
+    .whop-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: var(--rp); background: var(--gold); color: var(--void); font-family: 'Inter'; font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; border: none; text-decoration: none; transition: .3s; white-space: nowrap; }
+    .whop-btn:hover { background: #fff; transform: translateY(-1px); }
+
+    
+      .tapper-box { background: var(--deep); border: 1px solid var(--border); border-radius: var(--r); padding: 48px; margin: 40px 0; text-align: center; }
+      .tap-btn { padding: 20px 40px; background: var(--gold); border: none; border-radius: var(--rp); font-family: 'Cinzel'; font-size: 1.2rem; color: var(--void); cursor: pointer; transition: 0.3s; font-weight: 700; margin: 24px 0; }
+      .tap-btn:hover { background: #fff; transform: scale(1.05); }
+      .tap-result { display: none; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+      .tap-result.active { display: block; }
+      .tr-split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; text-align: left; margin-top: 24px; }
+      @media(max-width:600px){ .tr-split { grid-template-columns: 1fr; } }
+      .tr-side { background: var(--surface); padding: 24px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+      .tr-title { font-family: 'Inter'; font-size: 0.7rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+    
+  </style>
+</head>
+<body>
+<div class="noise"></div>
+
+<div class="whop-bar">
+  <div class="wb-left">
+    <div class="wb-module">
+      <div class="wb-m-label">Currently Viewing</div>
+      <div class="wb-m-name">Module 27 · The Phenomenon</div>
+    </div>
+    <div class="wb-progress-wrap">
+      <span class="wb-p-label">Progress</span>
+      <div class="wb-p-track"><div class="wb-p-fill" id="pfill"></div></div>
+    </div>
+  </div>
+  <div style="display:flex;gap:12px">
+    <a href="index.html" class="whop-btn" style="background:var(--surface);color:#fff;border:1px solid var(--border)">← Dashboard</a>
+    <a href="index.html" class="whop-btn">↩ Return to Course</a>
+  </div>
+</div>
+
+<main>
+  <section class="hero">
+    <p class="hero-eyebrow">Financial Freedom Masterclass · Module 27</p>
+    <h1 class="hero-title">The <br/><span class="g">Phenomenon</span></h1>
+    <p class="hero-sub">The sentence "I just did my job" is the single most expensive sentence in your financial life.</p>
+  </section>
+<!-- LESSON BODY -->
+<div class="lesson-body-container" style="max-width: 800px; margin: 40px auto 60px; padding: 0 10px;">
+<div class="sec-divider sr"><span>The Phenomenon</span></div>
+<p class="body-text sr">There is a specific moment that happens to almost every mid-career professional. You are sitting in a meeting, or on a call, or reviewing a document, and you solve a problem. Not a small problem. A problem that has been stalling a team for weeks, or costing the company real money, or creating genuine risk that nobody else in the room seems to fully grasp. You solve it in about four minutes. You say three sentences. You restructure the approach. You point to the thing everyone else missed.</p>
+<p class="body-text sr">And then the meeting moves on.</p>
+<p class="body-text sr">Nobody writes it down. Nobody sends a follow-up email saying, "Thank you for identifying the $200,000 compliance exposure we were about to walk into." Nobody pats you on the back. The project continues. The quarter closes. Your salary stays the same.</p>
+<p class="body-text sr">And here is the critical part: you don't write it down either. You don't log it. You don't add it to a running record. You don't even fully register it as an achievement, because to you, it felt like Tuesday. It felt like "just doing my job." It felt like the obvious thing to notice, the thing anyone with basic competence in this field would have caught.</p>
+<p class="body-text sr">Except they didn't catch it. Nobody else in the room caught it. And the reason you caught it is not "basic competence." The reason you caught it is fifteen years of pattern recognition, three previous failures that taught you exactly what the warning signs look like, and a specific mental model you built through experience that nobody taught you in a classroom.</p>
+<p class="body-text sr">But you don't experience it that way. You experience it as "I just did my job." And that sentence—"I just did my job"—is the single most expensive sentence in your financial life. It is the sentence that keeps you at your current salary. It is the sentence that makes you say "I don't really have anything special to offer" when someone asks what you do outside of your employer. It is the sentence that makes the idea of consulting, coaching, or selling your judgment feel absurd, because how could anyone pay me for something that feels this easy?</p>
+<p class="body-text sr">This is not humility. This is a cognitive distortion. And it has a name.</p>
+<div class="sec-divider sr"><span>The Curse of Knowledge: The Cognitive Science</span></div>
+<p class="body-text sr">The curse of knowledge is a well-documented cognitive bias first formally described in a 1989 paper by economists Colin Camerer, George Loewenstein, and Martin Weber, building on earlier work in cognitive psychology. The core finding is this: once you know something, it becomes extraordinarily difficult to accurately reconstruct what it was like not to know it. Your current knowledge "curses" your ability to imagine the perspective of someone who lacks it.</p>
+<p class="body-text sr">The classic demonstration is the "tappers and listeners" experiment conducted by Elizabeth Newton at Stanford in 1990. Participants were divided into two groups. "Tappers" were asked to tap out the rhythm of a well-known song (like "Happy Birthday") on a table. "Listeners" had to guess the song. Before the listeners heard the tapping, the tappers were asked to predict what percentage of listeners would correctly identify the song. The tappers predicted about 50% would get it. The actual success rate was 2.5%.</p>
+<p class="body-text sr">The tappers could not escape their own knowledge. They heard the full melody in their head while tapping. They assumed the listeners heard it too. They could not reconstruct the experience of hearing only the rhythm, stripped of the melody they already knew.</p>
+<p class="body-text sr">Now apply this to your career. You have spent fifteen or twenty years immersed in your industry. You have built mental models, pattern-recognition libraries, and intuitive shortcuts that allow you to look at a complex situation and immediately see the structure underneath. You see the song. But when you try to explain your value to someone outside your immediate team—a potential client, a networking contact, even your own spouse at dinner—you are tapping on the table. And you assume they hear the melody. They don't. They hear random knocks. And because you hear the melody so clearly, you assume what you're doing is obvious. Simple. "Just common sense."</p>
+<p class="body-text sr">But common sense is not common. And it is almost never free.</p>
+<div class="sec-divider sr"><span>The Inverse Dunning-Kruger Effect</span></div>
+<p class="body-text sr">There is a related phenomenon worth naming precisely, because it operates differently from what most people think.</p>
+<p class="body-text sr">The Dunning-Kruger effect, described by psychologists David Dunning and Justin Kruger in their 1999 paper, is often summarized as "incompetent people overestimate their ability." That's the popular version. But the original research identified a second, equally important finding that gets far less attention: highly competent people systematically underestimate their ability relative to others.</p>
+<p class="body-text sr">The mechanism is straightforward. If you are genuinely skilled at something, you assume that the task is easy for everyone, because it is easy for you. You look around the room and assume other people are also finding it easy. You calibrate your self-assessment against an imagined peer group that is as competent as you are, rather than against the actual distribution of skill in the market. The result is that the most capable people in the room are often the most uncertain about their own value, while the least capable are the most confident.</p>
+<p class="body-text sr">For a forty-seven-year-old operations director who has quietly saved her company $1.2 million over three years by restructuring vendor contracts, this manifests as a quiet, persistent feeling that she is "just doing what the role requires." She looks at her peers—other directors at other companies—and assumes they are doing the same thing, at the same level, with the same results. She has no visibility into the fact that most of them are not. She has no visibility into the fact that the specific way she structures those negotiations, the specific questions she asks, the specific pressure points she identifies, are not universal. They are hers. They were built through her specific history of successes and failures. They are her intellectual property.</p>
+<p class="body-text sr">But she doesn't experience them as intellectual property. She experiences them as "just how I do my job." And that experience is the curse of knowledge operating at full strength.</p>
+<div class="sec-divider sr"><span>The Organizational Erasure Effect</span></div>
+<p class="body-text sr">There is a second, structural reason your expertise feels invisible to you, and it has nothing to do with cognition. It has to do with how employment works.</p>
+<p class="body-text sr">When you are an employee, your output is absorbed into the organization. Your name is not on the product. Your specific contribution is blended into the team's contribution, which is blended into the department's contribution, which is blended into the company's quarterly earnings call. You are a line item in a budget. Your value is expressed as a salary, and that salary was negotiated at a specific moment in time, under specific constraints, and then adjusted by small annual increments that have almost nothing to do with the actual market value of what you produce today.</p>
+<p class="body-text sr">Over years, this structure teaches you a specific, deeply internalized lesson: your value is whatever the organization says it is. If they pay you $135,000 a year, then your value is $135,000 a year. If they give you a 3% raise, your value went up 3%. If they don't promote you, your value didn't increase. The organization becomes the sole arbiter of your worth, and you outsource your self-assessment to your employer's HR department.</p>
+<p class="body-text sr">This is not a rational arrangement. It is a convenience. And it is the single largest source of underpricing in the mid-career professional market. You are not worth what your W-2 says. You are worth what the market would pay for the specific problems you can solve, the specific judgments you can make, and the specific risks you can mitigate. Those are two completely different numbers, and for most people in the 40-to-55 bracket, the market number is significantly higher than the W-2 number.</p>
+<p class="body-text sr">But you will never discover that gap if you continue to let your employer's salary be the only mirror you look into.</p>
+<div class="sec-divider sr"><span>The Emotional Layer: Why Naming Your Value Feels Dangerous</span></div>
+<p class="body-text sr">There is a psychological reason, beyond cognitive bias, why this audit feels uncomfortable. For many people raised in professional cultures that valorize modesty, teamwork, and "not making it about yourself," the act of cataloguing your own achievements in specific, measurable, self-attributed terms feels close to arrogance. It feels like bragging. It feels like the thing that other people do—the loud ones, the self-promoters, the people who take credit for group work.</p>
+<p class="body-text sr">This is worth separating out clearly, because it is costing you real money.</p>
+<p class="body-text sr">There is a meaningful, structural difference between exaggerating your contribution and making your real contribution visible to people who need to see it in order to make a fair decision about your pay. These are not the same act. One is dishonest. The other is informational. If you solved a genuine problem, saved real money, mitigated real risk, or carried a project that others depended on, and the only reason the relevant decision-maker doesn't know the full scale of it is that you never articulated it plainly, that is not humility protecting your character. That is silence quietly costing you tens of thousands of dollars a year.</p>
+<p class="body-text sr">The audit you are about to conduct is not for public consumption. It is not a LinkedIn post. It is not a performance review where you have to perform confidence for a manager. It is a private, honest extraction of data. You are simply writing down what is true. You are not inflating. You are not performing. You are remembering. And the act of remembering, specifically and in detail, is the first step toward being compensated accurately.</p>
+<p class="body-text sr">The discomfort you feel when writing "I reduced voluntary turnover from 18% to 4%" is not evidence that you are being arrogant. It is evidence that you have been trained, by years of organizational structure and cultural messaging, to treat your own impact as invisible. The discomfort is the training wearing off. Let it wear off.</p>
+
+</div>
+<!-- END LESSON BODY -->
+
+  <section>
+    
+      <div class="card">
+        <h2 class="sec-title">The Curse of Knowledge</h2>
+        <p class="body-text">Once you know something, it becomes extraordinarily difficult to accurately reconstruct what it was like not to know it. You assume what you're doing is obvious. But common sense is not common, and it is almost never free.</p>
+      </div>
+      
+      <div class="tapper-box">
+        <h2 class="sec-title" style="margin-bottom:12px">The Tappers & Listeners Simulator</h2>
+        <p class="body-text" style="font-size:1rem">In 1990, Stanford researchers asked "Tappers" to tap out the rhythm of a famous song, and "Listeners" to guess it. Tappers predicted 50% would guess correctly.</p>
+        
+        <button class="tap-btn" onclick="document.getElementById('t-res').classList.add('active')">SIMULATE THE TAP</button>
+        
+        <div class="tap-result" id="t-res">
+          <p class="body-text" style="color:var(--danger)">The actual success rate was only 2.5%.</p>
+          <div class="tr-split">
+            <div class="tr-side">
+              <div class="tr-title">What You Experience</div>
+              <p class="body-text" style="font-size:0.95rem">You hear the full, complex melody playing in your head. You have 15 years of context, history, and pattern recognition. To you, the solution is obvious.</p>
+            </div>
+            <div class="tr-side">
+              <div class="tr-title">What The Client Experiences</div>
+              <p class="body-text" style="font-size:0.95rem">They only hear random knocks on a table. Without your internal context, they are completely lost. They are paying you to translate the knocks into music.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </section>
+
+  <div class="sec-divider"><span>Step 26 Integration</span></div>
+
+  <section>
+    <h2 class="sec-title" style="text-align:center">Plan Your Own Approach</h2>
+    <div class="journal-section">
+      
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 01</strong>Recall a time you solved a major problem in minutes. What was the problem, and why were you uniquely able to see the answer?</div>
+        <textarea id="j27_1" placeholder="Write your reflection here..." oninput="saveJ(1)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 02</strong>How often do you assume that the people around you understand a concept just as deeply as you do?</div>
+        <textarea id="j27_2" placeholder="Write your reflection here..." oninput="saveJ(2)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 03</strong>The Inverse Dunning-Kruger Effect: In what specific area do you consistently underestimate your own ability relative to your peers?</div>
+        <textarea id="j27_3" placeholder="Write your reflection here..." oninput="saveJ(3)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 04</strong>Organizational Erasure: How much of your identity and perceived value is currently tied solely to your job title or W-2?</div>
+        <textarea id="j27_4" placeholder="Write your reflection here..." oninput="saveJ(4)"></textarea>
+      </div>
+      <div class="journal-item">
+        <div class="journal-q"><strong>Question 05</strong>What does it actually feel like when you write down a major professional achievement? Does it feel like bragging? Why?</div>
+        <textarea id="j27_5" placeholder="Write your reflection here..." oninput="saveJ(5)"></textarea>
+      </div>
+    </div>
+
+    <div class="decl-box">
+      <p class="tag" style="margin-bottom:16px;letter-spacing:0.2em">SEAL YOUR COMMITMENT</p>
+      <p class="decl-text">"I will separate my humility from my data. Writing down the truth of my impact is not arrogance; it is accuracy."</p>
+      <div class="decl-input-wrap" id="d-wrap">
+        <input type="text" class="decl-input" id="d-input" placeholder="Type &quot;I ACCEPT&quot; to seal this" />
+        <button class="decl-btn" id="d-btn" onclick="seal()">SEAL</button>
+      </div>
+      <p class="decl-hint" id="d-hint">TYPE "I ACCEPT" AND PRESS SEAL</p>
+      <div class="decl-sealed-msg" id="d-msg">
+        <p style="font-family:'Cinzel';color:var(--gold);font-size:.9rem;letter-spacing:.1em">✓ DECLARATION SEALED</p>
+        <div id="d-date" style="font-family:'Inter';font-size:.65rem;color:var(--muted);margin-top:8px;letter-spacing:.1em"></div>
+      </div>
+    </div>
+  </section>
+
+
+<div style="display:flex;justify-content:center;align-items:center;margin-top:60px;margin-bottom:20px;flex-wrap:wrap;gap:16px" class="sr">
+  <a href="module-26.html" class="whop-btn" style="text-decoration:none; background:transparent; color:var(--gold); border:1px solid var(--gold);">&#8592; Previous</a>
+  <a href="index.html" class="whop-btn" style="text-decoration:none;">&#8617; Return to Course</a>
+  <a href="module-28.html" class="whop-btn" style="text-decoration:none; background:transparent; color:var(--gold); border:1px solid var(--gold);">Next Module &#8594;</a>
+</div>
+</main>
+
+<script>
+
+function saveJ(n){
+  const v = document.getElementById('j27_'+n).value;
+  localStorage.setItem('ffm27_r'+n, v);
+}
+
+function loadJ(){
+  for(let i=1;i<=10;i++){
+    const saved = localStorage.getItem('ffm27_r'+i);
+    const el = document.getElementById('j27_'+i);
+    if(saved && el) el.value = saved;
+  }
+  const dec = localStorage.getItem('ffm27_declaration');
+  if(dec){
+    document.getElementById('d-wrap').style.display='none';
+    const hint = document.getElementById('d-hint'); if(hint) hint.style.display='none';
+    document.getElementById('d-msg').classList.add('show');
+    document.getElementById('d-date').textContent = dec;
+  }
+}
+
+function seal(){
+  const input = document.getElementById('d-input');
+  if(input.value.trim().toUpperCase() !== 'I ACCEPT'){
+    input.style.borderColor = 'var(--danger)';
+    setTimeout(() => input.style.borderColor = '', 500);
+    return;
+  }
+  const dateStr = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  const sig = 'Declared on ' + dateStr;
+  localStorage.setItem('ffm27_declaration', sig);
+  document.getElementById('d-wrap').style.display='none';
+  const hint = document.getElementById('d-hint'); if(hint) hint.style.display='none';
+  document.getElementById('d-msg').classList.add('show');
+  document.getElementById('d-date').textContent = sig;
+}
+
+window.addEventListener('scroll', () => {
+  const pfill = document.getElementById('pfill');
+  if(pfill) {
+    let scrollPct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+    pfill.style.width = scrollPct + '%';
+  }
+});
+
+window.addEventListener('DOMContentLoaded', loadJ);
+</script>
+</body>
+</html>
