@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Escape The Career Trap — Build More In The Hours You Have</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --void:#030507;--deep:#060A12;--gold:#C9A84C;--gold-l:#E8C97A;--gold-d:rgba(201,168,76,.18);--gold-b:rgba(201,168,76,.3);
+      --text:#EEF0F4;--muted:#7A8290;--border:rgba(255,255,255,.07);--danger:#E84855;--success:#2ECC71;--r:18px;--rp:100px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',serif;overflow-x:hidden;line-height:1.7}
+    ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--void)}::-webkit-scrollbar-thumb{background:var(--gold-b);border-radius:4px}
+    .noise{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;background:rgba(3,5,7,.92);border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}
+    .nav-logo{display:flex;align-items:center;gap:12px}
+    .nav-logo img{width:36px;height:36px;border-radius:50%;object-fit:cover}
+    .nav-brand{font-family:'Cinzel';font-size:.82rem;letter-spacing:.12em;color:#fff;font-weight:700}
+    .nav-cta{padding:10px 24px;background:var(--gold);color:var(--void);font-family:'Inter';font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:var(--rp);text-decoration:none;transition:.3s}
+    .nav-cta:hover{background:#fff}
+    @media(max-width:600px){nav{padding:12px 18px}.nav-brand{font-size:.68rem}}
+
+    /* HERO */
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(201,168,76,.07) 0%,transparent 65%);pointer-events:none}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border:1px solid var(--gold-b);border-radius:var(--rp);font-family:'Inter';font-size:.63rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;margin-bottom:32px;background:rgba(201,168,76,.05)}
+    .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite;flex-shrink:0}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+    .hero h1{font-family:'Cinzel';font-size:clamp(2.2rem,5.5vw,4.8rem);font-weight:900;line-height:1.08;color:#fff;margin-bottom:24px;max-width:900px;letter-spacing:.02em}
+    .hero h1 .g{color:var(--gold)}
+    .hero-sub{font-size:clamp(1.1rem,2vw,1.4rem);font-style:italic;color:var(--muted);max-width:680px;margin:0 auto 48px;font-weight:300}
+
+    /* COUNTDOWN */
+    .countdown-wrap{display:flex;gap:16px;justify-content:center;margin-bottom:40px;flex-wrap:wrap}
+    .cd-unit{background:var(--deep);border:1px solid var(--gold-b);border-radius:14px;padding:16px 22px;min-width:78px;text-align:center}
+    .cd-num{font-family:'Cinzel';font-size:2.2rem;font-weight:900;color:var(--gold);line-height:1}
+    .cd-label{font-family:'Inter';font-size:.55rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-top:6px}
+
+    /* PRICE */
+    .price-block{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:36px}
+    .price-original{font-family:'Inter';font-size:1rem;color:var(--muted);text-decoration:line-through}
+    .price-tag{font-family:'Cinzel';font-size:3.5rem;font-weight:900;color:#fff;line-height:1}
+    .price-tag span{color:var(--gold)}
+    .price-badge{background:var(--danger);color:#fff;font-family:'Inter';font-size:.62rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:4px 14px;border-radius:var(--rp)}
+    .price-note{font-family:'Inter';font-size:.68rem;color:var(--muted);letter-spacing:.04em}
+    .hero-img{width:100%;max-width:920px;border-radius:20px;margin:48px auto 0;display:block;box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 60px rgba(201,168,76,.07)}
+
+    /* BUTTONS */
+    .btn-primary{display:inline-flex;align-items:center;gap:10px;padding:18px 48px;background:linear-gradient(135deg,var(--gold),#a8853a);color:var(--void);font-family:'Cinzel';font-size:1rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:var(--rp);text-decoration:none;transition:.3s;border:none;cursor:pointer;box-shadow:0 8px 32px rgba(201,168,76,.3)}
+    .btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(201,168,76,.4)}
+
+    /* LAYOUT */
+    .section{padding:100px 24px;max-width:1100px;margin:0 auto}
+    .sec-label{font-family:'Inter';font-size:.6rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:16px;display:block}
+    .sec-title{font-family:'Cinzel';font-size:clamp(1.8rem,4vw,3rem);font-weight:700;color:#fff;line-height:1.15;margin-bottom:20px}
+    .sec-body{font-size:1.15rem;color:var(--muted);font-weight:300;line-height:1.85;max-width:720px}
+    .divider{height:1px;background:var(--border);max-width:1100px;margin:0 auto}
+
+    /* PAIN */
+    .pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px}
+    @media(max-width:700px){.pain-grid{grid-template-columns:1fr}}
+    .pain-card{background:var(--deep);border:1px solid var(--border);border-radius:var(--r);padding:32px;transition:.3s}
+    .pain-card:hover{border-color:var(--gold-d)}
+    .pain-icon{font-size:1.5rem;margin-bottom:14px}
+    .pain-text{font-size:1.05rem;color:var(--text);line-height:1.65}
+    .pain-text em{color:var(--gold);font-style:normal;font-weight:600}
+
+    /* STATS */
+    .stats-section{background:var(--deep);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 24px}
+    .stats-inner{max-width:1100px;margin:0 auto;text-align:center}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-top:48px}
+    @media(max-width:900px){.stats-grid{grid-template-columns:1fr 1fr}}
+    .stat-item{text-align:center}
+    .stat-num{font-family:'Cinzel';font-size:clamp(2rem,4vw,3.5rem);font-weight:900;color:var(--gold);line-height:1;margin-bottom:8px}
+    .stat-label{font-family:'Inter';font-size:.78rem;color:var(--muted);letter-spacing:.06em;line-height:1.5}
+    .stat-source{font-family:'Inter';font-size:.56rem;color:#3A4250;margin-top:4px}
+
+    /* CHAPTERS */
+    .chapters-wrap{margin-top:56px}
+    .ch-item{border:1px solid var(--border);border-radius:14px;margin-bottom:12px;overflow:hidden;transition:.3s}
+    .ch-item.open{border-color:var(--gold-b)}
+    .ch-head{display:flex;align-items:center;justify-content:space-between;padding:22px 28px;cursor:pointer;user-select:none}
+    .ch-left{display:flex;align-items:center;gap:20px}
+    .ch-num{font-family:'Cinzel';font-size:1.8rem;font-weight:900;color:var(--muted);transition:.3s;line-height:1;min-width:46px}
+    .ch-item.open .ch-num{color:var(--gold)}
+    .ch-title{font-family:'Cinzel';font-size:.95rem;color:#fff;letter-spacing:.04em}
+    .ch-toggle{width:24px;height:24px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.9rem;transition:.4s;flex-shrink:0}
+    .ch-item.open .ch-toggle{transform:rotate(45deg);border-color:var(--gold);color:var(--gold)}
+    .ch-body{max-height:0;overflow:hidden;transition:max-height .45s ease}
+    .ch-item.open .ch-body{max-height:600px}
+    .ch-content{padding:0 28px 24px;border-top:1px solid var(--border)}
+    .ch-mods{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+    .ch-mod{background:rgba(201,168,76,.07);border:1px solid var(--gold-d);border-radius:8px;padding:6px 14px;font-family:'Inter';font-size:.7rem;color:var(--muted)}
+    .ch-mod:first-child{color:var(--gold);border-color:var(--gold-b)}
+
+    /* PREVIEW */
+    .preview-box{background:var(--deep);border:1px solid var(--gold-b);border-radius:20px;overflow:hidden;margin-top:48px;box-shadow:0 24px 80px rgba(0,0,0,.4)}
+    .pb-bar{background:rgba(0,0,0,.4);padding:14px 20px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+    .pb-dot{width:10px;height:10px;border-radius:50%}
+    .pb-url{flex:1;background:var(--void);border-radius:var(--rp);padding:6px 16px;font-family:'Inter';font-size:.68rem;color:var(--muted);margin:0 12px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+    .pb-inner{padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+    @media(max-width:700px){.pb-inner{grid-template-columns:1fr}}
+    .pb-text-title{font-family:'Cinzel';font-size:1.5rem;color:#fff;margin-bottom:12px}
+    .pb-text-sub{font-size:.95rem;color:var(--muted)}
+    .pb-features{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+    .pb-feat{display:flex;align-items:flex-start;gap:12px;font-family:'Inter';font-size:.78rem;color:var(--text)}
+    .pb-feat::before{content:'✓';color:var(--success);font-weight:bold;flex-shrink:0;margin-top:2px}
+    .pb-img img{width:100%;display:block;border-radius:12px;border:1px solid var(--border)}
+
+    /* DELIVERABLES */
+    .deliverables{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:48px}
+    @media(max-width:900px){.deliverables{grid-template-columns:1fr 1fr}}
+    @media(max-width:580px){.deliverables{grid-template-columns:1fr}}
+    .del-card{background:var(--deep);border:1px solid var(--border);border-radius:var(--r);padding:28px;transition:.3s}
+    .del-card:hover{border-color:var(--gold-d);transform:translateY(-4px)}
+    .del-icon{font-size:1.4rem;margin-bottom:12px}
+    .del-title{font-family:'Cinzel';font-size:1rem;color:#fff;margin-bottom:8px}
+    .del-desc{font-size:.88rem;color:var(--muted);line-height:1.6}
+
+    /* GUARANTEE */
+    .guarantee-box{background:var(--deep);border:1px solid var(--gold-b);border-radius:var(--r);padding:60px 48px;text-align:center;margin-top:48px;position:relative;overflow:hidden}
+    .guarantee-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.06) 0%,transparent 60%);pointer-events:none}
+    .guarantee-seal{width:90px;height:90px;border-radius:50%;border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 28px;font-size:2.2rem;background:rgba(201,168,76,.05)}
+    .guarantee-title{font-family:'Cinzel';font-size:1.8rem;color:#fff;margin-bottom:16px}
+    .guarantee-text{font-size:1.1rem;color:var(--muted);max-width:620px;margin:0 auto;line-height:1.8}
+
+    /* TESTIMONIALS */
+    .testimonials{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:48px}
+    @media(max-width:900px){.testimonials{grid-template-columns:1fr 1fr}}
+    @media(max-width:580px){.testimonials{grid-template-columns:1fr}}
+    .testi{background:var(--deep);border:1px solid var(--border);border-radius:var(--r);padding:28px}
+    .testi-stars{color:var(--gold);font-size:1rem;margin-bottom:12px;letter-spacing:2px}
+    .testi-text{font-size:1rem;font-style:italic;color:var(--text);margin-bottom:16px;line-height:1.65}
+    .testi-name{font-family:'Inter';font-size:.7rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+    .testi-role{font-family:'Inter';font-size:.62rem;color:#3A4250;margin-top:2px}
+
+    /* FINAL CTA */
+    .final-cta{background:var(--deep);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:120px 24px;text-align:center}
+    .final-inner{max-width:760px;margin:0 auto}
+
+    /* STICKY BAR */
+    .sticky-bar{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(6,10,18,.97);border-top:1px solid var(--gold-b);backdrop-filter:blur(12px);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px;transform:translateY(100%);transition:.4s}
+    .sticky-bar.show{transform:translateY(0)}
+    .sb-left{display:flex;flex-direction:column}
+    .sb-title{font-family:'Cinzel';font-size:.88rem;color:#fff;letter-spacing:.05em}
+    .sb-price{font-family:'Inter';font-size:.7rem;color:var(--gold);font-weight:600}
+    @media(max-width:640px){.sticky-bar{flex-direction:column;text-align:center;padding:12px 20px}}
+
+    footer{padding:40px 24px;text-align:center;border-top:1px solid var(--border)}
+    footer p{font-family:'Inter';font-size:.68rem;color:var(--muted);letter-spacing:.05em;line-height:2}
+  </style>
+</head>
+<body>
+<div class="noise"></div>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar" id="sticky">
+  <div class="sb-left">
+    <div class="sb-title">Escape The Career Trap</div>
+    <div class="sb-price">Founding Price — $45. Closes in <span id="sb-timer">--</span></div>
+  </div>
+  <a href="https://whop.com/silent-strategist/" class="btn-primary" style="padding:12px 28px;font-size:.78rem">Get Access Now — $45 →</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="img-logo.jpg" alt="Escape The Career Trap"/>
+    <span class="nav-brand">Escape The Career Trap</span>
+  </div>
+  <a href="https://whop.com/silent-strategist/" class="nav-cta">Get Access — $45</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge"><span class="dot"></span>&nbsp; Founding Member Offer — 14 Days Only</div>
+  <h1>You've Spent 20 Years Building<br/><span class="g">Someone Else's</span> Dream.</h1>
+  <p class="hero-sub">A 62-module, fully interactive written course that turns two decades of accumulated experience into a second income stream you actually own — and that fits in the hours you already have.</p>
+
+  <div class="countdown-wrap">
+    <div class="cd-unit"><div class="cd-num" id="cd-d">14</div><div class="cd-label">Days</div></div>
+    <div class="cd-unit"><div class="cd-num" id="cd-h">00</div><div class="cd-label">Hours</div></div>
+    <div class="cd-unit"><div class="cd-num" id="cd-m">00</div><div class="cd-label">Minutes</div></div>
+    <div class="cd-unit"><div class="cd-num" id="cd-s">00</div><div class="cd-label">Seconds</div></div>
+  </div>
+
+  <div class="price-block">
+    <div class="price-original">Regular price: $180</div>
+    <div class="price-tag"><span>$</span>45</div>
+    <div class="price-badge">75% OFF — Founding Members Only</div>
+    <div class="price-note">Price returns to $180 when the timer hits zero. No exceptions.</div>
+  </div>
+
+  <a href="https://whop.com/silent-strategist/" class="btn-primary">Claim Founding Member Access →</a>
+  <p style="font-family:'Inter';font-size:.66rem;color:var(--muted);margin-top:14px;letter-spacing:.05em">62 Interactive Modules &nbsp;·&nbsp; 12 Chapters &nbsp;·&nbsp; Lifetime Access &nbsp;·&nbsp; No Videos Required &nbsp;·&nbsp; 30-Day Guarantee</p>
+
+  <img src="img-hero.jpg" alt="Escape The Career Trap Course" class="hero-img"/>
+</div>
+
+<div class="divider"></div>
+
+<!-- PAIN -->
+<div class="section">
+  <span class="sec-label">Does This Sound Familiar?</span>
+  <h2 class="sec-title">You Are Not Starting Over.<br/>You Are Starting <span style="color:var(--gold)">From Experience.</span></h2>
+  <p class="sec-body">Most financial and career courses are built for people in their 20s with nothing to lose. This one was built specifically for professionals between 40 and 55 — people who have something far more valuable than ambition: a proven, two-decade track record.</p>
+  <div class="pain-grid">
+    <div class="pain-card">
+      <div class="pain-icon">💼</div>
+      <div class="pain-text">You have <em>20+ years of real expertise</em> but have never packaged it, priced it, or sold it beyond the salary someone else agreed to pay you.</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon">📊</div>
+      <div class="pain-text">You know you should be building <em>a second income stream</em>, but every course you've found was built for a 25-year-old with all the time in the world.</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon">⏳</div>
+      <div class="pain-text">Your <em>financial freedom number</em> exists in your head but has never been calculated specifically — which means you have no real target to build toward.</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-icon">🧠</div>
+      <div class="pain-text">A quiet internal script keeps telling you that <em>what you know is "just common sense"</em> — and couldn't possibly be worth real money to someone else.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stats-inner">
+    <span class="sec-label">The Research Is Clear</span>
+    <h2 class="sec-title" style="text-align:center">Age Is Not The Disadvantage<br/><span style="color:var(--gold)">You've Been Told It Is</span></h2>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-num counter" data-target="45">0</div>
+        <div class="stat-label">Average founder age of the fastest-growing new companies</div>
+        <div class="stat-source">MIT Sloan & U.S. Census Bureau</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num counter" data-target="62">0</div>
+        <div class="stat-label">Interactive modules inside this course — covering psychology, money, skills, offers and clients</div>
+        <div class="stat-source">Inside This Course</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num counter" data-target="12">0</div>
+        <div class="stat-label">Chapters taking you from financial clarity to a real, operating second income</div>
+        <div class="stat-source">Inside This Course</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2.4×</div>
+        <div class="stat-label">More likely to build a high-growth company at 50 than at 30</div>
+        <div class="stat-source">Harvard Business Review</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PREVIEW -->
+<div class="section">
+  <span class="sec-label">What's Inside</span>
+  <h2 class="sec-title">Not A PDF. Not A Video.<br/><span style="color:var(--gold)">A Living, Interactive System.</span></h2>
+  <p class="sec-body">Every module is a standalone interactive experience — with built-in journals that save your work, commitment declarations you have to unlock, custom calculators, and interactive diagrams. By Module 62, you won't just have knowledge. You'll have a personal document of decisions made, numbers calculated, and offers drafted.</p>
+  <div class="preview-box">
+    <div class="pb-bar">
+      <div class="pb-dot" style="background:#E84855"></div>
+      <div class="pb-dot" style="background:#F0A500"></div>
+      <div class="pb-dot" style="background:#2ECC71"></div>
+      <div class="pb-url">kingsleymirieri-ops.github.io/financial-freedom-masterclass/</div>
+    </div>
+    <div class="pb-inner">
+      <div>
+        <div class="pb-text-title">Every Module Includes</div>
+        <div class="pb-text-sub">62 fully built interactive pages — not passive reading experiences.</div>
+        <div class="pb-features">
+          <div class="pb-feat">A custom interactive tool specific to that lesson's concept</div>
+          <div class="pb-feat">A 5–6 question journal that saves directly to your browser</div>
+          <div class="pb-feat">A commitment declaration you unlock by typing "I ACCEPT"</div>
+          <div class="pb-feat">A scroll-progress bar tracking how deep you've gone</div>
+          <div class="pb-feat">A Whop notebook companion for additional notes</div>
+          <div class="pb-feat">Direct return link to the full course on Whop</div>
+        </div>
+      </div>
+      <div class="pb-img">
+        <img src="img-box.jpg" alt="Course preview"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CHAPTERS -->
+<div class="section">
+  <span class="sec-label">The Full Curriculum</span>
+  <h2 class="sec-title">12 Chapters. One Complete<br/><span style="color:var(--gold)">Transformation Arc.</span></h2>
+  <p class="sec-body">The course runs from your internal financial operating system all the way to live platforms, advisory boards, and AI tools — in exactly the order these decisions need to be made.</p>
+  <div class="chapters-wrap">
+
+    <div class="ch-item open">
+      <div class="ch-head" onclick="toggleCh(this)"><div class="ch-left"><div class="ch-num">01</div><div class="ch-title">The Foundation — Financial Identity & Clarity</div></div><div class="ch-toggle">+</div></div>
+      <div class="ch-body"><div class="ch-content">
+        <p style="color:var(--muted);font-size:.93rem;margin-bottom:14px">Diagnose your real financial starting point. Understand the difference between rich, wealthy, and free. Identify the exact beliefs that have been governing your money decisions.</p>
+        <div class="ch-mods"><div class="ch-mod">M1 The Foundation</div><div class="ch-mod">M2 The Fragility Trap</div><div class="ch-mod">M3 The Mind Behind the Money</div><div class="ch-mod">M4 Your Financial OS</div><div class="ch-mod">M5 The Real Cost of Comfort</div></div>
+      </div></div>
+    </div>
+
+    <div class="ch-item">
+      <div class="ch-head" onclick="toggleCh(this)"><div class="ch-left"><div class="ch-num">02</div><div class="ch-title">Earning More — The Hidden Skills Audit</div></div><div class="ch-toggle">+</div></div>
+      <div class="ch-body"><div class="ch-content">
+        <p style="color:var(--muted);font-size:.93rem;margin-bottom:14px">The market pays for what you know, not what your job title says. Unbundle your expertise, calculate your hidden moat, and build a low-risk test for your first offer.</p>
+        <div class="ch-mods"><div class="ch-mod">M6 Earn More Inside</div><div class="ch-mod">M7 The Skills Audit</div><div class="ch-mod">M8 The Late Bloomer Advantage</div><div class="ch-mod">M9 The Low-Risk Test</div></div>
+      </div></div>
+    </div>
+
+    <div class="ch-item">
+      <div class="ch-head" onclick="toggleCh(this)"><div class="ch-left"><div class="ch-num">03</div><div class="ch-title">Money Management — Debt, Leaks & Defence</div></div><div class="ch-toggle">+</div></div>
+      <div class="ch-body"><div class="ch-content">
+        <p style="color:var(--muted);font-size:.93rem;margin-bottom:14px">Map your buffer, decode your debt, identify the silent leak that undoes everything, and pressure-test your financial defences against real scams and structural traps.</p>
+        <div class="ch-mods"><div class="ch-mod">M10 Two Different Jobs</div><div class="ch-mod">M11 The Debt Decoder</div><div class="ch-mod">M12 The Leak That Undoes Everything</div><div class="ch-mod">M13 Pressure Testing Defences</div></div>
+      </div></div>
+    </div>
+
+    <div class="ch-item">
+      <div class="ch-head" onclick="toggleCh(this)"><div class="ch-left"><div class="ch-num">04</div><div class="ch-title">Protection & Your Freedom Number</div></div><div class="ch-toggle">+</div></div>
+      <div class="ch-body"><div class="ch-content">
+        <p style="color:var(--muted);font-size:.93rem;margin-bottom:14px">Build the liquidity buffer that catches life before it derails everything. Close the insurance gaps you don't know you have. Calculate your exact Freedom Number.</p>
+        <div class="ch-mods"><div class="ch-mod">M14 The Liquidity Buffer</div><div class="ch-mod">M15 Protection Gaps</div><div class="ch-mod">M16 Your Freedom Number Calculator</div></div>
+      </div></div>
+    </div>
+
+    <div class="ch-item">
+      <div class="ch-head" onclick="toggleCh(this)"><div class="ch-left"><div class="ch-num">05</div><div class="ch-title">Investing — Diversification & Asset Allocation</div></div><div class="ch-toggle">+</div></div>
+      <div class="ch-body"><div class="ch-content">
+        <p style="color:var(--muted);font-size:.93rem;margin-bottom:14px">From index funds and ETFs to property, SACCOs, and mobile money. Build an asset allocation matched to your actual age, timeline, and risk tolerance.</p>
+        <div class="ch-mods"><div class="ch-mod">M17 Why One Stock Is A Bet</div><div class="ch-mod">M18 The Boring Tool That Works</div><div class="ch-mod">M19 The Familiar Route To Wealth</div><div class="ch-mod">M20 The Financial World You Know</div><div class="ch-mod">M21 Your Asset Mix Calculator</div></div>
+      </div></div>
+    </div>
+
+    <div class="ch-item">
+      <div class="ch-head" onclick="toggleCh(this)"><div class="ch-left"><div class="ch-num">06</div><div class="ch-title">The Stealth Launch Strategy</div></div><div class="ch-toggle">+</div></div>
+      <div class="ch-body"><div class="ch-content">
+        <p style="color:var(--muted);font-size:.93rem;margin-bottom:14px">Build proof before you build noise. Earn your first paying client without a website, a logo, or a public announcement. Sequencing is everything.</p>
+        <div class="ch-mods"><div class="ch-mod">M22 Why Stealth Is Right</div><div class="ch-mod">M23 The Data Behind The Late Start</div><div class="ch-mod">M24 The Household Conversation</div><div class="ch-mod">M25 Returning To Freedom</div></div>
+      </div></div>
+    </div>
+
+    <div class="ch-item">
+      <div class="ch-head" onclick="toggleCh(this)"><div class="ch-left"><div class="ch-num">07</div><div class="ch-title">The Skills Inventory — Naming Your Offer</div></div><div class="ch-toggle">+</div></div>
+      <div class="ch-body"><div class="ch-content">
+        <p style="color:var(--muted);font-size:.93rem;margin-bottom:14px">The deepest chapter in the course. Pull 20 years of tacit knowledge into an auditable, priceable offer. Build your CCRI proof database, one-line value statement, and private proof record.</p>
+        <div class="ch-mods"><div class="ch-mod">M26 Why This Exists</div><div class="ch-mod">M27–M30 The Full Audit</div><div class="ch-mod">M31 The Packaging Shift</div><div class="ch-mod">M32 The One-Line Statement</div><div class="ch-mod">M33–M35 The Private Record</div><div class="ch-mod">M36 Final Reflection</div></div>
+      </div></div>
+    </div>
+
+    <div class="ch-item">
+      <div class="ch-head" onclick="toggleCh(this)"><div class="ch-left"><div class="ch-num">08</div><div class="ch-title">Sales Confidence — Without The Cringe</div></div><div class="ch-toggle">+</div></div>
+      <div class="ch-body"><div class="ch-content">
+        <p style="color:var(--muted);font-size:.93rem;margin-bottom:14px">Stop selling hours. Stop apologising before you finish your sentence. The quiet markers of real authority, holding the sales pause, and pricing from confidence rather than desperation.</p>
+        <div class="ch-mods"><div class="ch-mod">M37 Paper Doesn't Close Deals</div><div class="ch-mod">M38 The Employee Reflex</div><div class="ch-mod">M39 Stop Selling Hours</div><div class="ch-mod">M40–M42 Quiet Authority</div></div>
+      </div></div>
+    </div>
+
+    <div class="ch-item">
+      <div class="ch-head" onclick="toggleCh(this)"><div class="ch-left"><div class="ch-num">09</div><div class="ch-title">The Consulting Offer — Mechanics & Pricing</div></div><div class="ch-toggle">+</div></div>
+      <div class="ch-body"><div class="ch-content">
+        <p style="color:var(--muted);font-size:.93rem;margin-bottom:14px">Why consulting rewards experience over youth. Translate employment history into provable outcomes. Calculate your profit floor and protect against scope creep from day one.</p>
+        <div class="ch-mods"><div class="ch-mod">M43 Why This Stage Fits</div><div class="ch-mod">M44 The Resume Translator</div><div class="ch-mod">M45 Diagnostic Questions</div><div class="ch-mod">M46 Profit Floor Calculator</div><div class="ch-mod">M47 Protecting The Practice</div></div>
+      </div></div>
+    </div>
+
+    <div class="ch-item">
+      <div class="ch-head" onclick="toggleCh(this)"><div class="ch-left"><div class="ch-num">10</div><div class="ch-title">The Coaching Architecture</div></div><div class="ch-toggle">+</div></div>
+      <div class="ch-body"><div class="ch-content">
+        <p style="color:var(--muted);font-size:.93rem;margin-bottom:14px">The exact difference between consulting and coaching. How to choose a specific lane from your lived experience. Structure, discovery calls, accountability, and the mathematical ceiling of 1-on-1 work.</p>
+        <div class="ch-mods"><div class="ch-mod">M48 Consulting vs Coaching</div><div class="ch-mod">M49 Choosing Your Lane</div><div class="ch-mod">M50 Structure Over Personality</div><div class="ch-mod">M51 Earning Trust First</div><div class="ch-mod">M52 The Time Ceiling Calculator</div></div>
+      </div></div>
+    </div>
+
+    <div class="ch-item">
+      <div class="ch-head" onclick="toggleCh(this)"><div class="ch-left"><div class="ch-num">11</div><div class="ch-title">Relationships & The Referral Engine</div></div><div class="ch-toggle">+</div></div>
+      <div class="ch-body"><div class="ch-content">
+        <p style="color:var(--muted);font-size:.93rem;margin-bottom:14px">Warm beats cold every time. Give before you ask. Engineer referrals instead of waiting for them. The zero-agenda outreach template and a tracking system that keeps trust alive.</p>
+        <div class="ch-mods"><div class="ch-mod">M53 Warm vs Cold</div><div class="ch-mod">M54 Give First</div><div class="ch-mod">M55 Engineering Referrals</div><div class="ch-mod">M56 The First Message</div><div class="ch-mod">M57 Tracking Without Being Creepy</div></div>
+      </div></div>
+    </div>
+
+    <div class="ch-item">
+      <div class="ch-head" onclick="toggleCh(this)"><div class="ch-left"><div class="ch-num">12</div><div class="ch-title">The Modern Menu — Platforms, Licensing & AI</div></div><div class="ch-toggle">+</div></div>
+      <div class="ch-body"><div class="ch-content">
+        <p style="color:var(--muted);font-size:.93rem;margin-bottom:14px">Fractional roles. Expert-call networks. Licensed frameworks. Advisory board seats. AI tools that protect your margins. The complete modern menu for monetising experience without burning out.</p>
+        <div class="ch-mods"><div class="ch-mod">M58 The Modern Menu</div><div class="ch-mod">M59 Platforms Compared</div><div class="ch-mod">M60 Build Once, License Many</div><div class="ch-mod">M61 Advisory Board Seats</div><div class="ch-mod">M62 AI As Leverage</div></div>
+      </div></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- DELIVERABLES -->
+<div class="section">
+  <span class="sec-label">The Real Deliverable</span>
+  <h2 class="sec-title">By Module 62, You Don't Just Have<br/><span style="color:var(--gold)">Knowledge. You Have Documents.</span></h2>
+  <p class="sec-body">The journals inside each module extract specific decisions, numbers, and drafts — so you finish with a complete personal roadmap you actually own.</p>
+  <div class="deliverables">
+    <div class="del-card"><div class="del-icon">🔢</div><div class="del-title">Your Freedom Number</div><div class="del-desc">The exact monthly passive income figure you need to reach financial independence — calculated to your specific life.</div></div>
+    <div class="del-card"><div class="del-icon">📋</div><div class="del-title">Your Skills Audit</div><div class="del-desc">A documented inventory of your tacit expertise, your CCRI proof records, and the hidden value your career has already built.</div></div>
+    <div class="del-card"><div class="del-icon">✍️</div><div class="del-title">Your One-Line Offer</div><div class="del-desc">A single sentence naming exactly who you help and what expensive problem you solve — specific enough to earn trust in 10 seconds.</div></div>
+    <div class="del-card"><div class="del-icon">💰</div><div class="del-title">Your Pricing Floor</div><div class="del-desc">The minimum retainer below which you will not go — calculated from your real costs and time, not guesswork.</div></div>
+    <div class="del-card"><div class="del-icon">📬</div><div class="del-title">Your Outreach Script</div><div class="del-desc">A filled-in, personalized message ready to send to your first three warm contacts — this week.</div></div>
+    <div class="del-card"><div class="del-icon">📊</div><div class="del-title">Your Asset Allocation</div><div class="del-desc">A personalized investment mix based on your age, timeline, and the wealth-building tools you already have access to.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- GUARANTEE -->
+<div class="section" style="padding-top:60px;padding-bottom:60px">
+  <div class="guarantee-box">
+    <div class="guarantee-seal">🛡️</div>
+    <div class="guarantee-title">This Course Works, Or You Don't Pay.</div>
+    <div class="guarantee-text">Go through the course. Do the journals. Use the tools. If by the end of 30 days you don't have a clearer financial picture, a more specific sense of what you can offer, and a concrete first step — contact us for a full refund. No forms. No explanations required.</div>
+    <p style="font-family:'Inter';font-size:.68rem;color:var(--muted);margin-top:20px;letter-spacing:.05em">30-DAY FULL MONEY-BACK GUARANTEE</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- TESTIMONIALS -->
+<div class="section">
+  <span class="sec-label">Early Feedback</span>
+  <h2 class="sec-title">From People Who've Been<br/><span style="color:var(--gold)">Through It</span></h2>
+  <div class="testimonials">
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"The Skills Audit chapter alone was worth more than the full price. I had 22 years of experience I genuinely didn't know how to name or sell. Now I have a one-line statement I'm actually proud of."</div>
+      <div class="testi-name">Senior Operations Manager</div>
+      <div class="testi-role">Manufacturing Industry · 18 years experience</div>
+    </div>
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"I've bought a lot of courses. Most are passive video you forget before the week is out. The fact that every module is interactive and saves my actual answers made this feel like real work — in the best way."</div>
+      <div class="testi-name">Finance Director</div>
+      <div class="testi-role">Financial Services · 15 years experience</div>
+    </div>
+    <div class="testi">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"The Freedom Number calculator hit me harder than I expected. Seeing the actual number — not a vague 'save more' instruction — made the second income goal feel achievable for the first time."</div>
+      <div class="testi-name">HR Director</div>
+      <div class="testi-role">Technology Sector · 20 years experience</div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="final-cta">
+  <div class="final-inner">
+    <img src="img-logo.jpg" alt="Logo" style="width:80px;height:80px;border-radius:50%;margin:0 auto 28px;display:block;object-fit:cover"/>
+    <span class="sec-label" style="display:block;text-align:center">The Founding Price Disappears When The Timer Hits Zero</span>
+    <h2 class="sec-title" style="text-align:center;font-size:clamp(2rem,4vw,3.2rem)">Everything You Need To Build<br/><span style="color:var(--gold)">A Real Second Income.</span></h2>
+
+    <div class="countdown-wrap" style="margin:40px 0 32px">
+      <div class="cd-unit"><div class="cd-num" id="cd2-d">14</div><div class="cd-label">Days</div></div>
+      <div class="cd-unit"><div class="cd-num" id="cd2-h">00</div><div class="cd-label">Hours</div></div>
+      <div class="cd-unit"><div class="cd-num" id="cd2-m">00</div><div class="cd-label">Minutes</div></div>
+      <div class="cd-unit"><div class="cd-num" id="cd2-s">00</div><div class="cd-label">Seconds</div></div>
+    </div>
+
+    <div class="price-block" style="margin-bottom:32px">
+      <div class="price-original">Regular price: $180</div>
+      <div class="price-tag"><span>$</span>45</div>
+      <div class="price-badge">75% OFF — Founding Members Only</div>
+    </div>
+
+    <a href="https://whop.com/silent-strategist/" class="btn-primary" style="font-size:1.1rem;padding:22px 60px">Get Lifetime Access — $45 →</a>
+    <p style="font-family:'Inter';font-size:.66rem;color:var(--muted);margin-top:16px;letter-spacing:.05em">62 Modules · 12 Chapters · Lifetime Access · 30-Day Money-Back Guarantee</p>
+
+    <div style="display:flex;gap:32px;justify-content:center;margin-top:48px;flex-wrap:wrap">
+      <div style="text-align:center"><div style="font-family:'Cinzel';color:var(--gold);font-size:1.4rem;font-weight:900">62</div><div style="font-family:'Inter';font-size:.68rem;color:var(--muted)">Interactive Modules</div></div>
+      <div style="text-align:center"><div style="font-family:'Cinzel';color:var(--gold);font-size:1.4rem;font-weight:900">12</div><div style="font-family:'Inter';font-size:.68rem;color:var(--muted)">Chapters</div></div>
+      <div style="text-align:center"><div style="font-family:'Cinzel';color:var(--gold);font-size:1.4rem;font-weight:900">30</div><div style="font-family:'Inter';font-size:.68rem;color:var(--muted)">Day Guarantee</div></div>
+      <div style="text-align:center"><div style="font-family:'Cinzel';color:var(--gold);font-size:1.4rem;font-weight:900">∞</div><div style="font-family:'Inter';font-size:.68rem;color:var(--muted)">Lifetime Access</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <img src="img-logo.jpg" alt="Logo" style="width:44px;height:44px;border-radius:50%;margin:0 auto 16px;display:block;object-fit:cover"/>
+  <p><strong style="font-family:'Cinzel';color:#fff;letter-spacing:.1em">ESCAPE THE CAREER TRAP</strong></p>
+  <p>Build More In The Hours You Have.</p>
+  <p style="margin-top:16px">
+    <a href="https://kingsleymirieri-ops.github.io/financial-freedom-masterclass/" style="color:var(--gold);text-decoration:none">Preview The Course</a>
+    &nbsp;·&nbsp;
+    <a href="https://whop.com/silent-strategist/" style="color:var(--gold);text-decoration:none">Get Access Now</a>
+  </p>
+  <p style="margin-top:20px">© 2026 Escape The Career Trap. All rights reserved.</p>
+</footer>
+
+<script>
+  // COUNTDOWN — persists across page refreshes
+  const DEADLINE_KEY = 'ectc_deadline';
+  let deadline = localStorage.getItem(DEADLINE_KEY);
+  if(!deadline){
+    const d = new Date();
+    d.setDate(d.getDate() + 14);
+    deadline = d.getTime();
+    localStorage.setItem(DEADLINE_KEY, deadline);
+  }
+  deadline = parseInt(deadline);
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function updateCountdown(){
+    const diff = Math.max(0, deadline - Date.now());
+    const days = Math.floor(diff / 86400000);
+    const hrs  = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    const secs = Math.floor((diff % 60000) / 1000);
+    ['cd-d','cd2-d'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent=days; });
+    ['cd-h','cd2-h'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent=pad(hrs); });
+    ['cd-m','cd2-m'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent=pad(mins); });
+    ['cd-s','cd2-s'].forEach(id=>{ const el=document.getElementById(id); if(el) el.textContent=pad(secs); });
+    const sb = document.getElementById('sb-timer');
+    if(sb) sb.textContent = days + 'd ' + pad(hrs) + 'h ' + pad(mins) + 'm';
+  }
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+  // STICKY BAR
+  window.addEventListener('scroll', () => {
+    const s = document.getElementById('sticky');
+    if(s) s.classList.toggle('show', window.scrollY > 600);
+  });
+
+  // CHAPTER ACCORDION
+  function toggleCh(head){
+    const item = head.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.ch-item').forEach(i => i.classList.remove('open'));
+    if(!isOpen) item.classList.add('open');
+  }
+
+  // ANIMATED COUNTERS
+  function animateCounters(){
+    document.querySelectorAll('.counter').forEach(el => {
+      const target = parseInt(el.dataset.target);
+      let cur = 0;
+      const step = Math.ceil(target / 40);
+      const iv = setInterval(() => {
+        cur = Math.min(cur + step, target);
+        el.textContent = cur;
+        if(cur >= target) clearInterval(iv);
+      }, 40);
+    });
+  }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ animateCounters(); obs.disconnect(); } });
+  }, { threshold: 0.3 });
+  const sg = document.querySelector('.stats-grid');
+  if(sg) obs.observe(sg);
+</script>
+</body>
+</html>
