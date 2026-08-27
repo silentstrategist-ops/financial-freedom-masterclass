@@ -658,8 +658,12 @@ function updateProt(){
 }
 
 /* RADAR CANVAS */
+/* RADAR CANVAS ENHANCED */
+let mousePos = {x: 0, y: 0, activeAxis: -1};
+
 function drawRadar(){
   const c = document.getElementById('radar');
+  if(!c) return;
   const ctx = c.getContext('2d');
   const cx = c.width/2; const cy = c.height/2;
   const maxR = 140;
@@ -667,7 +671,7 @@ function drawRadar(){
   ctx.clearRect(0,0,c.width,c.height);
   
   // Draw Background Grid
-  ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+  ctx.strokeStyle = 'rgba(255,255,255,0.06)';
   ctx.lineWidth = 1;
   for(let i=1; i<=4; i++){
     let r = (maxR/4) * i;
@@ -681,6 +685,7 @@ function drawRadar(){
   }
   
   // Draw Axes
+  ctx.strokeStyle = 'rgba(255,255,255,0.12)';
   ctx.beginPath();
   ctx.moveTo(cx, cy - maxR); ctx.lineTo(cx, cy + maxR);
   ctx.moveTo(cx - maxR, cy); ctx.lineTo(cx + maxR, cy);
@@ -693,7 +698,7 @@ function drawRadar(){
   ctx.fillText('PROTECTION', cx, cy + maxR + 15);
   ctx.fillText('DEBT RIGIDITY', cx - maxR - 40, cy);
   
-  // Calculate points (0 = center, 100 = outer edge)
+  // Calculate points
   const pInc = cy - (maxR * (F.inc/100));
   const pEmp = cx + (maxR * (F.emp/100));
   const pProt = cy + (maxR * (F.prot/100));
@@ -707,24 +712,108 @@ function drawRadar(){
   ctx.lineTo(pDebt, cy);
   ctx.closePath();
   
-  // Calculate average fragility to pick color
   const avgF = (F.inc + F.emp + F.prot + F.debt) / 4;
   let color = 'rgba(46,204,113,'; // green
   if(avgF > 60) color = 'rgba(232,72,85,'; // red
   else if(avgF > 30) color = 'rgba(201,168,76,'; // gold
   
-  ctx.fillStyle = color + '0.3)';
+  ctx.fillStyle = color + '0.2)';
   ctx.fill();
   ctx.strokeStyle = color + '1)';
   ctx.lineWidth = 2;
+  
+  ctx.shadowBlur = 10;
+  ctx.shadowColor = color + '0.5)';
   ctx.stroke();
+  ctx.shadowBlur = 0; // reset
   
   // Dots
-  ctx.fillStyle = '#fff';
-  [ [cx, pInc], [pEmp, cy], [cx, pProt], [pDebt, cy] ].forEach(pt => {
-    ctx.beginPath(); ctx.arc(pt[0], pt[1], 4, 0, Math.PI*2); ctx.fill();
+  const pts = [
+    {name: 'Income Concentration', val: F.inc, x: cx, y: pInc, desc: `${F.inc}% single-source dependence`},
+    {name: 'Re-employment Speed', val: F.emp, x: pEmp, y: cy, desc: `${F.emp}% timeline risk`},
+    {name: 'Protection Gap', val: F.prot, x: cx, y: pProt, desc: `${F.prot}% insurance/coverage gap`},
+    {name: 'Debt Rigidity', val: F.debt, x: pDebt, y: cy, desc: `${F.debt}% rigid obligations`}
+  ];
+  
+  pts.forEach((pt, i) => {
+    ctx.beginPath();
+    if (mousePos.activeAxis === i) {
+      ctx.arc(pt.x, pt.y, 6, 0, Math.PI*2);
+      ctx.fillStyle = '#fff';
+      ctx.fill();
+      ctx.strokeStyle = color + '1)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      // Draw Tooltip
+      ctx.fillStyle = 'rgba(5, 8, 18, 0.95)';
+      ctx.strokeStyle = 'var(--gold-b)';
+      ctx.lineWidth = 1;
+      
+      const tx = pt.x + (pt.x > cx ? -180 : 20);
+      const ty = pt.y - 45;
+      ctx.beginPath();
+      ctx.rect(tx, ty, 160, 52);
+      ctx.fill();
+      ctx.stroke();
+      
+      ctx.fillStyle = '#fff'; ctx.font = 'bold 10px Inter'; ctx.textAlign = 'left'; ctx.textBaseline = 'top';
+      ctx.fillText(pt.name, tx + 10, ty + 10);
+      ctx.fillStyle = 'var(--gold)'; ctx.font = '9px Inter';
+      ctx.fillText(pt.desc, tx + 10, ty + 24);
+      ctx.fillStyle = 'var(--muted)'; ctx.font = '9px Inter';
+      ctx.fillText('Exposure: ' + pt.val + '%', tx + 10, ty + 36);
+    } else {
+      ctx.arc(pt.x, pt.y, 4, 0, Math.PI*2);
+      ctx.fillStyle = '#fff';
+      ctx.fill();
+    }
   });
 }
+
+(function(){
+  const c = document.getElementById('radar');
+  if(!c) return;
+  
+  c.addEventListener('mousemove', (e) => {
+    const rect = c.getBoundingClientRect();
+    const scaleX = c.width / rect.width;
+    const scaleY = c.height / rect.height;
+    const mx = (e.clientX - rect.left) * scaleX;
+    const my = (e.clientY - rect.top) * scaleY;
+    
+    const cx = c.width/2; const cy = c.height/2;
+    const maxR = 140;
+    
+    const pInc = {x: cx, y: cy - (maxR * (F.inc/100))};
+    const pEmp = {x: cx + (maxR * (F.emp/100)), y: cy};
+    const pProt = {x: cx, y: cy + (maxR * (F.prot/100))};
+    const pDebt = {x: cx - (maxR * (F.debt/100)), y: cy};
+    
+    const pts = [pInc, pEmp, pProt, pDebt];
+    let closestIndex = -1;
+    let maxDist = 20;
+    
+    pts.forEach((pt, i) => {
+      const dx = mx - pt.x;
+      const dy = my - pt.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < maxDist) {
+        closestIndex = i;
+      }
+    });
+    
+    if (mousePos.activeAxis !== closestIndex) {
+      mousePos.activeAxis = closestIndex;
+      drawRadar();
+    }
+  });
+  
+  c.addEventListener('mouseleave', () => {
+    mousePos.activeAxis = -1;
+    drawRadar();
+  });
+})();
 
 // Init
 updateInc(); updateEmp(); updateProt(); drawRadar();

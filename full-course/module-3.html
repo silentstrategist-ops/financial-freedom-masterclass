@@ -412,6 +412,17 @@
 
   <p class="body-text sr" style="text-align:center;font-style:italic;color:var(--muted);margin-bottom:28px">Click the belief-behaviour gap that most closely mirrors something in your own financial life.</p>
 
+  <!-- Tension Gauge Canvas -->
+  <div class="card sr" style="margin-bottom: 28px; padding: 24px; text-align: center; background: rgba(5,8,18,0.4); border-color: var(--gold-b);">
+    <p class="tag" style="margin-bottom: 8px;">Cognitive Tension Indicator</p>
+    <canvas id="tension-canvas" style="width: 100%; height: 140px; border-radius: 8px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); display: block;"></canvas>
+    <div style="display: flex; justify-content: space-between; font-family: 'Inter'; font-size: 0.65rem; color: var(--muted); margin-top: 12px; letter-spacing: 0.08em; text-transform: uppercase;">
+      <span>System 2: Conscious</span>
+      <span id="tension-status" style="color: var(--success); font-weight: bold; transition: color 0.3s;">STABLE</span>
+      <span>System 1: Autopilot</span>
+    </div>
+  </div>
+
   <div class="dissonance-grid sr">
     <div class="dis-card" onclick="selectDis(this,'resp')">
       <p class="dis-belief">"I am a responsible, hard-working person."</p>

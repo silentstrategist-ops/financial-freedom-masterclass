@@ -282,24 +282,13 @@
       </div>
     </div>
     
-    <div class="e-visual">
-      <div class="ev-track">
-        <div class="ev-buffer" id="ev-buf">Protected Buffer</div>
-        <div class="ev-surplus" id="ev-sur">Idle Surplus</div>
-      </div>
-      <div class="ev-markers">
-        <span>$0</span>
-        <span id="ev-target" style="color:var(--success)">Target: $150k</span>
-        <span id="ev-total">Total</span>
-      </div>
+        <!-- Buckets Canvas Visualizer -->
+    <div style="margin-bottom: 24px; text-align: center;">
+      <canvas id="buckets-canvas" style="width: 100%; height: 220px; border-radius: 8px; border: 1px solid var(--border); background: rgba(5,8,18,0.4); display: block;"></canvas>
+      <button id="invest-btn" class="whop-btn" style="background: var(--success); color: #000; margin: 16px auto 0; display: none;" onclick="investSurplus()">Invest the Surplus</button>
+      <div id="ev-target" style="color:var(--success); font-family:'Inter'; font-size:0.65rem; margin-top:8px; text-transform:uppercase; letter-spacing:0.05em;">Target: $0</div>
     </div>
-    
-    <div class="e-result" id="e-res-box">
-      <div class="e-r-title" id="e-res-title">The Silent Tax</div>
-      <div class="e-r-val" id="e-res-val" style="color:var(--danger)">-$10,000 / yr</div>
-      <div class="e-r-desc" id="e-res-desc">You have 200,000 sitting idle. By treating investing's job as saving's job, you are guaranteeing a loss of purchasing power every year.</div>
     </div>
-  </div>
 
   <!-- THE GOVERNOR TRANSLATOR -->
   <div class="sec-divider sr"><span>Correcting The Instincts</span></div>
@@ -416,16 +405,23 @@
 window.addEventListener('scroll',()=>{document.getElementById('pfill').style.width=Math.round((scrollY/(document.body.scrollHeight-innerHeight))*100)+'%'});
 
 /* BUFFER & LEAKAGE ENGINE */
+let totalCash = 0;
+let isInvested = false;
+
+function investSurplus() {
+  isInvested = true;
+  document.getElementById('invest-btn').style.display = 'none';
+  calcEngine();
+}
+
 function calcEngine(){
   const base = parseFloat(document.getElementById('e-base').value) || 0;
   const cash = parseFloat(document.getElementById('e-cash').value) || 0;
   const inf = parseFloat(document.getElementById('e-inf').value) || 0;
   
   const target3 = base * 3;
-  // We'll use 4x as a visual mid-point, but 3x as the minimum target line.
+  totalCash = cash;
   
-  const bufTrack = document.getElementById('ev-buf');
-  const surTrack = document.getElementById('ev-sur');
   const resBox = document.getElementById('e-res-box');
   const resTitle = document.getElementById('e-res-title');
   const resVal = document.getElementById('e-res-val');
@@ -433,22 +429,25 @@ function calcEngine(){
   document.getElementById('ev-target').textContent = `Target (3x): ${target3.toLocaleString()}`;
   
   if(cash === 0 || base === 0){
-    bufTrack.style.width = '0%'; surTrack.style.width = '0%';
+    if (window.updateVisualBuckets) window.updateVisualBuckets(0, 0, 0, 0);
     resBox.style.borderColor = 'var(--border)';
     resTitle.textContent = "Awaiting Data";
     resVal.textContent = "—";
     resVal.style.color = "var(--text)";
     resDesc.textContent = "Enter your baseline and cash to see your buffer health.";
+    document.getElementById('invest-btn').style.display = 'none';
     return;
   }
   
-  let bufPct = 0;
-  let surPct = 0;
+  let bufFraction = 0;
+  let surFraction = 0;
+  let invFraction = 0;
   
   if(cash <= target3){
-    // Deficit or exact buffer
-    bufPct = (cash / (target3*1.5)) * 100; // Visual scale
-    surPct = 0;
+    bufFraction = cash / target3;
+    surFraction = 0;
+    isInvested = false;
+    document.getElementById('invest-btn').style.display = 'none';
     
     resBox.style.borderColor = 'var(--gold)';
     resTitle.textContent = "Buffer Accumulation Phase";
@@ -457,32 +456,146 @@ function calcEngine(){
     resVal.style.color = "var(--gold)";
     resDesc.textContent = `You are actively building your ${target3.toLocaleString()} liquidity buffer. Keep going. This money's only job is safety.`;
   } else {
-    // Surplus
     const surplus = cash - target3;
-    bufPct = (target3 / cash) * 100;
-    surPct = (surplus / cash) * 100;
+    bufFraction = 1.0;
     
-    // Calculate tax
-    const loss = surplus * (inf / 100);
-    
-    resBox.style.borderColor = 'var(--danger)';
-    resTitle.textContent = "The Silent Tax";
-    resTitle.style.color = 'var(--danger)';
-    resVal.textContent = `-${loss.toLocaleString(undefined,{maximumFractionDigits:0})} / yr`;
-    resVal.style.color = "var(--danger)";
-    resDesc.textContent = `You have ${surplus.toLocaleString()} sitting idle past your 3-month target. At ${inf}% inflation, you are guaranteeing a loss of purchasing power every single year by leaving it in cash.`;
+    if (isInvested) {
+      invFraction = surplus / target3;
+      surFraction = 0;
+      document.getElementById('invest-btn').style.display = 'none';
+      
+      resBox.style.borderColor = 'var(--success)';
+      resTitle.textContent = "Surplus Active & Protected";
+      resTitle.style.color = 'var(--success)';
+      resVal.textContent = "Protected from Inflation";
+      resVal.style.color = "var(--success)";
+      resDesc.textContent = `Your ${surplus.toLocaleString()} surplus has been moved into index growth assets. It is now out-pacing inflation and compounding safely.`;
+    } else {
+      surFraction = surplus / target3;
+      invFraction = 0;
+      document.getElementById('invest-btn').style.display = 'inline-flex';
+      
+      const loss = surplus * (inf / 100);
+      resBox.style.borderColor = 'var(--danger)';
+      resTitle.textContent = "The Silent Tax";
+      resTitle.style.color = 'var(--danger)';
+      resVal.textContent = `-${loss.toLocaleString(undefined,{maximumFractionDigits:0})} / yr`;
+      resVal.style.color = "var(--danger)";
+      resDesc.textContent = `You have ${surplus.toLocaleString()} sitting idle past your 3-month target. At ${inf}% inflation, you are guaranteeing a loss of purchasing power every single year by leaving it in cash.`;
+    }
   }
   
-  // Cap visual percentages so text doesn't overflow wildly
-  if(bufPct < 15 && bufPct > 0) bufPct = 15;
-  if(surPct < 15 && surPct > 0) surPct = 15;
-  
-  bufTrack.style.width = bufPct + '%';
-  bufTrack.textContent = cash <= target3 ? 'Building...' : 'Protected';
-  
-  surTrack.style.width = surPct + '%';
-  surTrack.textContent = 'Idle Surplus';
+  if (window.updateVisualBuckets) {
+    window.updateVisualBuckets(Math.min(bufFraction, 1), Math.min(surFraction, 1.2), Math.min(invFraction, 1.2), inf);
+  }
 }
+
+/* BUCKETS CANVAS LOGIC */
+let buckets = {
+  buffer: { val: 0, target: 0, color: '#4FC3F7', glow: 'rgba(79, 195, 247, 0.4)' },
+  surplus: { val: 0, target: 0, color: '#C9A84C', glow: 'rgba(201, 168, 76, 0.4)' },
+  invested: { val: 0, target: 0, color: '#2ECC71', glow: 'rgba(46, 204, 113, 0.4)' }
+};
+let inflationRate = 0;
+
+(function(){
+  const canvas = document.getElementById('buckets-canvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  
+  let w, h;
+  function resize() {
+    w = canvas.width = canvas.parentElement.offsetWidth;
+    h = 220;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  
+  let dripTime = 0;
+  
+  function drawBuckets() {
+    ctx.clearRect(0,0,w,h);
+    
+    // Liquid animation levels (smooth approach)
+    ['buffer', 'surplus', 'invested'].forEach(key => {
+      const b = buckets[key];
+      b.val += (b.target - b.val) * 0.08;
+    });
+    
+    dripTime += 0.15;
+    
+    // Draw 3 Cylinders
+    const cylW = 60;
+    const cylH = 120;
+    const gap = (w - (cylW * 3)) / 4;
+    const startY = h - 45;
+    
+    const coords = [
+      { x: gap, label: 'Protected Buffer', data: buckets.buffer },
+      { x: gap * 2 + cylW, label: 'Idle Surplus', data: buckets.surplus },
+      { x: gap * 3 + cylW * 2, label: 'Investments', data: buckets.invested }
+    ];
+    
+    coords.forEach((c, idx) => {
+      // Draw cylinder wireframe
+      ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(c.x, startY - cylH, cylW, cylH);
+      
+      // Draw Liquid inside
+      const fillH = cylH * c.data.val;
+      if (fillH > 1) {
+        ctx.fillStyle = c.data.color;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = c.data.glow;
+        
+        ctx.beginPath();
+        const topY = startY - fillH;
+        ctx.moveTo(c.x, startY);
+        ctx.lineTo(c.x, topY);
+        const waveY = topY + Math.sin(dripTime + c.x) * 2;
+        ctx.lineTo(c.x + cylW, waveY);
+        ctx.lineTo(c.x + cylW, startY);
+        ctx.closePath();
+        ctx.fill();
+        ctx.shadowBlur = 0; // reset
+      }
+      
+      // Labels
+      ctx.fillStyle = 'var(--muted)'; ctx.font = 'bold 9px Inter'; ctx.textAlign = 'center';
+      ctx.fillText(c.label.toUpperCase(), c.x + cylW/2, startY + 18);
+      ctx.fillStyle = '#fff';
+      ctx.fillText(c.data.target > 0.05 ? Math.round(c.data.target * 100) + '%' : 'EMPTY', c.x + cylW/2, startY + 30);
+      
+      // Leak simulation on Idle Surplus bucket if inflation > 0 and surplus has liquid
+      if (idx === 1 && c.data.val > 0.05 && inflationRate > 0) {
+        ctx.fillStyle = 'rgba(232, 72, 85, 0.8)';
+        const crackY = startY - fillH/2;
+        const dropY = crackY + ((dripTime * 3) % 40);
+        ctx.beginPath();
+        ctx.arc(c.x + cylW/2, dropY, 2.5, 0, Math.PI*2);
+        ctx.fill();
+        
+        ctx.strokeStyle = 'var(--danger)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(c.x + cylW/2 - 4, crackY - 2);
+        ctx.lineTo(c.x + cylW/2 + 4, crackY + 2);
+        ctx.stroke();
+      }
+    });
+    
+    requestAnimationFrame(drawBuckets);
+  }
+  drawBuckets();
+  
+  window.updateVisualBuckets = function(bufFraction, surFraction, invFraction, inf) {
+    buckets.buffer.target = bufFraction;
+    buckets.surplus.target = surFraction;
+    buckets.invested.target = invFraction;
+    inflationRate = inf;
+  };
+})();
 calcEngine();
 
 /* JOURNAL */
