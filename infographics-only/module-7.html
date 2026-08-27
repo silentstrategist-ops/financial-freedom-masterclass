@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 7: The Skills Audit | Financial Freedom Masterclass</title>
+  <meta name="description" content="You have been collecting value for years without knowing it. Strip away your job title and audit your real, sellable market value."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --void:#030507;--deep:#060A12;--surface:rgba(255,255,255,.03);
+      --surface2:rgba(255,255,255,.06);--gold:#C9A84C;--gold-l:#E8C97A;
+      --gold-d:rgba(201,168,76,.15);--gold-g:rgba(201,168,76,.06);
+      --gold-b:rgba(201,168,76,.25);--text:#EEF0F4;--muted:#7A8290;
+      --muted2:#4A5260;--danger:#E84855;--success:#2ECC71;
+      --cyan:#4FC3F7;--purple:#9B7FE8;--border:rgba(255,255,255,.07);
+      --r:20px;--rp:100px;
+    }
+    ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--void)}
+    ::-webkit-scrollbar-thumb{background:var(--gold-b);border-radius:3px}
+    *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+    body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',serif;overflow-x:hidden;line-height:1.7}
+
+    .noise{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;opacity:.08;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+    #ambient-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.2}
+
+    main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 28px 180px}
+    @media(max-width:640px){main{padding:0 18px 180px}}
+
+    .sr{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+    .sr.v{opacity:1;transform:none}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes scaleIn{from{transform:scale(.93);opacity:0}to{transform:scale(1);opacity:1}}
+    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+    .tag{font-family:'Inter';font-size:.65rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;display:inline-block;margin-bottom:14px}
+    .sec-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;color:#fff;letter-spacing:.05em;margin-bottom:1rem;line-height:1.2}
+    .body-text{font-size:1.18rem;font-weight:300;color:var(--text);margin-bottom:1rem;line-height:1.85}
+    .em{color:var(--gold);font-style:italic}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:44px 48px}
+    @media(max-width:640px){.card{padding:28px 22px}}
+
+    .sec-divider{display:flex;align-items:center;gap:16px;margin:80px 0 32px}
+    .sec-divider::before,.sec-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+    .sec-divider span{font-family:'Inter';font-size:.6rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;white-space:nowrap}
+
+    /* HERO */
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 0 60px}
+    .hero-eyebrow{font-family:'Inter';font-size:.68rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fadeUp .8s .3s forwards}
+    .hero-title{font-family:'Cinzel',serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;line-height:1.05;color:#fff;margin-bottom:24px;opacity:0;animation:fadeUp .9s .5s forwards}
+    .hero-sub{font-size:1.3rem;font-style:italic;color:var(--muted);max-width:640px;margin:0 auto 40px;font-weight:300;opacity:0;animation:fadeUp .9s .7s forwards}
+    .hero-scroll{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 1s 1.2s forwards}
+    .hero-scroll span{font-family:'Inter';font-size:.6rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+    .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s infinite}
+    @keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+    /* UNBUNDLER */
+    .unbundler-box{background:var(--deep);border:1px solid var(--border);border-radius:var(--r);padding:44px 48px}
+    @media(max-width:640px){.unbundler-box{padding:28px 20px}}
+    .ub-input-wrap{display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap}
+    .ub-input{flex:1;min-width:200px;padding:14px 20px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter';font-size:.9rem;outline:none}
+    .ub-input:focus{border-color:var(--gold-b);background:var(--gold-g)}
+    .ub-select{padding:14px 20px;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter';font-size:.85rem;outline:none;cursor:pointer}
+    .ub-btn{padding:14px 24px;border-radius:8px;border:1px solid var(--gold-b);background:none;color:var(--gold);font-family:'Inter';font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:.3s;white-space:nowrap}
+    .ub-btn:hover{background:var(--gold);color:var(--void)}
+    
+    .ub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+    .ub-col{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:12px;padding:24px;min-height:200px;display:flex;flex-direction:column;gap:12px}
+    .ub-col-title{font-family:'Inter';font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:8px}
+    .ub-col.tech .ub-col-title{color:var(--cyan)}
+    .ub-col.soft .ub-col-title{color:var(--purple)}
+    .ub-col.achieve .ub-col-title{color:var(--success)}
+    .ub-item{background:var(--surface2);border:1px solid var(--border);padding:12px 16px;border-radius:8px;font-size:.95rem;animation:scaleIn .3s ease;display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .ub-item-text{flex:1;line-height:1.4}
+    .ub-del{background:none;border:none;color:var(--muted2);cursor:pointer;font-size:1rem;transition:.2s}
+    .ub-del:hover{color:var(--danger)}
+
+    /* TRANSLATION ENGINE */
+    .te-box{background:var(--deep);border:1px solid var(--gold-b);border-radius:var(--r);padding:44px 48px;position:relative}
+    @media(max-width:640px){.te-box{padding:28px 20px}}
+    .te-inputs{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:32px}
+    .te-group{display:flex;flex-direction:column;gap:6px}
+    .te-label{font-family:'Inter';font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+    .te-input{padding:14px 18px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Cormorant Garamond';font-size:1.1rem;outline:none;transition:.3s}
+    .te-input:focus{border-color:var(--gold-b);background:rgba(201,168,76,.03)}
+    .te-result-box{background:rgba(46,204,113,.05);border:1px solid rgba(46,204,113,.3);border-radius:12px;padding:32px 36px;text-align:center;min-height:120px;display:flex;align-items:center;justify-content:center}
+    .te-result-text{font-size:1.25rem;font-style:italic;line-height:1.6;color:var(--text)}
+    .te-placeholder{color:var(--muted2);font-size:1rem}
+
+    /* SECOND NATURE DETECTOR */
+    .snd-box{background:var(--surface);border:1px dashed var(--danger);border-radius:var(--r);padding:44px 48px}
+    @media(max-width:640px){.snd-box{padding:28px 20px}}
+    .snd-checklist{display:flex;flex-direction:column;gap:16px;margin:24px 0}
+    .snd-item{display:flex;align-items:center;gap:16px;cursor:pointer;padding:16px 20px;border-radius:8px;background:rgba(255,255,255,.02);border:1px solid var(--border);transition:.3s}
+    .snd-item:hover{background:rgba(255,255,255,.05)}
+    .snd-item.checked{border-color:var(--gold);background:rgba(201,168,76,.05)}
+    .snd-box-ui{width:20px;height:20px;border:1px solid var(--muted);border-radius:4px;display:flex;align-items:center;justify-content:center;transition:.3s}
+    .snd-item.checked .snd-box-ui{background:var(--gold);border-color:var(--gold)}
+    .snd-box-ui::after{content:'✓';color:var(--void);font-size:.7rem;font-family:'Inter';font-weight:900;opacity:0;transition:.3s}
+    .snd-item.checked .snd-box-ui::after{opacity:1}
+    .snd-text{font-size:1.05rem;color:var(--text)}
+    .snd-verdict{display:none;padding:24px;background:rgba(232,72,85,.1);border-left:4px solid var(--danger);border-radius:0 8px 8px 0;margin-top:24px;animation:scaleIn .4s ease}
+    .snd-verdict.show{display:block}
+    .snd-v-title{font-family:'Cinzel';font-size:1.1rem;color:var(--danger);margin-bottom:8px}
+    .snd-v-desc{font-size:1rem;color:var(--text);font-style:italic;line-height:1.6}
+
+    /* JOURNAL & DECLARATION */
+    .journal-section{display:flex;flex-direction:column;gap:20px}
+    .journal-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .3s}
+    .journal-item:focus-within{border-color:var(--gold-b)}
+    .journal-q{padding:24px 28px 16px;font-size:1.1rem;font-style:italic;color:var(--text);line-height:1.6}
+    .journal-q strong{font-style:normal;font-family:'Inter';font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+    .journal-item textarea{width:100%;padding:16px 28px 24px;background:none;border:none;border-top:1px solid var(--border);color:var(--text);font-family:'Cormorant Garamond';font-size:1.05rem;line-height:1.7;resize:vertical;min-height:100px;outline:none;transition:background .3s}
+    .journal-item textarea:focus{background:rgba(201,168,76,.02)}
+    .journal-item textarea::placeholder{color:var(--muted);font-style:italic}
+    .save-ind{font-family:'Inter';font-size:.6rem;letter-spacing:.1em;color:var(--success);padding:6px 28px;display:none;text-transform:uppercase}
+    .save-ind.show{display:block}
+    .journal-controls{display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:12px}
+    .jc-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--rp);font-family:'Inter';font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s;border:1px solid var(--border);background:none}
+    .jc-export{color:var(--gold);border-color:var(--gold-b)}.jc-export:hover{background:var(--gold);color:var(--void)}
+    .jc-clear{color:var(--muted)}.jc-clear:hover{color:var(--danger);border-color:rgba(232,72,85,.3);background:rgba(232,72,85,.05)}
+
+    .decl-box{text-align:center;padding:80px 48px;border:1px dashed var(--gold-b);border-radius:var(--r);background:radial-gradient(circle at 50% 0%,rgba(201,168,76,.06) 0%,transparent 65%);position:relative;overflow:hidden}
+    .decl-text{font-size:clamp(1.2rem,2.5vw,1.7rem);font-style:italic;font-weight:300;line-height:1.65;color:var(--text);max-width:680px;margin:0 auto 40px}
+    .decl-input-wrap{display:flex;gap:12px;justify-content:center;max-width:480px;margin:0 auto 16px}
+    .decl-input{flex:1;padding:14px 20px;background:rgba(255,255,255,.04);border:1px solid var(--gold-b);border-radius:var(--rp);color:var(--gold);font-family:'Cinzel';font-size:1rem;letter-spacing:.1em;outline:none;text-transform:uppercase;text-align:center;transition:border-color .4s,box-shadow .4s}
+    .decl-input:focus{background:var(--gold-g)}
+    .decl-input.error{border-color:var(--danger)!important;box-shadow:0 0 0 3px rgba(232,72,85,.15)!important}
+    .decl-input.success{border-color:var(--success)!important;box-shadow:0 0 20px rgba(46,204,113,.3)!important;color:var(--success)!important}
+    .decl-input::placeholder{color:var(--muted);font-family:'Inter';font-size:.75rem;text-transform:none;letter-spacing:.05em}
+    .decl-btn{padding:14px 28px;border-radius:var(--rp);border:1px solid var(--gold-b);background:none;color:var(--gold);font-family:'Inter';font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:.3s;white-space:nowrap}
+    .decl-btn:hover,.decl-btn.sealed{background:var(--gold);color:var(--void)}
+    .decl-hint{font-family:'Inter';font-size:.65rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:8px}
+    .decl-sealed-msg{display:none;margin-top:28px}.decl-sealed-msg.show{display:block;animation:fadeUp .6s ease forwards}
+    .decl-sealed-msg p{font-family:'Cinzel';font-size:.9rem;color:var(--gold);letter-spacing:.1em}
+    .decl-sealed-msg .sd{font-family:'Inter';font-size:.65rem;color:var(--muted);margin-top:8px;letter-spacing:.1em}
+    #p-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+
+    .whop-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(5,8,18,.95);border-top:1px solid var(--border);backdrop-filter:blur(14px);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .wb-left{display:flex;align-items:center;gap:16px}
+    .wb-module{display:flex;flex-direction:column}
+    .wb-m-label{font-family:'Inter';font-size:.6rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+    .wb-m-name{font-family:'Cinzel';font-size:.78rem;color:var(--text);letter-spacing:.05em}
+    .wb-progress-wrap{display:flex;align-items:center;gap:10px}
+    .wb-p-label{font-family:'Inter';font-size:.62rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+    .wb-p-track{width:120px;height:3px;background:var(--border);border-radius:3px;overflow:hidden}
+    .wb-p-fill{height:100%;background:var(--gold);width:0%;transition:width .5s;border-radius:3px}
+    .whop-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:var(--rp);background:var(--gold);color:var(--void);font-family:'Inter';font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;border:none;text-decoration:none;transition:.3s;white-space:nowrap}
+    .whop-btn:hover{background:var(--gold-l);transform:translateY(-1px)}
+    @media(max-width:640px){.wb-progress-wrap{display:none}}
+  </style>
+</head>
+<body>
+<div class="noise"></div>
+<canvas id="ambient-canvas"></canvas>
+
+<!-- WHOP BAR -->
+<div class="whop-bar">
+  <div class="wb-left">
+    <div class="wb-module">
+      <div class="wb-m-label">Currently Viewing</div>
+      <div class="wb-m-name">Module 7 · The Skills Audit</div>
+    </div>
+    <div class="wb-progress-wrap">
+      <span class="wb-p-label">Progress</span>
+      <div class="wb-p-track"><div class="wb-p-fill" id="pfill"></div></div>
+    </div>
+  </div>
+  <a href="https://whop.com/silent-strategist/exp_OQfyAgJkYyIvH9/app/courses/cors_fGZBpPUYQtguD/lessons/lesn_ejQih4Sv4Ix92/" class="whop-btn">↩ Return to Course</a>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Financial Freedom Masterclass · Module 7</p>
+    <h1 class="hero-title">You Are <span class="g">Sitting On</span><br/>A Large Pile of Skill.</h1>
+    <p class="hero-sub">The problem is almost never that you have nothing to offer. The problem is that it is buried inside a job title, with no label and no price tag.</p>
+    <div class="hero-scroll">
+      <span>Scroll to Audit Your Value</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- THE UNBUNDLER -->
+  <div class="sec-divider sr"><span>Why Job Titles Hide More Than They Show</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <h2 class="sec-title">The Market Does Not Buy <span style="color:var(--gold)">Titles.</span><br/>It Buys Proven Ability.</h2>
+    <p class="body-text lg">A job title is a short label written for internal use inside one company. It is almost useless for showing what you actually did, and what problems you are able to solve for someone else.</p>
+    <p class="body-text" style="color:var(--muted)">The first real task of a skills audit is setting the title aside completely, and asking a plainer, more honest question: What did I actually do, day to day, and what result did that produce?</p>
+  </div>
+
+  <div class="unbundler-box sr">
+    <p class="tag" style="margin-bottom:24px">The Title Unbundler: Separate Your Value</p>
+    <div class="ub-input-wrap">
+      <input type="text" id="ub-in" class="ub-input" placeholder="Type a specific skill, task, or achievement..."/>
+      <select id="ub-sel" class="ub-select">
+        <option value="tech">Technical / Domain Skill</option>
+        <option value="soft">Soft Skill / Judgement</option>
+        <option value="achieve">Marketable Achievement</option>
+      </select>
+      <button class="ub-btn" onclick="addSkill()">+ Add to Audit</button>
+    </div>
+    
+    <div class="ub-grid">
+      <div class="ub-col tech">
+        <div class="ub-col-title">Technical &amp; Domain Skills</div>
+        <div id="col-tech"></div>
+      </div>
+      <div class="ub-col soft">
+        <div class="ub-col-title">Judgement &amp; Soft Skills</div>
+        <div id="col-soft"></div>
+      </div>
+      <div class="ub-col achieve">
+        <div class="ub-col-title">Marketable Achievements</div>
+        <div id="col-achieve"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE SECOND NATURE TRAP -->
+  <div class="sec-divider sr"><span>The Curse of Knowledge</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <h2 class="sec-title">The "<span style="color:var(--gold)">Second Nature</span>" Trap</h2>
+    <p class="body-text lg">There is a specific trap that shows up constantly. Certain skills feel worthless to you simply because they've become second nature. You've done them so many times that you've stopped seeing them as skills.</p>
+    <p class="body-text" style="color:var(--muted)">If a skill feels boring or obvious to you, that is not proof it lacks value. It is very often proof that you've simply had it long enough to stop noticing it. Someone outside your field would happily pay for it.</p>
+  </div>
+
+  <div class="snd-box sr">
+    <p class="tag" style="margin-bottom:12px;color:var(--danger)">Run a "Boring" Skill Through the Filter</p>
+    <p style="font-size:1rem;font-style:italic;color:var(--muted)">Think of a task at work that you find completely ordinary, tedious, or routine. Check the boxes that apply to it:</p>
+    
+    <div class="snd-checklist">
+      <div class="snd-item" onclick="toggleSnd(this)">
+        <div class="snd-box-ui"></div>
+        <div class="snd-text">Do people occasionally come to you for help with this?</div>
+      </div>
+      <div class="snd-item" onclick="toggleSnd(this)">
+        <div class="snd-box-ui"></div>
+        <div class="snd-text">Would it take a completely new hire at least 3 months to do it as fast as you do?</div>
+      </div>
+      <div class="snd-item" onclick="toggleSnd(this)">
+        <div class="snd-box-ui"></div>
+        <div class="snd-text">If you stopped doing it, would something important quietly break or slow down?</div>
+      </div>
+    </div>
+    
+    <div class="snd-verdict" id="snd-verdict">
+      <h3 class="snd-v-title">You Are Undervaluing This Asset.</h3>
+      <p class="snd-v-desc">You checked multiple boxes. This is not just a "basic task"—it is a piece of operational leverage. Because it doesn't challenge you anymore, your brain has mislabeled it as "low value." To an outside client or a new employer, this is exactly what they pay for: smooth, thoughtless competence.</p>
+    </div>
+  </div>
+
+  <!-- THE TRANSLATION ENGINE -->
+  <div class="sec-divider sr"><span>Turning Raw Material Into Things That Sell</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <h2 class="sec-title">The <span style="color:var(--gold)">Consultant</span> Translation</h2>
+    <p class="body-text lg">Internal corporate language does not sell well on the outside. Every entry in your audit should follow a simple shape: a strong action, a clear scope, and a real result.</p>
+    <p class="body-text" style="color:var(--danger);font-style:italic">A word of real caution: If you honestly don't have a hard number, do not invent one. Describe the real scale instead (team size, time taken, stakes). A made-up number that falls apart under questioning will cost you far more trust than an honest description ever would.</p>
+  </div>
+
+  <div class="te-box sr">
+    <p class="tag" style="margin-bottom:24px">Build Your Consulting Bullet</p>
+    <div class="te-inputs">
+      <div class="te-group">
+        <label class="te-label" style="color:var(--cyan)">1. Strong Action (Verb + What you did)</label>
+        <input type="text" class="te-input" id="te-action" placeholder="e.g. Led a full clinic-wide transition from paper to digital..." oninput="updateTe()"/>
+      </div>
+      <div class="te-group">
+        <label class="te-label" style="color:var(--purple)">2. Clear Scope (The context or constraints)</label>
+        <input type="text" class="te-input" id="te-scope" placeholder="e.g. across 4 regional offices during peak season..." oninput="updateTe()"/>
+      </div>
+      <div class="te-group">
+        <label class="te-label" style="color:var(--success)">3. Real Result (Metric or impact)</label>
+        <input type="text" class="te-input" id="te-result" placeholder="e.g. maintaining uninterrupted patient scheduling throughout the changeover." oninput="updateTe()"/>
+      </div>
+    </div>
+    
+    <div class="te-result-box">
+      <div id="te-display" class="te-placeholder">Your translated achievement will appear here...</div>
+    </div>
+  </div>
+
+  <!-- JOURNAL -->
+  <div class="sec-divider sr"><span>Written Reflection — 10 Prompts</span></div>
+
+  <div class="card sr" style="margin-bottom:28px;border-color:var(--gold-b)">
+    <p class="body-text" style="margin:0;font-style:italic;color:var(--muted)">Complete this fully in your journal before moving forward. Take your real time with it. The second income model you'll eventually choose gets built directly from this list.</p>
+  </div>
+
+  <div class="journal-section sr">
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 01</strong>List five technical or domain skills you currently hold. For each one, would a stranger outside your industry recognise its value right away, or would you need to explain why it matters?</div><textarea id="r1" placeholder="Write your honest answer here..." oninput="saveJ('r1')"></textarea><div class="save-ind" id="sv-r1">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 02</strong>List three soft skills or moments of good judgement under pressure that you've shown more than once. Describe the real situation for each one, not just the name of the skill.</div><textarea id="r2" placeholder="Write your honest answer here..." oninput="saveJ('r2')"></textarea><div class="save-ind" id="sv-r2">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 03</strong>Identify one achievement in your career that, once the job title is stripped away, most resembles a piece of real, independent consulting work. Write it out in full.</div><textarea id="r3" placeholder="Write your honest answer here..." oninput="saveJ('r3')"></textarea><div class="save-ind" id="sv-r3">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 04</strong>Translate that achievement into the action, scope, result shape. Read it back to yourself. Does it now sound like something a stranger would actually pay for?</div><textarea id="r4" placeholder="Write your honest answer here..." oninput="saveJ('r4')"></textarea><div class="save-ind" id="sv-r4">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 05</strong>Name one skill you've been quietly assuming has no real market value. Why did you assume that? Did someone tell you that, or did you simply decide it on your own?</div><textarea id="r5" placeholder="Write your honest answer here..." oninput="saveJ('r5')"></textarea><div class="save-ind" id="sv-r5">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 06</strong>Of everything on your full list, which single item, if you had to pick only one to lead with, would open the most doors for you right now?</div><textarea id="r6" placeholder="Write your honest answer here..." oninput="saveJ('r6')"></textarea><div class="save-ind" id="sv-r6">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 07</strong>Which item on your list took the longest to actually develop, and does its price reflect that, or have you been quietly giving it away for free without realising it?</div><textarea id="r7" placeholder="Write your honest answer here..." oninput="saveJ('r7')"></textarea><div class="save-ind" id="sv-r7">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 08</strong>Think of someone completely outside your field. If you described your most "ordinary" skill to them honestly, how do you think they would actually react?</div><textarea id="r8" placeholder="Write your honest answer here..." oninput="saveJ('r8')"></textarea><div class="save-ind" id="sv-r8">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 09</strong>Looking at your full inventory as a whole, is there a clear theme—one specific type of problem you're unusually good at solving—that keeps showing up more than once?</div><textarea id="r9" placeholder="Write your honest answer here..." oninput="saveJ('r9')"></textarea><div class="save-ind" id="sv-r9">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 10</strong>If a client, employer, or opportunity offered to pay you specifically for the item you named in Question 06, what would you actually charge, and does that number feel too low, too high, or honest?</div><textarea id="r10" placeholder="I would charge..." oninput="saveJ('r10')"></textarea><div class="save-ind" id="sv-r10">✓ Saved</div></div>
+  </div>
+
+  <div class="journal-controls sr">
+    <button class="jc-btn jc-export" onclick="exportJournal()">📥 Download My Reflections</button>
+    <button class="jc-btn jc-clear" onclick="clearJournal()">🗑 Clear &amp; Reset</button>
+  </div>
+
+  <!-- DECLARATION -->
+  <div class="sec-divider sr"><span>The Declaration</span></div>
+
+  <div class="decl-box sr">
+    <canvas id="p-canvas"></canvas>
+    <p class="tag">Seal Your Skills Audit</p>
+    <p class="decl-text">"I will no longer bury my actual value inside an internal job title. I commit to owning the raw material of my competence, pricing it honestly, and treating my skills as sellable assets."</p>
+    <div class="decl-input-wrap">
+      <input type="text" class="decl-input" id="decl-in" placeholder='Type "I ACCEPT" to seal this'/>
+      <button class="decl-btn" onclick="sealDecl()">Seal</button>
+    </div>
+    <p class="decl-hint">Type "I ACCEPT" and press Seal</p>
+    <div class="decl-sealed-msg" id="sealed-msg">
+      <p>✦ THE AUDIT IS SEALED. THE VALUE IS UNBUNDLED. ✦</p>
+      <p class="sd" id="sealed-date"></p>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:center;align-items:center;margin-top:60px;margin-bottom:20px;flex-wrap:wrap;gap:16px" class="sr">
+  <a href="module-6.html" class="whop-btn" style="text-decoration:none; background:transparent; color:var(--gold); border:1px solid var(--gold);">&#8592; Previous</a>
+  <a href="https://whop.com/silent-strategist/exp_OQfyAgJkYyIvH9/app/courses/cors_fGZBpPUYQtguD/lessons/lesn_ejQih4Sv4Ix92/" class="whop-btn" style="text-decoration:none;">&#8617; Return to Course</a>
+  <a href="module-8.html" class="whop-btn" style="text-decoration:none; background:transparent; color:var(--gold); border:1px solid var(--gold);">Next Module &#8594;</a>
+</div>
+</main>
+
+<script>
+/* AMBIENT CANVAS */
+(function(){
+  const c=document.getElementById('ambient-canvas'),ctx=c.getContext('2d');let s=[];
+  const resize=()=>{c.width=innerWidth;c.height=innerHeight};
+  const init=()=>{s=[];for(let i=0;i<120;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.1+.2,speed:Math.random()*.16+.04,op:Math.random()*.5+.1,tw:Math.random()*Math.PI*2})};
+  const draw=()=>{ctx.clearRect(0,0,c.width,c.height);s.forEach(p=>{p.tw+=.007;const o=p.op*(.6+.4*Math.sin(p.tw));ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(201,168,76,${o})`;ctx.fill();p.y-=p.speed;if(p.y<0){p.y=c.height;p.x=Math.random()*c.width}});requestAnimationFrame(draw)};
+  resize();init();draw();window.addEventListener('resize',()=>{resize();init()});
+})();
+
+/* SCROLL REVEAL */
+(()=>{
+  const obs=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('v');obs.unobserve(en.target)}}),{threshold:.07});
+  document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
+})();
+
+/* PROGRESS */
+window.addEventListener('scroll',()=>{document.getElementById('pfill').style.width=Math.round((scrollY/(document.body.scrollHeight-innerHeight))*100)+'%'});
+
+/* UNBUNDLER */
+let skills = JSON.parse(localStorage.getItem('ffm7_skills')||'[]');
+function renderSkills(){
+  document.getElementById('col-tech').innerHTML='';
+  document.getElementById('col-soft').innerHTML='';
+  document.getElementById('col-achieve').innerHTML='';
+  skills.forEach((s,i)=>{
+    const el = document.createElement('div'); el.className='ub-item';
+    el.innerHTML = `<div class="ub-item-text">${s.text}</div><button class="ub-del" onclick="delSkill(${i})">✕</button>`;
+    if(s.type==='tech') document.getElementById('col-tech').appendChild(el);
+    if(s.type==='soft') document.getElementById('col-soft').appendChild(el);
+    if(s.type==='achieve') document.getElementById('col-achieve').appendChild(el);
+  });
+}
+function addSkill(){
+  const inp = document.getElementById('ub-in');
+  const type = document.getElementById('ub-sel').value;
+  const text = inp.value.trim();
+  if(!text) return;
+  skills.push({text, type});
+  localStorage.setItem('ffm7_skills', JSON.stringify(skills));
+  inp.value=''; renderSkills();
+}
+function delSkill(i){
+  skills.splice(i,1);
+  localStorage.setItem('ffm7_skills', JSON.stringify(skills));
+  renderSkills();
+}
+renderSkills();
+
+/* SECOND NATURE DETECTOR */
+function toggleSnd(el){
+  el.classList.toggle('checked');
+  const checked = document.querySelectorAll('.snd-item.checked').length;
+  if(checked >= 2){
+    document.getElementById('snd-verdict').classList.add('show');
+  } else {
+    document.getElementById('snd-verdict').classList.remove('show');
+  }
+}
+
+/* TRANSLATOR ENGINE */
+(function loadTe(){
+  const act = localStorage.getItem('ffm7_te_act')||'';
+  const scope = localStorage.getItem('ffm7_te_scope')||'';
+  const res = localStorage.getItem('ffm7_te_res')||'';
+  if(act) document.getElementById('te-action').value = act;
+  if(scope) document.getElementById('te-scope').value = scope;
+  if(res) document.getElementById('te-result').value = res;
+  updateTe();
+})();
+
+function updateTe(){
+  const act = document.getElementById('te-action').value.trim();
+  const scope = document.getElementById('te-scope').value.trim();
+  const res = document.getElementById('te-result').value.trim();
+  const display = document.getElementById('te-display');
+  
+  localStorage.setItem('ffm7_te_act', act);
+  localStorage.setItem('ffm7_te_scope', scope);
+  localStorage.setItem('ffm7_te_res', res);
+  
+  if(!act && !scope && !res){
+    display.className = 'te-placeholder';
+    display.innerHTML = 'Your translated achievement will appear here...';
+    return;
+  }
+  
+  display.className = 'te-result-text';
+  display.innerHTML = `
+    <span style="color:var(--cyan)">${act}</span> 
+    <span style="color:var(--purple)">${scope}</span> 
+    <span style="color:var(--success)">${res}</span>
+  `;
+}
+
+/* JOURNAL */
+['r1','r2','r3','r4','r5','r6','r7','r8','r9','r10'].forEach(id=>{
+  const saved=localStorage.getItem('ffm7_'+id);if(saved){const el=document.getElementById(id);if(el)el.value=saved}
+});
+function saveJ(id){
+  const val=document.getElementById(id)?.value||'';localStorage.setItem('ffm7_'+id,val);
+  const ind=document.getElementById('sv-'+id);if(ind){ind.classList.add('show');setTimeout(()=>ind.classList.remove('show'),2000)}
+}
+function exportJournal(){
+  const qs=[
+    'List five technical or domain skills you currently hold. Would a stranger recognise their value?',
+    'List three soft skills or moments of good judgement under pressure. Describe the situation.',
+    'Identify one achievement that most resembles independent consulting work.',
+    'Translate that achievement (Action, Scope, Result). Does it sound like something someone would pay for?',
+    'Name one skill you\'ve assumed has no market value. Why did you assume that?',
+    'Which single item would open the most doors for you right now?',
+    'Which item took the longest to develop? Does its price reflect that?',
+    'How would a stranger react to your most "ordinary" skill?',
+    'Is there a clear theme—one specific problem you\'re unusually good at solving?',
+    'What would you actually charge for the item in Q6, and does that number feel honest?'
+  ];
+  const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  let content=`FINANCIAL FREEDOM MASTERCLASS\nModule 7: The Skills Audit\nJournal Export — ${date}\n${'='.repeat(60)}\n\n`;
+  qs.forEach((q,i)=>{const key='ffm7_r'+(i+1);const answer=localStorage.getItem(key)||'(No answer written yet)';content+=`Reflection ${String(i+1).padStart(2,'0')}: ${q}\n\n${answer}\n\n${'-'.repeat(60)}\n\n`;});
+  const blob=new Blob([content],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='Module-7-Journal.txt';a.click();URL.revokeObjectURL(url);
+}
+function clearJournal(){
+  if(!confirm('Clear all reflection answers for Module 7? This cannot be undone.'))return;
+  ['r1','r2','r3','r4','r5','r6','r7','r8','r9','r10'].forEach(id=>{localStorage.removeItem('ffm7_'+id);const el=document.getElementById(id);if(el)el.value='';});
+}
+
+/* DECLARATION */
+(function(){
+  if(localStorage.getItem('ffm7_declaration')){
+    const d=localStorage.getItem('ffm7_declaration_date');
+    document.getElementById('decl-in').value='I ACCEPT';document.getElementById('decl-in').disabled=true;
+    document.querySelector('.decl-btn').classList.add('sealed');document.querySelector('.decl-btn').textContent='✦ Sealed';
+    document.getElementById('sealed-msg').classList.add('show');document.getElementById('sealed-date').textContent='Declared on '+d;
+  }
+})();
+function sealDecl(){
+  const inp=document.getElementById('decl-in');
+  if(inp.value.trim().toUpperCase()!=='I ACCEPT'){
+    inp.classList.add('error');inp.style.animation='shake .4s ease';
+    setTimeout(()=>{inp.classList.remove('error');inp.style.animation=''},600);return;
+  }
+  inp.classList.add('success');
+  const now=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  localStorage.setItem('ffm7_declaration','true');localStorage.setItem('ffm7_declaration_date',now);
+  setTimeout(()=>{
+    inp.disabled=true;document.querySelector('.decl-btn').classList.add('sealed');document.querySelector('.decl-btn').textContent='✦ Sealed';
+    document.getElementById('sealed-msg').classList.add('show');document.getElementById('sealed-date').textContent='Declared on '+now;
+    firePart();
+  },500);
+}
+function firePart(){
+  const canvas=document.getElementById('p-canvas'),ctx=canvas.getContext('2d');
+  canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;
+  const cx=canvas.width/2,cy=canvas.height/2,particles=[];
+  for(let i=0;i<90;i++){const a=Math.random()*Math.PI*2,sp=Math.random()*6+2;particles.push({x:cx,y:cy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,alpha:1,size:Math.random()*4+1,color:`hsl(${40+Math.random()*20},90%,${55+Math.random()*20}%)`})}
+  function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);let alive=false;particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.1;p.alpha-=.016;if(p.alpha>0)alive=true;ctx.globalAlpha=Math.max(0,p.alpha);ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=p.color;ctx.fill()});if(alive)requestAnimationFrame(anim);else ctx.clearRect(0,0,canvas.width,canvas.height);}
+  anim();
+}
+</script>
+</body>
+</html>

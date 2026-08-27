@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 3: The Mind Behind the Money | Financial Freedom Masterclass</title>
+  <meta name="description" content="Strategy without identity change is temporary. This module is about the identity change — cognitive dissonance, the two-system mind, the governor, and how your environment is training data."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --void:#030507;--deep:#060A12;--surface:rgba(255,255,255,.03);
+      --surface2:rgba(255,255,255,.06);--gold:#C9A84C;--gold-l:#E8C97A;
+      --gold-d:rgba(201,168,76,.15);--gold-g:rgba(201,168,76,.06);
+      --gold-b:rgba(201,168,76,.25);--text:#EEF0F4;--muted:#7A8290;
+      --muted2:#4A5260;--danger:#E84855;--success:#2ECC71;
+      --cyan:#4FC3F7;--purple:#9B7FE8;--border:rgba(255,255,255,.07);
+      --r:20px;--rp:100px;
+    }
+    ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--void)}
+    ::-webkit-scrollbar-thumb{background:var(--gold-b);border-radius:3px}
+    *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+    body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',serif;overflow-x:hidden;line-height:1.7}
+
+    /* NOISE + CANVAS */
+    .noise{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;opacity:.08;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+    #ambient-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.2}
+
+    /* LAYOUT */
+    main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 28px 180px}
+    @media(max-width:640px){main{padding:0 18px 180px}}
+
+    /* SCROLL REVEAL */
+    .sr{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+    .sr.v{opacity:1;transform:none}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes scaleIn{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+    @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+    @keyframes ripple{0%{transform:scale(1);opacity:.4}100%{transform:scale(2.5);opacity:0}}
+
+    /* TYPOGRAPHY */
+    .tag{font-family:'Inter';font-size:.65rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;display:inline-block;margin-bottom:14px}
+    .sec-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;color:#fff;letter-spacing:.05em;margin-bottom:1rem;line-height:1.2}
+    .body-text{font-size:1.18rem;font-weight:300;color:var(--text);margin-bottom:1rem;line-height:1.85}
+    .body-text.lg{font-size:1.35rem}
+    .pipe-quote{padding:16px 24px;border-left:3px solid var(--gold);font-style:italic;font-size:1.25rem;margin:28px 0;color:var(--text);background:var(--gold-g);border-radius:0 10px 10px 0}
+    .em{color:var(--gold);font-style:italic}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:44px 48px;backdrop-filter:blur(10px)}
+    @media(max-width:640px){.card{padding:28px 22px}}
+
+    /* SECTION DIVIDERS */
+    .sec-divider{display:flex;align-items:center;gap:16px;margin:80px 0 32px}
+    .sec-divider::before,.sec-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+    .sec-divider span{font-family:'Inter';font-size:.6rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;white-space:nowrap}
+
+    /* HERO */
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 0 60px}
+    .hero-eyebrow{font-family:'Inter';font-size:.68rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fadeUp .8s .3s forwards}
+    .hero-title{font-family:'Cinzel',serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:900;line-height:1.05;color:#fff;margin-bottom:24px;opacity:0;animation:fadeUp .9s .5s forwards}
+    .hero-title .g{color:var(--gold)}
+    .hero-sub{font-size:1.3rem;font-style:italic;color:var(--muted);max-width:620px;margin:0 auto 56px;font-weight:300;opacity:0;animation:fadeUp .9s .7s forwards}
+    .hero-core-stmt{max-width:720px;margin:0 auto 32px;padding:32px 40px;border:1px solid var(--gold-b);border-radius:var(--r);background:var(--gold-g);opacity:0;animation:fadeUp .9s .9s forwards}
+    .hero-core-stmt p{font-family:'Cinzel';font-size:clamp(1rem,2vw,1.4rem);color:#fff;line-height:1.6;letter-spacing:.04em}
+    .hero-core-stmt .hl{color:var(--gold)}
+    .hero-scroll{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 1s 1.5s forwards;margin-top:32px}
+    .hero-scroll span{font-family:'Inter';font-size:.6rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+    .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s infinite}
+    @keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+    /* BRAIN SPLIT */
+    .brain-split{display:grid;grid-template-columns:1fr 1fr;gap:2px;border-radius:var(--r);overflow:hidden;border:1px solid var(--border)}
+    @media(max-width:640px){.brain-split{grid-template-columns:1fr}}
+    .brain-side{padding:40px 36px;position:relative;overflow:hidden;cursor:pointer;transition:all .4s}
+    .brain-side.conscious{background:rgba(79,195,247,.04);border-right:1px solid var(--border)}
+    .brain-side.subconscious{background:rgba(155,127,232,.04)}
+    .brain-side:hover{transform:none}
+    .bs-label{font-family:'Inter';font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+    .brain-side.conscious .bs-label{color:var(--cyan)}
+    .brain-side.subconscious .bs-label{color:var(--purple)}
+    .bs-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .brain-side.conscious .bs-dot{background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:pulse 3s infinite}
+    .brain-side.subconscious .bs-dot{background:var(--purple);box-shadow:0 0 8px var(--purple);animation:pulse 1s infinite}
+    .bs-name{font-family:'Cinzel';font-size:1.5rem;color:#fff;margin-bottom:20px;letter-spacing:.05em}
+    .bs-trait{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;font-size:1rem;color:var(--muted);line-height:1.5}
+    .bs-trait::before{content:'→';color:var(--gold);flex-shrink:0;margin-top:2px}
+    .bs-speed{font-family:'Inter';font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;margin-top:20px;padding:8px 14px;border-radius:var(--rp);display:inline-block}
+    .brain-side.conscious .bs-speed{color:var(--cyan);border:1px solid rgba(79,195,247,.3);background:rgba(79,195,247,.05)}
+    .brain-side.subconscious .bs-speed{color:var(--purple);border:1px solid rgba(155,127,232,.3);background:rgba(155,127,232,.05)}
+    .brain-side-toggle{width:100%;margin-top:24px;padding:10px;border-radius:var(--r);border:1px solid var(--border);background:none;color:var(--muted);font-family:'Inter';font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:.3s}
+    .brain-side-toggle:hover{border-color:var(--gold-b);color:var(--gold)}
+    .bs-example{display:none;padding:16px;background:rgba(255,255,255,.03);border-radius:12px;margin-top:16px;font-style:italic;font-size:1rem;line-height:1.6;animation:scaleIn .3s ease}
+    .bs-example.show{display:block}
+
+    /* DISSONANCE CARDS */
+    .dissonance-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    @media(max-width:640px){.dissonance-grid{grid-template-columns:1fr}}
+    .dis-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:32px 28px;cursor:pointer;transition:all .35s}
+    .dis-card:hover:not(.selected){transform:translateY(-4px);border-color:rgba(232,72,85,.3)}
+    .dis-card.selected{border-color:var(--gold-b);background:var(--gold-g);cursor:default}
+    .dis-belief{font-style:italic;font-size:1.1rem;color:var(--text);margin-bottom:10px}
+    .dis-vs{font-family:'Inter';font-size:.6rem;letter-spacing:.15em;color:var(--danger);text-transform:uppercase;margin:10px 0}
+    .dis-behavior{font-size:1rem;color:var(--muted)}
+    .dis-tap{font-family:'Inter';font-size:.62rem;letter-spacing:.12em;color:var(--danger);text-transform:uppercase;margin-top:16px;display:flex;align-items:center;gap:6px}
+    .dis-card.selected .dis-tap{display:none}
+    .dis-reveal{display:none;margin-top:20px;padding:20px;background:rgba(0,0,0,.2);border-radius:12px;animation:scaleIn .3s ease}
+    .dis-card.selected .dis-reveal{display:block}
+    .dis-reveal h4{font-family:'Cinzel';font-size:.85rem;color:var(--gold);margin-bottom:10px;letter-spacing:.06em}
+    .dis-reveal .justifications{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+    .dis-just{font-size:.95rem;color:var(--muted);padding:8px 12px;background:rgba(232,72,85,.06);border-left:2px solid var(--danger);border-radius:0 8px 8px 0}
+    .dis-honest-q{font-style:italic;font-size:1rem;color:var(--gold);line-height:1.6;padding-top:10px;border-top:1px solid var(--border)}
+
+    /* GOVERNOR TEST */
+    .gov-test{padding:48px;background:var(--deep);border:1px solid var(--border);border-radius:var(--r)}
+    @media(max-width:640px){.gov-test{padding:28px 20px}}
+    .gov-q{margin-bottom:32px}
+    .gov-q-text{font-size:1.15rem;font-style:italic;margin-bottom:16px;color:var(--text)}
+    .gov-q-num{font-family:'Inter';font-size:.62rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:8px}
+    .gov-options{display:flex;gap:12px;flex-wrap:wrap}
+    .gov-opt{
+      flex:1;min-width:200px;padding:16px 18px;border-radius:var(--r);border:1px solid var(--border);
+      background:var(--surface);cursor:pointer;font-size:1rem;color:var(--muted);
+      transition:all .3s;text-align:center;line-height:1.5;
+    }
+    .gov-opt:hover:not(.chosen){border-color:var(--gold-b);color:var(--text)}
+    .gov-opt.chosen-value{border-color:var(--success);background:rgba(46,204,113,.07);color:var(--success)}
+    .gov-opt.chosen-protect{border-color:var(--danger);background:rgba(232,72,85,.07);color:var(--danger)}
+    .gov-opt.unchosen{opacity:.3}
+    .gov-result{display:none;padding:36px;border-radius:var(--r);text-align:center;margin-top:32px;animation:scaleIn .5s ease}
+    .gov-result.show{display:block}
+    .gov-result.low{background:rgba(46,204,113,.05);border:1px solid rgba(46,204,113,.2)}
+    .gov-result.mid{background:rgba(201,168,76,.05);border:1px solid var(--gold-b)}
+    .gov-result.high{background:rgba(232,72,85,.05);border:1px solid rgba(232,72,85,.2)}
+    .gov-score-label{font-family:'Inter';font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+    .gov-score{font-family:'Cinzel';font-size:3rem;font-weight:900;margin-bottom:12px}
+    .gov-result.low .gov-score{color:var(--success)}
+    .gov-result.mid .gov-score{color:var(--gold)}
+    .gov-result.high .gov-score{color:var(--danger)}
+    .gov-verdict{font-size:1.05rem;line-height:1.7;color:var(--text);font-style:italic;max-width:560px;margin:0 auto 16px}
+    .gov-next-step{font-family:'Inter';font-size:.75rem;color:var(--muted);letter-spacing:.05em;line-height:1.6}
+    .gov-meter{width:100%;height:6px;background:var(--border);border-radius:6px;overflow:hidden;margin:16px 0}
+    .gov-meter-fill{height:100%;border-radius:6px;transition:width 1s cubic-bezier(.16,1,.3,1)}
+    .gov-result.low .gov-meter-fill{background:var(--success);width:20%}
+    .gov-result.mid .gov-meter-fill{background:var(--gold);width:60%}
+    .gov-result.high .gov-meter-fill{background:var(--danger);width:100%}
+    .gov-retake{font-family:'Inter';font-size:.68rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;cursor:pointer;background:none;border:1px solid var(--border);padding:8px 16px;border-radius:var(--rp);margin-top:12px;transition:.3s}
+    .gov-retake:hover{color:var(--gold);border-color:var(--gold-b)}
+
+    /* FIVE VOICES AUDIT */
+    .voices-box{padding:44px 48px;background:var(--deep);border:1px solid var(--border);border-radius:var(--r)}
+    @media(max-width:640px){.voices-box{padding:28px 20px}}
+    .voice-row{display:flex;align-items:center;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+    .voice-name{flex:1;min-width:150px;padding:12px 16px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'Cormorant Garamond';font-size:1rem;outline:none;transition:.3s}
+    .voice-name:focus{border-color:var(--gold-b)}
+    .voice-name::placeholder{color:var(--muted);font-style:italic}
+    .voice-rating{display:flex;gap:6px;flex-wrap:wrap}
+    .v-rate-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:none;cursor:pointer;font-family:'Inter';font-size:.75rem;color:var(--muted);transition:.3s;display:flex;align-items:center;justify-content:center}
+    .v-rate-btn:hover{border-color:var(--gold-b);color:var(--gold)}
+    .v-rate-btn.active-neg2{background:rgba(232,72,85,.15);border-color:var(--danger);color:var(--danger)}
+    .v-rate-btn.active-neg1{background:rgba(232,72,85,.08);border-color:rgba(232,72,85,.5);color:rgba(232,72,85,.8)}
+    .v-rate-btn.active-0{background:rgba(255,255,255,.06);border-color:var(--muted);color:var(--muted)}
+    .v-rate-btn.active-pos1{background:rgba(46,204,113,.08);border-color:rgba(46,204,113,.5);color:rgba(46,204,113,.8)}
+    .v-rate-btn.active-pos2{background:rgba(46,204,113,.15);border-color:var(--success);color:var(--success)}
+    .voices-result{padding:28px;border-radius:var(--r);border:1px solid var(--border);margin-top:24px;text-align:center;transition:all .5s}
+    .v-avg-num{font-family:'Cinzel';font-size:2.8rem;font-weight:900;margin:8px 0}
+    .v-avg-label{font-family:'Inter';font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+    .v-avg-verdict{font-style:italic;font-size:1.05rem;margin-top:12px;line-height:1.65}
+
+    /* JOKE CONVERTER */
+    .joke-box{padding:44px 48px;background:var(--deep);border:1px solid var(--gold-b);border-radius:var(--r);text-align:center}
+    @media(max-width:640px){.joke-box{padding:28px 20px}}
+    .joke-input{width:100%;max-width:600px;padding:16px 24px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:var(--r);color:var(--text);font-family:'Cormorant Garamond';font-style:italic;font-size:1.2rem;outline:none;text-align:center;transition:.3s;margin:16px 0}
+    .joke-input:focus{border-color:var(--gold-b)}
+    .joke-arrow{font-family:'Cinzel';font-size:1.5rem;color:var(--gold);margin:12px 0}
+    .joke-identity{min-height:72px;padding:20px 28px;background:rgba(232,72,85,.04);border:1px solid rgba(232,72,85,.2);border-radius:var(--r);font-family:'Cinzel';font-size:1.1rem;color:var(--danger);letter-spacing:.03em;line-height:1.5;display:flex;align-items:center;justify-content:center;max-width:600px;margin:0 auto;transition:all .3s}
+    .joke-identity.empty{color:var(--muted2);font-family:'Inter';font-size:.8rem;font-style:italic;letter-spacing:0;border-color:var(--border);background:none;font-family:'Cormorant Garamond'}
+    .joke-sub{font-family:'Inter';font-size:.68rem;letter-spacing:.1em;color:var(--muted);margin-top:12px;text-transform:uppercase}
+
+    /* ENVIRONMENT DIAL */
+    .env-box{padding:44px 48px;background:var(--deep);border:1px solid var(--border);border-radius:var(--r)}
+    @media(max-width:640px){.env-box{padding:28px 20px}}
+    .env-tracks{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px}
+    @media(max-width:640px){.env-tracks{grid-template-columns:1fr}}
+    .env-track-box{padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r)}
+    .env-track-label{font-family:'Inter';font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+    .env-gap-display{text-align:center;padding:28px;background:var(--surface);border-radius:var(--r);border:1px solid var(--border);margin-top:20px;transition:all .5s}
+    .env-gap-num{font-family:'Cinzel';font-size:3rem;font-weight:900;margin:8px 0;transition:color .5s}
+    .env-gap-label{font-family:'Inter';font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+    .env-gap-verdict{font-style:italic;font-size:1.05rem;margin-top:12px;line-height:1.65;transition:all .4s}
+    input[type=range]{-webkit-appearance:none;width:100%;background:transparent;margin:12px 0}
+    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;height:22px;width:22px;border-radius:50%;background:var(--gold);cursor:pointer;margin-top:-9px;box-shadow:0 0 12px rgba(201,168,76,.4);transition:transform .2s}
+    input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+    input[type=range]::-webkit-slider-runnable-track{width:100%;height:4px;background:var(--border);border-radius:2px}
+    input[type=range]:focus{outline:none}
+
+    /* SMALL MOVES CHECKLIST */
+    .moves-list{display:flex;flex-direction:column;gap:16px}
+    .move-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .3s}
+    .move-item.done{border-color:rgba(46,204,113,.25)}
+    .move-header{display:flex;align-items:center;gap:16px;padding:24px 28px;cursor:pointer;transition:background .3s}
+    .move-header:hover{background:rgba(255,255,255,.02)}
+    .move-check{width:24px;height:24px;border-radius:50%;border:1px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.75rem;transition:all .3s}
+    .move-item.done .move-check{background:var(--success);border-color:var(--success);color:#000}
+    .move-title{font-family:'Cinzel';font-size:.95rem;color:#fff;letter-spacing:.04em;flex:1}
+    .move-item.done .move-title{color:var(--success)}
+    .move-toggle{font-family:'Inter';font-size:.65rem;color:var(--muted);transition:transform .3s}
+    .move-item.open .move-toggle{transform:rotate(180deg)}
+    .move-detail{display:none;padding:0 28px 24px;animation:scaleIn .3s ease}
+    .move-item.open .move-detail{display:block}
+    .move-desc{font-size:1rem;color:var(--muted);line-height:1.7;margin-bottom:16px}
+    .move-commit{font-family:'Inter';font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);cursor:pointer;background:none;border:1px solid var(--gold-b);padding:8px 16px;border-radius:var(--rp);transition:.3s}
+    .move-commit:hover{background:var(--gold);color:var(--void)}
+    .move-commit.committed{background:var(--success);border-color:var(--success);color:#000;cursor:default}
+
+    /* JOURNAL */
+    .journal-section{display:flex;flex-direction:column;gap:20px}
+    .journal-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .3s}
+    .journal-item:focus-within{border-color:var(--gold-b)}
+    .journal-q{padding:24px 28px 16px;font-size:1.1rem;font-style:italic;color:var(--text);line-height:1.6}
+    .journal-q strong{font-style:normal;font-family:'Inter';font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+    .journal-item textarea{width:100%;padding:16px 28px 24px;background:none;border:none;border-top:1px solid var(--border);color:var(--text);font-family:'Cormorant Garamond';font-size:1.05rem;line-height:1.7;resize:vertical;min-height:100px;outline:none;transition:background .3s}
+    .journal-item textarea:focus{background:rgba(201,168,76,.02)}
+    .journal-item textarea::placeholder{color:var(--muted);font-style:italic}
+    .save-ind{font-family:'Inter';font-size:.6rem;letter-spacing:.1em;color:var(--success);padding:6px 28px;display:none;text-transform:uppercase}
+    .save-ind.show{display:block}
+    .journal-controls{display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:12px}
+    .jc-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--rp);font-family:'Inter';font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s;border:1px solid var(--border);background:none}
+    .jc-export{color:var(--gold);border-color:var(--gold-b)}.jc-export:hover{background:var(--gold);color:var(--void)}
+    .jc-clear{color:var(--muted)}.jc-clear:hover{color:var(--danger);border-color:rgba(232,72,85,.3);background:rgba(232,72,85,.05)}
+
+    /* DECLARATION */
+    .decl-box{text-align:center;padding:80px 48px;border:1px dashed var(--gold-b);border-radius:var(--r);background:radial-gradient(circle at 50% 0%,rgba(201,168,76,.06) 0%,transparent 65%);position:relative;overflow:hidden}
+    .decl-text{font-size:clamp(1.2rem,2.5vw,1.7rem);font-style:italic;font-weight:300;line-height:1.65;color:var(--text);max-width:680px;margin:0 auto 40px}
+    .decl-input-wrap{display:flex;gap:12px;justify-content:center;max-width:480px;margin:0 auto 16px}
+    .decl-input{flex:1;padding:14px 20px;background:rgba(255,255,255,.04);border:1px solid var(--gold-b);border-radius:var(--rp);color:var(--gold);font-family:'Cinzel';font-size:1rem;letter-spacing:.1em;outline:none;text-transform:uppercase;text-align:center;transition:border-color .4s,box-shadow .4s}
+    .decl-input:focus{background:var(--gold-g)}
+    .decl-input.error{border-color:var(--danger)!important;box-shadow:0 0 0 3px rgba(232,72,85,.15)!important}
+    .decl-input.success{border-color:var(--success)!important;box-shadow:0 0 20px rgba(46,204,113,.3)!important;color:var(--success)!important}
+    .decl-input::placeholder{color:var(--muted);font-family:'Inter';font-size:.75rem;text-transform:none;letter-spacing:.05em}
+    .decl-btn{padding:14px 28px;border-radius:var(--rp);border:1px solid var(--gold-b);background:none;color:var(--gold);font-family:'Inter';font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:.3s;white-space:nowrap}
+    .decl-btn:hover,.decl-btn.sealed{background:var(--gold);color:var(--void)}
+    .decl-hint{font-family:'Inter';font-size:.65rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:8px}
+    .decl-sealed-msg{display:none;margin-top:28px}.decl-sealed-msg.show{display:block;animation:fadeUp .6s ease forwards}
+    .decl-sealed-msg p{font-family:'Cinzel';font-size:.9rem;color:var(--gold);letter-spacing:.1em}
+    .decl-sealed-msg .sd{font-family:'Inter';font-size:.65rem;color:var(--muted);margin-top:8px;letter-spacing:.1em}
+    #p-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+
+    /* WHOP BAR */
+    .whop-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(5,8,18,.95);border-top:1px solid var(--border);backdrop-filter:blur(14px);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .wb-left{display:flex;align-items:center;gap:16px}
+    .wb-module{display:flex;flex-direction:column}
+    .wb-m-label{font-family:'Inter';font-size:.6rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+    .wb-m-name{font-family:'Cinzel';font-size:.78rem;color:var(--text);letter-spacing:.05em}
+    .wb-progress-wrap{display:flex;align-items:center;gap:10px}
+    .wb-p-label{font-family:'Inter';font-size:.62rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+    .wb-p-track{width:120px;height:3px;background:var(--border);border-radius:3px;overflow:hidden}
+    .wb-p-fill{height:100%;background:var(--gold);width:0%;transition:width .5s;border-radius:3px}
+    .whop-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:var(--rp);background:var(--gold);color:var(--void);font-family:'Inter';font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;border:none;text-decoration:none;transition:.3s;white-space:nowrap}
+    .whop-btn:hover{background:var(--gold-l);transform:translateY(-1px)}
+    @media(max-width:640px){.wb-progress-wrap{display:none}}
+  </style>
+</head>
+<body>
+<div class="noise"></div>
+<canvas id="ambient-canvas"></canvas>
+
+<!-- WHOP BAR -->
+<div class="whop-bar">
+  <div class="wb-left">
+    <div class="wb-module">
+      <div class="wb-m-label">Currently Viewing</div>
+      <div class="wb-m-name">Module 3 · The Mind Behind the Money</div>
+    </div>
+    <div class="wb-progress-wrap">
+      <span class="wb-p-label">Progress</span>
+      <div class="wb-p-track"><div class="wb-p-fill" id="pfill"></div></div>
+    </div>
+  </div>
+  <a href="https://whop.com/silent-strategist/exp_OQfyAgJkYyIvH9/app/courses/cors_fGZBpPUYQtguD/lessons/lesn_Kjqb7UySELngz/" class="whop-btn">↩ Return to Course</a>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Financial Freedom Masterclass · Module 3</p>
+    <h1 class="hero-title">The Mind Behind<br/>the <span class="g">Money</span></h1>
+    <p class="hero-sub">You can hand someone a perfect financial plan and they will still find a way to sabotage it. Not because the plan is wrong. Because the person executing it is still wired to play small.</p>
+    <div class="hero-core-stmt">
+      <p><span class="hl">Strategy without identity change is temporary.</span><br/>This module is about the identity change.</p>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll to Begin</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- COGNITIVE DISSONANCE -->
+  <div class="sec-divider sr"><span>Cognitive Dissonance</span></div>
+
+  <div class="card sr" style="margin-bottom:32px">
+    <p class="tag">The Tension That Quietly Controls You</p>
+    <h2 class="sec-title">Your Mind Will Manufacture<br/>a <span style="color:var(--gold)">Justification</span> for Anything</h2>
+    <p class="body-text lg">Cognitive dissonance is the mental discomfort you feel when two conflicting beliefs collide — or when your actions don't match your self-image. Your mind will do almost anything to close that gap. And it almost always closes it by <span class="em">changing the story, not the behaviour.</span></p>
+    <p class="body-text" style="color:var(--muted)">The way out isn't willpower. It's noticing the justification the moment it appears and asking one honest question: <em style="color:var(--text)">is this true, or is this just resolving my discomfort?</em></p>
+  </div>
+
+  <p class="body-text sr" style="text-align:center;font-style:italic;color:var(--muted);margin-bottom:28px">Click the belief-behaviour gap that most closely mirrors something in your own financial life.</p>
+
+  <div class="dissonance-grid sr">
+    <div class="dis-card" onclick="selectDis(this,'resp')">
+      <p class="dis-belief">"I am a responsible, hard-working person."</p>
+      <p class="dis-vs">⚡ conflicts with</p>
+      <p class="dis-behavior">Almost no savings and mounting consumer debt.</p>
+      <div class="dis-tap">↗ This resonates — show me what's happening</div>
+      <div class="dis-reveal">
+        <h4>The Justifications Your Mind Reaches For</h4>
+        <div class="justifications">
+          <div class="dis-just">"I work hard, I deserve this purchase."</div>
+          <div class="dis-just">"I'll sort it out next month when things calm down."</div>
+          <div class="dis-just">"Money isn't everything — I value experiences."</div>
+        </div>
+        <p class="dis-honest-q">Honest question: Are you reaching for these because they're true — or because they close the gap without requiring you to change?</p>
+      </div>
+    </div>
+    <div class="dis-card" onclick="selectDis(this,'inv')">
+      <p class="dis-belief">"Financial freedom genuinely matters to me."</p>
+      <p class="dis-vs">⚡ conflicts with</p>
+      <p class="dis-behavior">Never invested a single dollar in any income-producing asset.</p>
+      <div class="dis-tap">↗ This resonates — show me what's happening</div>
+      <div class="dis-reveal">
+        <h4>The Justifications Your Mind Reaches For</h4>
+        <div class="justifications">
+          <div class="dis-just">"I don't have enough spare money to invest yet."</div>
+          <div class="dis-just">"I need to learn more before I start."</div>
+          <div class="dis-just">"The market is too unpredictable right now."</div>
+        </div>
+        <p class="dis-honest-q">Honest question: Are these reasons about the opportunity — or are they about avoiding the discomfort of actually starting?</p>
+      </div>
+    </div>
+    <div class="dis-card" onclick="selectDis(this,'raise')">
+      <p class="dis-belief">"I work hard and I deserve to be paid what I'm worth."</p>
+      <p class="dis-vs">⚡ conflicts with</p>
+      <p class="dis-behavior">Haven't asked for a raise or renegotiated income in over two years.</p>
+      <div class="dis-tap">↗ This resonates — show me what's happening</div>
+      <div class="dis-reveal">
+        <h4>The Justifications Your Mind Reaches For</h4>
+        <div class="justifications">
+          <div class="dis-just">"Now's not the right time — the economy is uncertain."</div>
+          <div class="dis-just">"My manager knows what I'm worth, they'll recognise it."</div>
+          <div class="dis-just">"I don't want to seem greedy or difficult."</div>
+        </div>
+        <p class="dis-honest-q">Honest question: Is the timing actually wrong — or is the real barrier the discomfort of asking directly for what you want?</p>
+      </div>
+    </div>
+    <div class="dis-card" onclick="selectDis(this,'sec')">
+      <p class="dis-belief">"I value security and stability for my family."</p>
+      <p class="dis-vs">⚡ conflicts with</p>
+      <p class="dis-behavior">Living fully paycheck to paycheck with no financial buffer.</p>
+      <div class="dis-tap">↗ This resonates — show me what's happening</div>
+      <div class="dis-reveal">
+        <h4>The Justifications Your Mind Reaches For</h4>
+        <div class="justifications">
+          <div class="dis-just">"The cost of living is just too high right now."</div>
+          <div class="dis-just">"Once this specific expense is handled, I'll start saving."</div>
+          <div class="dis-just">"At least we have our health and each other."</div>
+        </div>
+        <p class="dis-honest-q">Honest question: Are these circumstances — or are they the story your mind tells to avoid confronting a pattern you could actually change?</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TWO SYSTEMS -->
+  <div class="sec-divider sr"><span>Your Two-System Mind</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <p class="tag">Conscious vs Subconscious</p>
+    <h2 class="sec-title">Your Mind Operates on<br/><span style="color:var(--gold)">Two Distinct Systems.</span><br/>One of Them is Driving Right Now.</h2>
+    <p class="body-text" style="color:var(--muted)">The version of you that hesitates before investing, feels a flush of anxiety looking at a bank statement, or avoids asking for a raise — is very rarely making a conscious, reasoned decision in that moment. It's autopilot. And autopilot was programmed by something.</p>
+  </div>
+
+  <div class="brain-split sr">
+    <div class="brain-side conscious">
+      <div class="bs-label"><div class="bs-dot"></div>Conscious Mind</div>
+      <div class="bs-name">The Narrator</div>
+      <div class="bs-trait">Slow, deliberate processing</div>
+      <div class="bs-trait">Can hold a small amount of information at once</div>
+      <div class="bs-trait">Makes intentional decisions and sets goals</div>
+      <div class="bs-trait">Feels like "you" — it's the part doing the narrating</div>
+      <div class="bs-trait">What you're using right now to read this sentence</div>
+      <div class="bs-speed">⚡ Slow & Deliberate</div>
+      <button class="brain-side-toggle" onclick="toggleBrainExample(this,'con')">↓ See this in a financial moment</button>
+      <div class="bs-example" id="ex-con">"I've been thinking about this for three weeks. I've read two books, compared options, made a spreadsheet. I'm going to open that investment account today." — <em>This is rare. This is when the conscious mind is actually in charge.</em></div>
+    </div>
+    <div class="brain-side subconscious">
+      <div class="bs-label"><div class="bs-dot"></div>Subconscious Mind</div>
+      <div class="bs-name">The Autopilot</div>
+      <div class="bs-trait">Handles habits and automatic reactions</div>
+      <div class="bs-trait">Generates emotional responses before thought</div>
+      <div class="bs-trait">Was programmed by repetition you didn't choose</div>
+      <div class="bs-trait">Runs on cues and context, not logic</div>
+      <div class="bs-trait">Responsible for the large majority of daily behaviour</div>
+      <div class="bs-speed">⚡⚡⚡ Instant & Automatic</div>
+      <button class="brain-side-toggle" onclick="toggleBrainExample(this,'sub')">↓ See this in a financial moment</button>
+      <div class="bs-example" id="ex-sub">"I don't know why, I just feel uneasy about it. It feels risky. Something tells me not to." — <em>That 'something' is autopilot. It fired before you'd made a single conscious decision. It came from somewhere else entirely.</em></div>
+    </div>
+  </div>
+
+  <!-- GOVERNOR TEST -->
+  <div class="sec-divider sr"><span>The Governor Test</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <p class="tag">Is Your Mind Wired to Build — or to Protect?</p>
+    <h2 class="sec-title">Every subconscious pattern was installed<br/>by repetition you <span style="color:var(--gold)">didn't choose.</span></h2>
+    <p class="body-text" style="color:var(--muted)">Is there a governor sitting in your system — a mechanism whose entire job is to hit the brakes the moment you get close to real financial risk? It isn't malfunctioning. It's doing exactly what it was trained to do. The problem is that it's applying old protection to a present opportunity — and it cannot tell the difference on its own.</p>
+  </div>
+
+  <div class="gov-test sr" id="gov-test">
+    <div class="gov-q" id="gq-1">
+      <p class="gov-q-num">Question 1 of 5</p>
+      <p class="gov-q-text">When you think seriously about putting money into an investment — a fund, a property, a business — what fires first?</p>
+      <div class="gov-options">
+        <div class="gov-opt" onclick="govChoose(1,'value',this)">Curiosity about how it works and what it could return</div>
+        <div class="gov-opt" onclick="govChoose(1,'protect',this)">Anxiety about what could go wrong and what I might lose</div>
+      </div>
+    </div>
+    <div class="gov-q" id="gq-2" style="display:none">
+      <p class="gov-q-num">Question 2 of 5</p>
+      <p class="gov-q-text">When someone you know makes a significant amount of money, your first honest reaction is:</p>
+      <div class="gov-options">
+        <div class="gov-opt" onclick="govChoose(2,'value',this)">"That's possible. What did they do? What can I learn?"</div>
+        <div class="gov-opt" onclick="govChoose(2,'protect',this)">"They probably got lucky, or it won't last, or there's something we're not seeing."</div>
+      </div>
+    </div>
+    <div class="gov-q" id="gq-3" style="display:none">
+      <p class="gov-q-num">Question 3 of 5</p>
+      <p class="gov-q-text">When you receive unexpected extra income — a bonus, a gift, an unusual payment — your first thought is:</p>
+      <div class="gov-options">
+        <div class="gov-opt" onclick="govChoose(3,'value',this)">How can I put this to work? What asset can this start?</div>
+        <div class="gov-opt" onclick="govChoose(3,'protect',this)">What expense have I been putting off that I can finally cover?</div>
+      </div>
+    </div>
+    <div class="gov-q" id="gq-4" style="display:none">
+      <p class="gov-q-num">Question 4 of 5</p>
+      <p class="gov-q-text">When you think about your financial life 10 years from now, the feeling that comes first is:</p>
+      <div class="gov-options">
+        <div class="gov-opt" onclick="govChoose(4,'value',this)">Possibility — I can see genuine scenarios where this gets built</div>
+        <div class="gov-opt" onclick="govChoose(4,'protect',this)">Anxiety or uncertainty — I'm not sure it actually gets better</div>
+      </div>
+    </div>
+    <div class="gov-q" id="gq-5" style="display:none">
+      <p class="gov-q-num">Question 5 of 5</p>
+      <p class="gov-q-text">When you hear about someone taking a calculated financial risk — starting a business, investing a large sum — your instinct is:</p>
+      <div class="gov-options">
+        <div class="gov-opt" onclick="govChoose(5,'value',this)">Intrigue — I want to understand how they thought about it</div>
+        <div class="gov-opt" onclick="govChoose(5,'protect',this)">Caution — I immediately think about what could go wrong for them</div>
+      </div>
+    </div>
+    <div class="gov-result" id="gov-result">
+      <p class="gov-score-label">Governor Strength</p>
+      <div class="gov-score" id="gov-score-txt"></div>
+      <div class="gov-meter"><div class="gov-meter-fill" id="gov-mfill"></div></div>
+      <p class="gov-verdict" id="gov-verdict-txt"></p>
+      <p class="gov-next-step" id="gov-next-txt"></p>
+      <button class="gov-retake" onclick="govRetake()">↺ Retake</button>
+    </div>
+  </div>
+
+  <!-- FIVE VOICES AUDIT -->
+  <div class="sec-divider sr"><span>Your 5 Voices Audit</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <p class="tag">You Are Running the Average of the People You've Absorbed</p>
+    <h2 class="sec-title">The <span style="color:var(--gold)">inherited fear</span><br/>wearing a disguise.</h2>
+    <p class="body-text lg">Before you've made any decision about investing, your subconscious runs a silent scan — pulling up every association it has stored. Most of those associations came from other people. None of that was your direct experience. But your mind filed it as evidence anyway.</p>
+    <p class="body-text" style="color:var(--muted)">Name the five voices or presences you hear most often about money — family, friends, content you consume. Rate each one's relationship with wealth, risk, and financial growth. Your social average reveals what your autopilot treats as normal.</p>
+  </div>
+
+  <div class="voices-box sr">
+    <div id="voices-inputs"></div>
+    <div class="voices-result" id="voices-result">
+      <p class="v-avg-label">Your Financial Social Average</p>
+      <div class="v-avg-num" id="v-avg-num">—</div>
+      <p class="v-avg-verdict" id="v-avg-verdict">Rate at least one voice to see your financial social average.</p>
+    </div>
+  </div>
+
+  <!-- JOKE CONVERTER -->
+  <div class="sec-divider sr"><span>Jokes Your Subconscious Took Seriously</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <p class="body-text lg">When you repeatedly joke <em>"I'll never be good with money"</em> or <em>"I'm just bad at saving,"</em> your subconscious doesn't file that under "just a joke." It logs it as a statement about identity, repeated with your own voice, in your own mouth.</p>
+    <p class="body-text" style="color:var(--muted)">Identity statements are exactly the kind of input that shapes automatic behaviour. Say something about yourself often enough — even as a joke — and you're training the autopilot to keep it true.</p>
+  </div>
+
+  <div class="joke-box sr">
+    <p class="tag" style="margin-bottom:4px">The Joke-to-Identity Converter</p>
+    <p style="font-style:italic;color:var(--muted);font-size:1.05rem;margin-bottom:16px">Type a throwaway money joke or line you say about yourself</p>
+    <input type="text" class="joke-input" id="joke-in" placeholder="e.g. I'm just terrible with money..." oninput="convertJoke()"/>
+    <div class="joke-arrow">↓</div>
+    <p style="font-family:'Inter';font-size:.62rem;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;margin-bottom:8px">What your subconscious actually logged:</p>
+    <div class="joke-identity empty" id="joke-out">Your typed joke will appear here as the identity statement your autopilot filed.</div>
+    <p class="joke-sub" id="joke-sub-text">This is the input your autopilot is running on.</p>
+  </div>
+
+  <!-- ENVIRONMENT DIAL -->
+  <div class="sec-divider sr"><span>Your Environment as Training Data</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <p class="tag">The Practical Leverage Point</p>
+    <h2 class="sec-title">You Cannot Argue Your<br/>Subconscious Out of a Belief.<br/>You Can <span style="color:var(--gold)">Change What It Experiences.</span></h2>
+    <p class="body-text" style="color:var(--muted)">When you deliberately place yourself in an environment that reflects where you actually want to go — conversations about building rather than surviving, people who treat investing as normal — ongoing exposure quietly retrains what your subconscious treats as achievable. It stops filing "financial growth" under "risky and foreign" and starts filing it under "familiar and reachable."</p>
+  </div>
+
+  <div class="env-box sr">
+    <div class="env-tracks">
+      <div class="env-track-box">
+        <p class="env-track-label">Where is your current environment?</p>
+        <div style="display:flex;justify-content:space-between;font-family:'Inter';font-size:.6rem;color:var(--muted);margin-bottom:4px;letter-spacing:.05em"><span>Survival Mode</span><span>Growth Mode</span></div>
+        <input type="range" min="0" max="10" value="4" id="env-current" oninput="updateEnv()"/>
+        <div style="text-align:center;font-family:'Cinzel';font-size:1.5rem;color:var(--text)" id="env-cur-val">4</div>
+      </div>
+      <div class="env-track-box">
+        <p class="env-track-label">Where do you want your financial life to go?</p>
+        <div style="display:flex;justify-content:space-between;font-family:'Inter';font-size:.6rem;color:var(--muted);margin-bottom:4px;letter-spacing:.05em"><span>Survival Mode</span><span>Growth Mode</span></div>
+        <input type="range" min="0" max="10" value="8" id="env-target" oninput="updateEnv()"/>
+        <div style="text-align:center;font-family:'Cinzel';font-size:1.5rem;color:var(--text)" id="env-tar-val">8</div>
+      </div>
+    </div>
+    <div class="env-gap-display" id="env-gap-box">
+      <p class="env-gap-label">Environment Gap</p>
+      <div class="env-gap-num" id="env-gap-num">4</div>
+      <p class="env-gap-verdict" id="env-gap-verdict">Your current environment is significantly behind where you want to go. Your subconscious is being trained by the wrong inputs — this is a high-priority lever to pull.</p>
+    </div>
+  </div>
+
+  <!-- SMALL MOVES -->
+  <div class="sec-divider sr"><span>Small Moves. Real Subconscious Weight.</span></div>
+
+  <p class="body-text sr" style="text-align:center;font-style:italic;color:var(--muted);margin-bottom:28px">You don't need to relocate your life. These five adjustments work at the level of your autopilot — repeated exposure, not dramatic gestures.</p>
+
+  <div class="moves-list sr">
+    <div class="move-item" id="mv-1">
+      <div class="move-header" onclick="toggleMove('mv-1')">
+        <div class="move-check" id="chk-1">○</div>
+        <div class="move-title">Change Who You Talk to About Money First</div>
+        <div class="move-toggle">▼</div>
+      </div>
+      <div class="move-detail">
+        <p class="move-desc">If your default financial sounding board is someone anxious or dismissive about money, find at least one additional voice — a book's author, a podcast host, a mentor — whose financial conversation is calm and constructive. Deliberately increase your exposure to them. Not to replace your existing relationships, but to balance the input your subconscious is receiving.</p>
+        <button class="move-commit" onclick="commitMove('mv-1','chk-1',this)">I'll find this voice this week →</button>
+      </div>
+    </div>
+    <div class="move-item" id="mv-2">
+      <div class="move-header" onclick="toggleMove('mv-2')">
+        <div class="move-check" id="chk-2">○</div>
+        <div class="move-title">Audit Your Own Jokes and Throwaway Lines</div>
+        <div class="move-toggle">▼</div>
+      </div>
+      <div class="move-detail">
+        <p class="move-desc">For one week, every time you catch yourself saying something like "I'm just broke" or "I'll never understand investing" — notice it. You don't need to force positivity. You just need to stop reinforcing a story you don't actually want to be true. Awareness is the first interrupt in the pattern.</p>
+        <button class="move-commit" onclick="commitMove('mv-2','chk-2',this)">I'll monitor my language this week →</button>
+      </div>
+    </div>
+    <div class="move-item" id="mv-3">
+      <div class="move-header" onclick="toggleMove('mv-3')">
+        <div class="move-check" id="chk-3">○</div>
+        <div class="move-title">Change What's on Your Screen</div>
+        <div class="move-toggle">▼</div>
+      </div>
+      <div class="move-detail">
+        <p class="move-desc">The content you passively scroll past shapes your subconscious as much as deliberate study does. Following even a handful of accounts or channels that treat building wealth as normal — rather than a fantasy or a scandal — shifts your baseline exposure without requiring extra time. Your scroll feed is training data. Curate it deliberately.</p>
+        <button class="move-commit" onclick="commitMove('mv-3','chk-3',this)">I'll audit my follows today →</button>
+      </div>
+    </div>
+    <div class="move-item" id="mv-4">
+      <div class="move-header" onclick="toggleMove('mv-4')">
+        <div class="move-check" id="chk-4">○</div>
+        <div class="move-title">Put Yourself in One Room a Month Where Growth is the Assumption</div>
+        <div class="move-toggle">▼</div>
+      </div>
+      <div class="move-detail">
+        <p class="move-desc">Physical or virtual — a community, a webinar, a group chat, anywhere the ambient assumption is that people build and invest, not that they can't or shouldn't. You're looking for environments where financial growth is discussed as ordinary and ongoing — not as aspirational or exceptional. One room per month is enough to start shifting your autopilot's frame of reference.</p>
+        <button class="move-commit" onclick="commitMove('mv-4','chk-4',this)">I'll find this room this month →</button>
+      </div>
+    </div>
+    <div class="move-item" id="mv-5">
+      <div class="move-header" onclick="toggleMove('mv-5')">
+        <div class="move-check" id="chk-5">○</div>
+        <div class="move-title">Notice Who You Hide Your Financial Goals From — and Ask Why</div>
+        <div class="move-toggle">▼</div>
+      </div>
+      <div class="move-detail">
+        <p class="move-desc">Often the people we hide our ambitions from are the same people whose old reactions trained the governor in the first place. You don't need to announce your goals to everyone. But notice the hiding — because the hiding tells you something. It tells you whose voice is still running as an internal authority, and whether that authority belongs in that role.</p>
+        <button class="move-commit" onclick="commitMove('mv-5','chk-5',this)">I'll name that person honestly →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JOURNAL -->
+  <div class="sec-divider sr"><span>Written Reflection — 10 Prompts</span></div>
+
+  <div class="card sr" style="margin-bottom:28px;border-color:var(--gold-b)">
+    <p class="body-text" style="margin:0;font-style:italic;color:var(--muted)">Do not rush these. Write real sentences, not one-word answers. Your answers are saved privately to your browser — no one else can see them. As you move through the course, you will return to these reflections to evaluate how your thinking has shifted and to guide the decisions you take next.</p>
+  </div>
+
+  <div class="journal-section sr">
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 01</strong>Write down one financial belief you hold that you've never actually tested against your own real experience. Where did it come from?</div><textarea id="r1" placeholder="Write your honest answer here..." oninput="saveJ('r1')"></textarea><div class="save-ind" id="sv-r1">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 02</strong>Name the five people — or voices — you hear most often about money: family, friends, content you consume. What does each one actually believe about wealth, risk, and financial growth?</div><textarea id="r2" placeholder="Write your honest answer here..." oninput="saveJ('r2')"></textarea><div class="save-ind" id="sv-r2">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 03</strong>Recall the last time you joked about being bad with money or unlucky financially. What were you actually feeling underneath the joke?</div><textarea id="r3" placeholder="Write your honest answer here..." oninput="saveJ('r3')"></textarea><div class="save-ind" id="sv-r3">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 04</strong>Think of a financial decision you backed away from recently. Strip away the practical reasons — what's the emotional story underneath the hesitation?</div><textarea id="r4" placeholder="Write your honest answer here..." oninput="saveJ('r4')"></textarea><div class="save-ind" id="sv-r4">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 05</strong>Describe the environment you spend the most time in — physically and online. Does it reflect where you want your financial life to go, or where you're trying to leave?</div><textarea id="r5" placeholder="Write your honest answer here..." oninput="saveJ('r5')"></textarea><div class="save-ind" id="sv-r5">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 06</strong>Write down one belief about yourself and money that you'd genuinely like to be true. Then honestly rate how much your daily environment currently reinforces it.</div><textarea id="r6" placeholder="Write your honest answer here..." oninput="saveJ('r6')"></textarea><div class="save-ind" id="sv-r6">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 07</strong>Think of a piece of financial dissonance in your own life right now — a gap between what you believe about yourself and how you actually handle money. Name it directly instead of explaining it away.</div><textarea id="r7" placeholder="Write your honest answer here..." oninput="saveJ('r7')"></textarea><div class="save-ind" id="sv-r7">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 08</strong>Who is one person you could deliberately spend more time around — or listen to more often — because of how calmly and constructively they treat money?</div><textarea id="r8" placeholder="Write your honest answer here..." oninput="saveJ('r8')"></textarea><div class="save-ind" id="sv-r8">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 09</strong>What's one small, repeatable change you could make this week to your environment or inputs that would quietly train a more useful automatic reaction?</div><textarea id="r9" placeholder="Write your honest answer here..." oninput="saveJ('r9')"></textarea><div class="save-ind" id="sv-r9">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 10</strong>If your subconscious has a governor protecting you from financial risk — what is it actually protecting you from? Name the original wound or fear, not the surface-level caution.</div><textarea id="r10" placeholder="Write your honest answer here..." oninput="saveJ('r10')"></textarea><div class="save-ind" id="sv-r10">✓ Saved</div></div>
+  </div>
+
+  <div class="journal-controls sr">
+    <button class="jc-btn jc-export" onclick="exportJournal()">📥 Download My Reflections</button>
+    <button class="jc-btn jc-clear" onclick="clearJournal()">🗑 Clear &amp; Reset</button>
+  </div>
+
+  <!-- DECLARATION -->
+  <div class="sec-divider sr"><span>The Declaration</span></div>
+
+  <div class="decl-box sr">
+    <canvas id="p-canvas"></canvas>
+    <p class="tag">Seal Your Commitment</p>
+    <p class="decl-text">"I understand that my financial habits are not random. They are the output of an autopilot that was programmed without my conscious input. I commit to working on the identity, not just the strategy — because I know now that strategy without identity change is temporary."</p>
+    <div class="decl-input-wrap">
+      <input type="text" class="decl-input" id="decl-in" placeholder='Type "I ACCEPT" to seal this'/>
+      <button class="decl-btn" onclick="sealDecl()">Seal</button>
+    </div>
+    <p class="decl-hint">Type "I ACCEPT" and press Seal</p>
+    <div class="decl-sealed-msg" id="sealed-msg">
+      <p>✦ THE IDENTITY WORK BEGINS NOW ✦</p>
+      <p class="sd" id="sealed-date"></p>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:center;align-items:center;margin-top:60px;margin-bottom:20px;flex-wrap:wrap;gap:16px" class="sr">
+  <a href="module-2.html" class="whop-btn" style="text-decoration:none; background:transparent; color:var(--gold); border:1px solid var(--gold);">&#8592; Previous</a>
+  <a href="https://whop.com/silent-strategist/exp_OQfyAgJkYyIvH9/app/courses/cors_fGZBpPUYQtguD/lessons/lesn_Kjqb7UySELngz/" class="whop-btn" style="text-decoration:none;">&#8617; Return to Course</a>
+  <a href="module-4.html" class="whop-btn" style="text-decoration:none; background:transparent; color:var(--gold); border:1px solid var(--gold);">Next Module &#8594;</a>
+</div>
+</main>
+
+<script>
+/* AMBIENT CANVAS */
+(function(){
+  const c=document.getElementById('ambient-canvas'),ctx=c.getContext('2d');let s=[];
+  const resize=()=>{c.width=innerWidth;c.height=innerHeight};
+  const init=()=>{s=[];for(let i=0;i<120;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.1+.2,speed:Math.random()*.16+.04,op:Math.random()*.5+.1,tw:Math.random()*Math.PI*2})};
+  const draw=()=>{ctx.clearRect(0,0,c.width,c.height);s.forEach(p=>{p.tw+=.007;const o=p.op*(.6+.4*Math.sin(p.tw));ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(201,168,76,${o})`;ctx.fill();p.y-=p.speed;if(p.y<0){p.y=c.height;p.x=Math.random()*c.width}});requestAnimationFrame(draw)};
+  resize();init();draw();window.addEventListener('resize',()=>{resize();init()});
+})();
+
+/* SCROLL REVEAL */
+(()=>{
+  const obs=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('v');obs.unobserve(en.target)}}),{threshold:.07});
+  document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
+})();
+
+/* PROGRESS */
+window.addEventListener('scroll',()=>{document.getElementById('pfill').style.width=Math.round((scrollY/(document.body.scrollHeight-innerHeight))*100)+'%'});
+
+/* DISSONANCE */
+function selectDis(card,type){
+  if(card.classList.contains('selected'))return;
+  document.querySelectorAll('.dis-card').forEach(c=>c.classList.remove('selected'));
+  card.classList.add('selected');
+}
+
+/* BRAIN TOGGLE */
+function toggleBrainExample(btn,side){
+  const id=side==='con'?'ex-con':'ex-sub';
+  const el=document.getElementById(id);
+  el.classList.toggle('show');
+  btn.textContent=el.classList.contains('show')?'↑ Hide':'↓ See this in a financial moment';
+}
+
+/* GOVERNOR TEST */
+let govAnswers={};let govCurrentQ=1;
+function govChoose(q,type,el){
+  govAnswers[q]=type;
+  el.parentElement.querySelectorAll('.gov-opt').forEach(o=>{o.classList.remove('chosen-value','chosen-protect','unchosen')});
+  el.classList.add(type==='value'?'chosen-value':'chosen-protect');
+  el.parentElement.querySelectorAll('.gov-opt:not(.'+( type==='value'?'chosen-value':'chosen-protect')+')').forEach(o=>o.classList.add('unchosen'));
+  setTimeout(()=>{
+    if(q<5){
+      document.getElementById('gq-'+q).style.display='none';
+      govCurrentQ=q+1;
+      document.getElementById('gq-'+govCurrentQ).style.display='block';
+      document.getElementById('gq-'+govCurrentQ).style.animation='scaleIn .4s ease';
+    } else {
+      showGovResult();
+    }
+  },500);
+}
+function showGovResult(){
+  const protectCount=Object.values(govAnswers).filter(v=>v==='protect').length;
+  const res=document.getElementById('gov-result');
+  const scoreTxt=document.getElementById('gov-score-txt');
+  const verdictTxt=document.getElementById('gov-verdict-txt');
+  const nextTxt=document.getElementById('gov-next-txt');
+  document.getElementById('gq-5').style.display='none';
+  res.style.display='block';
+  if(protectCount<=1){
+    res.className='gov-result show low';
+    scoreTxt.textContent='Wired for Value';
+    verdictTxt.textContent='Your instinctive reactions lean toward opportunity and growth. Your autopilot is broadly aligned with building. The work here is maintaining and deepening that wiring — and making sure the environment around you keeps reinforcing it.';
+    nextTxt.textContent='Key action: Protect your environment deliberately. The governor is quiet now — keep feeding it the right inputs so it stays that way.';
+  } else if(protectCount<=3){
+    res.className='gov-result show mid';
+    scoreTxt.textContent='Mixed Signals';
+    verdictTxt.textContent='Your autopilot is sending mixed signals — part of you leans toward value and growth, but a significant governor is also running. It fires in specific contexts and generates hesitation before your conscious mind can weigh in. This is the most common pattern, and the most workable one.';
+    nextTxt.textContent='Key action: Identify the specific contexts where the governor fires hardest. Those are your highest-leverage points for environment change.';
+  } else {
+    res.className='gov-result show high';
+    scoreTxt.textContent='Governor is Active';
+    verdictTxt.textContent='Your subconscious currently has a strong protective default around financial risk and growth. This isn\'t a character flaw — it\'s a trained response. But it is actively filtering out opportunities before your conscious mind gets to evaluate them. The environment changes in this module are not optional for you — they are the mechanism for retraining this governor.';
+    nextTxt.textContent='Key action: Do not skip the environment audit. The governor was installed by repeated exposure — it can only be retrained by repeated exposure. That is the whole game.';
+  }
+}
+function govRetake(){
+  govAnswers={};govCurrentQ=1;
+  for(let i=1;i<=5;i++){
+    const qEl=document.getElementById('gq-'+i);
+    qEl.style.display=i===1?'block':'none';
+    qEl.querySelectorAll('.gov-opt').forEach(o=>o.className='gov-opt');
+  }
+  document.getElementById('gov-result').style.display='none';
+}
+
+/* FIVE VOICES */
+(function(){
+  const cont=document.getElementById('voices-inputs');
+  const ratings=[-2,-1,0,1,2];
+  const rLabels=['−−','−','0','+','++'];
+  for(let i=1;i<=5;i++){
+    const row=document.createElement('div');row.className='voice-row';
+    const inp=document.createElement('input');
+    inp.type='text';inp.className='voice-name';inp.placeholder='Voice '+i+' — name or description';
+    inp.id='vn-'+i;
+    const saved=localStorage.getItem('ffm3_vn'+i);if(saved)inp.value=saved;
+    inp.oninput=()=>{localStorage.setItem('ffm3_vn'+i,inp.value);updateVoices()};
+    const rDiv=document.createElement('div');rDiv.className='voice-rating';
+    ratings.forEach((r,ri)=>{
+      const btn=document.createElement('button');
+      btn.className='v-rate-btn';btn.textContent=rLabels[ri];btn.dataset.val=r;btn.dataset.voice=i;
+      const savedR=localStorage.getItem('ffm3_vr'+i);
+      if(savedR!==null&&parseInt(savedR)===r)btn.classList.add('active-'+( r<0?'neg':r>0?'pos':'')+Math.abs(r));
+      btn.onclick=()=>{
+        rDiv.querySelectorAll('.v-rate-btn').forEach(b=>b.className='v-rate-btn');
+        btn.classList.add('active-'+(r<0?'neg':r>0?'pos':'')+Math.abs(r));
+        localStorage.setItem('ffm3_vr'+i,r);
+        updateVoices();
+      };
+      rDiv.appendChild(btn);
+    });
+    row.appendChild(inp);row.appendChild(rDiv);cont.appendChild(row);
+  }
+  updateVoices();
+})();
+function updateVoices(){
+  let total=0,count=0;
+  for(let i=1;i<=5;i++){
+    const saved=localStorage.getItem('ffm3_vr'+i);
+    if(saved!==null){total+=parseInt(saved);count++;}
+  }
+  const avgNum=document.getElementById('v-avg-num');
+  const verdict=document.getElementById('v-avg-verdict');
+  const box=document.getElementById('voices-result');
+  if(count===0){avgNum.textContent='—';verdict.textContent='Rate at least one voice to see your financial social average.';return}
+  const avg=(total/count).toFixed(1);
+  avgNum.textContent=(avg>0?'+':'')+avg;
+  if(avg>0.8){avgNum.style.color='var(--success)';box.style.borderColor='rgba(46,204,113,.2)';verdict.textContent='Your financial social environment skews positive. The voices you\'ve absorbed tend to treat wealth and growth as normal and achievable. This is a strong foundation — protect and add to it deliberately.';}
+  else if(avg>=-0.5){avgNum.style.color='var(--gold)';box.style.borderColor='var(--gold-b)';verdict.textContent='Your financial social average is neutral. Some voices build, some erode. Your autopilot is receiving mixed training data about what\'s normal and achievable with money. The environment changes in this module are your highest-leverage move.';}
+  else{avgNum.style.color='var(--danger)';box.style.borderColor='rgba(232,72,85,.2)';verdict.textContent='Your financial social average skews negative. The ambient voices around you tend to treat wealth with anxiety, skepticism, or dismissal. This isn\'t your fault — but it is your problem to solve. Your subconscious has been filed under "financial growth = risky and foreign" by repeated exposure. The environment shifts in this module are not optional.';}
+}
+
+/* JOKE CONVERTER */
+function convertJoke(){
+  const val=document.getElementById('joke-in').value.trim();
+  const out=document.getElementById('joke-out');
+  const sub=document.getElementById('joke-sub-text');
+  if(!val){out.className='joke-identity empty';out.textContent='Your typed joke will appear here as the identity statement your autopilot filed.';return}
+  out.className='joke-identity';
+  // Clean up the input and reframe as identity statement
+  let identity=val;
+  identity=identity.replace(/^(i'm just|i'm|im|just|lol|haha)/gi,'').trim();
+  identity=identity.charAt(0).toUpperCase()+identity.slice(1);
+  if(!identity.match(/[.!?]$/))identity+='.';
+  out.textContent='FILED AS IDENTITY: "'+identity+'"';
+  sub.textContent='Your subconscious logged this as a fact about who you are — not a joke.';
+}
+
+/* ENVIRONMENT DIAL */
+function updateEnv(){
+  const cur=parseInt(document.getElementById('env-current').value);
+  const tar=parseInt(document.getElementById('env-target').value);
+  document.getElementById('env-cur-val').textContent=cur;
+  document.getElementById('env-tar-val').textContent=tar;
+  const gap=Math.max(0,tar-cur);
+  const gapNum=document.getElementById('env-gap-num');
+  const gapVerdict=document.getElementById('env-gap-verdict');
+  const box=document.getElementById('env-gap-box');
+  gapNum.textContent=gap;
+  if(gap===0){gapNum.style.color='var(--success)';box.style.borderColor='rgba(46,204,113,.2)';gapVerdict.textContent='Your current environment already reflects where you want to go. The key now is maintaining and deepening it — and being deliberate about what you allow to enter that environment.';}
+  else if(gap<=3){gapNum.style.color='var(--gold)';box.style.borderColor='var(--gold-b)';gapVerdict.textContent='A modest but real gap exists. Your environment is not yet fully aligned with where you want to go — and your subconscious is being trained by that gap. The small moves in this module will close this efficiently.';}
+  else{gapNum.style.color='var(--danger)';box.style.borderColor='rgba(232,72,85,.2)';gapVerdict.textContent='A significant gap exists between your current environment and where you want your financial life to go. Your subconscious is being trained by inputs that are misaligned with your goals. This is a high-priority lever to pull — and the good news is, it doesn\'t require money or dramatic upheaval to change.';}
+}
+updateEnv();
+
+/* SMALL MOVES */
+function toggleMove(id){
+  const el=document.getElementById(id);
+  el.classList.toggle('open');
+}
+function commitMove(id,chkId,btn){
+  document.getElementById(id).classList.add('done','open');
+  document.getElementById(chkId).textContent='✓';
+  btn.classList.add('committed');btn.textContent='✓ Committed';
+  localStorage.setItem('ffm3_mv_'+id,'committed');
+}
+// Restore committed state
+['mv-1','mv-2','mv-3','mv-4','mv-5'].forEach(id=>{
+  if(localStorage.getItem('ffm3_mv_'+id)){
+    const el=document.getElementById(id);if(!el)return;
+    el.classList.add('done');
+    const num=id.split('-')[1];
+    const chk=document.getElementById('chk-'+num);if(chk)chk.textContent='✓';
+    const btn=el.querySelector('.move-commit');
+    if(btn){btn.classList.add('committed');btn.textContent='✓ Committed';}
+  }
+});
+
+/* JOURNAL */
+['r1','r2','r3','r4','r5','r6','r7','r8','r9','r10'].forEach(id=>{
+  const saved=localStorage.getItem('ffm3_'+id);
+  if(saved){const el=document.getElementById(id);if(el)el.value=saved}
+});
+function saveJ(id){
+  const val=document.getElementById(id)?.value||'';
+  localStorage.setItem('ffm3_'+id,val);
+  const ind=document.getElementById('sv-'+id);
+  if(ind){ind.classList.add('show');setTimeout(()=>ind.classList.remove('show'),2000)}
+}
+
+/* EXPORT */
+function exportJournal(){
+  const questions=['Reflection 01: Write down one financial belief you hold that you\'ve never actually tested against your own real experience. Where did it come from?','Reflection 02: Name the five people — or voices — you hear most often about money. What does each one actually believe about wealth, risk, and financial growth?','Reflection 03: Recall the last time you joked about being bad with money or unlucky financially. What were you actually feeling underneath the joke?','Reflection 04: Think of a financial decision you backed away from recently. Strip away the practical reasons — what\'s the emotional story underneath?','Reflection 05: Describe the environment you spend the most time in. Does it reflect where you want your financial life to go?','Reflection 06: Write down one belief about yourself and money you\'d genuinely like to be true. How much does your daily environment reinforce it?','Reflection 07: Think of a piece of financial dissonance in your own life right now. Name it directly instead of explaining it away.','Reflection 08: Who is one person you could deliberately spend more time around because of how calmly they treat money?','Reflection 09: What\'s one small, repeatable change you could make this week to train a more useful automatic reaction?','Reflection 10: If your subconscious has a governor protecting you from financial risk — what is it actually protecting you from?'];
+  const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  let content=`FINANCIAL FREEDOM MASTERCLASS\nModule 3: The Mind Behind the Money\nJournal Export — ${date}\n${'='.repeat(60)}\n\n`;
+  questions.forEach((q,i)=>{const key='ffm3_r'+(i+1);const answer=localStorage.getItem(key)||'(No answer written yet)';content+=`${q}\n\n${answer}\n\n${'-'.repeat(60)}\n\n`;});
+  const decl=localStorage.getItem('ffm3_declaration');const declDate=localStorage.getItem('ffm3_declaration_date');
+  if(decl)content+=`DECLARATION SEALED on ${declDate}\n`;
+  const blob=new Blob([content],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='Module-3-Journal.txt';a.click();URL.revokeObjectURL(url);
+}
+function clearJournal(){
+  if(!confirm('Clear all reflection answers for Module 3? This cannot be undone.'))return;
+  ['r1','r2','r3','r4','r5','r6','r7','r8','r9','r10'].forEach(id=>{localStorage.removeItem('ffm3_'+id);const el=document.getElementById(id);if(el)el.value='';});
+}
+
+/* DECLARATION */
+(function(){
+  if(localStorage.getItem('ffm3_declaration')){
+    const d=localStorage.getItem('ffm3_declaration_date');
+    document.getElementById('decl-in').value='I ACCEPT';document.getElementById('decl-in').disabled=true;
+    document.querySelector('.decl-btn').classList.add('sealed');document.querySelector('.decl-btn').textContent='✦ Sealed';
+    document.getElementById('sealed-msg').classList.add('show');document.getElementById('sealed-date').textContent='Declared on '+d;
+  }
+})();
+function sealDecl(){
+  const inp=document.getElementById('decl-in');
+  if(inp.value.trim().toUpperCase()!=='I ACCEPT'){
+    inp.classList.add('error');inp.style.animation='shake .4s ease';
+    setTimeout(()=>{inp.classList.remove('error');inp.style.animation=''},600);return;
+  }
+  inp.classList.add('success');
+  const now=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  localStorage.setItem('ffm3_declaration','true');localStorage.setItem('ffm3_declaration_date',now);
+  setTimeout(()=>{
+    inp.disabled=true;document.querySelector('.decl-btn').classList.add('sealed');document.querySelector('.decl-btn').textContent='✦ Sealed';
+    document.getElementById('sealed-msg').classList.add('show');document.getElementById('sealed-date').textContent='Declared on '+now;
+    firePart();
+  },500);
+}
+function firePart(){
+  const canvas=document.getElementById('p-canvas'),ctx=canvas.getContext('2d');
+  canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;
+  const cx=canvas.width/2,cy=canvas.height/2,particles=[];
+  for(let i=0;i<90;i++){const a=Math.random()*Math.PI*2,sp=Math.random()*6+2;particles.push({x:cx,y:cy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,alpha:1,size:Math.random()*4+1,color:`hsl(${40+Math.random()*20},90%,${55+Math.random()*20}%)`})}
+  function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);let alive=false;particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.1;p.alpha-=.016;if(p.alpha>0)alive=true;ctx.globalAlpha=Math.max(0,p.alpha);ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=p.color;ctx.fill()});if(alive)requestAnimationFrame(anim);else ctx.clearRect(0,0,canvas.width,canvas.height);}
+  anim();
+}
+const ss=document.createElement('style');ss.textContent='@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}';document.head.appendChild(ss);
+</script>
+</body>
+</html>

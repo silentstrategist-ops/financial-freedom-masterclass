@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 4: Closing the Gap | Financial Freedom Masterclass</title>
+  <meta name="description" content="How identity and behaviour change actually work — self-perception theory, future self continuity, graduated exposure, and building the bridge between who you are now and who executes the plan."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --void:#030507;--deep:#060A12;--surface:rgba(255,255,255,.03);
+      --surface2:rgba(255,255,255,.06);--gold:#C9A84C;--gold-l:#E8C97A;
+      --gold-d:rgba(201,168,76,.15);--gold-g:rgba(201,168,76,.06);
+      --gold-b:rgba(201,168,76,.25);--text:#EEF0F4;--muted:#7A8290;
+      --muted2:#4A5260;--danger:#E84855;--success:#2ECC71;
+      --cyan:#4FC3F7;--purple:#9B7FE8;--border:rgba(255,255,255,.07);
+      --r:20px;--rp:100px;
+    }
+    ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--void)}
+    ::-webkit-scrollbar-thumb{background:var(--gold-b);border-radius:3px}
+    *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+    body{background:var(--void);color:var(--text);font-family:'Cormorant Garamond',serif;overflow-x:hidden;line-height:1.7}
+
+    .noise{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;opacity:.08;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+    #ambient-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.2}
+
+    main{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 28px 180px}
+    @media(max-width:640px){main{padding:0 18px 180px}}
+
+    .sr{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+    .sr.v{opacity:1;transform:none}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes scaleIn{from{transform:scale(.93);opacity:0}to{transform:scale(1);opacity:1}}
+    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+    @keyframes slideRight{from{width:0}to{width:100%}}
+    @keyframes glowPulse{0%,100%{box-shadow:0 0 12px rgba(46,204,113,.15)}50%{box-shadow:0 0 28px rgba(46,204,113,.35)}}
+    @keyframes bridgeDraw{from{width:0}to{width:100%}}
+
+    .tag{font-family:'Inter';font-size:.65rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;display:inline-block;margin-bottom:14px}
+    .sec-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;color:#fff;letter-spacing:.05em;margin-bottom:1rem;line-height:1.2}
+    .body-text{font-size:1.18rem;font-weight:300;color:var(--text);margin-bottom:1rem;line-height:1.85}
+    .em{color:var(--gold);font-style:italic}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:44px 48px}
+    @media(max-width:640px){.card{padding:28px 22px}}
+
+    .sec-divider{display:flex;align-items:center;gap:16px;margin:80px 0 32px}
+    .sec-divider::before,.sec-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+    .sec-divider span{font-family:'Inter';font-size:.6rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;white-space:nowrap}
+
+    /* HERO */
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 0 60px}
+    .hero-eyebrow{font-family:'Inter';font-size:.68rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;margin-bottom:28px;opacity:0;animation:fadeUp .8s .3s forwards}
+    .hero-title{font-family:'Cinzel',serif;font-size:clamp(2.6rem,6.5vw,5rem);font-weight:900;line-height:1.05;color:#fff;margin-bottom:24px;opacity:0;animation:fadeUp .9s .5s forwards}
+    .hero-title .g{color:var(--gold)}
+    .hero-sub{font-size:1.3rem;font-style:italic;color:var(--muted);max-width:640px;margin:0 auto 52px;font-weight:300;opacity:0;animation:fadeUp .9s .7s forwards}
+    .hero-pills{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .9s .9s forwards;margin-bottom:48px}
+    .hero-pill{font-family:'Inter';font-size:.65rem;letter-spacing:.12em;padding:8px 18px;border-radius:var(--rp);border:1px solid var(--gold-b);color:var(--gold);text-transform:uppercase}
+    .hero-scroll{display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 1s 1.4s forwards}
+    .hero-scroll span{font-family:'Inter';font-size:.6rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+    .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s infinite}
+    @keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+    /* LOGIC TRAP */
+    .logic-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px}
+    .logic-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:28px;cursor:pointer;transition:all .3s}
+    .logic-card:hover:not(.chosen){border-color:rgba(79,195,247,.3);transform:translateY(-3px)}
+    .logic-card.chosen{border-color:rgba(79,195,247,.4);background:rgba(79,195,247,.04);cursor:default}
+    .logic-card.unchosen{opacity:.3;cursor:default}
+    .logic-label{font-family:'Inter';font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px}
+    .logic-stmt{font-style:italic;font-size:1.1rem;color:var(--text);line-height:1.6}
+    .logic-result{display:none;padding:28px 32px;border-radius:var(--r);border:1px solid rgba(79,195,247,.2);background:rgba(79,195,247,.03);animation:scaleIn .4s ease;margin-top:8px}
+    .logic-result.show{display:block}
+    .logic-result h4{font-family:'Cinzel';font-size:.9rem;color:var(--cyan);margin-bottom:10px;letter-spacing:.06em}
+    .logic-result p{font-size:1rem;color:var(--muted);line-height:1.65}
+    .logic-result .verdict{font-style:italic;font-size:1.05rem;color:var(--text);margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+
+    /* EVIDENCE BOARD */
+    .evidence-board{background:var(--deep);border:1px solid var(--border);border-radius:var(--r);padding:44px 48px}
+    @media(max-width:640px){.evidence-board{padding:28px 20px}}
+    .ev-input-row{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+    .ev-input{flex:1;min-width:200px;padding:14px 18px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:var(--r);color:var(--text);font-family:'Cormorant Garamond';font-size:1.05rem;outline:none;transition:.3s}
+    .ev-input:focus{border-color:var(--gold-b);background:var(--gold-g)}
+    .ev-input::placeholder{color:var(--muted);font-style:italic}
+    .ev-add-btn{padding:14px 24px;border-radius:var(--rp);border:1px solid var(--gold-b);background:none;color:var(--gold);font-family:'Inter';font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:.3s;white-space:nowrap}
+    .ev-add-btn:hover{background:var(--gold);color:var(--void)}
+    .ev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;min-height:80px}
+    .ev-card{background:rgba(46,204,113,.06);border:1px solid rgba(46,204,113,.2);border-radius:14px;padding:16px 18px;animation:scaleIn .35s ease;position:relative}
+    .ev-num{font-family:'Inter';font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--success);margin-bottom:6px}
+    .ev-text{font-size:.95rem;color:var(--text);line-height:1.5}
+    .ev-del{position:absolute;top:10px;right:12px;background:none;border:none;color:var(--muted2);cursor:pointer;font-size:.8rem;transition:.3s;padding:2px 6px;border-radius:4px}
+    .ev-del:hover{color:var(--danger)}
+    .ev-empty{font-style:italic;color:var(--muted2);font-size:.95rem;grid-column:1/-1;text-align:center;padding:24px 0}
+    .ev-count{font-family:'Cinzel';font-size:2.5rem;font-weight:900;color:var(--success);text-align:center;margin-top:20px;transition:all .4s}
+    .ev-count-label{font-family:'Inter';font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:center}
+
+    /* FUTURE SELF BUILDER */
+    .fsb-box{background:var(--deep);border:1px solid var(--border);border-radius:var(--r);padding:44px 48px}
+    @media(max-width:640px){.fsb-box{padding:28px 20px}}
+    .fsb-prompt{margin-bottom:24px}
+    .fsb-prompt label{font-family:'Inter';font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block}
+    .fsb-prompt textarea{width:100%;padding:14px 18px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:var(--r);color:var(--text);font-family:'Cormorant Garamond';font-size:1.05rem;outline:none;resize:vertical;min-height:70px;transition:.3s;line-height:1.6}
+    .fsb-prompt textarea:focus{border-color:var(--gold-b);background:var(--gold-g)}
+    .fsb-prompt textarea::placeholder{color:var(--muted);font-style:italic}
+    .fsb-build-btn{width:100%;padding:16px;border-radius:var(--rp);border:1px solid var(--gold-b);background:none;color:var(--gold);font-family:'Cinzel';font-size:.9rem;letter-spacing:.12em;cursor:pointer;transition:.4s;margin-bottom:24px}
+    .fsb-build-btn:hover{background:var(--gold);color:var(--void)}
+    .fsb-portrait{display:none;padding:36px 40px;border:1px solid rgba(46,204,113,.25);border-radius:var(--r);background:rgba(46,204,113,.04);animation:scaleIn .5s ease;animation:glowPulse 3s ease infinite}
+    .fsb-portrait.show{display:block}
+    .fsb-portrait-label{font-family:'Inter';font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--success);margin-bottom:14px}
+    .fsb-portrait-text{font-size:1.2rem;font-style:italic;line-height:1.8;color:var(--text)}
+
+    /* THE LADDER */
+    .ladder-box{background:var(--deep);border:1px solid var(--border);border-radius:var(--r);padding:44px 48px}
+    @media(max-width:640px){.ladder-box{padding:28px 20px}}
+    .ladder-visual{display:flex;flex-direction:column;gap:12px}
+    .ladder-rung{display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:14px;border:1px solid var(--border);background:var(--surface);transition:all .4s;position:relative}
+    .ladder-rung.committed{border-color:rgba(46,204,113,.3);background:rgba(46,204,113,.05)}
+    .ladder-rung.rung-1{border-left:3px solid rgba(46,204,113,.6)}
+    .ladder-rung.rung-2{border-left:3px solid rgba(201,168,76,.5)}
+    .ladder-rung.rung-3{border-left:3px solid rgba(201,168,76,.7)}
+    .ladder-rung.rung-4{border-left:3px solid rgba(201,168,76,.9)}
+    .ladder-rung.rung-5{border-left:3px solid var(--gold)}
+    .rung-num{font-family:'Cinzel';font-size:1.3rem;color:var(--muted);width:32px;flex-shrink:0;text-align:center}
+    .ladder-rung.rung-1 .rung-num{color:var(--success)}
+    .rung-label{font-family:'Inter';font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+    .rung-input{flex:1;padding:10px 14px;background:none;border:none;border-bottom:1px solid var(--border);color:var(--text);font-family:'Cormorant Garamond';font-size:1.05rem;outline:none;transition:.3s}
+    .rung-input:focus{border-color:var(--gold-b)}
+    .rung-input::placeholder{color:var(--muted2);font-style:italic;font-size:.95rem}
+    .rung-commit{padding:8px 16px;border-radius:var(--rp);border:1px solid var(--border);background:none;color:var(--muted);font-family:'Inter';font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:.3s;white-space:nowrap}
+    .rung-commit:hover{border-color:var(--success);color:var(--success)}
+    .rung-commit.done{background:var(--success);border-color:var(--success);color:#000;cursor:default}
+    .ladder-note{font-family:'Inter';font-size:.7rem;letter-spacing:.05em;color:var(--muted);text-align:center;margin-top:16px;line-height:1.6;font-style:italic}
+
+    /* TWO PORTRAITS */
+    .portraits-wrap{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:start;margin-bottom:24px}
+    @media(max-width:640px){.portraits-wrap{grid-template-columns:1fr;gap:16px}}
+    .portrait-col{padding:36px 32px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface)}
+    .portrait-col.current{border-color:rgba(232,72,85,.2)}
+    .portrait-col.future{border-color:rgba(46,204,113,.2)}
+    .portrait-label{font-family:'Inter';font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px;display:block}
+    .portrait-col.current .portrait-label{color:var(--danger)}
+    .portrait-col.future .portrait-label{color:var(--success)}
+    .portrait-col textarea{width:100%;background:none;border:none;color:var(--text);font-family:'Cormorant Garamond';font-size:1rem;line-height:1.7;resize:vertical;min-height:220px;outline:none}
+    .portrait-col textarea::placeholder{color:var(--muted2);font-style:italic}
+    .portrait-bridge{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 16px;gap:10px}
+    @media(max-width:640px){.portrait-bridge{flex-direction:row}}
+    .bridge-line{width:2px;height:80px;background:linear-gradient(to bottom,rgba(232,72,85,.4),var(--gold),rgba(46,204,113,.4));border-radius:2px}
+    @media(max-width:640px){.bridge-line{width:80px;height:2px;background:linear-gradient(to right,rgba(232,72,85,.4),var(--gold),rgba(46,204,113,.4))}}
+    .bridge-label{font-family:'Inter';font-size:.55rem;letter-spacing:.12em;color:var(--gold);text-transform:uppercase;writing-mode:vertical-lr;text-orientation:mixed}
+    @media(max-width:640px){.bridge-label{writing-mode:horizontal-tb}}
+    .portrait-recall{background:rgba(201,168,76,.04);border:1px solid var(--gold-b);border-radius:var(--r);padding:24px 28px;margin-bottom:16px}
+    .portrait-recall-label{font-family:'Inter';font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+    .portrait-recall-text{font-style:italic;font-size:.95rem;color:var(--muted);line-height:1.65}
+
+    /* COMMITMENT CARD */
+    .commitment-builder{background:var(--deep);border:1px solid var(--border);border-radius:var(--r);padding:44px 48px}
+    @media(max-width:640px){.commitment-builder{padding:28px 20px}}
+    .commit-row{display:grid;grid-template-columns:1fr auto;gap:16px;margin-bottom:20px;align-items:end;flex-wrap:wrap}
+    @media(max-width:640px){.commit-row{grid-template-columns:1fr}}
+    .commit-field{width:100%}
+    .commit-label{font-family:'Inter';font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:block}
+    .commit-input{width:100%;padding:14px 18px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:var(--r);color:var(--text);font-family:'Cormorant Garamond';font-size:1.1rem;outline:none;transition:.3s}
+    .commit-input:focus{border-color:var(--gold-b);background:var(--gold-g)}
+    .commit-input::placeholder{color:var(--muted);font-style:italic}
+    input[type=date].commit-input{color-scheme:dark;min-width:160px}
+    .commit-build-btn{padding:14px 28px;border-radius:var(--rp);border:1px solid var(--gold-b);background:none;color:var(--gold);font-family:'Inter';font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:.4s;white-space:nowrap}
+    .commit-build-btn:hover{background:var(--gold);color:var(--void)}
+    .commit-card{display:none;border:1px solid rgba(46,204,113,.35);border-radius:var(--r);padding:44px 40px;text-align:center;background:rgba(46,204,113,.04);animation:scaleIn .5s ease;margin-top:24px}
+    .commit-card.show{display:block;animation:glowPulse 4s ease infinite}
+    .cc-label{font-family:'Inter';font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--success);margin-bottom:20px}
+    .cc-action{font-family:'Cinzel';font-size:clamp(1.1rem,2.5vw,1.6rem);color:#fff;line-height:1.4;margin-bottom:20px;letter-spacing:.03em}
+    .cc-by{font-family:'Inter';font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+    .cc-date{font-family:'Cinzel';font-size:1.1rem;color:var(--gold);letter-spacing:.08em}
+    .cc-seal-btn{margin-top:24px;padding:12px 28px;border-radius:var(--rp);background:none;border:1px solid var(--gold-b);color:var(--gold);font-family:'Inter';font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:.3s}
+    .cc-seal-btn:hover{background:var(--gold);color:var(--void)}
+    .cc-seal-btn.sealed{background:var(--success);border-color:var(--success);color:#000;cursor:default}
+
+    /* JOURNAL */
+    .journal-section{display:flex;flex-direction:column;gap:20px}
+    .journal-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .3s}
+    .journal-item:focus-within{border-color:var(--gold-b)}
+    .journal-q{padding:24px 28px 16px;font-size:1.1rem;font-style:italic;color:var(--text);line-height:1.6}
+    .journal-q strong{font-style:normal;font-family:'Inter';font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+    .journal-item textarea{width:100%;padding:16px 28px 24px;background:none;border:none;border-top:1px solid var(--border);color:var(--text);font-family:'Cormorant Garamond';font-size:1.05rem;line-height:1.7;resize:vertical;min-height:100px;outline:none;transition:background .3s}
+    .journal-item textarea:focus{background:rgba(201,168,76,.02)}
+    .journal-item textarea::placeholder{color:var(--muted);font-style:italic}
+    .save-ind{font-family:'Inter';font-size:.6rem;letter-spacing:.1em;color:var(--success);padding:6px 28px;display:none;text-transform:uppercase}
+    .save-ind.show{display:block}
+    .journal-controls{display:flex;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap;gap:12px}
+    .jc-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--rp);font-family:'Inter';font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s;border:1px solid var(--border);background:none}
+    .jc-export{color:var(--gold);border-color:var(--gold-b)}.jc-export:hover{background:var(--gold);color:var(--void)}
+    .jc-clear{color:var(--muted)}.jc-clear:hover{color:var(--danger);border-color:rgba(232,72,85,.3);background:rgba(232,72,85,.05)}
+
+    /* DECLARATION */
+    .decl-box{text-align:center;padding:80px 48px;border:1px dashed var(--gold-b);border-radius:var(--r);background:radial-gradient(circle at 50% 0%,rgba(201,168,76,.06) 0%,transparent 65%);position:relative;overflow:hidden}
+    .decl-text{font-size:clamp(1.2rem,2.5vw,1.7rem);font-style:italic;font-weight:300;line-height:1.65;color:var(--text);max-width:680px;margin:0 auto 40px}
+    .decl-input-wrap{display:flex;gap:12px;justify-content:center;max-width:480px;margin:0 auto 16px}
+    .decl-input{flex:1;padding:14px 20px;background:rgba(255,255,255,.04);border:1px solid var(--gold-b);border-radius:var(--rp);color:var(--gold);font-family:'Cinzel';font-size:1rem;letter-spacing:.1em;outline:none;text-transform:uppercase;text-align:center;transition:border-color .4s,box-shadow .4s}
+    .decl-input:focus{background:var(--gold-g)}
+    .decl-input.error{border-color:var(--danger)!important;box-shadow:0 0 0 3px rgba(232,72,85,.15)!important}
+    .decl-input.success{border-color:var(--success)!important;box-shadow:0 0 20px rgba(46,204,113,.3)!important;color:var(--success)!important}
+    .decl-input::placeholder{color:var(--muted);font-family:'Inter';font-size:.75rem;text-transform:none;letter-spacing:.05em}
+    .decl-btn{padding:14px 28px;border-radius:var(--rp);border:1px solid var(--gold-b);background:none;color:var(--gold);font-family:'Inter';font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:.3s;white-space:nowrap}
+    .decl-btn:hover,.decl-btn.sealed{background:var(--gold);color:var(--void)}
+    .decl-hint{font-family:'Inter';font-size:.65rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:8px}
+    .decl-sealed-msg{display:none;margin-top:28px}.decl-sealed-msg.show{display:block;animation:fadeUp .6s ease forwards}
+    .decl-sealed-msg p{font-family:'Cinzel';font-size:.9rem;color:var(--gold);letter-spacing:.1em}
+    .decl-sealed-msg .sd{font-family:'Inter';font-size:.65rem;color:var(--muted);margin-top:8px;letter-spacing:.1em}
+    #p-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+
+    /* WHOP BAR */
+    .whop-bar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(5,8,18,.95);border-top:1px solid var(--border);backdrop-filter:blur(14px);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .wb-left{display:flex;align-items:center;gap:16px}
+    .wb-module{display:flex;flex-direction:column}
+    .wb-m-label{font-family:'Inter';font-size:.6rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+    .wb-m-name{font-family:'Cinzel';font-size:.78rem;color:var(--text);letter-spacing:.05em}
+    .wb-progress-wrap{display:flex;align-items:center;gap:10px}
+    .wb-p-label{font-family:'Inter';font-size:.62rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+    .wb-p-track{width:120px;height:3px;background:var(--border);border-radius:3px;overflow:hidden}
+    .wb-p-fill{height:100%;background:var(--gold);width:0%;transition:width .5s;border-radius:3px}
+    .whop-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:var(--rp);background:var(--gold);color:var(--void);font-family:'Inter';font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;border:none;text-decoration:none;transition:.3s;white-space:nowrap}
+    .whop-btn:hover{background:var(--gold-l);transform:translateY(-1px)}
+    @media(max-width:640px){.wb-progress-wrap{display:none}}
+  </style>
+</head>
+<body>
+<div class="noise"></div>
+<canvas id="ambient-canvas"></canvas>
+
+<!-- WHOP BAR -->
+<div class="whop-bar">
+  <div class="wb-left">
+    <div class="wb-module">
+      <div class="wb-m-label">Currently Viewing</div>
+      <div class="wb-m-name">Module 4 · Closing the Gap</div>
+    </div>
+    <div class="wb-progress-wrap">
+      <span class="wb-p-label">Progress</span>
+      <div class="wb-p-track"><div class="wb-p-fill" id="pfill"></div></div>
+    </div>
+  </div>
+  <a href="https://whop.com/silent-strategist/exp_OQfyAgJkYyIvH9/app/courses/cors_fGZBpPUYQtguD/lessons/lesn_PVzMw4KDOGoyW/" class="whop-btn">↩ Return to Course</a>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Financial Freedom Masterclass · Module 4</p>
+    <h1 class="hero-title">Closing<br/>the <span class="g">Gap</span></h1>
+    <p class="hero-sub">You've named the governor. A named fear is still a fear. What actually moves you is closing the distance between the person currently running your financial decisions — and the person who can execute the plan.</p>
+    <div class="hero-pills">
+      <div class="hero-pill">Self-Perception Theory</div>
+      <div class="hero-pill">Future Self Continuity</div>
+      <div class="hero-pill">Graduated Exposure</div>
+      <div class="hero-pill">The Two Portraits</div>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll to Begin</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- WHY LOGIC DOESN'T WORK -->
+  <div class="sec-divider sr"><span>Why Arguing With the Governor Doesn't Work</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <p class="tag">The First Thing to Understand</p>
+    <h2 class="sec-title">You Cannot Logic Your Way<br/>Past an <span style="color:var(--gold)">Automatic Reaction.</span></h2>
+    <p class="body-text">You already know this from experience. You've probably told yourself <em>"there's no real reason to be anxious about this"</em> in the exact moment you were anxious about it — and the anxiety didn't move an inch.</p>
+    <p class="body-text" style="color:var(--muted)">That's because the governor wasn't built by argument. It was built by repeated experience and association. It only unbuilds the same way — through new repeated experience that contradicts the old one. <span class="em">Not convincing yourself. Accumulating a different kind of evidence.</span></p>
+  </div>
+
+  <p class="body-text sr" style="text-align:center;font-style:italic;color:var(--muted);margin-bottom:20px">Click the logic statement you've actually tried to use on yourself about money.</p>
+
+  <div class="logic-grid sr">
+    <div class="logic-card" onclick="pickLogic(this,'a')">
+      <p class="logic-label">Logic Statement A</p>
+      <p class="logic-stmt">"There's no real reason to be this anxious about investing. The research clearly supports it. I should just do it."</p>
+    </div>
+    <div class="logic-card" onclick="pickLogic(this,'b')">
+      <p class="logic-label">Logic Statement B</p>
+      <p class="logic-stmt">"I know I should ask for a raise. I'm underpaid. The numbers are obvious. I just need to have the conversation."</p>
+    </div>
+    <div class="logic-card" onclick="pickLogic(this,'c')">
+      <p class="logic-label">Logic Statement C</p>
+      <p class="logic-stmt">"I've told myself a hundred times to stop lifestyle-inflating. I know it's why I can't save. I understand the problem clearly."</p>
+    </div>
+  </div>
+  <div class="logic-result" id="logic-result">
+    <h4>Notice what happened.</h4>
+    <p>You had the correct information. You understood the logic. You agreed with yourself. And yet — the behaviour didn't change, or changed briefly and then reverted.</p>
+    <p class="verdict">That's not weakness. That's the governor doing exactly what it was trained to do. Logic reaches the conscious mind. The governor runs underneath it. The only language it understands is <em>repeated experience</em> — not argument.</p>
+  </div>
+
+  <!-- MECHANISM 1 -->
+  <div class="sec-divider sr"><span>Mechanism One · Identity Precedes Behaviour</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <p class="tag">Self-Perception Theory · Daryl Bem</p>
+    <h2 class="sec-title">You Don't Need to <em>Feel Like</em><br/>a Builder Before You <span style="color:var(--gold)">Build.</span></h2>
+    <p class="body-text lg">People often figure out what they believe about themselves by watching what they do — not the other way around. You don't only act because of who you believe you are. You also come to believe you're a certain kind of person <em>because of what you've observed yourself doing.</em></p>
+    <p class="body-text" style="color:var(--muted)">Every time you make one deliberate, financially competent decision — however small — you're not just solving that one decision. You're handing your subconscious a new piece of evidence about who you are. Enough pieces of evidence, and the self-concept shifts quietly, without a dramatic moment of transformation.</p>
+    <p class="body-text" style="color:var(--gold);font-style:italic">Stop waiting to feel like a financially free person before you take financially free actions. Take the action first. Let the identity follow the evidence.</p>
+  </div>
+
+  <div class="evidence-board sr">
+    <p class="tag" style="margin-bottom:4px">Your Identity Evidence Board</p>
+    <p style="font-size:1rem;color:var(--muted);font-style:italic;margin-bottom:20px">Log every small, financially-competent action you take — however minor. Each one is a piece of evidence your subconscious is filing under "who I am."</p>
+    <div class="ev-input-row">
+      <input type="text" class="ev-input" id="ev-in" placeholder="e.g. Opened a savings account today. Read one page of a finance book. Declined an impulse purchase..." onkeydown="if(event.key==='Enter')addEvidence()"/>
+      <button class="ev-add-btn" onclick="addEvidence()">+ Log Evidence</button>
+    </div>
+    <div class="ev-grid" id="ev-grid"></div>
+    <div style="margin-top:24px;text-align:center">
+      <div class="ev-count" id="ev-count">0</div>
+      <div class="ev-count-label">pieces of evidence filed</div>
+    </div>
+  </div>
+
+  <!-- MECHANISM 2 -->
+  <div class="sec-divider sr"><span>Mechanism Two · Future Self Continuity</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <p class="tag">Hal Hershfield · Future Self Research</p>
+    <h2 class="sec-title">If Your Future Self Feels Like<br/>a <span style="color:var(--gold)">Stranger,</span> Your Subconscious<br/>Won't Protect Them.</h2>
+    <p class="body-text lg">People who feel less connected to their future selves consistently make more present-biased, short-sighted financial decisions. In Hershfield's research, simply seeing a vivid, realistic image of their future face caused people to allocate significantly more toward long-term saving.</p>
+    <p class="body-text" style="color:var(--muted)">If your future, financially free self feels vague — someone else's life, a nice idea — your subconscious will keep prioritising whoever is sitting in the room right now. The governor doesn't protect a stranger. It protects <em>you, right now, today.</em></p>
+    <p class="body-text">The solution is to make your future self <em>specific enough to feel real.</em> Not aspirational — <span class="em">concrete.</span></p>
+  </div>
+
+  <div class="fsb-box sr">
+    <p class="tag" style="margin-bottom:4px">Build Your Future Self Portrait</p>
+    <p style="font-size:1rem;color:var(--muted);font-style:italic;margin-bottom:24px">Answer in specific, first-person detail. Not who you hope to be — who you will actually picture clearly enough to feel loyalty toward.</p>
+    <div class="fsb-prompt">
+      <label for="fsb-1">On a Tuesday morning, this version of you wakes up and the first financial thing they do is...</label>
+      <textarea id="fsb-1" placeholder="Be specific. What time? What do they check or decide or act on first?" oninput="saveFS()"></textarea>
+    </div>
+    <div class="fsb-prompt">
+      <label for="fsb-2">When an unexpected expense hits — a car repair, a medical bill — this person responds by...</label>
+      <textarea id="fsb-2" placeholder="Not the ideal response. The actual, calm, practiced response this version of you has." oninput="saveFS()"></textarea>
+    </div>
+    <div class="fsb-prompt">
+      <label for="fsb-3">At a family gathering when money comes up, this person talks about it differently. Specifically, they...</label>
+      <textarea id="fsb-3" placeholder="What have they stopped saying? What do they say instead?" oninput="saveFS()"></textarea>
+    </div>
+    <div class="fsb-prompt">
+      <label for="fsb-4">One thing this person has completely stopped joking about is...</label>
+      <textarea id="fsb-4" placeholder="The joke that used to be your default. Gone. Because the identity changed." oninput="saveFS()"></textarea>
+    </div>
+    <button class="fsb-build-btn" onclick="buildPortrait()">✦ Generate My Future Self Portrait</button>
+    <div class="fsb-portrait" id="fsb-portrait">
+      <p class="fsb-portrait-label">Your Future Self Portrait</p>
+      <p class="fsb-portrait-text" id="fsb-portrait-text"></p>
+    </div>
+  </div>
+
+  <!-- MECHANISM 3 -->
+  <div class="sec-divider sr"><span>Mechanism Three · Graduated Exposure</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <p class="tag">The Ladder, Not the Leap</p>
+    <h2 class="sec-title">One Huge Leap Can Confirm<br/>the Governor's <span style="color:var(--gold)">Worst Fears.</span></h2>
+    <p class="body-text lg">A governor that's spent years treating financial risk as danger won't be talked out of that stance by one bold leap. In fact, one huge leap — quitting a job overnight, dumping a large sum into an unfamiliar investment — tends to confirm the governor's worst fears if it goes wrong even slightly, and reinforces the old wiring harder than before.</p>
+    <p class="body-text" style="color:var(--muted)">Graduated exposure works differently. Instead of confronting the largest version of a feared thing all at once, you build tolerance through a sequence of smaller, manageable steps — each one digestible enough that you can actually succeed at it. Success at each small stage becomes the new evidence the subconscious files away.</p>
+    <p class="body-text">Your first financial risk shouldn't be your biggest one. It should be <span class="em">small enough to survive comfortably, and real enough to count as genuine evidence.</span></p>
+  </div>
+
+  <div class="ladder-box sr">
+    <p class="tag" style="margin-bottom:4px">Build Your Personal Ladder</p>
+    <p style="font-size:1rem;color:var(--muted);font-style:italic;margin-bottom:24px">Label each rung with a real financial action — from the smallest step you could take this week (Rung 1) to the boldest move you're building toward (Rung 5). You don't skip to the top.</p>
+    <div class="ladder-visual">
+      <div class="ladder-rung rung-5" id="lr-5">
+        <div class="rung-num">5</div>
+        <div style="flex:1"><div class="rung-label">Boldest move — building toward this</div><input type="text" class="rung-input" id="li-5" placeholder="The biggest step on your financial horizon..." oninput="saveLadder(5)"/></div>
+        <button class="rung-commit" id="lc-5" onclick="commitRung(5)">Commit</button>
+      </div>
+      <div class="ladder-rung rung-4" id="lr-4">
+        <div class="rung-num">4</div>
+        <div style="flex:1"><div class="rung-label">Significant — requires real courage</div><input type="text" class="rung-input" id="li-4" placeholder="A step that stretches you meaningfully..." oninput="saveLadder(4)"/></div>
+        <button class="rung-commit" id="lc-4" onclick="commitRung(4)">Commit</button>
+      </div>
+      <div class="ladder-rung rung-3" id="lr-3">
+        <div class="rung-num">3</div>
+        <div style="flex:1"><div class="rung-label">Moderate — uncomfortable but survivable</div><input type="text" class="rung-input" id="li-3" placeholder="Something that feels like a real step forward..." oninput="saveLadder(3)"/></div>
+        <button class="rung-commit" id="lc-3" onclick="commitRung(3)">Commit</button>
+      </div>
+      <div class="ladder-rung rung-2" id="lr-2">
+        <div class="rung-num">2</div>
+        <div style="flex:1"><div class="rung-label">Small — still real, still counts</div><input type="text" class="rung-input" id="li-2" placeholder="One step above the very first one..." oninput="saveLadder(2)"/></div>
+        <button class="rung-commit" id="lc-2" onclick="commitRung(2)">Commit</button>
+      </div>
+      <div class="ladder-rung rung-1" id="lr-1">
+        <div class="rung-num">1</div>
+        <div style="flex:1"><div class="rung-label">First rung — smallest real action this week</div><input type="text" class="rung-input" id="li-1" placeholder="What's the minimum real step? Open an account. Make one call. Set aside one amount..." oninput="saveLadder(1)"/></div>
+        <button class="rung-commit" id="lc-1" onclick="commitRung(1)">Commit</button>
+      </div>
+    </div>
+    <p class="ladder-note">You climb it deliberately so the ladder actually holds. You don't skip rungs to prove you're brave.</p>
+  </div>
+
+  <!-- THE TWO PORTRAITS -->
+  <div class="sec-divider sr"><span>Closing the Gap in Writing</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <p class="tag">This is where your previous answers become raw material</p>
+    <h2 class="sec-title">Draw Both Portraits.<br/>Honestly. Then <span style="color:var(--gold)">Build the Bridge.</span></h2>
+    <p class="body-text">Write out the person currently making your financial decisions — not who you wish you were, who's actually been in charge. Then write the person who can execute the plan in this course — not vague, not aspirational. Specific. What does this person do differently on a Tuesday morning?</p>
+    <p class="body-text" style="color:var(--muted)">This exercise only works if you're honest in both directions. Overstating how bad the first version is turns this into self-punishment. Overstating how ready the second version is turns it into fantasy. Write both as they actually are.</p>
+  </div>
+
+  <div class="portrait-recall sr" id="m2-recall-box" style="display:none">
+    <p class="portrait-recall-label">From your Module 2 reflections — your five voices</p>
+    <p class="portrait-recall-text" id="m2-recall-text"></p>
+  </div>
+
+  <div class="portraits-wrap sr">
+    <div class="portrait-col current">
+      <span class="portrait-label">Portrait 1 — Who's Currently Running Things</span>
+      <textarea id="portrait-1" placeholder="What does this version of you believe is possible? What do they avoid? What have they been protecting, and from what? Write honestly — no self-punishment, just accuracy." oninput="savePortrait(1)"></textarea>
+    </div>
+    <div class="portrait-bridge">
+      <div class="bridge-line"></div>
+      <div class="bridge-label">The Bridge</div>
+      <div class="bridge-line"></div>
+    </div>
+    <div class="portrait-col future">
+      <span class="portrait-label">Portrait 2 — Who Executes the Plan</span>
+      <textarea id="portrait-2" placeholder="What does this person do differently on a Tuesday morning? How do they talk about money at a family gathering? What's the first thing they do when an unexpected expense hits? What have they stopped joking about?" oninput="savePortrait(2)"></textarea>
+    </div>
+  </div>
+
+  <!-- COMMITMENT CARD -->
+  <div class="sec-divider sr"><span>The First Rung — Your Commitment</span></div>
+
+  <div class="card sr" style="margin-bottom:28px">
+    <p class="body-text lg">Name the smallest possible action this week that <em>only the second version of you</em> would take. Not the biggest leap you can imagine — <span class="em">the smallest real one.</span> This is your first rung. The plan we build from here is built on this completed action — not on intentions.</p>
+  </div>
+
+  <div class="commitment-builder sr">
+    <p class="tag" style="margin-bottom:16px">Build Your First Rung Commitment</p>
+    <div class="commit-row">
+      <div class="commit-field">
+        <label class="commit-label" for="cc-action">The specific action I will take</label>
+        <input type="text" class="commit-input" id="cc-action" placeholder="Name it precisely. Not 'invest more' — which account, which amount, which day." oninput="updateCard()"/>
+      </div>
+      <div>
+        <label class="commit-label" for="cc-date">I will have done this by</label>
+        <input type="date" class="commit-input" id="cc-date" oninput="updateCard()"/>
+      </div>
+    </div>
+    <button class="commit-build-btn" onclick="buildCard()">✦ Generate My Commitment Card</button>
+    <div class="commit-card" id="commit-card">
+      <p class="cc-label">My First Rung Commitment</p>
+      <p class="cc-action" id="cc-action-display"></p>
+      <p class="cc-by">I will have done this by</p>
+      <p class="cc-date" id="cc-date-display"></p>
+      <button class="cc-seal-btn" id="cc-seal" onclick="sealCard()">✦ Seal This Commitment</button>
+    </div>
+  </div>
+
+  <!-- JOURNAL -->
+  <div class="sec-divider sr"><span>Written Reflection — 10 Prompts</span></div>
+
+  <div class="card sr" style="margin-bottom:28px;border-color:var(--gold-b)">
+    <p class="body-text" style="margin:0;font-style:italic;color:var(--muted)">Do not rush these. Your answers are saved privately to your browser — no one else can see them. Build directly on your Module 1, 2, and 3 answers. This is where the portraits become the plan.</p>
+  </div>
+
+  <div class="journal-section sr">
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 01</strong>Read back your Module 2 answer about the five voices you hear most on money. Which one belongs most clearly to the person you're trying to stop being?</div><textarea id="r1" placeholder="Write your honest answer here..." oninput="saveJ('r1')"></textarea><div class="save-ind" id="sv-r1">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 02</strong>Write one sentence, in first person, present tense, describing a specific financial decision your future self makes calmly that currently makes you anxious.</div><textarea id="r2" placeholder="I calmly..." oninput="saveJ('r2')"></textarea><div class="save-ind" id="sv-r2">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 03</strong>What is the smallest real financial action you could take in the next seven days that your current self has been avoiding?</div><textarea id="r3" placeholder="Write your honest answer here..." oninput="saveJ('r3')"></textarea><div class="save-ind" id="sv-r3">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 04</strong>Describe, in physical detail, what it would feel like in your body to actually take that action. Not the outcome — the moment itself.</div><textarea id="r4" placeholder="Where do you feel it? What does your chest do? What changes?" oninput="saveJ('r4')"></textarea><div class="save-ind" id="sv-r4">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 05</strong>Name one piece of evidence from your own past — however small — that contradicts the story your governor tells about you and money.</div><textarea id="r5" placeholder="Write your honest answer here..." oninput="saveJ('r5')"></textarea><div class="save-ind" id="sv-r5">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 06</strong>If your future self — ten years from now — could send you one sentence of advice about the decision you're currently avoiding, what would it say?</div><textarea id="r6" placeholder="Write it in their voice — not encouragement, actual advice." oninput="saveJ('r6')"></textarea><div class="save-ind" id="sv-r6">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 07</strong>Which of your current financial habits would your future self be quietly relieved to have already dropped?</div><textarea id="r7" placeholder="Write your honest answer here..." oninput="saveJ('r7')"></textarea><div class="save-ind" id="sv-r7">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 08</strong>Write down one thing you've achieved in a completely different area of your life — unrelated to money — that required exactly the same kind of courage this financial step requires.</div><textarea id="r8" placeholder="What was it? How did you move despite the discomfort?" oninput="saveJ('r8')"></textarea><div class="save-ind" id="sv-r8">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 09</strong>What would change in how you speak about money this week if you were gathering evidence for the second portrait instead of the first?</div><textarea id="r9" placeholder="Write your honest answer here..." oninput="saveJ('r9')"></textarea><div class="save-ind" id="sv-r9">✓ Saved</div></div>
+    <div class="journal-item"><div class="journal-q"><strong>Reflection 10</strong>Write your commitment from Question 03 here again, and the date you'll have done it by. This is not optional — the next section builds directly on this completed action, not on intentions.</div><textarea id="r10" placeholder="My commitment: ... I will have done this by: ..." oninput="saveJ('r10')"></textarea><div class="save-ind" id="sv-r10">✓ Saved</div></div>
+  </div>
+
+  <div class="journal-controls sr">
+    <button class="jc-btn jc-export" onclick="exportJournal()">📥 Download My Reflections</button>
+    <button class="jc-btn jc-clear" onclick="clearJournal()">🗑 Clear &amp; Reset</button>
+  </div>
+
+  <!-- DECLARATION -->
+  <div class="sec-divider sr"><span>The Declaration</span></div>
+
+  <div class="decl-box sr">
+    <canvas id="p-canvas"></canvas>
+    <p class="tag">Seal Your Commitment</p>
+    <p class="decl-text">"I understand that the gap closes through evidence, not intention. I commit to the first rung — the smallest real action — and I understand that this action is not a symbolic gesture. It is the first piece of evidence I am filing under who I am becoming."</p>
+    <div class="decl-input-wrap">
+      <input type="text" class="decl-input" id="decl-in" placeholder='Type "I ACCEPT" to seal this'/>
+      <button class="decl-btn" onclick="sealDecl()">Seal</button>
+    </div>
+    <p class="decl-hint">Type "I ACCEPT" and press Seal</p>
+    <div class="decl-sealed-msg" id="sealed-msg">
+      <p>✦ THE EVIDENCE BEGINS NOW. THE GAP IS CLOSING. ✦</p>
+      <p class="sd" id="sealed-date"></p>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:center;align-items:center;margin-top:60px;margin-bottom:20px;flex-wrap:wrap;gap:16px" class="sr">
+  <a href="module-3.html" class="whop-btn" style="text-decoration:none; background:transparent; color:var(--gold); border:1px solid var(--gold);">&#8592; Previous</a>
+  <a href="https://whop.com/silent-strategist/exp_OQfyAgJkYyIvH9/app/courses/cors_fGZBpPUYQtguD/lessons/lesn_PVzMw4KDOGoyW/" class="whop-btn" style="text-decoration:none;">&#8617; Return to Course</a>
+  <a href="module-5.html" class="whop-btn" style="text-decoration:none; background:transparent; color:var(--gold); border:1px solid var(--gold);">Next Module &#8594;</a>
+</div>
+</main>
+
+<script>
+/* AMBIENT CANVAS */
+(function(){
+  const c=document.getElementById('ambient-canvas'),ctx=c.getContext('2d');let s=[];
+  const resize=()=>{c.width=innerWidth;c.height=innerHeight};
+  const init=()=>{s=[];for(let i=0;i<120;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.1+.2,speed:Math.random()*.16+.04,op:Math.random()*.5+.1,tw:Math.random()*Math.PI*2})};
+  const draw=()=>{ctx.clearRect(0,0,c.width,c.height);s.forEach(p=>{p.tw+=.007;const o=p.op*(.6+.4*Math.sin(p.tw));ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(201,168,76,${o})`;ctx.fill();p.y-=p.speed;if(p.y<0){p.y=c.height;p.x=Math.random()*c.width}});requestAnimationFrame(draw)};
+  resize();init();draw();window.addEventListener('resize',()=>{resize();init()});
+})();
+
+/* SCROLL REVEAL */
+(()=>{
+  const obs=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('v');obs.unobserve(en.target)}}),{threshold:.07});
+  document.querySelectorAll('.sr').forEach(el=>obs.observe(el));
+})();
+
+/* PROGRESS */
+window.addEventListener('scroll',()=>{document.getElementById('pfill').style.width=Math.round((scrollY/(document.body.scrollHeight-innerHeight))*100)+'%'});
+
+/* LOAD CROSS-MODULE DATA */
+(function(){
+  const m2r2=localStorage.getItem('ffm2_r2');
+  if(m2r2&&m2r2.trim().length>10){
+    document.getElementById('m2-recall-box').style.display='block';
+    document.getElementById('m2-recall-text').textContent=m2r2.trim();
+  }
+})();
+
+/* LOGIC TRAP */
+function pickLogic(card,type){
+  document.querySelectorAll('.logic-card').forEach(c=>{c.classList.add('unchosen');c.onclick=null});
+  card.classList.remove('unchosen');card.classList.add('chosen');
+  document.getElementById('logic-result').classList.add('show');
+}
+
+/* EVIDENCE BOARD */
+let evidence=JSON.parse(localStorage.getItem('ffm4_evidence')||'[]');
+function renderEvidence(){
+  const grid=document.getElementById('ev-grid');
+  grid.innerHTML='';
+  if(!evidence.length){grid.innerHTML='<p class="ev-empty">Your first logged action will appear here. Start small — small is the whole point.</p>';document.getElementById('ev-count').textContent='0';return}
+  evidence.forEach((item,i)=>{
+    const card=document.createElement('div');card.className='ev-card';
+    card.innerHTML=`<div class="ev-num">Evidence #${i+1}</div><div class="ev-text">${item}</div><button class="ev-del" onclick="deleteEvidence(${i})">✕</button>`;
+    grid.appendChild(card);
+  });
+  document.getElementById('ev-count').textContent=evidence.length;
+}
+function addEvidence(){
+  const inp=document.getElementById('ev-in');
+  const val=inp.value.trim();if(!val)return;
+  evidence.unshift(val);
+  localStorage.setItem('ffm4_evidence',JSON.stringify(evidence));
+  inp.value='';renderEvidence();
+}
+function deleteEvidence(i){
+  evidence.splice(i,1);
+  localStorage.setItem('ffm4_evidence',JSON.stringify(evidence));
+  renderEvidence();
+}
+renderEvidence();
+
+/* FUTURE SELF BUILDER */
+['fsb-1','fsb-2','fsb-3','fsb-4'].forEach(id=>{
+  const saved=localStorage.getItem('ffm4_'+id);if(saved){document.getElementById(id).value=saved}
+});
+function saveFS(){['fsb-1','fsb-2','fsb-3','fsb-4'].forEach(id=>localStorage.setItem('ffm4_'+id,document.getElementById(id).value))}
+function buildPortrait(){
+  const a=document.getElementById('fsb-1').value.trim();
+  const b=document.getElementById('fsb-2').value.trim();
+  const c=document.getElementById('fsb-3').value.trim();
+  const d=document.getElementById('fsb-4').value.trim();
+  if(!a&&!b&&!c&&!d){alert('Fill in at least one prompt to build your portrait.');return}
+  let portrait='';
+  if(a)portrait+=`On a Tuesday morning, I wake up and the first financial thing I do is ${a.replace(/^I /i,'').replace(/^the first financial thing i do is /i,'').replace(/\.$/, '')}. `;
+  if(b)portrait+=`When an unexpected expense hits, I ${b.replace(/^I /i,'').replace(/^this person responds by /i,'').replace(/\.$/, '')}. `;
+  if(c)portrait+=`When money comes up at a family gathering, I ${c.replace(/^I /i,'').replace(/^this person /i,'').replace(/\.$/, '')}. `;
+  if(d)portrait+=`I have completely stopped joking about ${d.replace(/^I |^the joke is|^that I /i,'').replace(/\.$/, '')}.`;
+  const el=document.getElementById('fsb-portrait');
+  document.getElementById('fsb-portrait-text').textContent=portrait.trim();
+  el.classList.add('show');el.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+/* LADDER */
+for(let i=1;i<=5;i++){
+  const saved=localStorage.getItem('ffm4_li'+i);if(saved)document.getElementById('li-'+i).value=saved;
+  if(localStorage.getItem('ffm4_lc'+i)){document.getElementById('lc-'+i).classList.add('done');document.getElementById('lc-'+i).textContent='✓';document.getElementById('lr-'+i).classList.add('committed')}
+}
+function saveLadder(i){localStorage.setItem('ffm4_li'+i,document.getElementById('li-'+i).value)}
+function commitRung(i){
+  const val=document.getElementById('li-'+i).value.trim();if(!val){alert('Write something in this rung first.');return}
+  document.getElementById('lc-'+i).classList.add('done');document.getElementById('lc-'+i).textContent='✓';
+  document.getElementById('lr-'+i).classList.add('committed');
+  localStorage.setItem('ffm4_lc'+i,'committed');
+}
+
+/* PORTRAITS */
+(function(){
+  const p1=localStorage.getItem('ffm4_portrait1');const p2=localStorage.getItem('ffm4_portrait2');
+  if(p1)document.getElementById('portrait-1').value=p1;
+  if(p2)document.getElementById('portrait-2').value=p2;
+})();
+function savePortrait(n){localStorage.setItem('ffm4_portrait'+n,document.getElementById('portrait-'+n).value)}
+
+/* COMMITMENT CARD */
+(function(){
+  const saved=localStorage.getItem('ffm4_cc');
+  if(saved){
+    const d=JSON.parse(saved);
+    document.getElementById('cc-action').value=d.action||'';
+    document.getElementById('cc-date').value=d.date||'';
+    if(d.built){
+      document.getElementById('cc-action-display').textContent=d.action;
+      document.getElementById('cc-date-display').textContent=formatDate(d.date);
+      document.getElementById('commit-card').classList.add('show');
+    }
+    if(d.sealed){document.getElementById('cc-seal').classList.add('sealed');document.getElementById('cc-seal').textContent='✦ Commitment Sealed';}
+  }
+})();
+function formatDate(str){if(!str)return'';const d=new Date(str+'T12:00:00');return d.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}
+function updateCard(){}
+function buildCard(){
+  const action=document.getElementById('cc-action').value.trim();
+  const date=document.getElementById('cc-date').value;
+  if(!action||!date){alert('Please fill in both the action and the date.');return}
+  document.getElementById('cc-action-display').textContent=action;
+  document.getElementById('cc-date-display').textContent=formatDate(date);
+  document.getElementById('commit-card').classList.add('show');
+  document.getElementById('commit-card').scrollIntoView({behavior:'smooth',block:'center'});
+  localStorage.setItem('ffm4_cc',JSON.stringify({action,date,built:true}));
+}
+function sealCard(){
+  const btn=document.getElementById('cc-seal');
+  btn.classList.add('sealed');btn.textContent='✦ Commitment Sealed';
+  const saved=JSON.parse(localStorage.getItem('ffm4_cc')||'{}');saved.sealed=true;
+  localStorage.setItem('ffm4_cc',JSON.stringify(saved));
+}
+
+/* JOURNAL */
+['r1','r2','r3','r4','r5','r6','r7','r8','r9','r10'].forEach(id=>{
+  const saved=localStorage.getItem('ffm4_'+id);if(saved){const el=document.getElementById(id);if(el)el.value=saved}
+});
+function saveJ(id){
+  const val=document.getElementById(id)?.value||'';localStorage.setItem('ffm4_'+id,val);
+  const ind=document.getElementById('sv-'+id);if(ind){ind.classList.add('show');setTimeout(()=>ind.classList.remove('show'),2000)}
+}
+function exportJournal(){
+  const qs=['Read back your Module 2 answer about the five voices. Which one belongs most clearly to the person you\'re trying to stop being?','Write one sentence, in first person present tense, describing a financial decision your future self makes calmly that currently makes you anxious.','What is the smallest real financial action you could take in the next seven days that your current self has been avoiding?','Describe, in physical detail, what it would feel like in your body to take that action. Not the outcome — the moment itself.','Name one piece of evidence from your own past that contradicts the story your governor tells about you and money.','If your future self could send you one sentence of advice about the decision you\'re currently avoiding, what would it say?','Which of your current financial habits would your future self be quietly relieved to have already dropped?','Write down one thing you\'ve achieved in a different area of your life that required exactly the same kind of courage this financial step requires.','What would change in how you speak about money this week if you were gathering evidence for the second portrait?','Write your commitment from Question 03 and the date you\'ll have done it by.'];
+  const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  let content=`FINANCIAL FREEDOM MASTERCLASS\nModule 4: Closing the Gap\nJournal Export — ${date}\n${'='.repeat(60)}\n\n`;
+  qs.forEach((q,i)=>{const key='ffm4_r'+(i+1);const answer=localStorage.getItem(key)||'(No answer written yet)';content+=`Reflection ${String(i+1).padStart(2,'0')}: ${q}\n\n${answer}\n\n${'-'.repeat(60)}\n\n`;});
+  const blob=new Blob([content],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='Module-4-Journal.txt';a.click();URL.revokeObjectURL(url);
+}
+function clearJournal(){
+  if(!confirm('Clear all reflection answers for Module 4? This cannot be undone.'))return;
+  ['r1','r2','r3','r4','r5','r6','r7','r8','r9','r10'].forEach(id=>{localStorage.removeItem('ffm4_'+id);const el=document.getElementById(id);if(el)el.value='';});
+}
+
+/* DECLARATION */
+(function(){
+  if(localStorage.getItem('ffm4_declaration')){
+    const d=localStorage.getItem('ffm4_declaration_date');
+    document.getElementById('decl-in').value='I ACCEPT';document.getElementById('decl-in').disabled=true;
+    document.querySelector('.decl-btn').classList.add('sealed');document.querySelector('.decl-btn').textContent='✦ Sealed';
+    document.getElementById('sealed-msg').classList.add('show');document.getElementById('sealed-date').textContent='Declared on '+d;
+  }
+})();
+function sealDecl(){
+  const inp=document.getElementById('decl-in');
+  if(inp.value.trim().toUpperCase()!=='I ACCEPT'){
+    inp.classList.add('error');inp.style.animation='shake .4s ease';
+    setTimeout(()=>{inp.classList.remove('error');inp.style.animation=''},600);return;
+  }
+  inp.classList.add('success');
+  const now=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  localStorage.setItem('ffm4_declaration','true');localStorage.setItem('ffm4_declaration_date',now);
+  setTimeout(()=>{
+    inp.disabled=true;document.querySelector('.decl-btn').classList.add('sealed');document.querySelector('.decl-btn').textContent='✦ Sealed';
+    document.getElementById('sealed-msg').classList.add('show');document.getElementById('sealed-date').textContent='Declared on '+now;
+    firePart();
+  },500);
+}
+function firePart(){
+  const canvas=document.getElementById('p-canvas'),ctx=canvas.getContext('2d');
+  canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;
+  const cx=canvas.width/2,cy=canvas.height/2,particles=[];
+  for(let i=0;i<90;i++){const a=Math.random()*Math.PI*2,sp=Math.random()*6+2;particles.push({x:cx,y:cy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,alpha:1,size:Math.random()*4+1,color:`hsl(${40+Math.random()*20},90%,${55+Math.random()*20}%)`})}
+  function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);let alive=false;particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.1;p.alpha-=.016;if(p.alpha>0)alive=true;ctx.globalAlpha=Math.max(0,p.alpha);ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=p.color;ctx.fill()});if(alive)requestAnimationFrame(anim);else ctx.clearRect(0,0,canvas.width,canvas.height);}
+  anim();
+}
+const ss=document.createElement('style');ss.textContent='@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}';document.head.appendChild(ss);
+</script>
+</body>
+</html>
