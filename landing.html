@@ -69,7 +69,7 @@
     .sec-body{font-size:1.15rem;color:var(--muted);font-weight:300;line-height:1.85;max-width:720px}
     .divider{height:1px;background:var(--border);max-width:1100px;margin:0 auto}
 
-    /* PAIN (Focus on Time/Clarity) */
+    /* PAIN */
     .pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px}
     @media(max-width:700px){.pain-grid{grid-template-columns:1fr}}
     .pain-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--r);padding:36px;transition:.3s;backdrop-filter:blur(12px)}
@@ -78,8 +78,18 @@
     .pain-title{font-family:'Cinzel';font-size:1.2rem;color:#fff;margin-bottom:10px}
     .pain-text{font-size:1.05rem;color:var(--muted);line-height:1.65}
 
+    /* STATS */
+    .stats-section{background:var(--deep);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 24px}
+    .stats-inner{max-width:1100px;margin:0 auto;text-align:center}
+    .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-top:48px}
+    @media(max-width:900px){.stats-grid{grid-template-columns:1fr 1fr}}
+    .stat-item{text-align:center}
+    .stat-num{font-family:'Cinzel';font-size:clamp(2rem,4vw,3.5rem);font-weight:900;color:var(--gold);line-height:1;margin-bottom:8px}
+    .stat-label{font-family:'Inter';font-size:.78rem;color:var(--muted);letter-spacing:.06em;line-height:1.5}
+    .stat-source{font-family:'Inter';font-size:.56rem;color:#3A4250;margin-top:4px}
+
     /* DEMO UI CARDS (Rich vs Wealth vs Freedom) */
-    .demo-section{background:radial-gradient(ellipse at 50% 0%, rgba(201,168,76,.05) 0%, transparent 70%); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:100px 24px}
+    .demo-section{background:radial-gradient(ellipse at 50% 0%, rgba(201,168,76,.05) 0%, transparent 70%); padding:100px 24px}
     .demo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;max-width:1100px;margin-left:auto;margin-right:auto}
     @media(max-width:900px){.demo-grid{grid-template-columns:1fr}}
     .demo-card{background:var(--void);border:1px solid var(--border);border-radius:24px;padding:40px;position:relative;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.4)}
@@ -195,8 +205,8 @@
 
   <!-- HERO -->
   <div class="hero">
-    <h1>Stop Gathering Information.<br/><span class="g">Start Gaining Clarity.</span></h1>
-    <p class="hero-sub">A 62-module, fully interactive financial operating system that takes you from plugging debt leaks and building asset portfolios, to packaging your skills into a high-leverage income stream.</p>
+    <h1>You've Spent Decades Building<br/><span class="g">Someone Else's</span> Dream.</h1>
+    <p class="hero-sub">A 62-module, fully interactive financial operating system that takes you from plugging leaks and calculating your runway, to packaging your accumulated experience into a high-leverage second income.</p>
 
     <div class="btn-group">
       <a href="https://whop.com/silent-strategist/" class="btn-primary">Get Lifetime Access</a>
@@ -210,32 +220,62 @@
 
   <div class="divider"></div>
 
-  <!-- PAIN (Focus on Overload & Clarity) -->
+  <!-- PAIN (Tailored for the Overwhelmed 46-Year-Old Avatar) -->
   <div class="section">
     <span class="sec-label">The Real Problem</span>
-    <h2 class="sec-title">The Issue Isn't Lack of Information.<br/>It's <span style="color:var(--gold)">Information Overload.</span></h2>
-    <p class="sec-body">Whether you are just starting out or have been working for years, you don't need another 10-hour video series. You need a linear system that cuts through conflicting advice and meets you exactly where your finances are today.</p>
+    <h2 class="sec-title">The Issue Isn't A Lack of Ambition.<br/>It's Feeling <span style="color:var(--gold)">Out Of Time.</span></h2>
+    <p class="sec-body">When you are balancing a demanding career, family obligations, and trying to secure your future, you don't have 40 hours a week for trial-and-error. You need a linear system that cuts through the noise and leverages the experience you already have.</p>
     
     <div class="pain-grid">
       <div class="pain-card">
-        <div class="pain-icon">🪣</div>
-        <div class="pain-title">The Debt & Leak Cycle</div>
-        <div class="pain-text">It doesn't matter if you earn minimum wage or a massive salary—if you don't know how to plug hidden leaks and decode debt, you will always be trapped working for the next paycheck.</div>
+        <div class="pain-icon">⏳</div>
+        <div class="pain-title">The Clock is Ticking</div>
+        <div class="pain-text">You know you can't rely on a salary forever. But without knowing your exact financial runway or how to plug the hidden leaks in your lifestyle, retirement feels like a moving target.</div>
       </div>
       <div class="pain-card">
-        <div class="pain-icon">📈</div>
-        <div class="pain-title">The Income Ceiling</div>
-        <div class="pain-text">Whether you are just starting out or have years of experience, you must learn how to audit your skills, package them, and decouple your time from your active income.</div>
+        <div class="pain-icon">💼</div>
+        <div class="pain-title">The Expertise Ceiling</div>
+        <div class="pain-text">You have years of highly valuable, tacit knowledge. But because you've only ever sold it to an employer for a salary, you lack the architecture to package and sell it on your own terms.</div>
       </div>
       <div class="pain-card">
-        <div class="pain-icon">🧱</div>
-        <div class="pain-title">The Asset Illusion</div>
-        <div class="pain-text">You don't need to be rich to start building assets. But without a clear map for where to put your money—even if it's just a few dollars a month—true wealth remains impossible.</div>
+        <div class="pain-icon">🔓</div>
+        <div class="pain-title">The Passive Income Gap</div>
+        <div class="pain-text">You understand that true freedom means your assets pay your living expenses. But the conflicting advice on how to actually build that passive income leaves you paralyzed.</div>
       </div>
       <div class="pain-card">
         <div class="pain-icon">🧠</div>
         <div class="pain-title">Information Overload</div>
-        <div class="pain-text">From beginners to veterans, everyone is drowning in conflicting financial advice online. You don't need more theories; you need a single, linear system that forces action.</div>
+        <div class="pain-text">You don't need another 10-hour video series built for 20-year-olds with infinite free time. You need a mature, zero-fluff system that forces decisions and delivers clarity.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS SECTION (Brought back for validation) -->
+  <div class="stats-section">
+    <div class="stats-inner">
+      <span class="sec-label">The Research Is Clear</span>
+      <h2 class="sec-title" style="text-align:center">Age Is Not The Disadvantage<br/><span style="color:var(--gold)">You've Been Told It Is</span></h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-num counter" data-target="45">0</div>
+          <div class="stat-label">Average founder age of the fastest-growing new companies</div>
+          <div class="stat-source">MIT Sloan & U.S. Census Bureau</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num counter" data-target="62">0</div>
+          <div class="stat-label">Interactive modules inside this course — covering psychology, money, and skills</div>
+          <div class="stat-source">Inside This Course</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num counter" data-target="12">0</div>
+          <div class="stat-label">Chapters taking you from financial clarity to a real second income</div>
+          <div class="stat-source">Inside This Course</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">2.4×</div>
+          <div class="stat-label">More likely to build a high-growth company at 50 than at 30</div>
+          <div class="stat-source">Harvard Business Review</div>
+        </div>
       </div>
     </div>
   </div>
@@ -247,7 +287,7 @@
       <h2 class="sec-title" style="text-align:center">Beautiful Design Meets<br/><span style="color:var(--gold)">Interactive Clarity</span></h2>
       <p class="sec-body" style="text-align:center;margin:0 auto">This isn't a wall of text. It's a premium environment designed to force decisions and reveal your exact financial reality.</p>
       
-      <!-- 3 CARDS UI PREVIEW (From Image 3) -->
+      <!-- 3 CARDS UI PREVIEW -->
       <div class="demo-grid">
         <div class="demo-card">
           <div class="demo-icon">💸</div>
@@ -274,7 +314,7 @@
         </div>
       </div>
 
-      <!-- LIVE CALCULATOR HOOK (From Image 4) -->
+      <!-- LIVE CALCULATOR HOOK -->
       <div class="calc-container">
         <div class="calc-header">
           <span class="sec-label">Interactive Calculator Demo</span>
@@ -494,6 +534,25 @@
     particle.style.animationDelay = (Math.random() * -30) + 's';
     dustContainer.appendChild(particle);
   }
+
+  // ANIMATED COUNTERS
+  function animateCounters(){
+    document.querySelectorAll('.counter').forEach(el => {
+      const target = parseInt(el.dataset.target);
+      let cur = 0;
+      const step = Math.ceil(target / 40);
+      const iv = setInterval(() => {
+        cur = Math.min(cur + step, target);
+        el.textContent = cur;
+        if(cur >= target) clearInterval(iv);
+      }, 40);
+    });
+  }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ animateCounters(); obs.disconnect(); } });
+  }, { threshold: 0.3 });
+  const sg = document.querySelector('.stats-grid');
+  if(sg) obs.observe(sg);
 
   // LIVE CALCULATOR HOOK
   function runCalc(){
